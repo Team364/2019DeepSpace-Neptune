@@ -30,7 +30,11 @@ import frc.robot.Autons.*;
 public class Robot extends TimedRobot {
 
   public static DriveSystem driveSystem;
+  public static LiftSystem liftSystem;
+  public static IntakeSystem intakeSystem;
+  public static ClawSystem clawSystem;
   public static OI oi;
+
   public UsbCamera camera;
   public static Command Auto1;
   public static Command Auto2;
@@ -54,8 +58,13 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Auto2", cargoAuto);
     m_chooser.addOption("Auto3", straightAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
+
     driveSystem = new DriveSystem();
+    liftSystem = new LiftSystem();
+    intakeSystem = new IntakeSystem();
+    clawSystem = new ClawSystem();
     oi = new OI();
+
     Auto1 = new Auto1();
     Auto2 = new Auto2();
     Auto3 = new Auto3();
