@@ -28,12 +28,12 @@ public class TeleopLiftCommand extends Command {
             liftSystem.firstStageControl(-1);
         } else {
             if(Robot.oi.controller.getPOV() == 0) {
-                liftSystem.firstStageControl(-1);
-                liftSystem.secondStageControl(1);
+               // liftSystem.firstStageControl(-1);
+               // liftSystem.secondStageControl(1);
                 
             } else if(Robot.oi.controller.getPOV() == 180) {
-                liftSystem.firstStageControl(1);
-                liftSystem.secondStageControl(-1);
+              //  liftSystem.firstStageControl(1);
+              //  liftSystem.secondStageControl(-1);
               
             } else{
                 liftSystem.firstStageControl(0);
