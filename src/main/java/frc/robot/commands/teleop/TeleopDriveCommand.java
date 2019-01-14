@@ -24,7 +24,7 @@ public class TeleopDriveCommand extends Command {
     public boolean forward;
     public double leftVelocity;
     public double rightVelocity;
-    static enum DriveStates {STATE_NOT_MOVING, STATE_DIRECT_DRIVE, STATE_RAMP_DOWN, STATE_FOLLOW_CUBE}
+    static enum DriveStates {STATE_NOT_MOVING, STATE_DIRECT_DRIVE, STATE_RAMP_DOWN, STATE_FOLLOW_CUBE, STATE_TURN_180}
     public DriveStates driveState;
     public double tankLeft;
     public double tankRight;
@@ -83,6 +83,10 @@ public class TeleopDriveCommand extends Command {
                 System.out.println("STATE_NOT_MOVING->FOLLOW_CUBE");
                 driveState = DriveStates.STATE_FOLLOW_CUBE;
             }
+            if(Robot.oi.controller.getRawButton(1)){
+                System.out.println("STATE_NOT_MOVING->STATE_TURN_180");
+                driveState = DriveStates.STATE_TURN_180;
+            }
         } else if (driveState == DriveStates.STATE_DIRECT_DRIVE) {
             tankLeft = leftControllerInput;
             tankRight = rightControllerInput;
@@ -94,7 +98,12 @@ public class TeleopDriveCommand extends Command {
         } else if (driveState == DriveStates.STATE_RAMP_DOWN) {
            driveState = DriveStates.STATE_NOT_MOVING;
             
-        } else if (driveState == DriveStates.STATE_FOLLOW_CUBE) {
+        } else if (driveState == DriveStates.STATE_TURN_180) {
+            Robot.Turn180.start();
+            if(Robot.driveSystem.reachedHeadingL(175)){
+            driveState = DriveStates.STATE_NOT_MOVING;
+            }
+         } else if (driveState == DriveStates.STATE_FOLLOW_CUBE) {
             if(!Robot.oi.controller.getRawButton(10)) {
                 System.out.println("FOLLOW_CUBE->STATE_NOT_MOVING");
                 driveState = DriveStates.STATE_NOT_MOVING;

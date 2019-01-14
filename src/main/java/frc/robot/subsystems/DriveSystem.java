@@ -150,6 +150,13 @@ public class DriveSystem extends Subsystem {
             return false;
         }
     }       
+    public boolean reachedHeadingL(double heading) {
+        if(navX.getYaw() <= (heading + 5) && navX.getYaw() >= (heading - 5)) {
+            return true;
+        } else {
+            return false;
+        }
+    }      
 
 
     /**

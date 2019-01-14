@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
 import frc.robot.Autons.*;
+import frc.robot.commands.teleop.Subroutines.TeleopTurn180;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -40,10 +41,11 @@ public class Robot extends TimedRobot {
   public static Command Auto2;
   public static Command Auto3;
 
+  public static Command Turn180;
+
   private static final String driveStraightAuto = "Default";
-  private static final String rampAuto = "Auto1";
+  private static final String turnAuto = "Auto1";
   private static final String cargoAuto = "Auto2";
-  private static final String straightAuto = "Auto3";
   private String autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
@@ -54,9 +56,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_chooser.setDefaultOption("Default Auto", driveStraightAuto);
-    m_chooser.addOption("Auto1", rampAuto);
-    m_chooser.addOption("Auto2", cargoAuto);
-    m_chooser.addOption("Auto3", straightAuto);
+    m_chooser.addOption("TurnAuto", turnAuto);
+    m_chooser.addOption("CargoAuto", cargoAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
 
     driveSystem = new DriveSystem();
@@ -65,12 +66,17 @@ public class Robot extends TimedRobot {
     clawSystem = new ClawSystem();
     oi = new OI();
 
-    Auto1 = new Auto1();
-    Auto2 = new Auto2();
-    Auto3 = new Auto3();
+    Auto1 = new TurnAuto();
+    Auto2 = new CargoAuto();
+    Auto3 = new StraightAuto();
+
+    Turn180 = new TeleopTurn180();
+
     camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
     camera.setResolution(320, 240);
     driveSystem.resetHeading();
+
+
   }
 
   /**
@@ -88,7 +94,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     autoSelected = m_chooser.getSelected();
-    autoSelected = SmartDashboard.getString("Auto Selector", driveStraightAuto);
     System.out.println("Auto selected: " + autoSelected);
     Scheduler.getInstance().removeAll();
     driveSystem.resetHeading();
@@ -97,7 +102,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     switch (autoSelected) {
-      case rampAuto:
+      case turnAuto:
         Auto1.start();
         break;
       case cargoAuto:

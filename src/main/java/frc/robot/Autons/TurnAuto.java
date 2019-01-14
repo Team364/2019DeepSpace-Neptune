@@ -7,12 +7,12 @@ import frc.robot.commands.auto.drive.*;
 /**
  * Auto file - Objective - DriveStraight
  */
-public class Auto1 extends CommandGroup {
+public class TurnAuto extends CommandGroup {
     /**
      * Objective - Cross the line
      *<p>1 Drive Foward
      */
-    public Auto1() {
+    public TurnAuto() {
        
         addSequential(new DriveForPower(0.6, 2)); //1
         addSequential(new StopDriveMotors());
