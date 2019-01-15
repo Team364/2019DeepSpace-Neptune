@@ -24,7 +24,7 @@ public class TeleopDriveCommand extends Command {
     public boolean forward;
     public double leftVelocity;
     public double rightVelocity;
-    static enum DriveStates {STATE_NOT_MOVING, STATE_DIRECT_DRIVE, STATE_RAMP_DOWN, STATE_FOLLOW_CUBE, STATE_TURN_180}
+    static enum DriveStates {STATE_NOT_MOVING, STATE_DIRECT_DRIVE, STATE_RAMP_DOWN, STATE_FOLLOW_CUBE, STATE_TURN_180, STATE_LINE_UP_TAPE}
     public DriveStates driveState;
     public double tankLeft;
     public double tankRight;
@@ -56,7 +56,7 @@ public class TeleopDriveCommand extends Command {
         centerX = table.getEntry("centerX");
         area = table.getEntry("area");
         pid = new PIDCalc(0.003, 0.001, 0.0, 0.0, "follow");
-        pida = new PIDCalc(0.0001, 0.0, 0.0, 0.0, "area");
+        pida = new PIDCalc(0.001, 0.0, 0.0, 0.0, "area");
     }
 
     @Override
@@ -87,9 +87,16 @@ public class TeleopDriveCommand extends Command {
                 System.out.println("STATE_NOT_MOVING->STATE_TURN_180");
                 driveState = DriveStates.STATE_TURN_180;
             }
+            if(Robot.oi.controller.getRawButton(2)){
+                System.out.println("STATE_NOT_MOVING->STATE_LINE_UP_TAPE");
+                driveState = DriveStates.STATE_LINE_UP_TAPE;
+            }
+
         } else if (driveState == DriveStates.STATE_DIRECT_DRIVE) {
+
             tankLeft = leftControllerInput;
             tankRight = rightControllerInput;
+
             if ((Math.abs(leftControllerInput) < 0.2) && (Math.abs(rightControllerInput) < 0.2)) {
                 System.out.println("STATE_DIRECT_DRIVE->STATE_RAMP_DOWN");
                 driveState = DriveStates.STATE_RAMP_DOWN;
@@ -103,19 +110,19 @@ public class TeleopDriveCommand extends Command {
             if(Robot.driveSystem.reachedHeadingL(175)){
             driveState = DriveStates.STATE_NOT_MOVING;
             }
-         } else if (driveState == DriveStates.STATE_FOLLOW_CUBE) {
-            if(!Robot.oi.controller.getRawButton(10)) {
-                System.out.println("FOLLOW_CUBE->STATE_NOT_MOVING");
+         } else if (driveState == DriveStates.STATE_LINE_UP_TAPE) {
+            if(!Robot.oi.controller.getRawButton(2)) {
+                System.out.println("STATE_LINE_UP_TAPE->STATE_NOT_MOVING");
                 driveState = DriveStates.STATE_NOT_MOVING;
             }
-            double[] defaultValue = {160.0};
-            double[] defaultValuea = {7000};
+            double[] defaultValue = {100};
+            double[] defaultValuea = {320};
             x = centerX.getDoubleArray(defaultValue);
             a = area.getDoubleArray(defaultValuea);
             SmartDashboard.putNumberArray("xarray", x);
             if(x.length >= 1 && a.length >= 1) {
-                pidOutput = pid.calculateOutput(160, x[0]);
-                pidOutputa = pida.calculateOutput(4500, a[0]);
+                pidOutput = pid.calculateOutput(120, x[0]);
+                pidOutputa = pida.calculateOutput(800, a[0]);
                 tankLeft = pidOutput + pidOutputa;
                 tankRight = -pidOutput + pidOutputa;
             }

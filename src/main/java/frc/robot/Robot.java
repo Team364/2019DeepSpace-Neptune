@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
   public static LiftSystem liftSystem;
   public static IntakeSystem intakeSystem;
   public static ClawSystem clawSystem;
+
   public static OI oi;
 
   public UsbCamera camera;
@@ -64,6 +65,7 @@ public class Robot extends TimedRobot {
     liftSystem = new LiftSystem();
     intakeSystem = new IntakeSystem();
     clawSystem = new ClawSystem();
+
     oi = new OI();
 
     Auto1 = new TurnAuto();

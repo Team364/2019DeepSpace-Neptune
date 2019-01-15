@@ -20,20 +20,19 @@ import frc.robot.commands.teleop.TeleopDriveCommand;
 
 public class DriveSystem extends Subsystem {
 
-    public VictorSP leftFront;
-    public VictorSP leftRear;
-    public VictorSP rightFront;
-    public VictorSP rightRear;
-    public DoubleSolenoid shifter;
+    private VictorSP leftFront;
+    private VictorSP leftRear;
+    private VictorSP rightFront;
+    private VictorSP rightRear;
+    private DoubleSolenoid shifter;
     public AHRS navX;
     public PIDCalc pidNavX;
-    public PIDCalc pidLeft;
-    public PIDCalc pidRight;
-    public PIDCalc pidRampDown;
+    //public PIDCalc pidLeft;
+    //public PIDCalc pidRight;
     public double pidOutputNavX;
-    public double pidOutputLeft;
-    public double pidOutputRight;
-    public double pidOutputRampDown;
+    private double pidOutputLeft;
+    private double pidOutputRight;
+    private double pidOutputRampDown;
 
     /**
      * DriveSystem()
@@ -73,8 +72,8 @@ public class DriveSystem extends Subsystem {
      * @param right sets the right drive power
      */
     public void tankDrive(double left, double right) {
-        leftFront.set(-left);
-        leftRear.set(-left);
+        leftFront.set(-left*0.85);
+        leftRear.set(-left*0.85);
         rightFront.set(-right);
         rightRear.set(-right);
     }
@@ -99,6 +98,14 @@ public class DriveSystem extends Subsystem {
         return navX.getYaw();
     }
 
+    public double getGyro360()  {
+        if(navX.getYaw() < 0){
+            return navX.getYaw() + 360;
+        }
+        else{
+            return navX.getYaw();
+        }
+    }
 
     public void driveForPower(double power){
         leftFront.set(-power*0.85);
