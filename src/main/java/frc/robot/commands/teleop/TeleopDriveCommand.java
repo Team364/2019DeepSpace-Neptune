@@ -3,37 +3,23 @@ package frc.robot.commands.teleop;
 //import edu.wpi.first.wpilibj.HLUsageReporting.Null;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.VisionSystem;
+//import frc.robot.subsystems.VisionSystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.PIDCalc;
-import edu.wpi.first.networktables.*;
+//import edu.wpi.first.networktables.*;
 
 public class TeleopDriveCommand extends Command {
 
     public double leftControllerInput;
     public double rightControllerInput;
-    public static Command RampDown;
-    public boolean rampDownSequence;
-    public boolean forward;
-    public double leftVelocity;
-    public double rightVelocity;
 
     static enum DriveStates {
-        STATE_NOT_MOVING, STATE_DIRECT_DRIVE, STATE_RAMP_DOWN //, STATE_FOLLOW_CUBE, STATE_TURN_180, STATE_LINE_UP_TAPE
+        STATE_NOT_MOVING, STATE_DIRECT_DRIVE, STATE_RAMP_DOWN
     }
 
     public DriveStates driveState;
     public double tankLeft;
     public double tankRight;
-    public boolean CancelRamp;
-    // public NetworkTableEntry centerX;
-    // public NetworkTableEntry area;
-    public double centerX;
-    public double area;
-    // public double[] x;
-    // public double[] a;
-    public double x;
-    public double a;
     public PIDCalc pidXvalue;
     public double pidOutputXvalue;
     public PIDCalc pidAvalue;
@@ -44,33 +30,28 @@ public class TeleopDriveCommand extends Command {
      */
     public TeleopDriveCommand() {
         requires(Robot.driveSystem);
-        // RampDown = new RampDown();
-        CancelRamp = false;
         setInterruptible(true);
     }
 
     @Override
     protected void initialize() {
         driveState = DriveStates.STATE_NOT_MOVING;
-        rampDownSequence = false;
         pidXvalue = new PIDCalc(0.001, 0.001, 0.0, 0.0, "follow");
         pidAvalue = new PIDCalc(0.001, 0.0, 0.0, 0.0, "area");
-        // NetworkTableInstance inst = NetworkTableInstance.getDefault();
-        // NetworkTable table = inst.getTable("GRIP/contours");
-        // centerX = table.getEntry("centerX");
-        // area = table.getEntry("area");
     }
 
     @Override
     protected void end() {
-        // This will probably never be called.
         Robot.driveSystem.stop();
     }
 
     @Override
     protected void execute() {
+
         rightControllerInput = -Robot.oi.controller.getRawAxis(1);
         leftControllerInput = -Robot.oi.controller.getRawAxis(5);
+        SmartDashboard.putNumber("GetLeftContr: ", leftControllerInput);
+        SmartDashboard.putNumber("GetRightContr: ", rightControllerInput);
 
         // normal tank drive control
         if (driveState == DriveStates.STATE_NOT_MOVING) {
@@ -82,10 +63,8 @@ public class TeleopDriveCommand extends Command {
             }
 
         } else if (driveState == DriveStates.STATE_DIRECT_DRIVE) {
-
             tankLeft = leftControllerInput;
             tankRight = rightControllerInput;
-
             if ((Math.abs(leftControllerInput) < 0.2) && (Math.abs(rightControllerInput) < 0.2)) {
                 System.out.println("STATE_DIRECT_DRIVE->STATE_RAMP_DOWN");
                 driveState = DriveStates.STATE_RAMP_DOWN;
@@ -94,23 +73,11 @@ public class TeleopDriveCommand extends Command {
         } else if (driveState == DriveStates.STATE_RAMP_DOWN) {
             driveState = DriveStates.STATE_NOT_MOVING;
 
-            /*
-             * } else if (driveState == DriveStates.STATE_TURN_180) { Robot.Turn180.start();
-             * if(Robot.driveSystem.reachedHeadingL(175)){ driveState =
-             * DriveStates.STATE_NOT_MOVING; }
-             * 
-             * 
-             * } else if (driveState == DriveStates.STATE_LINE_UP_TAPE) {
-             * if((!Robot.oi.controller.getRawButton(2))||(!Robot.visionSystem.
-             * visionTargetSeen)) {
-             * System.out.println("STATE_LINE_UP_TAPE->STATE_NOT_MOVING"); driveState =
-             * DriveStates.STATE_NOT_MOVING; } if(Robot.visionSystem.visionTargetSeen){
-             * pidOutputXvalue = pidXvalue.calculateOutput(120, Robot.visionSystem.centerX);
-             * pidOutputAvalue = pidAvalue.calculateOutput(800,
-             * Robot.visionSystem.targetArea); //tankLeft = pidOutputXvalue +
-             * pidOutputAvalue; //tankRight = -pidOutputXvalue + pidOutputAvalue; tankLeft =
-             * pidOutputXvalue; tankRight = -pidOutputXvalue; }
-             */
+            // This state is only useful if abrupt stoppage is likely
+            // to do damage to the robot.
+
+            // TODO: Add code that gradually ramps down robot speed
+            // tankLeft -= .10
 
         } else {
             // This condition should never happen!
@@ -119,13 +86,6 @@ public class TeleopDriveCommand extends Command {
 
         Robot.driveSystem.tankDrive(tankLeft, tankRight);
 
-        if (Robot.oi.shiftHigh.get()) {
-            Robot.driveSystem.shiftHigh();
-        } else if (Robot.oi.shiftLow.get()) {
-            Robot.driveSystem.shiftLow();
-        } else {
-            Robot.driveSystem.noShiftInput();
-        }
     }
 
     @Override
@@ -135,6 +95,7 @@ public class TeleopDriveCommand extends Command {
 
     @Override
     protected boolean isFinished() {
+        // This command will only end when interrupted during teleop mode
         return false;
     }
 
