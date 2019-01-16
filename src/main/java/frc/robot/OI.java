@@ -2,6 +2,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+//import frc.robot.commands.*;
+import frc.robot.commands.teleop.TeleopAlignWithTape;
+import frc.robot.commands.teleop.Subroutines.TeleopTurn180;
 
 public class OI {
 
@@ -20,6 +23,9 @@ public class OI {
     public JoystickButton resetLiftEncoderButton;
     public JoystickButton dataButton;
 
+    public JoystickButton turn180Button;
+    public JoystickButton alignWithTapeButton;
+
     public JoystickButton autoSelectorButton;
     public JoystickButton flippyShitButton;
 
@@ -29,10 +35,12 @@ public class OI {
         shiftLow = new JoystickButton(controller, 7);
         shiftHigh = new JoystickButton(controller, 8);
 
-        clawButton = new JoystickButton(controller, 5);
-        pinchButton = new JoystickButton(controller, 6);
-        firstStageLiftButton = new JoystickButton(controller, 4);//was 4
-        resetLiftEncoderButton = new JoystickButton(controller, 1);
-       
+        //clawButton = new JoystickButton(controller, 5);
+        //pinchButton = new JoystickButton(controller, 6);
+        //firstStageLiftButton = new JoystickButton(controller, 4);//was 4
+        //resetLiftEncoderButton = new JoystickButton(controller, 1);
+
+        turn180Button = new JoystickButton(controller, 1);
+        turn180Button.whenPressed(new TeleopTurn180());
     }
 }

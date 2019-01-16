@@ -14,7 +14,6 @@ public class TeleopTurn180 extends CommandGroup {
        
         addSequential(new TurnToHeadingXL(175)); //1
         addSequential(new StopDriveMotors());
-
     
     }
 }

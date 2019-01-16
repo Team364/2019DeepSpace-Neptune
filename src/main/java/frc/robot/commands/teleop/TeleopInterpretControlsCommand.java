@@ -23,14 +23,12 @@ public class TeleopInterpretControlsCommand extends Command {
      * Command used to interpret user controls and trigger all other commands
      */
     public TeleopInterpretControlsCommand() {
-        requires(Robot.driveSystem);
+        //requires(Robot.driveSystem);
     }
 
     @Override
     protected void initialize() {
 
-        rightControllerInput = -Robot.oi.controller.getRawAxis(1);
-        leftControllerInput = -Robot.oi.controller.getRawAxis(5);
     }
 
     @Override
@@ -41,15 +39,17 @@ public class TeleopInterpretControlsCommand extends Command {
 
     @Override
     protected void execute() {
+        rightControllerInput = -Robot.oi.controller.getRawAxis(1);
+        leftControllerInput = -Robot.oi.controller.getRawAxis(5);
 
         //if ((Math.abs(leftControllerInput) >= 0.25) || (Math.abs(rightControllerInput) >= 0.25)) {
 
             // Always schedule a TeleopDriveCommand, otherwise robot will not STOP
             // TODO: Make TeleopDriveCommand interruptible so that other driveSystem commands can execute
-            
+
             System.out.println("USER ACTION: DRIVE");
             // Trigger TeleopDriveCommand
-            teleopDriveCommand.start();
+
         //}
         if(Robot.oi.controller.getRawButton(10)) {
             System.out.println("USER ACTION: FOLLOW CUBE");

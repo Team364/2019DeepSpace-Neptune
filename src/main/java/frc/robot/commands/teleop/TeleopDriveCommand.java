@@ -46,6 +46,7 @@ public class TeleopDriveCommand extends Command {
         requires(Robot.driveSystem);
         // RampDown = new RampDown();
         CancelRamp = false;
+        setInterruptible(true);
     }
 
     @Override
@@ -58,7 +59,6 @@ public class TeleopDriveCommand extends Command {
         // NetworkTable table = inst.getTable("GRIP/contours");
         // centerX = table.getEntry("centerX");
         // area = table.getEntry("area");
-
     }
 
     @Override
@@ -126,6 +126,11 @@ public class TeleopDriveCommand extends Command {
         } else {
             Robot.driveSystem.noShiftInput();
         }
+    }
+
+    @Override
+    protected void interrupted() {
+        end();
     }
 
     @Override

@@ -72,7 +72,7 @@ public class DriveSystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new TeleopInterpretControlsCommand());
+        setDefaultCommand(new TeleopDriveCommand());
     }
 
     /**
