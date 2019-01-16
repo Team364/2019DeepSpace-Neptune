@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.PIDCalc;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.TestPipelineTape;
 import frc.robot.commands.teleop.TeleopDriveCommand;
 
 
@@ -33,6 +34,12 @@ public class DriveSystem extends Subsystem {
     private double pidOutputLeft;
     private double pidOutputRight;
     private double pidOutputRampDown;
+    public PIDCalc pidXvalue;
+    public double pidOutputXvalue;
+    public PIDCalc pidAvalue;
+    public double pidOutputAvalue;
+    public double visionLeft;
+    public double visionRight;
 
     /**
      * DriveSystem()
@@ -51,13 +58,15 @@ public class DriveSystem extends Subsystem {
         rightFront = new VictorSP(RobotMap.rightFrontDrive);
         rightRear = new VictorSP(RobotMap.rightRearDrive);
 
-
+    
         // Initialize DoubleSolenoid shifter object
         shifter = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
         
 	    // Init the navX, Pathfinder, and PIDCalc
         navX = new AHRS(SPI.Port.kMXP);
         pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
+        pidXvalue = new PIDCalc(0.0001, 0.001, 0.0, 0.0, "follow");
+        pidAvalue = new PIDCalc(0.001, 0.0, 0.0, 0.0, "area");
     }
 
     @Override
@@ -164,6 +173,13 @@ public class DriveSystem extends Subsystem {
             return false;
         }
     }      
+    public void lineUpWithTape(){
+        pidOutputXvalue = pidXvalue.calculateOutput(120, VisionSystem.centerX);
+        pidOutputAvalue = pidAvalue.calculateOutput(800, VisionSystem.targetArea);
+        visionLeft = pidOutputXvalue + pidOutputAvalue;
+        visionRight = -pidOutputXvalue + pidOutputAvalue;
+        tankDrive(visionLeft, visionRight);
+    }
 
 
     /**

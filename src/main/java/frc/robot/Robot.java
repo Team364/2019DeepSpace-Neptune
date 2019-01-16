@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -34,10 +32,12 @@ public class Robot extends TimedRobot {
   public static LiftSystem liftSystem;
   public static IntakeSystem intakeSystem;
   public static ClawSystem clawSystem;
+  
+  public static VisionSystem visionSystem;
 
   public static OI oi;
 
-  public UsbCamera camera;
+ 
   public static Command Auto1;
   public static Command Auto2;
   public static Command Auto3;
@@ -65,6 +65,7 @@ public class Robot extends TimedRobot {
     liftSystem = new LiftSystem();
     intakeSystem = new IntakeSystem();
     clawSystem = new ClawSystem();
+    visionSystem = new VisionSystem();
 
     oi = new OI();
 
@@ -74,8 +75,6 @@ public class Robot extends TimedRobot {
 
     Turn180 = new TeleopTurn180();
 
-    camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
-    camera.setResolution(320, 240);
     driveSystem.resetHeading();
 
 
@@ -126,6 +125,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     putSmartDashVars();
+
   }
 
   @Override

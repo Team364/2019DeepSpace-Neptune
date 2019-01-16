@@ -1,16 +1,9 @@
-/*
- *  George and Keanu:
- *  This is the TeleopDriveCommand. This runs whenever there isn't another command
- *  running that requries the DriveSystem class. In Execute, the drive motors are
- *  given an output from the joysticks using a variable in the OI (Operator Interface) class.
- *  The shifters are also set using the triggers from each joystick.
- */
-
 package frc.robot.commands.teleop;
 
 //import edu.wpi.first.wpilibj.HLUsageReporting.Null;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.VisionSystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.PIDCalc;
 import edu.wpi.first.networktables.*;
@@ -29,14 +22,18 @@ public class TeleopDriveCommand extends Command {
     public double tankLeft;
     public double tankRight;
     public boolean CancelRamp;
-    public NetworkTableEntry centerX;
-    public NetworkTableEntry area;
-    public PIDCalc pid;
-    public double pidOutput;
-    public PIDCalc pida;
-    public double pidOutputa;
-    public double[] x;
-    public double[] a;
+    //public NetworkTableEntry centerX;
+    //public NetworkTableEntry area;
+    public double centerX;
+    public double area;
+    //public double[] x;
+    //public double[] a;
+    public double x;
+    public double a;
+    public PIDCalc pidXvalue;
+    public double pidOutputXvalue;
+    public PIDCalc pidAvalue;
+    public double pidOutputAvalue;
 
     /**
      * Command used for teleop control specific to the drive system
@@ -51,12 +48,13 @@ public class TeleopDriveCommand extends Command {
     protected void initialize() {
         driveState = DriveStates.STATE_NOT_MOVING;
         rampDownSequence = false;
-        NetworkTableInstance inst = NetworkTableInstance.getDefault();
-        NetworkTable table = inst.getTable("GRIP/contours");
-        centerX = table.getEntry("centerX");
-        area = table.getEntry("area");
-        pid = new PIDCalc(0.003, 0.001, 0.0, 0.0, "follow");
-        pida = new PIDCalc(0.001, 0.0, 0.0, 0.0, "area");
+        pidXvalue = new PIDCalc(0.001, 0.001, 0.0, 0.0, "follow");
+        pidAvalue = new PIDCalc(0.001, 0.0, 0.0, 0.0, "area");
+       // NetworkTableInstance inst = NetworkTableInstance.getDefault();
+        //NetworkTable table = inst.getTable("GRIP/contours");
+     //   centerX = table.getEntry("centerX");
+    //  area = table.getEntry("area");
+      
     }
 
     @Override
@@ -110,22 +108,21 @@ public class TeleopDriveCommand extends Command {
             if(Robot.driveSystem.reachedHeadingL(175)){
             driveState = DriveStates.STATE_NOT_MOVING;
             }
+
          } else if (driveState == DriveStates.STATE_LINE_UP_TAPE) {
-            if(!Robot.oi.controller.getRawButton(2)) {
+            if((!Robot.oi.controller.getRawButton(2))||(!VisionSystem.visionTargetSeen)) {
                 System.out.println("STATE_LINE_UP_TAPE->STATE_NOT_MOVING");
                 driveState = DriveStates.STATE_NOT_MOVING;
             }
-            double[] defaultValue = {100};
-            double[] defaultValuea = {320};
-            x = centerX.getDoubleArray(defaultValue);
-            a = area.getDoubleArray(defaultValuea);
-            SmartDashboard.putNumberArray("xarray", x);
-            if(x.length >= 1 && a.length >= 1) {
-                pidOutput = pid.calculateOutput(120, x[0]);
-                pidOutputa = pida.calculateOutput(800, a[0]);
-                tankLeft = pidOutput + pidOutputa;
-                tankRight = -pidOutput + pidOutputa;
-            }
+           if(VisionSystem.visionTargetSeen){
+            pidOutputXvalue = pidXvalue.calculateOutput(120, VisionSystem.centerX);
+            pidOutputAvalue = pidAvalue.calculateOutput(800, VisionSystem.targetArea);
+            //tankLeft = pidOutputXvalue + pidOutputAvalue;
+            //tankRight = -pidOutputXvalue + pidOutputAvalue;
+            tankLeft = pidOutputXvalue;
+            tankRight = -pidOutputXvalue;
+           }
+            
 
             }else {
             // This condition should never happen!
