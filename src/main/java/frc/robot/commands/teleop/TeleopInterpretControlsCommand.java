@@ -23,7 +23,7 @@ public class TeleopInterpretControlsCommand extends Command {
      * Command used to interpret user controls and trigger all other commands
      */
     public TeleopInterpretControlsCommand() {
-        //requires(Robot.driveSystem);
+        requires(Robot.driveSystem);
     }
 
     @Override
