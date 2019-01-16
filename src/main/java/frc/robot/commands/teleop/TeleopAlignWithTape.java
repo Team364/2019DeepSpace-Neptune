@@ -15,7 +15,6 @@ public class TeleopAlignWithTape extends Command {
     public static double centerX = 0.0;
     public static double targetArea = 0.0;
     public static boolean visionTargetSeen = false;  
-    //private final Object imgLock = new Object();
     private static boolean robotAligned = false;
 
     /**
@@ -38,8 +37,10 @@ public class TeleopAlignWithTape extends Command {
 
     @Override
     protected void execute() {
-        if (Robot.visionSystem.visionTargetSeen) {
+        // Process the frame currently sitting in VisionSystem
+        Robot.visionSystem.processOneFrame();
 
+        if (Robot.visionSystem.visionTargetSeen) {
             // I see a target! 
             double centerX = Robot.visionSystem.centerX;
             double targetArea = Robot.visionSystem.targetArea;
