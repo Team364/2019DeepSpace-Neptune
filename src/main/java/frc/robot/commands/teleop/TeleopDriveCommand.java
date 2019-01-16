@@ -17,17 +17,21 @@ public class TeleopDriveCommand extends Command {
     public boolean forward;
     public double leftVelocity;
     public double rightVelocity;
-    static enum DriveStates {STATE_NOT_MOVING, STATE_DIRECT_DRIVE, STATE_RAMP_DOWN, STATE_FOLLOW_CUBE, STATE_TURN_180, STATE_LINE_UP_TAPE}
+
+    static enum DriveStates {
+        STATE_NOT_MOVING, STATE_DIRECT_DRIVE, STATE_RAMP_DOWN //, STATE_FOLLOW_CUBE, STATE_TURN_180, STATE_LINE_UP_TAPE
+    }
+
     public DriveStates driveState;
     public double tankLeft;
     public double tankRight;
     public boolean CancelRamp;
-    //public NetworkTableEntry centerX;
-    //public NetworkTableEntry area;
+    // public NetworkTableEntry centerX;
+    // public NetworkTableEntry area;
     public double centerX;
     public double area;
-    //public double[] x;
-    //public double[] a;
+    // public double[] x;
+    // public double[] a;
     public double x;
     public double a;
     public PIDCalc pidXvalue;
@@ -40,7 +44,7 @@ public class TeleopDriveCommand extends Command {
      */
     public TeleopDriveCommand() {
         requires(Robot.driveSystem);
-       // RampDown = new RampDown();
+        // RampDown = new RampDown();
         CancelRamp = false;
     }
 
@@ -50,11 +54,11 @@ public class TeleopDriveCommand extends Command {
         rampDownSequence = false;
         pidXvalue = new PIDCalc(0.001, 0.001, 0.0, 0.0, "follow");
         pidAvalue = new PIDCalc(0.001, 0.0, 0.0, 0.0, "area");
-       // NetworkTableInstance inst = NetworkTableInstance.getDefault();
-        //NetworkTable table = inst.getTable("GRIP/contours");
-     //   centerX = table.getEntry("centerX");
-    //  area = table.getEntry("area");
-      
+        // NetworkTableInstance inst = NetworkTableInstance.getDefault();
+        // NetworkTable table = inst.getTable("GRIP/contours");
+        // centerX = table.getEntry("centerX");
+        // area = table.getEntry("area");
+
     }
 
     @Override
@@ -67,7 +71,6 @@ public class TeleopDriveCommand extends Command {
     protected void execute() {
         rightControllerInput = -Robot.oi.controller.getRawAxis(1);
         leftControllerInput = -Robot.oi.controller.getRawAxis(5);
-      
 
         // normal tank drive control
         if (driveState == DriveStates.STATE_NOT_MOVING) {
@@ -76,18 +79,6 @@ public class TeleopDriveCommand extends Command {
             if ((Math.abs(leftControllerInput) >= 0.25) || (Math.abs(rightControllerInput) >= 0.25)) {
                 System.out.println("STATE_NOT_MOVING->STATE_DIRECT_DRIVE");
                 driveState = DriveStates.STATE_DIRECT_DRIVE;
-            }
-            if(Robot.oi.controller.getRawButton(10)) {
-                System.out.println("STATE_NOT_MOVING->FOLLOW_CUBE");
-                driveState = DriveStates.STATE_FOLLOW_CUBE;
-            }
-            if(Robot.oi.controller.getRawButton(1)){
-                System.out.println("STATE_NOT_MOVING->STATE_TURN_180");
-                driveState = DriveStates.STATE_TURN_180;
-            }
-            if(Robot.oi.controller.getRawButton(2)){
-                System.out.println("STATE_NOT_MOVING->STATE_LINE_UP_TAPE");
-                driveState = DriveStates.STATE_LINE_UP_TAPE;
             }
 
         } else if (driveState == DriveStates.STATE_DIRECT_DRIVE) {
@@ -101,36 +92,33 @@ public class TeleopDriveCommand extends Command {
             }
 
         } else if (driveState == DriveStates.STATE_RAMP_DOWN) {
-           driveState = DriveStates.STATE_NOT_MOVING;
-            
-        } else if (driveState == DriveStates.STATE_TURN_180) {
-            Robot.Turn180.start();
-            if(Robot.driveSystem.reachedHeadingL(175)){
             driveState = DriveStates.STATE_NOT_MOVING;
-            }
 
-         } else if (driveState == DriveStates.STATE_LINE_UP_TAPE) {
-            if((!Robot.oi.controller.getRawButton(2))||(!VisionSystem.visionTargetSeen)) {
-                System.out.println("STATE_LINE_UP_TAPE->STATE_NOT_MOVING");
-                driveState = DriveStates.STATE_NOT_MOVING;
-            }
-           if(VisionSystem.visionTargetSeen){
-            pidOutputXvalue = pidXvalue.calculateOutput(120, VisionSystem.centerX);
-            pidOutputAvalue = pidAvalue.calculateOutput(800, VisionSystem.targetArea);
-            //tankLeft = pidOutputXvalue + pidOutputAvalue;
-            //tankRight = -pidOutputXvalue + pidOutputAvalue;
-            tankLeft = pidOutputXvalue;
-            tankRight = -pidOutputXvalue;
-           }
-            
+            /*
+             * } else if (driveState == DriveStates.STATE_TURN_180) { Robot.Turn180.start();
+             * if(Robot.driveSystem.reachedHeadingL(175)){ driveState =
+             * DriveStates.STATE_NOT_MOVING; }
+             * 
+             * 
+             * } else if (driveState == DriveStates.STATE_LINE_UP_TAPE) {
+             * if((!Robot.oi.controller.getRawButton(2))||(!Robot.visionSystem.
+             * visionTargetSeen)) {
+             * System.out.println("STATE_LINE_UP_TAPE->STATE_NOT_MOVING"); driveState =
+             * DriveStates.STATE_NOT_MOVING; } if(Robot.visionSystem.visionTargetSeen){
+             * pidOutputXvalue = pidXvalue.calculateOutput(120, Robot.visionSystem.centerX);
+             * pidOutputAvalue = pidAvalue.calculateOutput(800,
+             * Robot.visionSystem.targetArea); //tankLeft = pidOutputXvalue +
+             * pidOutputAvalue; //tankRight = -pidOutputXvalue + pidOutputAvalue; tankLeft =
+             * pidOutputXvalue; tankRight = -pidOutputXvalue; }
+             */
 
-            }else {
+        } else {
             // This condition should never happen!
             driveState = DriveStates.STATE_NOT_MOVING;
         }
 
         Robot.driveSystem.tankDrive(tankLeft, tankRight);
-    
+
         if (Robot.oi.shiftHigh.get()) {
             Robot.driveSystem.shiftHigh();
         } else if (Robot.oi.shiftLow.get()) {
@@ -138,9 +126,6 @@ public class TeleopDriveCommand extends Command {
         } else {
             Robot.driveSystem.noShiftInput();
         }
-
-        SmartDashboard.putNumber("GetLeftContr: ", leftControllerInput);
-        SmartDashboard.putNumber("GetRightContr: ", rightControllerInput);
     }
 
     @Override

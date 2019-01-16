@@ -10,8 +10,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.PIDCalc;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.TestPipelineTape;
+import frc.robot.DynamicVisionPipeline;
 import frc.robot.commands.teleop.TeleopDriveCommand;
+import frc.robot.commands.teleop.TeleopInterpretControlsCommand;
 
 
 /**
@@ -71,7 +72,7 @@ public class DriveSystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new TeleopDriveCommand());
+        setDefaultCommand(new TeleopInterpretControlsCommand());
     }
 
     /**
@@ -160,27 +161,19 @@ public class DriveSystem extends Subsystem {
      * @return returns true if the robot is within 2 degrees of wanted heading
      */ 
     public boolean reachedHeading(double heading) {
-        if(navX.getYaw() <= (heading + 2) && navX.getYaw() >= (heading - 2)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (navX.getYaw() <= (heading + 2) && navX.getYaw() >= (heading - 2));
     }       
     public boolean reachedHeadingL(double heading) {
-        if(navX.getYaw() <= (heading + 5) && navX.getYaw() >= (heading - 5)) {
-            return true;
-        } else {
-            return false;
-        }
-    }      
-    public void lineUpWithTape(){
-        pidOutputXvalue = pidXvalue.calculateOutput(120, VisionSystem.centerX);
-        pidOutputAvalue = pidAvalue.calculateOutput(800, VisionSystem.targetArea);
+        return (navX.getYaw() <= (heading + 5) && navX.getYaw() >= (heading - 5));
+    }
+
+  /*  public void lineUpWithTape(){
+        pidOutputXvalue = pidXvalue.calculateOutput(120, Robot.visionSystem.centerX);
+        pidOutputAvalue = pidAvalue.calculateOutput(800, Robot.visionSystem.targetArea);
         visionLeft = pidOutputXvalue + pidOutputAvalue;
         visionRight = -pidOutputXvalue + pidOutputAvalue;
         tankDrive(visionLeft, visionRight);
-    }
-
+    }*/
 
     /**
      * shiftHigh()
