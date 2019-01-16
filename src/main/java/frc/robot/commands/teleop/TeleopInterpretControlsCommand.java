@@ -42,11 +42,15 @@ public class TeleopInterpretControlsCommand extends Command {
     @Override
     protected void execute() {
 
-        if ((Math.abs(leftControllerInput) >= 0.25) || (Math.abs(rightControllerInput) >= 0.25)) {
+        //if ((Math.abs(leftControllerInput) >= 0.25) || (Math.abs(rightControllerInput) >= 0.25)) {
+
+            // Always schedule a TeleopDriveCommand, otherwise robot will not STOP
+            // TODO: Make TeleopDriveCommand interruptible so that other driveSystem commands can execute
+            
             System.out.println("USER ACTION: DRIVE");
             // Trigger TeleopDriveCommand
             teleopDriveCommand.start();
-        }
+        //}
         if(Robot.oi.controller.getRawButton(10)) {
             System.out.println("USER ACTION: FOLLOW CUBE");
             // Trigger TeleopFollowCubeCommand
