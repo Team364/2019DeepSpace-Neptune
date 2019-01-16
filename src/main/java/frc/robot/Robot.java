@@ -29,9 +29,6 @@ import frc.robot.commands.teleop.Subroutines.TeleopTurn180;
 public class Robot extends TimedRobot {
 
   public static DriveSystem driveSystem;
-  public static LiftSystem liftSystem;
-  public static IntakeSystem intakeSystem;
-  public static ClawSystem clawSystem;
   
   public static VisionSystem visionSystem;
 
@@ -62,9 +59,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto choices", m_chooser);
 
     driveSystem = new DriveSystem();
-    liftSystem = new LiftSystem();
-    intakeSystem = new IntakeSystem();
-    clawSystem = new ClawSystem();
     visionSystem = new VisionSystem();
 
     oi = new OI();
