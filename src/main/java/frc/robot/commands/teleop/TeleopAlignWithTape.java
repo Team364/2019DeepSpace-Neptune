@@ -27,10 +27,6 @@ public class TeleopAlignWithTape extends Command {
 
     @Override
     protected void initialize() {
-        // Does initialize run only once? I'm not 100% sure...
-        //Robot.visionSystem.visionThread.start();
-        // TODO: Turn ON thread
-
         // Set up vision system to track TAPE
         Robot.visionSystem.setupSearchForTape();
     }
@@ -68,7 +64,6 @@ public class TeleopAlignWithTape extends Command {
 
     @Override
     protected void end() {
-        // TODO: Turn OFF thread
     }
 
 }
