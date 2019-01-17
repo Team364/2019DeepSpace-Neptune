@@ -6,7 +6,7 @@ import frc.robot.commands.auto.drive.ShiftDown;
 import frc.robot.commands.auto.drive.ShiftUp;
 import frc.robot.commands.teleop.Subroutines.TeleopTurn180;
 import frc.robot.commands.teleop.TeleopAlignWithTape;
-import frc.robot.commands.teleop.TeleopFollowCube;
+import frc.robot.commands.teleop.TeleopFollowBall;
 
 
 public class OI {
@@ -36,12 +36,6 @@ public class OI {
         alignWithTapeButton.whileActive(new TeleopAlignWithTape());
 
         followCubeButton = new JoystickButton(controller, 10);
-        followCubeButton.whenPressed(new TeleopFollowCube());
-
-        /*if(Robot.oi.controller.getRawButton(10)) {
-            System.out.println("USER ACTION: FOLLOW CUBE");
-            // Trigger TeleopFollowCubeCommand
-            // TODO: make follow cube command
-        }*/
+        followCubeButton.whenPressed(new TeleopFollowBall());
     }
 }

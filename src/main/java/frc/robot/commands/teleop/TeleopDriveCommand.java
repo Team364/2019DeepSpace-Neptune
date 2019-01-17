@@ -1,12 +1,8 @@
 package frc.robot.commands.teleop;
 
-//import edu.wpi.first.wpilibj.HLUsageReporting.Null;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-//import frc.robot.subsystems.VisionSystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.PIDCalc;
-//import edu.wpi.first.networktables.*;
 
 public class TeleopDriveCommand extends Command {
 
@@ -14,16 +10,14 @@ public class TeleopDriveCommand extends Command {
     public double rightControllerInput;
 
     static enum DriveStates {
-        STATE_NOT_MOVING, STATE_DIRECT_DRIVE, STATE_RAMP_DOWN
+        STATE_NOT_MOVING,
+        STATE_DIRECT_DRIVE, 
+        STATE_RAMP_DOWN
     }
 
     public DriveStates driveState;
     public double tankLeft;
     public double tankRight;
-    public PIDCalc pidXvalue;
-    public double pidOutputXvalue;
-    public PIDCalc pidAvalue;
-    public double pidOutputAvalue;
 
     /**
      * Command used for teleop control specific to the drive system
@@ -36,8 +30,6 @@ public class TeleopDriveCommand extends Command {
     @Override
     protected void initialize() {
         driveState = DriveStates.STATE_NOT_MOVING;
-        pidXvalue = new PIDCalc(0.001, 0.001, 0.0, 0.0, "follow");
-        pidAvalue = new PIDCalc(0.001, 0.0, 0.0, 0.0, "area");
     }
 
     @Override

@@ -8,7 +8,7 @@ import frc.robot.Robot;
 //import org.opencv.core.Rect;
 //import org.opencv.imgproc.Imgproc;
 
-public class TeleopFollowCube extends Command {
+public class TeleopFollowBall extends Command {
     //public static VisionPipeline vision;
 
     //public static VisionThread visionThread;
@@ -21,7 +21,7 @@ public class TeleopFollowCube extends Command {
     /**
      * Command used for teleop control specific to the intake system
      */
-    public TeleopFollowCube() {
+    public TeleopFollowBall() {
         requires(Robot.visionSystem);
         requires(Robot.driveSystem);
     }

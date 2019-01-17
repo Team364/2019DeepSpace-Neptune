@@ -7,8 +7,8 @@ import frc.robot.commands.teleop.TeleopAlignWithTape;
 import frc.robot.BasicVisionPipeline;
 
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.CameraServer;//edu.wpi.first.wpilibj.CameraServer; (deprecated)
-import edu.wpi.first.vision.VisionThread; //edu.wpi.first.wpilibj.vision.VisionThread; (deprecated)
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.vision.VisionThread;
 
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
@@ -31,6 +31,7 @@ public class VisionSystem extends Subsystem {
     public UsbCamera camera;
 
     private Mat lastCapturedImage;
+    
 
     /**
      * VisionSystem() interprets data from grip pipelines filtering images from the

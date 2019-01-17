@@ -2,11 +2,6 @@ package frc.robot.commands.teleop;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-//import frc.robot.DynamicVisionPipeline;
-//import edu.wpi.first.wpilibj.vision.VisionPipeline;
-//import edu.wpi.first.wpilibj.vision.VisionThread;
-//import org.opencv.core.Rect;
-//import org.opencv.imgproc.Imgproc;
 import frc.robot.subsystems.VisionSystem;
 
 public class TeleopAlignWithTape extends Command {
@@ -16,7 +11,6 @@ public class TeleopAlignWithTape extends Command {
     public static double centerX = 0.0;
     public static double targetArea = 0.0;
     public static boolean visionTargetSeen = false;  
-    private static boolean robotAligned = false;
 
     /**
      * Command used for teleop control specific to the intake system
