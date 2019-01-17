@@ -19,12 +19,7 @@ public class TeleopFollowBall extends Command {
 
     @Override
     protected void initialize() {
-        // Does initialize run only once? I'm not 100% sure...
-        //Robot.visionSystem.visionThread.start();
-        // TODO: Turn ON thread
-
-        // Set up vision system to track TAPE
-        //Robot.visionSystem.setupSearchForTape();
+        //Robot.visionSystem.setupSearchForBall();
     }
 
     @Override

@@ -31,6 +31,24 @@ public class VisionSystem extends Subsystem {
     public UsbCamera camera;
 
     private Mat lastCapturedImage;
+
+    //Tape Fliter Values
+    private double tapeContoursMinArea = 100.0;
+    private double tapeContoursMinPerimeter = 0.0;
+    private double tapeContoursMinWidth = 0.0;
+    private double tapeContoursMaxWidth = 999.0;
+    private double tapeContoursMinHeight = 0.0;
+    private double tapeContoursMaxHeight = 1000.0;
+    private double[] tapeContoursSolidity = {0.0, 100.0};
+    private double tapeContoursMaxVertices = 1000000.0;
+    private double tapeContoursMinVertices = 0.0;
+    private double tapeContoursMinRatio = 0.0;
+    private double tapeContoursMaxRatio = 1000.0;
+
+    //Tape Contour Values
+    private double[] tapeThresholdHue = {71.22302158273381, 100.13651877133105};
+    private double[] tapeThresholdSaturation = {22.93165467625899, 107.04778156996588};
+    private double[] tapeThresholdValue = {240.78237410071944, 255.0};
     
 
     /**
@@ -53,19 +71,68 @@ public class VisionSystem extends Subsystem {
     }
 
     public void setupSearchForBall() {
-        // TODO: Determine best parameters for BALL, use them in the functions below
-        //imageProcessingPipeline.setFilterContours(...); // Use BALL parameters here
-        //imageProcessingPipeline.setHsvThresholdParameters(...); // and here
+                /*        
+        imageProcessingPipeline.setFilterContours(
+            ballContoursMinArea,
+            ballContoursMinPerimeter,
+            ballContoursMinWidth,
+            ballContoursMaxWidth,
+            ballContoursMinHeight,
+            ballContoursMaxHeight,
+            ballContoursSolidity,
+            ballContoursMaxVertices,
+            ballContoursMinVertices, 
+            ballContoursMinRatio, 
+            ballContoursMaxRatio
+            );
+        imageProcessingPipeline.setHsvThresholdParameters(
+            ballThresholdHue,
+            ballThresholdSaturation,
+            ballThresholdValue
+        );
+        */
     }
     public void setupSearchForDisk() {
-        // TODO: Determine best parameters for DISK, use them in the functions below
-        //imageProcessingPipeline.setFilterContours(...); // Use DISK parameters here
-        //imageProcessingPipeline.setHsvThresholdParameters(...); // and here
+        /*        
+        imageProcessingPipeline.setFilterContours(
+            diskContoursMinArea,
+            diskContoursMinPerimeter,
+            diskContoursMinWidth,
+            diskContoursMaxWidth,
+            diskContoursMinHeight,
+            diskContoursMaxHeight,
+            diskContoursSolidity,
+            diskContoursMaxVertices,
+            diskContoursMinVertices, 
+            diskContoursMinRatio, 
+            diskContoursMaxRatio
+            );
+        imageProcessingPipeline.setHsvThresholdParameters(
+            diskThresholdHue,
+            diskThresholdSaturation,
+            diskThresholdValue
+        );
+        */
     }
     public void setupSearchForTape() {
-        // TODO: Determine best parameters for TAPE, use them in the functions below
-        //imageProcessingPipeline.setFilterContours(...); // Use TAPE parameters here
-        //imageProcessingPipeline.setHsvThresholdParameters(...); // and here
+        imageProcessingPipeline.setFilterContours(
+            tapeContoursMinArea,
+            tapeContoursMinPerimeter,
+            tapeContoursMinWidth,
+            tapeContoursMaxWidth,
+            tapeContoursMinHeight,
+            tapeContoursMaxHeight,
+            tapeContoursSolidity,
+            tapeContoursMaxVertices,
+            tapeContoursMinVertices, 
+            tapeContoursMinRatio, 
+            tapeContoursMaxRatio
+            );
+        imageProcessingPipeline.setHsvThresholdParameters(
+            tapeThresholdHue,
+            tapeThresholdSaturation,
+            tapeThresholdValue
+        );
     }
 
     //public ArrayList<MatOfPoint> processOneFrame() {
