@@ -2,21 +2,12 @@ package frc.robot.commands.teleop;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-//import frc.robot.DynamicVisionPipeline;
-//import edu.wpi.first.wpilibj.vision.VisionPipeline;
-//import edu.wpi.first.wpilibj.vision.VisionThread;
-//import org.opencv.core.Rect;
-//import org.opencv.imgproc.Imgproc;
 
 public class TeleopFollowBall extends Command {
-    //public static VisionPipeline vision;
 
-    //public static VisionThread visionThread;
     public static double centerX = 0.0;
     public static double targetArea = 0.0;
     public static boolean visionTargetSeen = false;  
-    //private final Object imgLock = new Object();
-    private static boolean robotAligned = false;
 
     /**
      * Command used for teleop control specific to the intake system
@@ -56,18 +47,11 @@ public class TeleopFollowBall extends Command {
 
     @Override
     protected boolean isFinished() {
-
-        // How do we know if it's finished? Setting to true for now...
-        // TODO: include logic to determine if we've "lined up with tape"
-        robotAligned = true;
-
-        //return false; // Be careful with returning false... this would cause the command to never end
-        return robotAligned;
+        return false;
     }
 
     @Override
     protected void end() {
-        // TODO: Turn OFF thread
     }
 
 }

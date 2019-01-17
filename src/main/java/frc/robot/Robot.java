@@ -128,5 +128,10 @@ public class Robot extends TimedRobot {
 
   private void putSmartDashVars() {
    SmartDashboard.putNumber("Gyro Angle", driveSystem.getGyroAngle());
+   SmartDashboard.putNumber("GetLeftContr: ", -Robot.oi.controller.getRawAxis(5));
+   SmartDashboard.putNumber("GetRightContr: ",  -Robot.oi.controller.getRawAxis(1));
+   SmartDashboard.putBoolean("VisionTargetSeen", Robot.visionSystem.visionTargetSeen);
+   SmartDashboard.putNumber("visionTargetCenterX", Robot.visionSystem.centerX);
+   SmartDashboard.putNumber("visionTargetArea", Robot.visionSystem.targetArea);
 }
 }

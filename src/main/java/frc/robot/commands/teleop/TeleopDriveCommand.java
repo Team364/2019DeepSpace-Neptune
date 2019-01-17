@@ -2,7 +2,6 @@ package frc.robot.commands.teleop;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TeleopDriveCommand extends Command {
 
@@ -42,8 +41,6 @@ public class TeleopDriveCommand extends Command {
 
         rightControllerInput = -Robot.oi.controller.getRawAxis(1);
         leftControllerInput = -Robot.oi.controller.getRawAxis(5);
-        SmartDashboard.putNumber("GetLeftContr: ", leftControllerInput);
-        SmartDashboard.putNumber("GetRightContr: ", rightControllerInput);
 
         // normal tank drive control
         if (driveState == DriveStates.STATE_NOT_MOVING) {

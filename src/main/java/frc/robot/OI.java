@@ -36,6 +36,6 @@ public class OI {
         alignWithTapeButton.whileActive(new TeleopAlignWithTape());
 
         followCubeButton = new JoystickButton(controller, 10);
-        followCubeButton.whenPressed(new TeleopFollowBall());
+        followCubeButton.whileActive(new TeleopFollowBall());
     }
 }
