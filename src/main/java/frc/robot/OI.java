@@ -33,7 +33,7 @@ public class OI {
         turn180Button.whenPressed(new TeleopTurn180());
 
         alignWithTapeButton = new JoystickButton(controller, 2);
-        alignWithTapeButton.whenPressed(new TeleopAlignWithTape());
+        alignWithTapeButton.whileActive(new TeleopAlignWithTape());
 
         followCubeButton = new JoystickButton(controller, 10);
         followCubeButton.whenPressed(new TeleopFollowCube());

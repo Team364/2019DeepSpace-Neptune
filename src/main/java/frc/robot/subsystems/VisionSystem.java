@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.DynamicVisionPipeline;
+import frc.robot.commands.teleop.TeleopAlignWithTape;
 import frc.robot.BasicVisionPipeline;
 
 import edu.wpi.cscore.UsbCamera;
@@ -22,7 +23,9 @@ public class VisionSystem extends Subsystem {
     public static VisionThread imageCaptureThread;
 
     public double centerX = 0.0;
+    public static double DesiredX = 120.0;
     public double targetArea = 0.0;
+    public static double DesiredTargetArea = 800.0;
     public boolean visionTargetSeen = false;
     private final Object imgLock = new Object();
     public UsbCamera camera;
@@ -86,6 +89,13 @@ public class VisionSystem extends Subsystem {
     }
     protected void initDefaultCommand() {
         //setDefaultCommand(new TeleopVisionCommand());
+    }
+
+    public boolean reachedDesiredX(){
+        return (centerX <= (DesiredX + 2.5) && centerX >= (DesiredX - 2.5));
+    }
+    public boolean reachedDesiredTargetArea(){
+        return (targetArea <= (DesiredTargetArea + 100) && targetArea >= (DesiredTargetArea - 100));
     }
 
 }

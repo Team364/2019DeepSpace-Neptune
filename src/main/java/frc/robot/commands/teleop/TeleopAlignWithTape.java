@@ -7,6 +7,7 @@ import frc.robot.Robot;
 //import edu.wpi.first.wpilibj.vision.VisionThread;
 //import org.opencv.core.Rect;
 //import org.opencv.imgproc.Imgproc;
+import frc.robot.subsystems.VisionSystem;
 
 public class TeleopAlignWithTape extends Command {
     //public static VisionPipeline vision;
@@ -23,6 +24,7 @@ public class TeleopAlignWithTape extends Command {
     public TeleopAlignWithTape() {
         requires(Robot.visionSystem);
         requires(Robot.driveSystem);
+
     }
 
     @Override
@@ -42,8 +44,8 @@ public class TeleopAlignWithTape extends Command {
             double targetArea = Robot.visionSystem.targetArea;
 
             // Interpret location(s) of target and drive accordingly
-            double pidOutputXvalue = Robot.driveSystem.pidXvalue.calculateOutput(120, centerX);
-            double pidOutputAvalue = Robot.driveSystem.pidAvalue.calculateOutput(800, targetArea);
+            double pidOutputXvalue = Robot.driveSystem.pidXvalue.calculateOutput(VisionSystem.DesiredX , centerX);
+            double pidOutputAvalue = Robot.driveSystem.pidAvalue.calculateOutput(VisionSystem.DesiredTargetArea, targetArea);
             double visionLeft = pidOutputXvalue + pidOutputAvalue;
             double visionRight = -pidOutputXvalue + pidOutputAvalue;
 
@@ -53,13 +55,7 @@ public class TeleopAlignWithTape extends Command {
 
     @Override
     protected boolean isFinished() {
-
-        // How do we know if it's finished? Setting to true for now...
-        // TODO: include logic to determine if we've "lined up with tape"
-        robotAligned = true;
-
-        //return false; // Be careful with returning false... this would cause the command to never end
-        return robotAligned;
+       return (Robot.visionSystem.reachedDesiredX() && Robot.visionSystem.reachedDesiredTargetArea());
     }
 
     @Override
