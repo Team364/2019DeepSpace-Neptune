@@ -40,8 +40,13 @@ public class VisionSystem extends Subsystem {
     public double targetArea6 = 0.0;
 
     //Pid SetPoints
-    public static double DesiredX = 194;
-    public static double DesiredTargetArea = 2000.0;
+    public static double tapeDesiredX = 194;
+    public static double tapeDesiredTargetArea = 2000.0;
+
+    public static double ballDesiredX = 170;
+    public static double ballDesiredTargetArea = 17000.0;
+
+    public static double diskDesiredX = 25;
 
 
     public boolean visionTargetSeen = false;
@@ -86,6 +91,23 @@ public class VisionSystem extends Subsystem {
     double[] ballThresholdSaturation = {105.48561151079136, 255.0};
     double[] ballThresholdValue = {6.879496402877698, 255.0};
     
+    //Disk Filter Values
+    double diskContoursMinArea = 0.0;
+    double diskContoursMinPerimeter = 200.0;
+    double diskContoursMinWidth = 0.0;
+    double diskContoursMaxWidth = 1000.0;
+    double diskContoursMinHeight = 0.0;
+    double diskContoursMaxHeight = 100.0;
+    double[] diskContoursSolidity = {0.0, 100.0};
+    double diskContoursMaxVertices = 1000000.0;
+    double diskContoursMinVertices = 0.0;
+    double diskContoursMinRatio = 0.0;
+    double diskContoursMaxRatio = 1000.0;
+
+    //Disk HSV Values
+    double[] diskThresholdHue = {22.66187050359712, 37.16723549488056};
+    double[] diskThresholdSaturation = {121.53776978417264, 255.0};
+    double[] diskThresholdValue = {133.00359712230215, 255.0};
 
     /**
      * VisionSystem() interprets data from grip pipelines filtering images from the
@@ -128,7 +150,6 @@ public class VisionSystem extends Subsystem {
         
     }
     public void setupSearchForDisk() {
-        /*        
         imageProcessingPipeline.setFilterContours(
             diskContoursMinArea,
             diskContoursMinPerimeter,
@@ -147,7 +168,6 @@ public class VisionSystem extends Subsystem {
             diskThresholdSaturation,
             diskThresholdValue
         );
-        */
     }
     public void setupSearchForTape() {
         imageProcessingPipeline.setFilterContours(
@@ -224,10 +244,10 @@ public class VisionSystem extends Subsystem {
     }
 
     public boolean reachedDesiredX(){
-        return (((centerX + centerX2) / 2) <= (DesiredX + 5) && ((centerX + centerX2) / 2)>= (DesiredX - 5));
+        return (((centerX + centerX2) / 2) <= (tapeDesiredX + 5) && ((centerX + centerX2) / 2)>= (tapeDesiredX - 5));
     }
     public boolean reachedDesiredTargetArea(){
-        return (targetArea <= (DesiredTargetArea + 100) && targetArea >= (DesiredTargetArea - 100));
+        return (targetArea <= (tapeDesiredTargetArea + 100) && targetArea >= (tapeDesiredTargetArea - 100));
     }
     public boolean moreThan2Targets(){
         if(imageProcessingPipeline.filterContoursOutput().size() >= 3){
@@ -235,5 +255,8 @@ public class VisionSystem extends Subsystem {
         }else{
             return false;
         }
+    }
+    public boolean alignedWithDisk(){
+        return ((centerX / 2) <= (diskDesiredX + 6) && (centerX / 2)>= (diskDesiredX - 6));
     }
 }

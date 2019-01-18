@@ -153,6 +153,13 @@ public class DriveSystem extends Subsystem {
         rightFront.set(power - pidOutputNavX);
         rightRear.set(power - pidOutputNavX);
     }
+    public void turnToDisk(double X) {
+        pidOutputNavX = pidNavX.calculateOutput(X, Robot.visionSystem.centerX);
+        leftFront.set(pidOutputNavX);
+        leftRear.set(pidOutputNavX);
+        rightFront.set(-pidOutputNavX);
+        rightRear.set(-pidOutputNavX);
+    }
     /**
      * reachedHeading()
      * Determines if the drivetrain has reached the target heading

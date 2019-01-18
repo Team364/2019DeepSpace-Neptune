@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.VisionSystem;
 
-public class TeleopAlignWithTape extends Command {
+public class TeleopAlignWithDisk extends Command {
     //public static VisionPipeline vision;
 
     //public static VisionThread visionThread;
@@ -15,7 +15,7 @@ public class TeleopAlignWithTape extends Command {
     /**
      * Command used for teleop control specific to the intake system
      */
-    public TeleopAlignWithTape() {
+    public TeleopAlignWithDisk() {
         requires(Robot.visionSystem);
         requires(Robot.driveSystem);
 
@@ -24,7 +24,7 @@ public class TeleopAlignWithTape extends Command {
     @Override
     protected void initialize() {
         // Set up vision system to track TAPE
-        Robot.visionSystem.setupSearchForTape();
+        Robot.visionSystem.setupSearchForDisk();
         Robot.driveSystem.pidXvalue.setPIDParameters(0.0007, 0.0, 0.0, 0.0);
         Robot.driveSystem.pidAvalue.setPIDParameters(0.0003, 0.0, 0.0, 0.0);
     }

@@ -7,6 +7,8 @@ import frc.robot.commands.auto.drive.ShiftUp;
 import frc.robot.commands.teleop.Subroutines.TeleopTurn180;
 import frc.robot.commands.teleop.TeleopAlignWithTape;
 import frc.robot.commands.teleop.TeleopFollowBall;
+import frc.robot.commands.teleop.TeleopAlignWithDisk;
+import frc.robot.commands.teleop.Subroutines.TeleopIntakeDisk;
 
 
 public class OI {
@@ -18,6 +20,7 @@ public class OI {
     public JoystickButton turn180Button;
     public JoystickButton alignWithTapeButton;
     public JoystickButton followCubeButton;
+    public JoystickButton alignWithDiskButton;
 
     public OI() {
 
@@ -35,7 +38,12 @@ public class OI {
         alignWithTapeButton = new JoystickButton(controller, 2);
         alignWithTapeButton.whileActive(new TeleopAlignWithTape());
 
-        followCubeButton = new JoystickButton(controller, 10);
+        followCubeButton = new JoystickButton(controller, 3);
         followCubeButton.whileActive(new TeleopFollowBall());
+
+        alignWithDiskButton = new JoystickButton(controller, 4);
+        alignWithDiskButton.whenPressed(new TeleopIntakeDisk());
+
+
     }
 }

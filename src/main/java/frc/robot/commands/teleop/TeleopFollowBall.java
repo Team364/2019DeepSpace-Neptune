@@ -2,6 +2,7 @@ package frc.robot.commands.teleop;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.VisionSystem;
 
 public class TeleopFollowBall extends Command {
 
@@ -19,7 +20,8 @@ public class TeleopFollowBall extends Command {
 
     @Override
     protected void initialize() {
-        //Robot.visionSystem.setupSearchForBall();
+        Robot.visionSystem.setupSearchForBall();
+        Robot.driveSystem.pidXvalue.setPIDParameters(0.001, 0.0, 0.0, 0.0);
     }
 
     @Override
@@ -31,10 +33,9 @@ public class TeleopFollowBall extends Command {
             double targetArea = Robot.visionSystem.targetArea;
 
             // Interpret location(s) of target and drive accordingly
-            double pidOutputXvalue = Robot.driveSystem.pidXvalue.calculateOutput(120, centerX);
-            double pidOutputAvalue = Robot.driveSystem.pidAvalue.calculateOutput(800, targetArea);
-            double visionLeft = pidOutputXvalue + pidOutputAvalue;
-            double visionRight = -pidOutputXvalue + pidOutputAvalue;
+            double pidOutputXvalue = Robot.driveSystem.pidXvalue.calculateOutput(VisionSystem.ballDesiredX, centerX);
+            double visionLeft = pidOutputXvalue;
+            double visionRight = -pidOutputXvalue;
 
             Robot.driveSystem.tankDrive(visionLeft, visionRight);
         }
