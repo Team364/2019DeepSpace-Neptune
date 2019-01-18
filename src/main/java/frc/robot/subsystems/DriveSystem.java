@@ -65,7 +65,7 @@ public class DriveSystem extends Subsystem {
 	    // Init the navX, Pathfinder, and PIDCalc
         navX = new AHRS(SPI.Port.kMXP);
         pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
-        pidXvalue = new PIDCalc(0.007, 0.0, 0.0, 0.0, "follow");
+        pidXvalue = new PIDCalc(0.007, 0.0, 0.0, 0.0, "CenterX");
         pidAvalue = new PIDCalc(0.0004, 0.0, 0.0, 0.0, "area");
     }
 
@@ -153,12 +153,12 @@ public class DriveSystem extends Subsystem {
         rightFront.set(power - pidOutputNavX);
         rightRear.set(power - pidOutputNavX);
     }
-    public void turnToDisk(double X) {
-        pidOutputNavX = pidNavX.calculateOutput(X, Robot.visionSystem.centerX);
-        leftFront.set(pidOutputNavX);
-        leftRear.set(pidOutputNavX);
-        rightFront.set(-pidOutputNavX);
-        rightRear.set(-pidOutputNavX);
+    public void turnToVisionTarget() {
+        pidOutputXvalue = pidXvalue.calculateOutput(Robot.visionSystem.DesiredX, Robot.visionSystem.centerX);
+        leftFront.set(pidOutputXvalue);
+        leftRear.set(pidOutputXvalue);
+        rightFront.set(-pidOutputXvalue);
+        rightRear.set(-pidOutputXvalue);
     }
     /**
      * reachedHeading()

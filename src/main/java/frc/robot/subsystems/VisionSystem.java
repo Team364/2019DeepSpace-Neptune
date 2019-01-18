@@ -40,6 +40,7 @@ public class VisionSystem extends Subsystem {
     public double targetArea6 = 0.0;
 
     //Pid SetPoints
+    public double DesiredX;
     public static double tapeDesiredX = 194;
     public static double tapeDesiredTargetArea = 2000.0;
 

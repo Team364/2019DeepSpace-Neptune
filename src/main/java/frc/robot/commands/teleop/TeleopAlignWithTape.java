@@ -25,6 +25,8 @@ public class TeleopAlignWithTape extends Command {
     protected void initialize() {
         // Set up vision system to track TAPE
         Robot.visionSystem.setupSearchForTape();
+        Robot.driveSystem.pidXvalue.resetPID();
+        Robot.driveSystem.pidAvalue.resetPID();
         Robot.driveSystem.pidXvalue.setPIDParameters(0.0007, 0.0, 0.0, 0.0);
         Robot.driveSystem.pidAvalue.setPIDParameters(0.0003, 0.0, 0.0, 0.0);
     }

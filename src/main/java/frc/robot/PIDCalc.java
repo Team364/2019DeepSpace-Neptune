@@ -50,6 +50,9 @@ public class PIDCalc {
         prev_error = 0;
         error = 0;
     }
+    public double getError(){
+        return error;
+    }
 
     public void setPIDParameters(double pTerm, double iTerm, double dTerm, double fTerm) {
         kP = pTerm;

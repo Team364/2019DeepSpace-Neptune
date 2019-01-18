@@ -3,6 +3,7 @@ package frc.robot.commands.auto.drive;
 import edu.wpi.first.vision.VisionPipeline;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.VisionSystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -18,13 +19,14 @@ public class TurnToDisk extends Command {
 
     @Override
     protected void initialize() {
+        Robot.visionSystem.DesiredX = VisionSystem.diskDesiredX;
         Robot.driveSystem.pidXvalue.setPIDParameters(0.0095, 0, 0, 0);
         Robot.driveSystem.stop();
     }
 
     @Override
     protected void execute(){
-        Robot.driveSystem.turnToDisk(centerX);
+        Robot.driveSystem.turnToVisionTarget();
         SmartDashboard.putNumber("Center X Disk ", Robot.visionSystem.centerX);
     }
 
