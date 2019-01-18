@@ -131,7 +131,15 @@ public class Robot extends TimedRobot {
    SmartDashboard.putNumber("GetLeftContr: ", -Robot.oi.controller.getRawAxis(5));
    SmartDashboard.putNumber("GetRightContr: ",  -Robot.oi.controller.getRawAxis(1));
    SmartDashboard.putBoolean("VisionTargetSeen", Robot.visionSystem.visionTargetSeen);
+
    SmartDashboard.putNumber("visionTargetCenterX", Robot.visionSystem.centerX);
    SmartDashboard.putNumber("visionTargetArea", Robot.visionSystem.targetArea);
+   SmartDashboard.putNumber("X2 ", Robot.visionSystem.centerX2);
+   SmartDashboard.putNumber("X3 ", Robot.visionSystem.centerX3);
+   SmartDashboard.putNumber("X4 ", Robot.visionSystem.centerX4);
+   SmartDashboard.putNumber("A2 ", Robot.visionSystem.targetArea2);
+   SmartDashboard.putNumber("A3 ", Robot.visionSystem.targetArea3);
+   SmartDashboard.putNumber("A4 ", Robot.visionSystem.targetArea4);
 }
+
 }

@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.teleop.*;
 import frc.robot.DynamicVisionPipeline;
 import frc.robot.commands.teleop.TeleopAlignWithTape;
 import frc.robot.BasicVisionPipeline;
@@ -22,10 +24,26 @@ public class VisionSystem extends Subsystem {
     private static BasicVisionPipeline imageCapturePipeline = new BasicVisionPipeline();
     public static VisionThread imageCaptureThread;
 
+    // Printing array of objects 
     public double centerX = 0.0;
-    public static double DesiredX = 120.0;
+    public double centerX2 = 0.0;
+    public double centerX3 = 0.0;
+    public double centerX4 = 0.0;
+    public double centerX5 = 0.0;
+    public double centerX6 = 0.0;
+
     public double targetArea = 0.0;
-    public static double DesiredTargetArea = 800.0;
+    public double targetArea2 = 0.0;
+    public double targetArea3 = 0.0;
+    public double targetArea4 = 0.0;
+    public double targetArea5 = 0.0;
+    public double targetArea6 = 0.0;
+
+    //Pid SetPoints
+    public static double DesiredX = 194;
+    public static double DesiredTargetArea = 2000.0;
+
+
     public boolean visionTargetSeen = false;
     private final Object imgLock = new Object();
     public UsbCamera camera;
@@ -45,10 +63,28 @@ public class VisionSystem extends Subsystem {
     private double tapeContoursMinRatio = 0.0;
     private double tapeContoursMaxRatio = 1000.0;
 
-    //Tape Contour Values
+    //Tape HSV Values
     private double[] tapeThresholdHue = {71.22302158273381, 100.13651877133105};
     private double[] tapeThresholdSaturation = {22.93165467625899, 107.04778156996588};
     private double[] tapeThresholdValue = {240.78237410071944, 255.0};
+
+    //Ball Filter Values
+    double ballContoursMinArea = 180.0;
+    double ballContoursMinPerimeter = 200.0;
+    double ballContoursMinWidth = 0.0;
+    double ballContoursMaxWidth = 1000.0;
+    double ballContoursMinHeight = 0.0;
+    double ballContoursMaxHeight = 1000.0;
+    double[] ballContoursSolidity = {0.0, 100.0};
+    double ballContoursMaxVertices = 1000000.0;
+    double ballContoursMinVertices = 0.0;
+    double ballContoursMinRatio = 0.0;
+    double ballContoursMaxRatio = 1000.0;
+
+    //Ball HSV Values
+    double[] ballThresholdHue = {0.16709213274541646, 23.428933171859523};
+    double[] ballThresholdSaturation = {105.48561151079136, 255.0};
+    double[] ballThresholdValue = {6.879496402877698, 255.0};
     
 
     /**
@@ -70,8 +106,7 @@ public class VisionSystem extends Subsystem {
         imageCaptureThread.start();
     }
 
-    public void setupSearchForBall() {
-                /*        
+    public void setupSearchForBall() {     
         imageProcessingPipeline.setFilterContours(
             ballContoursMinArea,
             ballContoursMinPerimeter,
@@ -90,7 +125,7 @@ public class VisionSystem extends Subsystem {
             ballThresholdSaturation,
             ballThresholdValue
         );
-        */
+        
     }
     public void setupSearchForDisk() {
         /*        
@@ -143,27 +178,62 @@ public class VisionSystem extends Subsystem {
             source = lastCapturedImage;
         }
         imageProcessingPipeline.process(source);
-
         if (!imageProcessingPipeline.filterContoursOutput().isEmpty()) {
             visionTargetSeen = true;
-            Rect r = Imgproc.boundingRect(imageProcessingPipeline.filterContoursOutput().get(0));
+            Rect a = Imgproc.boundingRect(imageProcessingPipeline.filterContoursOutput().get(0));
+      
             synchronized (imgLock) {
-                centerX = r.x + (r.width / 2);
-                targetArea = r.area();
+                centerX = a.x + (a.width / 2);
+                targetArea = a.area();
+                if(imageProcessingPipeline.filterContoursOutput().size() >= 2){
+                    Rect b =Imgproc.boundingRect(imageProcessingPipeline.filterContoursOutput().get(1));
+                    centerX2 = b.x + (b.width / 2);
+                    targetArea2 = b.area();
+                }
+                if(imageProcessingPipeline.filterContoursOutput().size() >= 3){
+                    Rect c =Imgproc.boundingRect(imageProcessingPipeline.filterContoursOutput().get(2));
+                    centerX3 = c.x + (c.width / 2);
+                    targetArea3 = c.area();
+                }
+                if(imageProcessingPipeline.filterContoursOutput().size() >= 4){
+                    Rect d =Imgproc.boundingRect(imageProcessingPipeline.filterContoursOutput().get(3));
+                    centerX4 = d.x + (d.width / 2);
+                    targetArea4 = d.area();
+                }
+                if(imageProcessingPipeline.filterContoursOutput().size() >= 5){
+                    Rect e =Imgproc.boundingRect(imageProcessingPipeline.filterContoursOutput().get(4));
+                    centerX5 = e.x + (e.width / 2);
+                    targetArea5 = e.area();
+                }
+                if(imageProcessingPipeline.filterContoursOutput().size() >= 6){
+                    Rect f =Imgproc.boundingRect(imageProcessingPipeline.filterContoursOutput().get(5));
+                    centerX6 = f.x + (f.width / 2);
+                    targetArea6 = f.area();
+                }
             }
+           // System.out.println(imageProcessingPipeline.filterContoursOutput().size());
+
+          
         } else {
             visionTargetSeen = false;
         }
     }
+    @Override
     protected void initDefaultCommand() {
-        //setDefaultCommand(new TeleopVisionCommand());
+        setDefaultCommand(new TeleopBasicVisionCommand());
     }
 
     public boolean reachedDesiredX(){
-        return (centerX <= (DesiredX + 2.5) && centerX >= (DesiredX - 2.5));
+        return (((centerX + centerX2) / 2) <= (DesiredX + 5) && ((centerX + centerX2) / 2)>= (DesiredX - 5));
     }
     public boolean reachedDesiredTargetArea(){
         return (targetArea <= (DesiredTargetArea + 100) && targetArea >= (DesiredTargetArea - 100));
     }
-
+    public boolean moreThan2Targets(){
+        if(imageProcessingPipeline.filterContoursOutput().size() >= 3){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

@@ -65,8 +65,8 @@ public class DriveSystem extends Subsystem {
 	    // Init the navX, Pathfinder, and PIDCalc
         navX = new AHRS(SPI.Port.kMXP);
         pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
-        pidXvalue = new PIDCalc(0.0001, 0.001, 0.0, 0.0, "follow");
-        pidAvalue = new PIDCalc(0.001, 0.0, 0.0, 0.0, "area");
+        pidXvalue = new PIDCalc(0.007, 0.0, 0.0, 0.0, "follow");
+        pidAvalue = new PIDCalc(0.0004, 0.0, 0.0, 0.0, "area");
     }
 
     @Override

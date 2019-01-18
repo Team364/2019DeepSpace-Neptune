@@ -35,21 +35,24 @@ public class TeleopAlignWithTape extends Command {
         if (Robot.visionSystem.visionTargetSeen) {
             // I see a target! 
             double centerX = Robot.visionSystem.centerX;
+            double centerX2 = Robot.visionSystem.centerX2;
             double targetArea = Robot.visionSystem.targetArea;
+            double visionLeft;
+            double visionRight;
 
             // Interpret location(s) of target and drive accordingly
-            double pidOutputXvalue = Robot.driveSystem.pidXvalue.calculateOutput(VisionSystem.DesiredX , centerX);
+            double pidOutputXvalue = Robot.driveSystem.pidXvalue.calculateOutput(VisionSystem.DesiredX , ((centerX + centerX2) / 2));
             double pidOutputAvalue = Robot.driveSystem.pidAvalue.calculateOutput(VisionSystem.DesiredTargetArea, targetArea);
-            double visionLeft = pidOutputXvalue + pidOutputAvalue;
-            double visionRight = -pidOutputXvalue + pidOutputAvalue;
-
+                visionLeft = pidOutputXvalue + pidOutputAvalue;
+                visionRight = -pidOutputXvalue + pidOutputAvalue;
             Robot.driveSystem.tankDrive(visionLeft, visionRight);
         }
     }
 
     @Override
     protected boolean isFinished() {
-       return (Robot.visionSystem.reachedDesiredX() && Robot.visionSystem.reachedDesiredTargetArea());
+        return false;
+       
     }
 
     @Override
