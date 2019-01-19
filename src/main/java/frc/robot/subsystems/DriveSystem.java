@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import edu.wpi.first.wpilibj.VictorSP;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SPI;
@@ -12,6 +11,10 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 //import frc.robot.DynamicVisionPipeline;
 import frc.robot.commands.teleop.TeleopDriveCommand;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
+import frc.robot.commands.teleop.TeleopDriveCommand;
 
 
 /**
@@ -21,23 +24,34 @@ import frc.robot.commands.teleop.TeleopDriveCommand;
 
 public class DriveSystem extends Subsystem {
 
-    private VictorSP leftFront;
-    private VictorSP leftRear;
-    private VictorSP rightFront;
-    private VictorSP rightRear;
+    //Motor Controller Declarations
+    private TalonSRX leftTop;
+    private TalonSRX rightTop;
+
+    private VictorSPX leftFront;
+    private VictorSPX leftRear;
+    private VictorSPX rightFront;
+    private VictorSPX rightRear;
+    //Shifter
     private DoubleSolenoid shifter;
+    //Gyro
     public AHRS navX;
+    //PID Gyro
     public PIDCalc pidNavX;
-    //public PIDCalc pidLeft;
-    //public PIDCalc pidRight;
     public double pidOutputNavX;
+    //PID Left
+    public PIDCalc pidLeft;
     private double pidOutputLeft;
+    //PID Right
+    public PIDCalc pidRight;
     private double pidOutputRight;
-    private double pidOutputRampDown;
+    //PID Vision X 
     public PIDCalc pidXvalue;
     public double pidOutputXvalue;
+    //PID Vision Area
     public PIDCalc pidAvalue;
     public double pidOutputAvalue;
+    //Vision Right and Left
     public double visionLeft;
     public double visionRight;
 
@@ -52,21 +66,40 @@ public class DriveSystem extends Subsystem {
      */ 
     public DriveSystem() {
         
-        // Initialize TalonSRX and VictorSPX objects
-        leftFront = new VictorSP(RobotMap.leftFrontDrive);
-        leftRear = new VictorSP(RobotMap.leftRearDrive);
-        rightFront = new VictorSP(RobotMap.rightFrontDrive);
-        rightRear = new VictorSP(RobotMap.rightRearDrive);
-
-    
-        // Initialize DoubleSolenoid shifter object
-        shifter = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
-        
-	    // Init the navX, Pathfinder, and PIDCalc
-        navX = new AHRS(SPI.Port.kMXP);
-        pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
-        pidXvalue = new PIDCalc(0.007, 0.0, 0.0, 0.0, "CenterX");
-        pidAvalue = new PIDCalc(0.0004, 0.0, 0.0, 0.0, "area");
+         // Initialize TalonSRX and VictorSPX objects
+         leftFront = new VictorSPX(RobotMap.leftFrontDrive);
+         leftTop = new TalonSRX(RobotMap.leftTopDrive);
+         leftRear = new VictorSPX(RobotMap.leftRearDrive);
+ 
+         rightFront = new VictorSPX(RobotMap.rightFrontDrive);
+         rightTop = new TalonSRX(RobotMap.rightTopDrive);
+         rightRear = new VictorSPX(RobotMap.rightRearDrive);
+ 
+         // Initialize DoubleSolenoid shifter object
+         shifter = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
+         
+         // Set the front drive motors to follow the rear
+         leftFront.follow(leftTop);
+         leftRear.follow(leftTop);
+         rightFront.follow(rightTop);
+         rightRear.follow(rightTop);
+ 
+         // Config PF on left side
+         leftRear.config_kP(0, 0.25, 100);
+         leftRear.config_kF(0, 1, 100);
+ 
+         // Config PF on right side
+         rightRear.config_kP(0, 0.25, 100);
+         rightRear.config_kF(0, 1, 100);
+ 
+         // Init the navX, Pathfinder, and PIDCalc
+         navX = new AHRS(SPI.Port.kMXP);
+         pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
+         pidLeft = new PIDCalc(0.0005, 0, 0, 0, "Left");
+         pidRight = new PIDCalc(0.0005, 0, 0, 0, "Right");
+         pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
+         pidXvalue = new PIDCalc(0.007, 0.0, 0.0, 0.0, "CenterX");
+         pidAvalue = new PIDCalc(0.0004, 0.0, 0.0, 0.0, "area");
     }
 
     @Override
@@ -81,10 +114,8 @@ public class DriveSystem extends Subsystem {
      * @param right sets the right drive power
      */
     public void tankDrive(double left, double right) {
-        leftFront.set(-left*0.85);
-        leftRear.set(-left*0.85);
-        rightFront.set(-right);
-        rightRear.set(-right);
+        leftTop.set(ControlMode.PercentOutput, left);
+        rightTop.set(ControlMode.PercentOutput, -right);
     }
 
     /**
@@ -93,12 +124,43 @@ public class DriveSystem extends Subsystem {
      * Use this in auto to stop the drivetrain inbetween commands
      */ 
     public void stop() {
-        leftFront.set(0);
-        leftRear.set(0);
-        rightFront.set(0);
-        rightRear.set(0);
+        leftTop.set(ControlMode.PercentOutput, 0);
+        rightTop.set(ControlMode.PercentOutput, 0);
     }
-
+    /**
+     * driveStraightToEcnoderCounts()
+     * Uses the TalonSRX PID to drive to a certain number of counts
+     * @param counts specify encoder counts to drive to
+     */ 
+    public void driveStraightToEncoderCounts(int counts, boolean backwards, boolean useGyro) {
+        if(backwards) {
+            pidOutputLeft = pidLeft.calculateOutput(counts, -getLeftEncoderPosition());
+            pidOutputRight = pidRight.calculateOutput(counts, -getRightEncoderPosition());
+            pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
+            System.out.println("bLeft: " + pidOutputLeft);
+            System.out.println("bRight: " + pidOutputRight);            
+            if(useGyro) {
+                leftTop.set(ControlMode.PercentOutput, -pidOutputLeft + pidOutputNavX);
+                rightTop.set(ControlMode.PercentOutput, pidOutputRight + pidOutputNavX);
+            } else {
+                leftTop.set(ControlMode.PercentOutput, -pidOutputLeft);
+                rightTop.set(ControlMode.PercentOutput, pidOutputRight);
+            }
+        } else {
+            pidOutputLeft = pidLeft.calculateOutput(counts, getLeftEncoderPosition());
+            pidOutputRight = pidRight.calculateOutput(counts, getRightEncoderPosition());
+            pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
+            System.out.println("Left: " + pidOutputLeft);
+            System.out.println("Right: " + pidOutputRight);
+            if(useGyro) {
+                leftTop.set(ControlMode.PercentOutput, pidOutputLeft + pidOutputNavX);
+                rightTop.set(ControlMode.PercentOutput, -pidOutputRight + pidOutputNavX);
+            } else {
+                leftTop.set(ControlMode.PercentOutput, pidOutputLeft);
+                rightTop.set(ControlMode.PercentOutput, -pidOutputRight);
+            }
+        }
+    }
     /**
      * getGyroAngle()
      * @return returns the navX angle (yaw)
@@ -117,10 +179,10 @@ public class DriveSystem extends Subsystem {
     }
 
     public void driveForPower(double power){
-        leftFront.set(-power*0.85);
-        leftRear.set(-power*0.85);
-        rightFront.set(-power);
-        rightRear.set(-power);
+        leftFront.set(ControlMode.PercentOutput, -power*0.85);
+        leftRear.set(ControlMode.PercentOutput,-power*0.85);
+        rightFront.set(ControlMode.PercentOutput, -power);
+        rightRear.set(ControlMode.PercentOutput, -power);
 
     }
 
@@ -138,27 +200,27 @@ public class DriveSystem extends Subsystem {
      */ 
     public void turnToHeading(double heading) {
         pidOutputNavX = pidNavX.calculateOutput(heading, navX.getYaw());
-        leftFront.set(pidOutputNavX);
-        leftRear.set(pidOutputNavX);
-        rightFront.set(-pidOutputNavX);
-        rightRear.set(-pidOutputNavX);
+        leftFront.set(ControlMode.PercentOutput, pidOutputNavX);
+        leftRear.set(ControlMode.PercentOutput, pidOutputNavX);
+        rightFront.set(ControlMode.PercentOutput, -pidOutputNavX);
+        rightRear.set(ControlMode.PercentOutput, -pidOutputNavX);
         SmartDashboard.putNumber("PidOutputNavX", pidOutputNavX);
         SmartDashboard.putBoolean("reachHeading", reachedHeading(heading));
     }
 
     public void keepHeading(double power){
         pidOutputNavX = pidNavX.calculateOutput(0, navX.getYaw());
-        leftFront.set(power*0.85 + pidOutputNavX);
-        leftRear.set(power*0.85 + pidOutputNavX);
-        rightFront.set(power - pidOutputNavX);
-        rightRear.set(power - pidOutputNavX);
+        leftFront.set(ControlMode.PercentOutput, power*0.85 + pidOutputNavX);
+        leftRear.set(ControlMode.PercentOutput, power*0.85 + pidOutputNavX);
+        rightFront.set(ControlMode.PercentOutput, power - pidOutputNavX);
+        rightRear.set(ControlMode.PercentOutput, power - pidOutputNavX);
     }
     public void turnToVisionTarget() {
         pidOutputXvalue = pidXvalue.calculateOutput(Robot.visionSystem.DesiredX, Robot.visionSystem.centerX);
-        leftFront.set(pidOutputXvalue);
-        leftRear.set(pidOutputXvalue);
-        rightFront.set(-pidOutputXvalue);
-        rightRear.set(-pidOutputXvalue);
+        leftFront.set(ControlMode.PercentOutput, pidOutputXvalue);
+        leftRear.set(ControlMode.PercentOutput, pidOutputXvalue);
+        rightFront.set(ControlMode.PercentOutput, -pidOutputXvalue);
+        rightRear.set(ControlMode.PercentOutput, -pidOutputXvalue);
     }
     /**
      * reachedHeading()
@@ -172,6 +234,31 @@ public class DriveSystem extends Subsystem {
     public boolean reachedHeadingL(double heading) {
         return (navX.getYaw() <= (heading + 5) && navX.getYaw() >= (heading - 5));
     }
+     /**
+     * getLeftEncoderPosition()
+     * @return returns the left encoder position in counts
+     */ 
+    public int getLeftEncoderPosition() {
+        return leftTop.getSelectedSensorPosition(0);
+    }
+
+    /**
+     * getRightEncoderPosition()
+     * @return returns the right encoder position in counts
+     */ 
+    public int getRightEncoderPosition() {
+        return -rightTop.getSelectedSensorPosition(0);
+    }
+
+    /**
+     * setLeftDrivePower()
+     * Use this for motion profiling to set the left drive power
+     * @param power sets the left drive power
+     */ 
+    public void setLeftDrivePower(double power) {
+        leftTop.set(ControlMode.PercentOutput, power);
+    }
+
 
   /*  public void lineUpWithTape(){
         pidOutputXvalue = pidXvalue.calculateOutput(120, Robot.visionSystem.centerX);
