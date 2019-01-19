@@ -5,11 +5,11 @@ import frc.robot.Robot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
-public class TurnToHeadingXL extends Command {
+public class TurnToHeading extends Command {
 
     private double wantedHeading;
 
-    public TurnToHeadingXL(double heading) {
+    public TurnToHeading(double heading) {
         requires(Robot.driveSystem);
         wantedHeading = heading;
         setTimeout(3);
@@ -17,7 +17,14 @@ public class TurnToHeadingXL extends Command {
 
     @Override
     protected void initialize() {
-        Robot.driveSystem.pidNavX.setPIDParameters(0.0075, 0, 0, 0);
+        if(wantedHeading >= 170){ 
+            Robot.driveSystem.pidNavX.setPIDParameters(0.0075, 0, 0, 0);
+        }else if(wantedHeading >= 60){  
+            Robot.driveSystem.pidNavX.setPIDParameters(0.0095, 0, 0, 0);
+        }else{      
+            Robot.driveSystem.pidNavX.setPIDParameters(0.015, 0, 0, 0);
+        }
+      
         Robot.driveSystem.stop();
         Robot.driveSystem.resetHeading();
         Robot.driveSystem.pidNavX.resetPID();
@@ -31,7 +38,7 @@ public class TurnToHeadingXL extends Command {
 
     @Override
     protected boolean isFinished() {
-        return Robot.driveSystem.reachedHeadingL(wantedHeading) || isTimedOut();
+        return Robot.driveSystem.reachedHeading(wantedHeading) || isTimedOut();
     }
 
     @Override

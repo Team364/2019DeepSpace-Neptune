@@ -9,8 +9,7 @@ import frc.robot.commands.auto.drive.*;
  */
 public class StraightAuto extends CommandGroup {
     /**
-     * Objective - Cross the line
-     *<p>1 Drive Foward
+     * Drive Straight
      */
     public StraightAuto() {
        

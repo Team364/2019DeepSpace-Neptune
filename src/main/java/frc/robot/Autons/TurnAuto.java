@@ -9,20 +9,19 @@ import frc.robot.commands.auto.drive.*;
  */
 public class TurnAuto extends CommandGroup {
     /**
-     * Objective - Cross the line
-     *<p>1 Drive Foward
+     *Turn Testing
      */
     public TurnAuto() {
        
         addSequential(new DriveForPower(0.6, 2)); //1
         addSequential(new StopDriveMotors());
-        addSequential(new TurnToHeadingL(-90));
+        addSequential(new TurnToHeading(-90));
         addSequential(new StopDriveMotors());
         addSequential(new WaitCommand(0.2));
 
         addSequential(new DriveForPower(0.6, 2)); //1
         addSequential(new StopDriveMotors());
-        addSequential(new TurnToHeadingL(90));
+        addSequential(new TurnToHeading(90));
         addSequential(new StopDriveMotors());
         addSequential(new WaitCommand(0.2));
 
