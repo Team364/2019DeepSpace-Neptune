@@ -97,7 +97,6 @@ public class DriveSystem extends Subsystem {
          pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
          pidLeft = new PIDCalc(0.0005, 0, 0, 0, "Left");
          pidRight = new PIDCalc(0.0005, 0, 0, 0, "Right");
-         pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
          pidXvalue = new PIDCalc(0.007, 0.0, 0.0, 0.0, "CenterX");
          pidAvalue = new PIDCalc(0.0004, 0.0, 0.0, 0.0, "area");
     }
@@ -116,6 +115,14 @@ public class DriveSystem extends Subsystem {
     public void tankDrive(double left, double right) {
         leftTop.set(ControlMode.PercentOutput, left);
         rightTop.set(ControlMode.PercentOutput, -right);
+    }
+
+    public void triggerDrive(double throttle, double steer){
+        double leftDrive;
+        double rightDrive;
+        leftDrive = throttle + steer;
+        rightDrive = throttle - steer;
+        tankDrive(leftDrive, rightDrive);
     }
 
     /**

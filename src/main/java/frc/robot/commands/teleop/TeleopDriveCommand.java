@@ -62,12 +62,6 @@ public class TeleopDriveCommand extends Command {
         } else if (driveState == DriveStates.STATE_RAMP_DOWN) {
             driveState = DriveStates.STATE_NOT_MOVING;
 
-            // This state is only useful if abrupt stoppage is likely
-            // to do damage to the robot.
-
-            // TODO: Add code that gradually ramps down robot speed
-            // tankLeft -= .10
-
         } else {
             // This condition should never happen!
             driveState = DriveStates.STATE_NOT_MOVING;

@@ -1,7 +1,5 @@
 package frc.robot.commands.teleop;
 
-import java.io.Console;
-
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.VisionSystem;
@@ -14,7 +12,6 @@ public class TeleopCenterOnBall extends Command {
     private static boolean reachedX;
     double visionLeft;
     double visionRight;
-    public static int counter = 0;
 
     /**
      * Command used for teleop control specific to the intake system
@@ -26,7 +23,6 @@ public class TeleopCenterOnBall extends Command {
 
     @Override
     protected void initialize() {
-        counter = 0;
         reachedX = false;
         Robot.visionSystem.DesiredX = VisionSystem.ballDesiredX;
         Robot.visionSystem.setupSearchForBall();
@@ -40,8 +36,6 @@ public class TeleopCenterOnBall extends Command {
         if (Robot.visionSystem.visionTargetSeen) {
 
             // I see a target! 
-            double centerX = Robot.visionSystem.centerX;
-   
             // Interpret location(s) of target and drive accordingly
             if(!reachedX){
             Robot.driveSystem.turnToVisionTarget();
@@ -54,7 +48,6 @@ public class TeleopCenterOnBall extends Command {
             }
            
         }
-        System.out.println(counter);
     }
 
     @Override

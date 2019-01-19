@@ -10,12 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
 import frc.robot.Autons.*;
 import frc.robot.commands.teleop.Subroutines.TeleopTurn180;
@@ -27,61 +23,57 @@ import frc.robot.commands.teleop.Subroutines.TeleopTurn180;
  * project.
  */
 public class Robot extends TimedRobot {
+  //Declarations
 
+  //Subsystems
   public static DriveSystem driveSystem;
-  
   public static VisionSystem visionSystem;
 
+  //Controls
   public static OI oi;
 
- 
+  //Commands
+  //Auto Commands
   public static Command Auto1;
   public static Command Auto2;
   public static Command Auto3;
-
+  //Subroutine Commands
   public static Command Turn180;
 
+  //Auto Selector String
+  private String autoSelected;
+  //Auto Chooser
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  //Auto Selector String Options
   private static final String driveStraightAuto = "Default";
   private static final String turnAuto = "Auto1";
   private static final String cargoAuto = "Auto2";
-  private String autoSelected;
-  private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
-  /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
-   */
   @Override
   public void robotInit() {
+    //Auto Selector init
     m_chooser.setDefaultOption("Default Auto", driveStraightAuto);
     m_chooser.addOption("TurnAuto", turnAuto);
     m_chooser.addOption("CargoAuto", cargoAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
 
+    //Subsystem init
     driveSystem = new DriveSystem();
     visionSystem = new VisionSystem();
-
+    //Controls init
     oi = new OI();
-
+    //Auto Command inits Auto CommandGroups are assigned to commands 
     Auto1 = new TurnAuto();
     Auto2 = new CargoAuto();
     Auto3 = new StraightAuto();
-
+    //Teleop Subroutine CommandGroups are assigned to commands
     Turn180 = new TeleopTurn180();
-
+    //Sensors Reset
     driveSystem.resetHeading();
 
 
   }
 
-  /**
-   * This function is called every robot packet, no matter the mode. Use
-   * this for items like diagnostics that you want ran during disabled,
-   * autonomous, teleoperated and test.
-   *
-   * <p>This runs after the mode specific periodic functions, but before
-   * LiveWindow and SmartDashboard integrated updating.
-   */
   @Override
   public void robotPeriodic() {
   }
