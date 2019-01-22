@@ -26,10 +26,10 @@ public class OI {
 
         controller = new Joystick(0);
 
-        shiftLow = new JoystickButton(controller, 7);
+        shiftLow = new JoystickButton(controller, 5);
         shiftLow.whenPressed(new ShiftDown());
 
-        shiftHigh = new JoystickButton(controller, 8);
+        shiftHigh = new JoystickButton(controller, 6);
         shiftHigh.whenPressed(new ShiftUp());
 
         turn180Button = new JoystickButton(controller, 1);

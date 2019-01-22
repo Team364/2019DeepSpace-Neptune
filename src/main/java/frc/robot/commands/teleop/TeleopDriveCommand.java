@@ -15,8 +15,11 @@ public class TeleopDriveCommand extends Command {
     }
 
     public DriveStates driveState;
-    public double tankLeft;
-    public double tankRight;
+    private double steer;
+    private double throttle;
+    private double frontThrottle;
+    private double backThrottle;
+    private double steerHold;
 
     /**
      * Command used for teleop control specific to the drive system
@@ -39,22 +42,23 @@ public class TeleopDriveCommand extends Command {
     @Override
     protected void execute() {
 
-        rightControllerInput = -Robot.oi.controller.getRawAxis(1);
-        leftControllerInput = -Robot.oi.controller.getRawAxis(5);
+        frontThrottle = Robot.oi.controller.getRawAxis(2);
+        backThrottle = Robot.oi.controller.getRawAxis(3);
+        
+        steerHold = -Robot.oi.controller.getRawAxis(0);
 
         // normal tank drive control
         if (driveState == DriveStates.STATE_NOT_MOVING) {
-            tankLeft = 0;
-            tankRight = 0;
-            if ((Math.abs(leftControllerInput) >= 0.25) || (Math.abs(rightControllerInput) >= 0.25)) {
+            throttle = 0;
+            if ((Math.abs(frontThrottle) >= 0.25) || (Math.abs(backThrottle) >= 0.25) || (Math.abs(steerHold) >= 0.25)) {
                 System.out.println("STATE_NOT_MOVING->STATE_DIRECT_DRIVE");
                 driveState = DriveStates.STATE_DIRECT_DRIVE;
             }
 
         } else if (driveState == DriveStates.STATE_DIRECT_DRIVE) {
-            tankLeft = leftControllerInput;
-            tankRight = rightControllerInput;
-            if ((Math.abs(leftControllerInput) < 0.2) && (Math.abs(rightControllerInput) < 0.2)) {
+            throttle = backThrottle - frontThrottle;
+            steer = steerHold;
+            if ((Math.abs(frontThrottle) < 0.2) && (Math.abs(backThrottle) < 0.2)) {
                 System.out.println("STATE_DIRECT_DRIVE->STATE_RAMP_DOWN");
                 driveState = DriveStates.STATE_RAMP_DOWN;
             }
@@ -67,7 +71,7 @@ public class TeleopDriveCommand extends Command {
             driveState = DriveStates.STATE_NOT_MOVING;
         }
 
-        Robot.driveSystem.tankDrive(tankLeft, tankRight);
+        Robot.driveSystem.triggerDrive(throttle, steerHold);
 
     }
 

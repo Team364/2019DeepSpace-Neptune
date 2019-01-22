@@ -113,8 +113,8 @@ public class DriveSystem extends Subsystem {
      * @param right sets the right drive power
      */
     public void tankDrive(double left, double right) {
-        leftTop.set(ControlMode.PercentOutput, left);
-        rightTop.set(ControlMode.PercentOutput, -right);
+        leftTop.set(ControlMode.PercentOutput, -left);
+        rightTop.set(ControlMode.PercentOutput, right);
     }
 
     public void triggerDrive(double throttle, double steer){
