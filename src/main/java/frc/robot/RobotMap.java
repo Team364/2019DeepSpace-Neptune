@@ -11,6 +11,8 @@ public class RobotMap {
     public static final int rightTopDrive = 10;
     public static final int rightRearDrive = 1;
 
+    // public static final int extraTalon = 5;
+
     public static final int shifterPort1 = 0;
     public static final int shifterPort2 = 7;
 

@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+// import com.ctre.phoenix.sensors.PigeonIMU;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SPI;
@@ -32,6 +33,9 @@ public class DriveSystem extends Subsystem {
     private VictorSPX leftRear;
     private VictorSPX rightFront;
     private VictorSPX rightRear;
+
+    // private TalonSRX extraTalon;
+    // private PigeonIMU testPigeon;
     //Shifter
     private DoubleSolenoid shifter;
     //Gyro
@@ -55,6 +59,10 @@ public class DriveSystem extends Subsystem {
     public double visionLeft;
     public double visionRight;
 
+
+
+         
+
     /**
      * DriveSystem()
      * Constructor for the DriveSystem class
@@ -74,10 +82,15 @@ public class DriveSystem extends Subsystem {
          rightFront = new VictorSPX(RobotMap.rightFrontDrive);
          rightTop = new TalonSRX(RobotMap.rightTopDrive);
          rightRear = new VictorSPX(RobotMap.rightRearDrive);
+         
+        //  extraTalon = new TalonSRX(RobotMap.extraTalon);
  
          // Initialize DoubleSolenoid shifter object
          shifter = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
-         
+
+        //Initialize PigeonIMU
+        //  testPigeon = new PigeonIMU(extraTalon);
+        
          // Set the front drive motors to follow the rear
          leftFront.follow(leftTop);
          leftRear.follow(leftTop);
@@ -125,6 +138,14 @@ public class DriveSystem extends Subsystem {
         tankDrive(leftDrive, rightDrive);
     }
 
+    // public void getPigeonGyro(){
+    //     double[] ypr = new double[3];
+    //     testPigeon.getYawPitchRoll(ypr);
+    //     SmartDashboard.putNumber("Yaw: ", ypr[0]);
+    //     SmartDashboard.putNumber("Pitch: ", ypr[1]);
+    //     SmartDashboard.putNumber("Roll: ", ypr[2]);
+    
+    // }
     /**
      * stop()
      * Stops the drive motors

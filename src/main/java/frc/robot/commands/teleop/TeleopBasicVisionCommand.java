@@ -21,7 +21,7 @@ public class TeleopBasicVisionCommand extends Command {
 
     @Override
     protected void execute() {
-        Robot.visionSystem.processOneFrame();
+       // Robot.visionSystem.processOneFrame();
    
     }
 
