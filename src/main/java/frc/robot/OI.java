@@ -8,7 +8,6 @@ import frc.robot.commands.teleop.Subroutines.TeleopTurn180;
 import frc.robot.commands.teleop.TeleopAlignWithTape;
 import frc.robot.commands.teleop.TeleopCenterOnBall;
 import frc.robot.commands.teleop.TeleopAlignWithDisk;
-import frc.robot.commands.teleop.Subroutines.TeleopIntakeDisk;
 import frc.robot.commands.teleop.TestPGyro;
 
 public class OI {
@@ -44,7 +43,7 @@ public class OI {
         followCubeButton.whileActive(new TeleopCenterOnBall());
 
         alignWithDiskButton = new JoystickButton(controller, 4);
-        alignWithDiskButton.whenPressed(new TeleopIntakeDisk());
+        alignWithDiskButton.whenPressed(new TeleopAlignWithDisk());
 
         diagnosticButton = new JoystickButton(controller, 7);
         // diagnosticButton.whileActive(new TestPGyro());

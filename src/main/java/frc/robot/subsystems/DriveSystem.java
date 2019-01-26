@@ -105,13 +105,16 @@ public class DriveSystem extends Subsystem {
          rightRear.config_kP(0, 0.25, 100);
          rightRear.config_kF(0, 1, 100);
  
-         // Init the navX, Pathfinder, and PIDCalc
+         // Init the navX
+         //DriveSystem Gyro
          navX = new AHRS(SPI.Port.kMXP);
+         //PIDCalc Init
+         //DriveSystem Gyro PID init
          pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
+         //DriveSystem Left Side init
          pidLeft = new PIDCalc(0.0005, 0, 0, 0, "Left");
+         //DriveSystem Right Side init
          pidRight = new PIDCalc(0.0005, 0, 0, 0, "Right");
-         pidXvalue = new PIDCalc(0.007, 0.0, 0.0, 0.0, "CenterX");
-         pidAvalue = new PIDCalc(0.0004, 0.0, 0.0, 0.0, "area");
     }
 
     @Override
@@ -129,7 +132,14 @@ public class DriveSystem extends Subsystem {
         leftTop.set(ControlMode.PercentOutput, -left);
         rightTop.set(ControlMode.PercentOutput, right);
     }
-
+    /**
+     * triggerDrive()
+     * <p>Sets forward and backward drive of drivetrain to triggers
+     * <p>Left and Right on the left Joystick of the controller control turn
+     * <p>uses tankDrive method to control the drivetrain
+     * @param throttle sets forward and backward values for drivetrain
+     * @param steer adds power to left and subtracts power from right to turn
+     */
     public void triggerDrive(double throttle, double steer){
         double leftDrive;
         double rightDrive;
@@ -138,6 +148,10 @@ public class DriveSystem extends Subsystem {
         tankDrive(leftDrive, rightDrive);
     }
 
+    /**
+     * getPigeonGyro
+     * <p>returns yaw, pitch, and roll of the pigeon IMU
+     */
     // public void getPigeonGyro(){
     //     double[] ypr = new double[3];
     //     testPigeon.getYawPitchRoll(ypr);
@@ -159,15 +173,21 @@ public class DriveSystem extends Subsystem {
      * driveStraightToEcnoderCounts()
      * Uses the TalonSRX PID to drive to a certain number of counts
      * @param counts specify encoder counts to drive to
+     * @param backwards false to drive forward; true to drive backwards
+     * @param useGyro true to use NavX to correct path and keep straight
      */ 
     public void driveStraightToEncoderCounts(int counts, boolean backwards, boolean useGyro) {
         if(backwards) {
+            //TODO: make sure gyro is at zero when this starts
+            //getEncoderPosition gives a measure of encoder counts that is used as actual in PID loop
             pidOutputLeft = pidLeft.calculateOutput(counts, -getLeftEncoderPosition());
             pidOutputRight = pidRight.calculateOutput(counts, -getRightEncoderPosition());
             pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
+            //Prints the pidOutput to the console
             System.out.println("bLeft: " + pidOutputLeft);
             System.out.println("bRight: " + pidOutputRight);            
             if(useGyro) {
+                //TODO: See if one of the PID NavX values needs to be negated
                 leftTop.set(ControlMode.PercentOutput, -pidOutputLeft + pidOutputNavX);
                 rightTop.set(ControlMode.PercentOutput, pidOutputRight + pidOutputNavX);
             } else {
@@ -197,21 +217,14 @@ public class DriveSystem extends Subsystem {
         return navX.getYaw();
     }
 
-    public double getGyro360()  {
-        if(navX.getYaw() < 0){
-            return navX.getYaw() + 360;
-        }
-        else{
-            return navX.getYaw();
-        }
-    }
-
+    /**
+     * driveforPower()
+     * <p>sets drivetrain to drive for a percentage output between -1 and 1
+     * @param power percentage outuput between -1 and 1
+     */
     public void driveForPower(double power){
-        leftFront.set(ControlMode.PercentOutput, -power*0.85);
-        leftRear.set(ControlMode.PercentOutput,-power*0.85);
-        rightFront.set(ControlMode.PercentOutput, -power);
-        rightRear.set(ControlMode.PercentOutput, -power);
-
+        leftTop.set(ControlMode.PercentOutput, -power);
+        rightTop.set(ControlMode.PercentOutput, -power);
     }
 
     /**
@@ -228,40 +241,42 @@ public class DriveSystem extends Subsystem {
      */ 
     public void turnToHeading(double heading) {
         pidOutputNavX = pidNavX.calculateOutput(heading, navX.getYaw());
-        leftFront.set(ControlMode.PercentOutput, pidOutputNavX);
-        leftRear.set(ControlMode.PercentOutput, pidOutputNavX);
-        rightFront.set(ControlMode.PercentOutput, -pidOutputNavX);
-        rightRear.set(ControlMode.PercentOutput, -pidOutputNavX);
+        leftTop.set(ControlMode.PercentOutput, pidOutputNavX);
+        rightTop.set(ControlMode.PercentOutput, -pidOutputNavX);
         SmartDashboard.putNumber("PidOutputNavX", pidOutputNavX);
         SmartDashboard.putBoolean("reachHeading", reachedHeading(heading));
     }
 
+    /**
+     * keepHeading()
+     * <p> a modified drive for power that uses NavX to correct path and keep straight
+     * @param power percentage output between -1 and 1
+     */
     public void keepHeading(double power){
         pidOutputNavX = pidNavX.calculateOutput(0, navX.getYaw());
-        leftFront.set(ControlMode.PercentOutput, power*0.85 + pidOutputNavX);
-        leftRear.set(ControlMode.PercentOutput, power*0.85 + pidOutputNavX);
-        rightFront.set(ControlMode.PercentOutput, power - pidOutputNavX);
-        rightRear.set(ControlMode.PercentOutput, power - pidOutputNavX);
+        leftTop.set(ControlMode.PercentOutput, power + pidOutputNavX);
+        rightTop.set(ControlMode.PercentOutput, power - pidOutputNavX);
     }
-    public void turnToVisionTarget() {
-        pidOutputXvalue = pidXvalue.calculateOutput(Robot.visionSystem.DesiredX, Robot.visionSystem.centerX);
-        leftFront.set(ControlMode.PercentOutput, pidOutputXvalue);
-        leftRear.set(ControlMode.PercentOutput, pidOutputXvalue);
-        rightFront.set(ControlMode.PercentOutput, -pidOutputXvalue);
-        rightRear.set(ControlMode.PercentOutput, -pidOutputXvalue);
-    }
+
+    //Outdated Method
+    // public void turnToVisionTarget() {
+    //     pidOutputXvalue = pidXvalue.calculateOutput(Robot.visionSystem.DesiredX, Robot.visionSystem.centerX);
+    //     leftFront.set(ControlMode.PercentOutput, pidOutputXvalue);
+    //     leftRear.set(ControlMode.PercentOutput, pidOutputXvalue);
+    //     rightFront.set(ControlMode.PercentOutput, -pidOutputXvalue);
+    //     rightRear.set(ControlMode.PercentOutput, -pidOutputXvalue);
+    // }
+
     /**
      * reachedHeading()
-     * Determines if the drivetrain has reached the target heading
+     * <p>Determines if the drivetrain has reached the target heading
+     * <p>Threshold is currently 4 degrees
      * @param heading heading to be reached
      * @return returns true if the robot is within 2 degrees of wanted heading
      */ 
     public boolean reachedHeading(double heading) {
         return (navX.getYaw() <= (heading + 2) && navX.getYaw() >= (heading - 2));
     }       
-    public boolean reachedHeadingL(double heading) {
-        return (navX.getYaw() <= (heading + 5) && navX.getYaw() >= (heading - 5));
-    }
      /**
      * getLeftEncoderPosition()
      * @return returns the left encoder position in counts
@@ -287,18 +302,9 @@ public class DriveSystem extends Subsystem {
         leftTop.set(ControlMode.PercentOutput, power);
     }
 
-
-  /*  public void lineUpWithTape(){
-        pidOutputXvalue = pidXvalue.calculateOutput(120, Robot.visionSystem.centerX);
-        pidOutputAvalue = pidAvalue.calculateOutput(800, Robot.visionSystem.targetArea);
-        visionLeft = pidOutputXvalue + pidOutputAvalue;
-        visionRight = -pidOutputXvalue + pidOutputAvalue;
-        tankDrive(visionLeft, visionRight);
-    }*/
-
     /**
      * shiftHigh()
-     * Shifts the drivetrain into high gear
+     * <p>Shifts the drivetrain into high gear
      */ 
     public void shiftHigh() {
         shifter.set(DoubleSolenoid.Value.kForward);
@@ -306,7 +312,7 @@ public class DriveSystem extends Subsystem {
 
     /**
      * shiftLow()
-     * Shifts the drivetrain into low gear
+     * <p>Shifts the drivetrain into low gear
      */ 
     public void shiftLow() {
         shifter.set(DoubleSolenoid.Value.kReverse);
