@@ -21,6 +21,14 @@ public class TeleopBasicVisionCommand extends Command {
 
     @Override
     protected void execute() { 
+        if(!Robot.visionSystem.noTarget()){
+            System.out.println(Robot.visionSystem.getAngleValues()[0]);
+            System.out.println(Robot.visionSystem.getCenterXValues()[0]);
+            System.out.println(Robot.visionSystem.getCenterYValues()[0]);
+            System.out.println(Robot.visionSystem.getHeightValues()[0]);
+            System.out.println(Robot.visionSystem.getWidthValues()[0]);
+        }
+
     }
 
     @Override
