@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.auto.drive.ShiftDown;
 import frc.robot.commands.auto.drive.ShiftUp;
-import frc.robot.commands.teleop.Subroutines.TeleopTurn180;
-import frc.robot.commands.teleop.TeleopAlignWithTape;
-import frc.robot.commands.teleop.TeleopCenterOnBall;
-import frc.robot.commands.teleop.TeleopAlignWithDisk;
+import frc.robot.commands.teleop.buttonsubroutines.TeleopTurn180;
+import frc.robot.commands.teleop.activesubroutines.TeleopAlignWithTape;
+import frc.robot.commands.teleop.activesubroutines.TeleopCenterOnBall;
+import frc.robot.commands.teleop.activesubroutines.TeleopAlignWithDisk;
 //import frc.robot.commands.teleop.TestPGyro;
 
 public class OI {

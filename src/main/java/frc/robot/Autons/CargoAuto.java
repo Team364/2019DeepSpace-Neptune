@@ -5,14 +5,19 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 import frc.robot.commands.auto.drive.*;
 
 /**
- * Auto file - Objective - DriveStraight
+ * Auto file - Objective - Place 2 hatches on Cargo Ship
  */
 public class CargoAuto extends CommandGroup {
     /**
-     *Drive to Cargo Ship; Grab another hatch
+     *Drive to Cargo Ship; Place Hatch; Grab another hatch; Place hatch
+     *<p>DeadReckoned
+     *<p>Has not been tested on practice feild
+     *<p>Distances must be changed
      */
     public CargoAuto() {
-       
+        //TODO: Use encoders to ensure precision
+        //Currently this is running on raw power and time
+        //This is known as dead reckoning. It is not as accuarte as a closed loop
         addSequential(new DriveStraightForPower(0.6, 1.5)); //1
         addSequential(new StopDriveMotors());
         addSequential(new TurnToHeading(-30));

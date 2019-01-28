@@ -36,6 +36,7 @@ public class DriveStraightForPower extends Command {
     @Override
     protected void end() {
         Robot.driveSystem.noShiftInput();
+        Robot.driveSystem.stop();
     }
 
     @Override

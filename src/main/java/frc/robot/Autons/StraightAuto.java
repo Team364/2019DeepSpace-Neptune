@@ -10,13 +10,15 @@ import frc.robot.commands.auto.drive.*;
 public class StraightAuto extends CommandGroup {
     /**
      * Drive Straight
+     * <p>1:Drive while NavX gryo corrects path
+     * <p>2:Wait for end of Auto Period
      */
     public StraightAuto() {
-       
+        
+        //Drive while NavX Gyro corrects path
         addSequential(new DriveStraightForPower(0.6, 6)); //1
-        addSequential(new StopDriveMotors());
-
-        addSequential(new WaitCommand(30));
+        //Wait for end of Auto Period
+        addSequential(new WaitCommand(30));//2
 
     
     }

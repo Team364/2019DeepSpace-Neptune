@@ -1,19 +1,23 @@
-package frc.robot.commands.teleop.Subroutines;
+package frc.robot.commands.teleop.buttonsubroutines;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.auto.drive.*;
 
 /**
- * Auto file - Objective - DriveStraight
+ * Subroutine to be run in teleop on button press
+ * <p>Robot turns approximately 180 degrees
  */
 public class TeleopTurn180 extends CommandGroup {
     /**
      * Turns Robot 180 degrees
+     * <p>1: Turn
+     * <p>2: Stop Drive Motors
      */
     public TeleopTurn180() {
-       
+        //Turn
         addSequential(new TurnToHeading(175)); //1
-        addSequential(new StopDriveMotors());
+        //Stop Motors
+        addSequential(new StopDriveMotors());//2
     
     }
 }

@@ -8,6 +8,7 @@ public class TeleopBasicVisionCommand extends Command {
 
     /**
      * Command that runs automatically for visionSystem
+     * Prints Vision Target Data to Console
      */
     public TeleopBasicVisionCommand() {
         requires(Robot.visionSystem);
