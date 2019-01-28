@@ -7,7 +7,7 @@ import frc.robot.subsystems.VisionSystem;
 public class TeleopAlignWithDisk extends Command {
 
     /**
-     * Command used for teleop control specific to the intake system
+     * Does Nothing
      */
     public TeleopAlignWithDisk() {
         requires(Robot.visionSystem);

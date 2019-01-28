@@ -8,9 +8,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.PIDCalc;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
-//import frc.robot.DynamicVisionPipeline;
 import frc.robot.commands.teleop.TeleopDriveCommand;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -135,7 +133,7 @@ public class DriveSystem extends Subsystem {
     /**
      * triggerDrive()
      * <p>Sets forward and backward drive of drivetrain to triggers
-     * <p>Left and Right on the left Joystick of the controller control turn
+     * <p>X axis of left Joystick of the controller control turn
      * <p>uses tankDrive method to control the drivetrain
      * @param throttle sets forward and backward values for drivetrain
      * @param steer adds power to left and subtracts power from right to turn
@@ -257,15 +255,6 @@ public class DriveSystem extends Subsystem {
         leftTop.set(ControlMode.PercentOutput, power + pidOutputNavX);
         rightTop.set(ControlMode.PercentOutput, power - pidOutputNavX);
     }
-
-    //Outdated Method
-    // public void turnToVisionTarget() {
-    //     pidOutputXvalue = pidXvalue.calculateOutput(Robot.visionSystem.DesiredX, Robot.visionSystem.centerX);
-    //     leftFront.set(ControlMode.PercentOutput, pidOutputXvalue);
-    //     leftRear.set(ControlMode.PercentOutput, pidOutputXvalue);
-    //     rightFront.set(ControlMode.PercentOutput, -pidOutputXvalue);
-    //     rightRear.set(ControlMode.PercentOutput, -pidOutputXvalue);
-    // }
 
     /**
      * reachedHeading()
