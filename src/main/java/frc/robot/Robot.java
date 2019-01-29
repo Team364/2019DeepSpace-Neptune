@@ -28,6 +28,7 @@ public class Robot extends TimedRobot {
   //Subsystems
   public static DriveSystem driveSystem;
   public static VisionSystem visionSystem;
+  public static LiftSystem liftSystem;
 
   //Controls
   public static OI oi;
@@ -60,6 +61,7 @@ public class Robot extends TimedRobot {
     //Subsystem init
     driveSystem = new DriveSystem();
     visionSystem = new VisionSystem();
+    liftSystem = new LiftSystem();
     //Controls init
     oi = new OI();
     //Auto Command inits Auto CommandGroups are assigned to commands 

@@ -9,17 +9,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.PIDCalc;
 import frc.robot.RobotMap;
-import frc.robot.commands.teleop.TeleopDriveCommand;
+import frc.robot.commands.teleop.defaultcommands.TeleopDriveCommand;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-
-import frc.robot.commands.teleop.TeleopDriveCommand;
-
-
-/**
- * @author Keanu Clark
- * @version v1.0
- */ 
 
 public class DriveSystem extends Subsystem {
 
