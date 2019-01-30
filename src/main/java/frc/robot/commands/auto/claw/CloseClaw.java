@@ -1,13 +1,12 @@
-package frc.robot.commands.teleop.buttonsubroutines;
+package frc.robot.commands.auto.claw;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 
-public class SetObjectStateCargo extends Command {
+public class CloseClaw extends Command {
 
-
-    public SetObjectStateCargo() {
+    public CloseClaw() {
         requires(Robot.clawSystem);
         setTimeout(0.1);
     }
@@ -18,17 +17,17 @@ public class SetObjectStateCargo extends Command {
 
     @Override
     protected void execute() {
-        Robot.objState = Robot.ObjectStates.CARGO_OBJ; 
-        Robot.clawSystem.setObjStateCargo();
+        Robot.clawSystem.closeClaw();;
     }
 
     @Override
     protected boolean isFinished() {
-        return  isTimedOut();
+        return isTimedOut();
     }
 
     @Override
     protected void end() {
+        Robot.clawSystem.noClawInput();
     }
 
     @Override

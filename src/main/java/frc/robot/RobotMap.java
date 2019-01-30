@@ -32,8 +32,17 @@ public class RobotMap {
     //Talon SRX
     public static final int leftClaw = 5;
 
-
+    //TODO: Set these according to how the robot is wired
     public static final int shifterPort1 = 0;
     public static final int shifterPort2 = 7;
+
+    public static final int intakePort1 = 2;
+    public static final int intakePort2 = 3;
+    
+    public static final int hatchPort1 = 4;
+    public static final int hatchPort2 = 5;
+
+    public static final int climbPort1 = 4;
+    public static final int climbPort2 = 5;
 
 }
