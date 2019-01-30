@@ -13,8 +13,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
+import frc.robot.oi.*;
 import frc.robot.Autons.*;
-import frc.robot.commands.teleop.buttonsubroutines.TeleopTurn180;
+import frc.robot.commands.teleop.buttonsubroutines.drive.*;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -29,9 +30,12 @@ public class Robot extends TimedRobot {
   public static DriveSystem driveSystem;
   public static VisionSystem visionSystem;
   public static LiftSystem liftSystem;
+  public static ArmSystem armSystem;
+  public static ClawSystem clawSystem;
 
   //Controls
-  public static OI oi;
+  public static DriverOI oi;
+  public static OperatorOI oi2;
 
   //Commands
   //Auto Commands
@@ -50,6 +54,13 @@ public class Robot extends TimedRobot {
   private static final String turnAuto = "Auto1";
   private static final String cargoAuto = "Auto2";
 
+  public static enum ObjectStates {
+    CARGO_OBJ,
+    HATCH_OBJ
+}
+
+  public static ObjectStates objState;
+
   @Override
   public void robotInit() {
     //Auto Selector init
@@ -62,8 +73,11 @@ public class Robot extends TimedRobot {
     driveSystem = new DriveSystem();
     visionSystem = new VisionSystem();
     liftSystem = new LiftSystem();
+    clawSystem = new ClawSystem();
+    armSystem = new ArmSystem();
     //Controls init
-    oi = new OI();
+    oi = new DriverOI();
+    oi2 = new OperatorOI();
     //Auto Command inits Auto CommandGroups are assigned to commands 
     Auto1 = new TurnAuto();
     Auto2 = new CargoAuto();

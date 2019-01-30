@@ -21,6 +21,14 @@ public class TeleopLiftCommand extends Command {
 
     @Override
     protected void execute() {
+        double power = Robot.oi2.leftStick;
+        if(power >= 0.1){
+            Robot.liftSystem.manualLiftControl(power);
+        }else if(power <= 0.1){
+            Robot.liftSystem.manualLiftControl(power);
+        }else{
+            Robot.liftSystem.manualLiftControl(0);
+        }
     }
 
     @Override
@@ -29,7 +37,7 @@ public class TeleopLiftCommand extends Command {
     }
     @Override
     protected void end() {
-        Robot.driveSystem.stop();
+        Robot.liftSystem.stop();
     }
 
     @Override

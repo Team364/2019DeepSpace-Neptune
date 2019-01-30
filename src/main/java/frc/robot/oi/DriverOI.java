@@ -1,18 +1,15 @@
-package frc.robot;
+package frc.robot.oi;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.auto.drive.ShiftDown;
 import frc.robot.commands.auto.drive.ShiftUp;
-import frc.robot.commands.teleop.buttonsubroutines.TeleopTurn180;
-import frc.robot.commands.teleop.activesubroutines.TeleopAlignWithTape;
-import frc.robot.commands.teleop.activesubroutines.TeleopCenterOnBall;
-import frc.robot.commands.teleop.activesubroutines.TeleopAlignWithDisk;
+import frc.robot.commands.teleop.buttonsubroutines.drive.*;
+import frc.robot.commands.teleop.activesubroutines.*;
 //import frc.robot.commands.teleop.TestPGyro;
 
-public class OI {
+public class DriverOI {
     //Driver Controller
-    //A second controller will be added for operator(second driver)
     //Xbox One Wired Controller
     /**
      * Index
@@ -48,6 +45,11 @@ public class OI {
      */
     public Joystick controller;
 
+    /**
+     * Operator Controller
+     */
+    public Joystick controller2;
+
     //Driver Buttons
     public JoystickButton shiftLow;
     public JoystickButton shiftHigh;
@@ -62,10 +64,10 @@ public class OI {
      * <p>Initializes Joysticks and buttons thereof
      * <p>assigns commands to buttons when pressed or held
      */
-    public OI() {
+    public DriverOI() {
         //Driver controller
         controller = new Joystick(0);
-
+  
         //Robot shifts gears down
         //Button is pressed once
         //Left menu button

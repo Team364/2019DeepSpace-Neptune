@@ -7,12 +7,16 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import frc.robot.RobotMap;
 
 public class ClawSystem extends Subsystem {
+    private TalonSRX rightClaw;
+    private TalonSRX leftClaw;
 
     /**
      * ClawSystem()
      */ 
     public ClawSystem() {
         //initialize talons and or victors here
+        rightClaw = new TalonSRX(RobotMap.rightClaw);
+        leftClaw= new TalonSRX(RobotMap.leftClaw);
     }
 
     @Override

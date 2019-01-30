@@ -10,7 +10,7 @@ public class TeleopArmCommand extends Command {
      * <p>Operator controled manually
      */
     public TeleopArmCommand() {
-        requires(Robot.liftSystem);
+        requires(Robot.armSystem);
         //Other commands can interrupt this command
         setInterruptible(true);
     }
@@ -29,7 +29,7 @@ public class TeleopArmCommand extends Command {
     }
     @Override
     protected void end() {
-        Robot.driveSystem.stop();
+        //Robot.armSystem.stop();
     }
 
     @Override
