@@ -11,6 +11,7 @@ import frc.robot.commands.auto.drive.ShiftUp;
 import frc.robot.commands.teleop.buttonsubroutines.drive.*;
 import frc.robot.commands.teleop.buttonsubroutines.*;
 import frc.robot.commands.teleop.buttonsubroutines.claw.IntakeObject;
+import frc.robot.commands.teleop.buttonsubroutines.claw.ScoreObject;
 import frc.robot.commands.teleop.activesubroutines.*;
 import frc.robot.commands.teleop.buttonsubroutines.lift.*;
 import frc.robot.oi.controls.*;
@@ -61,8 +62,9 @@ public class OperatorOI{
     public JoystickButton setLiftPositionMedium;
     public JoystickButton setLiftPositionHigh;
 
+    //Intake and Outtake Buttons
     public JoystickTrigger intake;
-
+    public JoystickTrigger outtake;
     //Ball
     public JoystickTrigger setObjectStateCargo;
     //Disk
@@ -99,6 +101,10 @@ public class OperatorOI{
         intake = new JoystickTrigger(5);
         intake.setTheshold(-0.5);
         intake.whenActive(new IntakeObject());
+
+        outtake = new JoystickTrigger(3);
+        intake.setTheshold(0.6);
+        intake.whenActive(new ScoreObject());
     }
 }
 
