@@ -7,7 +7,6 @@ import frc.robot.commands.auto.claw.*;
 
 /**
  * Subroutine to be run in teleop on button press
- * <p>Robot turns approximately 180 degrees
  */
 public class IntakeObject extends CommandGroup {
     /**
@@ -18,7 +17,7 @@ public class IntakeObject extends CommandGroup {
             //Score Hatch Subroutine
             addSequential(new OpenHatchMechanism());
         }else if(Robot.objState == Robot.ObjectStates.CARGO_OBJ){
-            //Score Cube Subroutine
+            //Score Cargo Subroutine
             addSequential(new IntakeCargo());
             addSequential(new CloseClaw());
         }

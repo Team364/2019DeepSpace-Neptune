@@ -23,6 +23,8 @@ public class IntakeCargo extends Command {
     @Override
     protected boolean isFinished() {
         return isTimedOut();
+        //Stop when limit switch is hit
+        //TODO: Add limit switch stop
     }
 
     @Override

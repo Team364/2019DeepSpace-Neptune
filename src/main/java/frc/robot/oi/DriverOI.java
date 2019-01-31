@@ -6,6 +6,7 @@ import frc.robot.commands.auto.drive.ShiftDown;
 import frc.robot.commands.auto.drive.ShiftUp;
 import frc.robot.commands.teleop.buttonsubroutines.drive.*;
 import frc.robot.commands.teleop.activesubroutines.*;
+import frc.robot.oi.controls.*;
 //import frc.robot.commands.teleop.TestPGyro;
 
 public class DriverOI {
@@ -59,6 +60,8 @@ public class DriverOI {
     public JoystickButton alignWithDiskButton;
     public JoystickButton diagnosticButton;
 
+    public JoystickPOV left180;
+    public JoystickPOV right180;
     /**
      * OI()
      * <p>Initializes Joysticks and buttons thereof
@@ -111,6 +114,14 @@ public class DriverOI {
         //Use for testing and printing out data
         diagnosticButton = new JoystickButton(controller, 7);
         //diagnosticButton.whileActive(new TestPGyro());
+
+        //Right on the D-pad
+        right180 = new JoystickPOV(90);
+        right180.whenActive(new Turn180right());
+
+        //Left on the D-pad
+        left180 = new JoystickPOV(270);
+        left180.whenActive(new Turn180left());
 
 
     }

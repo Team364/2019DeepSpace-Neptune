@@ -31,6 +31,7 @@ public class ClawSystem extends Subsystem {
 
         intakePistons = new DoubleSolenoid(RobotMap.intakePort1, RobotMap.intakePort2);
         hatchPistons = new DoubleSolenoid(RobotMap.hatchPort1, RobotMap.hatchPort2);
+        //TODO: Add limit switch
     }
 
     @Override

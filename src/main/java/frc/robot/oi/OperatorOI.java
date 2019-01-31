@@ -10,6 +10,7 @@ import frc.robot.commands.auto.drive.ShiftDown;
 import frc.robot.commands.auto.drive.ShiftUp;
 import frc.robot.commands.teleop.buttonsubroutines.drive.*;
 import frc.robot.commands.teleop.buttonsubroutines.*;
+import frc.robot.commands.teleop.buttonsubroutines.claw.IntakeObject;
 import frc.robot.commands.teleop.activesubroutines.*;
 import frc.robot.commands.teleop.buttonsubroutines.lift.*;
 import frc.robot.oi.controls.*;
@@ -60,6 +61,8 @@ public class OperatorOI{
     public JoystickButton setLiftPositionMedium;
     public JoystickButton setLiftPositionHigh;
 
+    public JoystickTrigger intake;
+
     //Ball
     public JoystickTrigger setObjectStateCargo;
     //Disk
@@ -82,7 +85,7 @@ public class OperatorOI{
         setObjectStateHatch.whenPressed(new SetObjectStateHatch());
         //Set state to cargo when left trigger is pulled
         setObjectStateCargo = new JoystickTrigger(2);
-        setObjectStateCargo.whenPressed(new SetObjectStateCargo());
+        setObjectStateCargo.whenActive(new SetObjectStateCargo());
         //Set Lift Position to level 1
         setLiftPositionLow = new JoystickButton(controller2, 1);
         setLiftPositionLow.whenPressed(new ElevateToPosition(1));
@@ -93,7 +96,9 @@ public class OperatorOI{
         setLiftPositionHigh = new JoystickButton(controller2, 4);
         setLiftPositionHigh.whenPressed(new ElevateToPosition(3));
 
-        
+        intake = new JoystickTrigger(5);
+        intake.setTheshold(-0.5);
+        intake.whenActive(new IntakeObject());
     }
 }
 

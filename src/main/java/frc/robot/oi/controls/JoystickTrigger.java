@@ -1,19 +1,25 @@
 package frc.robot.oi.controls;
 
 import frc.robot.Robot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.buttons.*;
 
 public class JoystickTrigger extends Trigger{
     
-    private double TriggerValue;
+    private double AxisValue;
+    //Default Threshold
+    private double Threshold = 0.5;
 
   public JoystickTrigger(int axisNumber) {
-    TriggerValue = Robot.oi2.controller2.getRawAxis(axisNumber);
+    AxisValue = Robot.oi2.controller2.getRawAxis(axisNumber);
   } 
 
+  public void setTheshold(double newThreshold){
+    Threshold = newThreshold;
+  }
+
+
   public boolean pressed(){
-      if(TriggerValue >= 0.5){
+      if(AxisValue >= Threshold){
         return true;
       }else{
         return false;
@@ -24,9 +30,6 @@ public class JoystickTrigger extends Trigger{
     return pressed();
 }
 
-  public void whenPressed(final Command command) {
-    command.start();
-  }
 
 }
 
