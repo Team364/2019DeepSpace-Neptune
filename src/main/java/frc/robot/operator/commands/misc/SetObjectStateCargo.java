@@ -8,7 +8,7 @@ public class SetObjectStateCargo extends Command {
 
 
     public SetObjectStateCargo() {
-        requires(Robot.clawSystem);
+        requires(Robot.gripSystem);
         setTimeout(0.1);
     }
 
@@ -19,7 +19,7 @@ public class SetObjectStateCargo extends Command {
     @Override
     protected void execute() {
         Robot.objState = Robot.ObjectStates.CARGO_OBJ; 
-        Robot.clawSystem.setObjStateCargo();
+        Robot.gripSystem.setObjStateCargo();
     }
 
     @Override

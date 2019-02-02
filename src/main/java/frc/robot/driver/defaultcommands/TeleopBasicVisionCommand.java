@@ -22,13 +22,13 @@ public class TeleopBasicVisionCommand extends Command {
     @Override
     protected void execute() { 
         //If a target is seen, output the values for angle, center x and y, height, and width
-        if(!Robot.visionSystem.noTarget()){
-            System.out.println(Robot.visionSystem.getAngleValues()[0]);
-            System.out.println(Robot.visionSystem.getCenterXValues()[0]);
-            System.out.println(Robot.visionSystem.getCenterYValues()[0]);
-            System.out.println(Robot.visionSystem.getHeightValues()[0]);
-            System.out.println(Robot.visionSystem.getWidthValues()[0]);
-        }
+        // if(!Robot.visionSystem.noTarget()){
+        //     System.out.println(Robot.visionSystem.getAngleValues()[0]);
+        //     System.out.println(Robot.visionSystem.getCenterXValues()[0]);
+        //     System.out.println(Robot.visionSystem.getCenterYValues()[0]);
+        //     System.out.println(Robot.visionSystem.getHeightValues()[0]);
+        //     System.out.println(Robot.visionSystem.getWidthValues()[0]);
+        // }
 
     }
 

@@ -51,6 +51,7 @@ public class OperatorOI{
     public Joystick controller2;
 
     public Double leftStick;
+    public Double rightStick;
     //Lift Buttons
     public JoystickButton setLiftPositionLow;
     public JoystickButton setLiftPositionMedium;
@@ -76,12 +77,13 @@ public class OperatorOI{
         //Initialize Operator Controller
         controller2 = new Joystick(1);
         leftStick = controller2.getRawAxis(1);
+        rightStick = controller2.getRawAxis(5);
         //Set state To hatch when left bumper is pressed
         setObjectStateHatch = new JoystickButton(controller2, 5);
         setObjectStateHatch.whenPressed(new SetObjectStateHatch());
         //Set state to cargo when left trigger is pulled
-        setObjectStateCargo = new JoystickTrigger(2);
-        setObjectStateCargo.whenActive(new SetObjectStateCargo());
+        // setObjectStateCargo = new JoystickTrigger(2);
+        // setObjectStateCargo.whenActive(new SetObjectStateCargo());
         //Set Lift Position to level 1
         setLiftPositionLow = new JoystickButton(controller2, 1);
         setLiftPositionLow.whenPressed(new ElevateToPosition(1));
@@ -92,13 +94,13 @@ public class OperatorOI{
         setLiftPositionHigh = new JoystickButton(controller2, 4);
         setLiftPositionHigh.whenPressed(new ElevateToPosition(3));
 
-        intake = new JoystickTrigger(5);
-        intake.setTheshold(-0.5);
-        intake.whenActive(new IntakeObject());
+        // intake = new JoystickTrigger(5);
+        // intake.setTheshold(-0.5);
+        // intake.whenActive(new IntakeObject());
 
-        outtake = new JoystickTrigger(3);
-        intake.setTheshold(0.6);
-        intake.whenActive(new ScoreObject());
+        // outtake = new JoystickTrigger(3);
+        // intake.setTheshold(0.6);
+        // intake.whenActive(new ScoreObject());
     }
 }
 

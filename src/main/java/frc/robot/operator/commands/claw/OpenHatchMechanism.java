@@ -7,7 +7,7 @@ import frc.robot.Robot;
 public class OpenHatchMechanism extends Command {
 
     public OpenHatchMechanism() {
-        requires(Robot.clawSystem);
+        requires(Robot.gripSystem);
         setTimeout(0.1);
     }
 
@@ -17,7 +17,7 @@ public class OpenHatchMechanism extends Command {
 
     @Override
     protected void execute() {
-        Robot.clawSystem.openHatch();;
+        Robot.gripSystem.openLevers();;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class OpenHatchMechanism extends Command {
 
     @Override
     protected void end() {
-        Robot.clawSystem.noHatchInput();
+        Robot.gripSystem.noLeverInput();
     }
 
     @Override

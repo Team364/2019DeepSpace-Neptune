@@ -100,13 +100,13 @@ public class DriverOI {
         diagnosticButton = new JoystickButton(controller, 7);
         //diagnosticButton.whileActive(new TestPGyro());
 
-        //Right on the D-pad
-        right180 = new JoystickPOV(90);
-        right180.whenActive(new Turn180right());
+        // //Right on the D-pad
+        // right180 = new JoystickPOV(90);
+        // right180.whenActive(new Turn180right());
 
-        //Left on the D-pad
-        left180 = new JoystickPOV(270);
-        left180.whenActive(new Turn180left());
+        // //Left on the D-pad
+        // left180 = new JoystickPOV(270);
+        // left180.whenActive(new Turn180left());
 
 
     }

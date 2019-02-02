@@ -7,7 +7,7 @@ import frc.robot.Robot;
 public class CloseClaw extends Command {
 
     public CloseClaw() {
-        requires(Robot.clawSystem);
+        requires(Robot.gripSystem);
         setTimeout(0.1);
     }
 
@@ -17,7 +17,7 @@ public class CloseClaw extends Command {
 
     @Override
     protected void execute() {
-        Robot.clawSystem.closeClaw();;
+        Robot.gripSystem.closeClaw();;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class CloseClaw extends Command {
 
     @Override
     protected void end() {
-        Robot.clawSystem.noClawInput();
+        Robot.gripSystem.noClawInput();
     }
 
     @Override

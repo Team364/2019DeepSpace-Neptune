@@ -14,7 +14,7 @@ public class ClimbSystem extends Subsystem {
      */ 
     public ClimbSystem() {
         //initialize talons and or victors here
-     Pistons = new DoubleSolenoid(RobotMap.climbPort1, RobotMap.climbPort2);
+    //  Pistons = new DoubleSolenoid(RobotMap.climbPort1, RobotMap.climbPort2);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class ClimbSystem extends Subsystem {
      * <p>Extend Climb Mechanism
      */ 
     public void release() {
-        Pistons.set(DoubleSolenoid.Value.kForward);
+        // Pistons.set(DoubleSolenoid.Value.kForward);
     }
 
     /**
@@ -36,7 +36,7 @@ public class ClimbSystem extends Subsystem {
      * <p>Retract Climb Mechanism
      */ 
     public void retract() {
-        Pistons.set(DoubleSolenoid.Value.kReverse);
+        // Pistons.set(DoubleSolenoid.Value.kReverse);
     }
 
     /**
@@ -44,7 +44,7 @@ public class ClimbSystem extends Subsystem {
      * Leaves the scoring mechanism where it is
      */ 
     public void noInput() {
-        Pistons.set(DoubleSolenoid.Value.kOff);
+        // Pistons.set(DoubleSolenoid.Value.kOff);
     }
 
 }

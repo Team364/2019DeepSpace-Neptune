@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
   public static VisionSystem visionSystem;
   public static LiftSystem liftSystem;
   public static ArmSystem armSystem;
-  public static ClawSystem clawSystem;
+  public static GripSystem gripSystem;
 
   //Controls
   public static DriverOI oi;
@@ -75,7 +75,7 @@ public class Robot extends TimedRobot {
     driveSystem = new DriveSystem();
     visionSystem = new VisionSystem();
     liftSystem = new LiftSystem();
-    clawSystem = new ClawSystem();
+    gripSystem = new GripSystem();
     armSystem = new ArmSystem();
     //Controls init
     oi = new DriverOI();
@@ -123,6 +123,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
       Scheduler.getInstance().removeAll();
+      System.out.println(objState);
   }
 
   @Override

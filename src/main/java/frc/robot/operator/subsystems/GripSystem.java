@@ -1,7 +1,7 @@
 package frc.robot.operator.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.operator.defaultcommands.TeleopClawCommand;
+import frc.robot.operator.defaultcommands.TeleopGripCommand;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -9,7 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
-public class ClawSystem extends Subsystem {
+public class GripSystem extends Subsystem {
     private TalonSRX rightClaw;
     private TalonSRX leftClaw;
     //claw pistons
@@ -20,34 +20,34 @@ public class ClawSystem extends Subsystem {
     /**
      * ClawSystem()
      */ 
-    public ClawSystem() {
+    public GripSystem() {
         //initialize talons and or victors here
-        rightClaw = new TalonSRX(RobotMap.rightClaw);
-        leftClaw= new TalonSRX(RobotMap.leftClaw);
+        // rightClaw = new TalonSRX(RobotMap.rightClaw);
+        // leftClaw= new TalonSRX(RobotMap.leftClaw);
 
-        //Telling the LeftClaw to run will make the RightClaw run inversely with the LeftClaw
-        rightClaw.follow(leftClaw);
-        rightClaw.setInverted(true);
+        // //Telling the LeftClaw to run will make the RightClaw run inversely with the LeftClaw
+        // rightClaw.follow(leftClaw);
+        // rightClaw.setInverted(true);
 
-        intakePistons = new DoubleSolenoid(RobotMap.intakePort1, RobotMap.intakePort2);
-        leverPistons = new DoubleSolenoid(RobotMap.leverPort1, RobotMap.leverPort2);
+        // intakePistons = new DoubleSolenoid(RobotMap.intakePort1, RobotMap.intakePort2);
+        // leverPistons = new DoubleSolenoid(RobotMap.leverPort1, RobotMap.leverPort2);
         //TODO: Add limit switch
     }
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new TeleopClawCommand());
+        setDefaultCommand(new TeleopGripCommand());
     }
     //These assignments are arbitrary
     //TODO: Test this
     public void runIntakeForward(){
-        leftClaw.set(ControlMode.PercentOutput, -1);
+        // leftClaw.set(ControlMode.PercentOutput, -1);
     }
     public void runIntakeBackward(){
-        leftClaw.set(ControlMode.PercentOutput, 1);
+        // leftClaw.set(ControlMode.PercentOutput, 1);
     }
     public void stop(){
-        leftClaw.set(ControlMode.PercentOutput, 0);
+        // leftClaw.set(ControlMode.PercentOutput, 0);
     }
     //TODO: Make sure these are set correctly. Open should open. Close should close
     /**
@@ -55,7 +55,7 @@ public class ClawSystem extends Subsystem {
      * <p>Opens Claw
      */ 
     public void openClaw() {
-        intakePistons.set(DoubleSolenoid.Value.kForward);
+        // intakePistons.set(DoubleSolenoid.Value.kForward);
     }
 
     /**
@@ -63,7 +63,7 @@ public class ClawSystem extends Subsystem {
      * <p>Closes Claw
      */ 
     public void closeClaw() {
-        intakePistons.set(DoubleSolenoid.Value.kReverse);
+        // intakePistons.set(DoubleSolenoid.Value.kReverse);
     }
 
     /**
@@ -71,47 +71,47 @@ public class ClawSystem extends Subsystem {
      * Leaves the claw pistons where they're at
      */ 
     public void noClawInput() {
-        intakePistons.set(DoubleSolenoid.Value.kOff);
+        // intakePistons.set(DoubleSolenoid.Value.kOff);
     }
 
     //TODO: Make sure these are set correctly. Open should open. Close should close
     //TODO: Find better name for this. Ask mechanincal what they're calling this device later on
     /**
-     * openHatch()
+     * openLevers()
      * <p>Opens Hatch Scoring Mechanism
      */ 
-    public void openHatch() {
-        leverPistons.set(DoubleSolenoid.Value.kForward);
+    public void openLevers() {
+        // leverPistons.set(DoubleSolenoid.Value.kForward);
     }
 
     /**
      * closeClaw()
      * <p>Closes Hatch Scoring Mechanism
      */ 
-    public void closeHatch() {
-        leverPistons.set(DoubleSolenoid.Value.kReverse);
+    public void closeLevers() {
+        // leverPistons.set(DoubleSolenoid.Value.kReverse);
     }
 
     /**
      * noClawInput()
      * Leaves the hatch scoring pistons where they're at
      */ 
-    public void noHatchInput() {
-        leverPistons.set(DoubleSolenoid.Value.kOff);
+    public void noLeverInput() {
+        // leverPistons.set(DoubleSolenoid.Value.kOff);
     }
     //Claw is open to receive ball. Hatch apparatus opens to make room for ball
     //Do not change this. If the desired effect is what occurs, test what the
     //methods openClaw and openHatch do
     public void setObjStateCargo(){
-        openClaw();
-        openHatch();
+        // openClaw();
+        // openLevers();
     }
     //Hatch Apparatus closes to slide into the center of disk. Claw closes to make room for hatch
     //Do not change this. If the desired effect is what occurs, test what the
     //methods closeClaw and closeHatch do
     public void setObjStateHatch(){
-        closeClaw();
-        closeHatch();
+        // closeClaw();
+        // closeHatch();
     }
     
 }

@@ -7,7 +7,7 @@ import frc.robot.Robot;
 public class ReturnToDefault extends Command {
 
     public ReturnToDefault() {
-        requires(Robot.clawSystem);
+        requires(Robot.gripSystem);
         setTimeout(0.1);
     }
 
@@ -18,9 +18,9 @@ public class ReturnToDefault extends Command {
     @Override
     protected void execute() {
         if(Robot.objState == Robot.ObjectStates.HATCH_OBJ){
-            Robot.clawSystem.setObjStateHatch();
+            Robot.gripSystem.setObjStateHatch();
         }else if(Robot.objState == Robot.ObjectStates.CARGO_OBJ){
-            Robot.clawSystem.setObjStateCargo();
+            Robot.gripSystem.setObjStateCargo();
         }
         
         
@@ -33,7 +33,7 @@ public class ReturnToDefault extends Command {
 
     @Override
     protected void end() {
-        Robot.clawSystem.noClawInput();
+        Robot.gripSystem.noClawInput();
     }
 
     @Override

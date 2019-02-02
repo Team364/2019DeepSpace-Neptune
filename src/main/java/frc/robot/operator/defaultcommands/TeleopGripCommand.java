@@ -3,14 +3,14 @@ package frc.robot.operator.defaultcommands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class TeleopArmCommand extends Command {
+public class TeleopGripCommand extends Command {
 
     /**
      * Command used for teleop control specific to the arn System
      * <p>Operator controled manually
      */
-    public TeleopArmCommand() {
-        requires(Robot.armSystem);
+    public TeleopGripCommand() {
+        requires(Robot.gripSystem);
         //Other commands can interrupt this command
         setInterruptible(true);
     }
@@ -29,7 +29,7 @@ public class TeleopArmCommand extends Command {
     }
     @Override
     protected void end() {
-        //Robot.armSystem.stop();
+        //Robot.clawSystem.stop();
     }
 
     @Override

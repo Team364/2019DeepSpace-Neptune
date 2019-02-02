@@ -7,7 +7,7 @@ import frc.robot.Robot;
 public class IntakeCargo extends Command {
 
     public IntakeCargo() {
-        requires(Robot.clawSystem);
+        requires(Robot.gripSystem);
         setTimeout(0.5);
     }
 
@@ -17,7 +17,7 @@ public class IntakeCargo extends Command {
 
     @Override
     protected void execute() {
-        Robot.clawSystem.runIntakeForward();
+        Robot.gripSystem.runIntakeForward();
     }
 
     @Override
@@ -29,7 +29,7 @@ public class IntakeCargo extends Command {
 
     @Override
     protected void end() {
-        Robot.clawSystem.stop();
+        Robot.gripSystem.stop();
     }
 
     @Override

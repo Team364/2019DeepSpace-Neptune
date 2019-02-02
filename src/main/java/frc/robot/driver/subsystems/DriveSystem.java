@@ -64,47 +64,47 @@ public class DriveSystem extends Subsystem {
      */ 
     public DriveSystem() {
         
-         // Initialize TalonSRX and VictorSPX objects
-         leftFront = new VictorSPX(RobotMap.leftFrontDrive);
-         leftTop = new TalonSRX(RobotMap.leftTopDrive);
-         leftRear = new VictorSPX(RobotMap.leftRearDrive);
+        //  // Initialize TalonSRX and VictorSPX objects
+        //  leftFront = new VictorSPX(RobotMap.leftFrontDrive);
+        //  leftTop = new TalonSRX(RobotMap.leftTopDrive);
+        //  leftRear = new VictorSPX(RobotMap.leftRearDrive);
  
-         rightFront = new VictorSPX(RobotMap.rightFrontDrive);
-         rightTop = new TalonSRX(RobotMap.rightTopDrive);
-         rightRear = new VictorSPX(RobotMap.rightRearDrive);
+        //  rightFront = new VictorSPX(RobotMap.rightFrontDrive);
+        //  rightTop = new TalonSRX(RobotMap.rightTopDrive);
+        //  rightRear = new VictorSPX(RobotMap.rightRearDrive);
          
-        //  extraTalon = new TalonSRX(RobotMap.extraTalon);
+        // //  extraTalon = new TalonSRX(RobotMap.extraTalon);
  
-         // Initialize DoubleSolenoid shifter object
-         shifter = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
+        //  // Initialize DoubleSolenoid shifter object
+        //  shifter = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
 
-        //Initialize PigeonIMU
-        //  testPigeon = new PigeonIMU(extraTalon);
+        // //Initialize PigeonIMU
+        // //  testPigeon = new PigeonIMU(extraTalon);
         
-         // Set the front drive motors to follow the rear
-         leftFront.follow(leftTop);
-         leftRear.follow(leftTop);
-         rightFront.follow(rightTop);
-         rightRear.follow(rightTop);
+        //  // Set the front drive motors to follow the rear
+        //  leftFront.follow(leftTop);
+        //  leftRear.follow(leftTop);
+        //  rightFront.follow(rightTop);
+        //  rightRear.follow(rightTop);
  
-         // Config PF on left side
-         leftRear.config_kP(0, 0.25, 100);
-         leftRear.config_kF(0, 1, 100);
+        //  // Config PF on left side
+        //  leftRear.config_kP(0, 0.25, 100);
+        //  leftRear.config_kF(0, 1, 100);
  
-         // Config PF on right side
-         rightRear.config_kP(0, 0.25, 100);
-         rightRear.config_kF(0, 1, 100);
+        //  // Config PF on right side
+        //  rightRear.config_kP(0, 0.25, 100);
+        //  rightRear.config_kF(0, 1, 100);
  
-         // Init the navX
-         //DriveSystem Gyro
-         navX = new AHRS(SPI.Port.kMXP);
-         //PIDCalc Init
-         //DriveSystem Gyro PID init
-         pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
-         //DriveSystem Left Side init
-         pidLeft = new PIDCalc(0.0005, 0, 0, 0, "Left");
-         //DriveSystem Right Side init
-         pidRight = new PIDCalc(0.0005, 0, 0, 0, "Right");
+        //  // Init the navX
+        //  //DriveSystem Gyro
+        //  navX = new AHRS(SPI.Port.kMXP);
+        //  //PIDCalc Init
+        //  //DriveSystem Gyro PID init
+        //  pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
+        //  //DriveSystem Left Side init
+        //  pidLeft = new PIDCalc(0.0005, 0, 0, 0, "Left");
+        //  //DriveSystem Right Side init
+        //  pidRight = new PIDCalc(0.0005, 0, 0, 0, "Right");
     }
 
     @Override
@@ -119,8 +119,8 @@ public class DriveSystem extends Subsystem {
      * @param right sets the right drive power
      */
     public void tankDrive(double left, double right) {
-        leftTop.set(ControlMode.PercentOutput, -left);
-        rightTop.set(ControlMode.PercentOutput, right);
+        // leftTop.set(ControlMode.PercentOutput, -left);
+        // rightTop.set(ControlMode.PercentOutput, right);
     }
     /**
      * triggerDrive()
@@ -131,11 +131,11 @@ public class DriveSystem extends Subsystem {
      * @param steer adds power to left and subtracts power from right to turn
      */
     public void triggerDrive(double throttle, double steer){
-        double leftDrive;
-        double rightDrive;
-        leftDrive = throttle + steer;
-        rightDrive = throttle - steer;
-        tankDrive(leftDrive, rightDrive);
+        // double leftDrive;
+        // double rightDrive;
+        // leftDrive = throttle + steer;
+        // rightDrive = throttle - steer;
+        // tankDrive(leftDrive, rightDrive);
     }
 
     /**
@@ -156,8 +156,8 @@ public class DriveSystem extends Subsystem {
      * Use this in auto to stop the drivetrain inbetween commands
      */ 
     public void stop() {
-        leftTop.set(ControlMode.PercentOutput, 0);
-        rightTop.set(ControlMode.PercentOutput, 0);
+        // leftTop.set(ControlMode.PercentOutput, 0);
+        // rightTop.set(ControlMode.PercentOutput, 0);
     }
     /**
      * driveStraightToEcnoderCounts()
@@ -167,44 +167,46 @@ public class DriveSystem extends Subsystem {
      * @param useGyro true to use NavX to correct path and keep straight
      */ 
     public void driveStraightToEncoderCounts(int counts, boolean backwards, boolean useGyro) {
-        if(backwards) {
-            //TODO: make sure gyro is at zero when this starts
-            //getEncoderPosition gives a measure of encoder counts that is used as actual in PID loop
-            pidOutputLeft = pidLeft.calculateOutput(counts, -getLeftEncoderPosition());
-            pidOutputRight = pidRight.calculateOutput(counts, -getRightEncoderPosition());
-            pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
-            //Prints the pidOutput to the console
-            System.out.println("bLeft: " + pidOutputLeft);
-            System.out.println("bRight: " + pidOutputRight);            
-            if(useGyro) {
-                //TODO: See if one of the PID NavX values needs to be negated
-                leftTop.set(ControlMode.PercentOutput, -pidOutputLeft + pidOutputNavX);
-                rightTop.set(ControlMode.PercentOutput, pidOutputRight + pidOutputNavX);
-            } else {
-                leftTop.set(ControlMode.PercentOutput, -pidOutputLeft);
-                rightTop.set(ControlMode.PercentOutput, pidOutputRight);
-            }
-        } else {
-            pidOutputLeft = pidLeft.calculateOutput(counts, getLeftEncoderPosition());
-            pidOutputRight = pidRight.calculateOutput(counts, getRightEncoderPosition());
-            pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
-            System.out.println("Left: " + pidOutputLeft);
-            System.out.println("Right: " + pidOutputRight);
-            if(useGyro) {
-                leftTop.set(ControlMode.PercentOutput, pidOutputLeft + pidOutputNavX);
-                rightTop.set(ControlMode.PercentOutput, -pidOutputRight + pidOutputNavX);
-            } else {
-                leftTop.set(ControlMode.PercentOutput, pidOutputLeft);
-                rightTop.set(ControlMode.PercentOutput, -pidOutputRight);
-            }
-        }
+        // if(backwards) {
+        //     //TODO: make sure gyro is at zero when this starts
+        //     //getEncoderPosition gives a measure of encoder counts that is used as actual in PID loop
+        //     pidOutputLeft = pidLeft.calculateOutput(counts, -getLeftEncoderPosition());
+        //     pidOutputRight = pidRight.calculateOutput(counts, -getRightEncoderPosition());
+        //     pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
+        //     //Prints the pidOutput to the console
+        //     System.out.println("bLeft: " + pidOutputLeft);
+        //     System.out.println("bRight: " + pidOutputRight);            
+        //     if(useGyro) {
+        //         //TODO: See if one of the PID NavX values needs to be negated
+        //         leftTop.set(ControlMode.PercentOutput, -pidOutputLeft + pidOutputNavX);
+        //         rightTop.set(ControlMode.PercentOutput, pidOutputRight + pidOutputNavX);
+        //     } else {
+        //         leftTop.set(ControlMode.PercentOutput, -pidOutputLeft);
+        //         rightTop.set(ControlMode.PercentOutput, pidOutputRight);
+        //     }
+        // } else {
+        //     pidOutputLeft = pidLeft.calculateOutput(counts, getLeftEncoderPosition());
+        //     pidOutputRight = pidRight.calculateOutput(counts, getRightEncoderPosition());
+        //     pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
+        //     System.out.println("Left: " + pidOutputLeft);
+        //     System.out.println("Right: " + pidOutputRight);
+        //     if(useGyro) {
+        //         leftTop.set(ControlMode.PercentOutput, pidOutputLeft + pidOutputNavX);
+        //         rightTop.set(ControlMode.PercentOutput, -pidOutputRight + pidOutputNavX);
+        //     } else {
+        //         leftTop.set(ControlMode.PercentOutput, pidOutputLeft);
+        //         rightTop.set(ControlMode.PercentOutput, -pidOutputRight);
+        //     }
+        // }
     }
     /**
      * getGyroAngle()
      * @return returns the navX angle (yaw)
      */
     public double getGyroAngle() {
-        return navX.getYaw();
+        // return navX.getYaw();
+        //This is a placeholder. Delete whenever original code is commented out
+        return 0;
     }
 
     /**
@@ -213,8 +215,8 @@ public class DriveSystem extends Subsystem {
      * @param power percentage outuput between -1 and 1
      */
     public void driveForPower(double power){
-        leftTop.set(ControlMode.PercentOutput, -power);
-        rightTop.set(ControlMode.PercentOutput, -power);
+        // leftTop.set(ControlMode.PercentOutput, -power);
+        // rightTop.set(ControlMode.PercentOutput, -power);
     }
 
     /**
@@ -222,7 +224,7 @@ public class DriveSystem extends Subsystem {
      * Resets navX gyro heading
      */ 
     public void resetHeading() {
-        navX.reset();
+        // navX.reset();
     }
     //TODO: Move to command
     /**
@@ -231,11 +233,11 @@ public class DriveSystem extends Subsystem {
      * @param heading heading to turn to
      */ 
     public void turnToHeading(double heading) {
-        pidOutputNavX = pidNavX.calculateOutput(heading, navX.getYaw());
-        leftTop.set(ControlMode.PercentOutput, pidOutputNavX);
-        rightTop.set(ControlMode.PercentOutput, -pidOutputNavX);
-        SmartDashboard.putNumber("PidOutputNavX", pidOutputNavX);
-        SmartDashboard.putBoolean("reachHeading", reachedHeading(heading));
+        // pidOutputNavX = pidNavX.calculateOutput(heading, navX.getYaw());
+        // leftTop.set(ControlMode.PercentOutput, pidOutputNavX);
+        // rightTop.set(ControlMode.PercentOutput, -pidOutputNavX);
+        // SmartDashboard.putNumber("PidOutputNavX", pidOutputNavX);
+        // SmartDashboard.putBoolean("reachHeading", reachedHeading(heading));
     }
 
     /**
@@ -244,9 +246,9 @@ public class DriveSystem extends Subsystem {
      * @param power percentage output between -1 and 1
      */
     public void keepHeading(double power){
-        pidOutputNavX = pidNavX.calculateOutput(0, navX.getYaw());
-        leftTop.set(ControlMode.PercentOutput, power + pidOutputNavX);
-        rightTop.set(ControlMode.PercentOutput, power - pidOutputNavX);
+        // pidOutputNavX = pidNavX.calculateOutput(0, navX.getYaw());
+        // leftTop.set(ControlMode.PercentOutput, power + pidOutputNavX);
+        // rightTop.set(ControlMode.PercentOutput, power - pidOutputNavX);
     }
 
     /**
@@ -257,14 +259,18 @@ public class DriveSystem extends Subsystem {
      * @return returns true if the robot is within 2 degrees of wanted heading
      */ 
     public boolean reachedHeading(double heading) {
-        return (navX.getYaw() <= (heading + 2) && navX.getYaw() >= (heading - 2));
+        // return (navX.getYaw() <= (heading + 2) && navX.getYaw() >= (heading - 2));
+        //This is a placeholder. Delete whenever the orignal code is uncommented
+        return false;
     }       
      /**
      * getLeftEncoderPosition()
      * @return returns the left encoder position in counts
      */ 
     public int getLeftEncoderPosition() {
-        return leftTop.getSelectedSensorPosition(0);
+        // return leftTop.getSelectedSensorPosition(0);
+        //This is a placeholder. Delete whenever the orignal code is uncommented
+        return 0;
     }
 
     /**
@@ -272,7 +278,9 @@ public class DriveSystem extends Subsystem {
      * @return returns the right encoder position in counts
      */ 
     public int getRightEncoderPosition() {
-        return -rightTop.getSelectedSensorPosition(0);
+        // return -rightTop.getSelectedSensorPosition(0);
+        //This is a placeholder. Delete whenever the orignal code is uncommented
+        return 0;
     }
 
     /**
@@ -281,7 +289,7 @@ public class DriveSystem extends Subsystem {
      * @param power sets the left drive power
      */ 
     public void setLeftDrivePower(double power) {
-        leftTop.set(ControlMode.PercentOutput, power);
+        // leftTop.set(ControlMode.PercentOutput, power);
     }
 
     /**
@@ -289,7 +297,7 @@ public class DriveSystem extends Subsystem {
      * <p>Shifts the drivetrain into high gear
      */ 
     public void shiftHigh() {
-        shifter.set(DoubleSolenoid.Value.kForward);
+        // shifter.set(DoubleSolenoid.Value.kForward);
     }
 
     /**
@@ -297,7 +305,7 @@ public class DriveSystem extends Subsystem {
      * <p>Shifts the drivetrain into low gear
      */ 
     public void shiftLow() {
-        shifter.set(DoubleSolenoid.Value.kReverse);
+        // shifter.set(DoubleSolenoid.Value.kReverse);
     }
 
     /**
@@ -305,6 +313,6 @@ public class DriveSystem extends Subsystem {
      * Leaves the shifters where they're at
      */ 
     public void noShiftInput() {
-        shifter.set(DoubleSolenoid.Value.kOff);
+        // shifter.set(DoubleSolenoid.Value.kOff);
     }
 }

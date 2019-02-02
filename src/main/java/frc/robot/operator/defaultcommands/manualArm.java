@@ -3,14 +3,14 @@ package frc.robot.operator.defaultcommands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class TeleopClawCommand extends Command {
+public class manualArm extends Command {
 
     /**
      * Command used for teleop control specific to the arn System
      * <p>Operator controled manually
      */
-    public TeleopClawCommand() {
-        requires(Robot.clawSystem);
+    public manualArm() {
+        requires(Robot.armSystem);
         //Other commands can interrupt this command
         setInterruptible(true);
     }
@@ -21,6 +21,7 @@ public class TeleopClawCommand extends Command {
 
     @Override
     protected void execute() {
+        Robot.armSystem.moveArm(Robot.oi2.rightStick);
     }
 
     @Override
@@ -29,7 +30,7 @@ public class TeleopClawCommand extends Command {
     }
     @Override
     protected void end() {
-        //Robot.clawSystem.stop();
+        //Robot.armSystem.stop();
     }
 
     @Override

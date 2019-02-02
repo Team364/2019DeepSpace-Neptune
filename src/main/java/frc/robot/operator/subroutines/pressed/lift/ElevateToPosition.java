@@ -2,6 +2,7 @@ package frc.robot.operator.subroutines.pressed.lift;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.Robot.ObjectStates;
 
 
@@ -11,6 +12,8 @@ public class ElevateToPosition extends Command {
     private double low;
     private double med;
     private double high;
+    //Only used for testing
+    private double desiredHeight;
 
     public ElevateToPosition(int Height) {
         requires(Robot.driveSystem);
@@ -30,23 +33,32 @@ public class ElevateToPosition extends Command {
         }else if(Height == 3){
         wantedPosition = high;
         }
+        //Used only for testing
+        desiredHeight = Height;
         
         setTimeout(3);
     }
 
     @Override
     protected void initialize() {
-        Robot.liftSystem.pidLift.setPIDParameters(0.001, 0, 0, 0);
+        // Robot.liftSystem.pidLift.setPIDParameters(0.001, 0, 0, 0);
     }
 
     @Override
     protected void execute() {
-        Robot.liftSystem.setLiftPosition(wantedPosition);
+        // double pidLiftOutput;
+        // Robot.liftSystem.setLiftPosition(wantedPosition);
+        // pidLiftOutput = Robot.liftSystem.pidLift.calculateOutput(wantedPosition, Robot.liftSystem.getLiftPosition());
+        // Robot.liftSystem.leftLift.set(ControlMode.PercentOutput, pidLiftOutput);
+        System.out.println("The Object State is: " + Robot.objState);
+        System.out.println("The Height that has been selected is: " + desiredHeight);
+        System.out.println("The encoder count being fed to the execute method is: " + wantedPosition);
     }
 
     @Override
     protected boolean isFinished() {
-        return Robot.liftSystem.reachedPosition(wantedPosition) || isTimedOut();
+        // return Robot.liftSystem.reachedPosition(wantedPosition) || isTimedOut();
+         return isTimedOut();
     }
 
     @Override
