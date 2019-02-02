@@ -15,7 +15,7 @@ public class ClawSystem extends Subsystem {
     //claw pistons
     private DoubleSolenoid intakePistons;
     //hatch pistons
-    private DoubleSolenoid hatchPistons;
+    private DoubleSolenoid leverPistons;
 
     /**
      * ClawSystem()
@@ -30,7 +30,7 @@ public class ClawSystem extends Subsystem {
         rightClaw.setInverted(true);
 
         intakePistons = new DoubleSolenoid(RobotMap.intakePort1, RobotMap.intakePort2);
-        hatchPistons = new DoubleSolenoid(RobotMap.hatchPort1, RobotMap.hatchPort2);
+        leverPistons = new DoubleSolenoid(RobotMap.leverPort1, RobotMap.leverPort2);
         //TODO: Add limit switch
     }
 
@@ -81,7 +81,7 @@ public class ClawSystem extends Subsystem {
      * <p>Opens Hatch Scoring Mechanism
      */ 
     public void openHatch() {
-        hatchPistons.set(DoubleSolenoid.Value.kForward);
+        leverPistons.set(DoubleSolenoid.Value.kForward);
     }
 
     /**
@@ -89,7 +89,7 @@ public class ClawSystem extends Subsystem {
      * <p>Closes Hatch Scoring Mechanism
      */ 
     public void closeHatch() {
-        hatchPistons.set(DoubleSolenoid.Value.kReverse);
+        leverPistons.set(DoubleSolenoid.Value.kReverse);
     }
 
     /**
@@ -97,7 +97,7 @@ public class ClawSystem extends Subsystem {
      * Leaves the hatch scoring pistons where they're at
      */ 
     public void noHatchInput() {
-        hatchPistons.set(DoubleSolenoid.Value.kOff);
+        leverPistons.set(DoubleSolenoid.Value.kOff);
     }
     //Claw is open to receive ball. Hatch apparatus opens to make room for ball
     //Do not change this. If the desired effect is what occurs, test what the

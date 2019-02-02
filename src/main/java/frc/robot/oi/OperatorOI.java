@@ -16,6 +16,7 @@ import frc.robot.commands.teleop.activesubroutines.*;
 import frc.robot.commands.teleop.buttonsubroutines.lift.*;
 import frc.robot.oi.controls.*;
 import frc.robot.commands.teleop.buttonsubroutines.*;
+import frc.robot.commands.auto.misc.*;
 //import frc.robot.commands.teleop.TestPGyro;
 
 public class OperatorOI{

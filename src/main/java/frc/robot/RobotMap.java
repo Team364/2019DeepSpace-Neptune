@@ -39,8 +39,8 @@ public class RobotMap {
     public static final int intakePort1 = 2;
     public static final int intakePort2 = 3;
     
-    public static final int hatchPort1 = 4;
-    public static final int hatchPort2 = 5;
+    public static final int leverPort1 = 4;
+    public static final int leverPort2 = 5;
 
     public static final int climbPort1 = 4;
     public static final int climbPort2 = 5;

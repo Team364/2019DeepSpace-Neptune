@@ -1,14 +1,14 @@
-package frc.robot.commands.teleop.buttonsubroutines;
+package frc.robot.commands.auto.misc;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 
-public class SetObjectStateCargo extends Command {
+public class SetObjectStateHatch extends Command {
 
 
-    public SetObjectStateCargo() {
-        requires(Robot.clawSystem);
+    public SetObjectStateHatch() {
+        requires(Robot.driveSystem);
         setTimeout(0.1);
     }
 
@@ -18,8 +18,7 @@ public class SetObjectStateCargo extends Command {
 
     @Override
     protected void execute() {
-        Robot.objState = Robot.ObjectStates.CARGO_OBJ; 
-        Robot.clawSystem.setObjStateCargo();
+        Robot.objState = Robot.ObjectStates.HATCH_OBJ; 
     }
 
     @Override
