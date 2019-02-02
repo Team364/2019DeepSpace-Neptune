@@ -1,18 +1,23 @@
 package frc.robot.driver.commands.lift;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.PIDCalc;
 import frc.robot.Robot;
 
 
 public class KeepPitch extends Command {
 
-    private double lowPitch;
-    private double highPitch;
+    private double EvenPitch = 0;
+    private double lowHeight = 0;
+    private double highHeight = 5;
+    private PIDCalc pidPitch;
 
     public KeepPitch() {
-        lowPitch = -5;
-        highPitch = 5;
+
         requires(Robot.climbSystem);
+
+        pidPitch = new PIDCalc(0, 0, 0, 0, "ClimbPitch");
+
     }
 
     @Override
@@ -21,20 +26,18 @@ public class KeepPitch extends Command {
 
     @Override
     protected void execute() {
-        if(Robot.driveSystem.navX.getPitch() < lowPitch) {
-
-        }
-        else if(Robot.driveSystem.navX.getPitch() > highPitch) {
-
-        }
-        else {
-            
-        }
+        Robot.liftSystem.setLiftPosition(pidPitch.calculateOutput(EvenPitch, Robot.driveSystem.navX.getPitch()));
     }
 
     @Override
     protected boolean isFinished() {
-        return isTimedOut();
+        if(Robot.liftSystem.getLiftPosition() > lowHeight || Robot.liftSystem.getLiftPosition() < highHeight) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 
     @Override
