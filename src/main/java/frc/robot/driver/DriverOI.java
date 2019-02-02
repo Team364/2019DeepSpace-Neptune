@@ -95,6 +95,7 @@ public class DriverOI {
         alignWithTapeButton = new JoystickButton(controller, 2);
         alignWithTapeButton.whileActive(new Align());
 
+
         //Does nothing
         //Use for testing and printing out data
         diagnosticButton = new JoystickButton(controller, 7);

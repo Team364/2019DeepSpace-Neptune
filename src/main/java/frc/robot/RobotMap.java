@@ -42,7 +42,13 @@ public class RobotMap {
     public static final int leverPort1 = 4;
     public static final int leverPort2 = 5;
 
+    //these are for cylinders for climbing
     public static final int climbPort1 = 4;
     public static final int climbPort2 = 5;
+
+    //TODO: change these to correct values
+    //these are for HabWheels
+    public static final int climbPort3 = 6;
+    public static final int climbPort4 = 7;
 
 }

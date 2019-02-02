@@ -2,7 +2,7 @@ package frc.robot.driver.commands.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.driver.subsystems.DriveSystem;
+import frc.robot.subsystems.DriveSystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 

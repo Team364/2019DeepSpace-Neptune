@@ -1,4 +1,4 @@
-package frc.robot.driver.subsystems;
+package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 // import com.ctre.phoenix.sensors.PigeonIMU;
@@ -64,47 +64,47 @@ public class DriveSystem extends Subsystem {
      */ 
     public DriveSystem() {
         
-        //  // Initialize TalonSRX and VictorSPX objects
-        //  leftFront = new VictorSPX(RobotMap.leftFrontDrive);
-        //  leftTop = new TalonSRX(RobotMap.leftTopDrive);
-        //  leftRear = new VictorSPX(RobotMap.leftRearDrive);
+         // Initialize TalonSRX and VictorSPX objects
+         leftFront = new VictorSPX(RobotMap.leftFrontDrive);
+         leftTop = new TalonSRX(RobotMap.leftTopDrive);
+         leftRear = new VictorSPX(RobotMap.leftRearDrive);
  
-        //  rightFront = new VictorSPX(RobotMap.rightFrontDrive);
-        //  rightTop = new TalonSRX(RobotMap.rightTopDrive);
-        //  rightRear = new VictorSPX(RobotMap.rightRearDrive);
+         rightFront = new VictorSPX(RobotMap.rightFrontDrive);
+         rightTop = new TalonSRX(RobotMap.rightTopDrive);
+         rightRear = new VictorSPX(RobotMap.rightRearDrive);
          
-        // //  extraTalon = new TalonSRX(RobotMap.extraTalon);
+        //  extraTalon = new TalonSRX(RobotMap.extraTalon);
  
-        //  // Initialize DoubleSolenoid shifter object
-        //  shifter = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
+         // Initialize DoubleSolenoid shifter object
+         shifter = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
 
-        // //Initialize PigeonIMU
-        // //  testPigeon = new PigeonIMU(extraTalon);
+        //Initialize PigeonIMU
+        //  testPigeon = new PigeonIMU(extraTalon);
         
-        //  // Set the front drive motors to follow the rear
-        //  leftFront.follow(leftTop);
-        //  leftRear.follow(leftTop);
-        //  rightFront.follow(rightTop);
-        //  rightRear.follow(rightTop);
+         // Set the front drive motors to follow the rear
+         leftFront.follow(leftTop);
+         leftRear.follow(leftTop);
+         rightFront.follow(rightTop);
+         rightRear.follow(rightTop);
  
-        //  // Config PF on left side
-        //  leftRear.config_kP(0, 0.25, 100);
-        //  leftRear.config_kF(0, 1, 100);
+         // Config PF on left side
+         leftRear.config_kP(0, 0.25, 100);
+         leftRear.config_kF(0, 1, 100);
  
-        //  // Config PF on right side
-        //  rightRear.config_kP(0, 0.25, 100);
-        //  rightRear.config_kF(0, 1, 100);
+         // Config PF on right side
+         rightRear.config_kP(0, 0.25, 100);
+         rightRear.config_kF(0, 1, 100);
  
-        //  // Init the navX
-        //  //DriveSystem Gyro
-        //  navX = new AHRS(SPI.Port.kMXP);
-        //  //PIDCalc Init
-        //  //DriveSystem Gyro PID init
-        //  pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
-        //  //DriveSystem Left Side init
-        //  pidLeft = new PIDCalc(0.0005, 0, 0, 0, "Left");
-        //  //DriveSystem Right Side init
-        //  pidRight = new PIDCalc(0.0005, 0, 0, 0, "Right");
+         // Init the navX
+         //DriveSystem Gyro
+         navX = new AHRS(SPI.Port.kMXP);
+         //PIDCalc Init
+         //DriveSystem Gyro PID init
+         pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
+         //DriveSystem Left Side init
+         pidLeft = new PIDCalc(0.0005, 0, 0, 0, "Left");
+         //DriveSystem Right Side init
+         pidRight = new PIDCalc(0.0005, 0, 0, 0, "Right");
     }
 
     @Override
@@ -204,9 +204,7 @@ public class DriveSystem extends Subsystem {
      * @return returns the navX angle (yaw)
      */
     public double getGyroAngle() {
-        // return navX.getYaw();
-        //This is a placeholder. Delete whenever original code is commented out
-        return 0;
+        return navX.getYaw();
     }
 
     /**

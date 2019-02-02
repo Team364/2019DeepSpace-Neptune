@@ -2,7 +2,6 @@ package frc.robot.driver.subroutines.held;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.driver.subsystems.VisionSystem;
 
 public class Align extends Command {
 

@@ -12,8 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.robot.driver.subsystems.*;
-import frc.robot.operator.subsystems.*;
+import frc.robot.subsystems.*;
 import frc.robot.driver.*;
 import frc.robot.operator.*;
 import frc.robot.shared.autos.*;
@@ -34,6 +33,7 @@ public class Robot extends TimedRobot {
   public static LiftSystem liftSystem;
   public static ArmSystem armSystem;
   public static GripSystem gripSystem;
+  public static ClimbSystem climbSystem;
 
   //Controls
   public static DriverOI oi;
@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
     HATCH_OBJ
 }
 
-  public static ObjectStates objState;
+  public static ObjectStates objState = ObjectStates.CARGO_OBJ;
 
   @Override
   public void robotInit() {
@@ -77,6 +77,7 @@ public class Robot extends TimedRobot {
     liftSystem = new LiftSystem();
     gripSystem = new GripSystem();
     armSystem = new ArmSystem();
+    climbSystem = new ClimbSystem();
     //Controls init
     oi = new DriverOI();
     oi2 = new OperatorOI();
