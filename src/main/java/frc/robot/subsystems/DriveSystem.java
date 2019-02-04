@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.PIDCalc;
 import frc.robot.RobotMap;
-import frc.robot.driver.defaultcommands.TeleopDriveCommand;
+import frc.robot.defaultcommands.TeleopDriveCommand;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 

@@ -11,18 +11,14 @@ import frc.robot.RobotMap;
 public class ClimbSystem extends Subsystem {
 
     private DoubleSolenoid Pistons;
-    private DoubleSolenoid HabWheels;
-
-    private double navXpitch;
+    private DoubleSolenoid Wheels;
     /**
      * ClimbSystem()
      */ 
     public ClimbSystem() {
         //initialize talons and or victors here
         Pistons = new DoubleSolenoid(RobotMap.climbPort1, RobotMap.climbPort2);
-        HabWheels = new DoubleSolenoid(RobotMap.climbPort3, RobotMap.climbPort4);
-    
-        navXpitch = 100;
+        Wheels = new DoubleSolenoid(RobotMap.climbPort3, RobotMap.climbPort4);
     }
 
     @Override
@@ -40,38 +36,39 @@ public class ClimbSystem extends Subsystem {
     }
 
     /**
-     * closeClaw()
+     * retract()
      * <p>Retract Climb Mechanism
      */ 
     public void retract() {
         Pistons.set(DoubleSolenoid.Value.kReverse);
     }
-
-    public boolean ReachedPitch(){
-        // checks if the robot has reached pitch(height)
-        // make sure to change navXpitch later on
-        if(Robot.driveSystem.getGyroAngle() > navXpitch) {
-            return true;
-        }
-        else {
-            return false;
-        }
-
-    }
-
-    public void EngageWheels(){
-        HabWheels.set(DoubleSolenoid.Value.kForward);
-    }
-
-    public void DisengageWheels(){
-        HabWheels.set(DoubleSolenoid.Value.kReverse);
-    }
     /**
      * noInput()
-     * Leaves the scoring mechanism where it is
+     * <p>Leaves the scoring mechanism where it is
      */ 
     public void noInput() {
         Pistons.set(DoubleSolenoid.Value.kOff);
+    }
+    /**
+     * releaseWheels()
+     * <p>releases contact wheels for climbing
+     */
+    public void releaseWheels(){
+        Wheels.set(DoubleSolenoid.Value.kForward);
+    }
+    /**
+     * retractWheels()
+     * <p>retracts contact wheels after climbing
+     */
+    public void retractWheels(){
+        Wheels.set(DoubleSolenoid.Value.kReverse);
+    }
+    /**
+     * noInput()
+     * <p>Leaves the contact mechanism where it is
+     */ 
+    public void noInputWheels() {
+        Wheels.set(DoubleSolenoid.Value.kOff);
     }
 
 }
