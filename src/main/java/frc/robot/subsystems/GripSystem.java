@@ -16,6 +16,7 @@ public class GripSystem extends Subsystem {
     // private DoubleSolenoid intakePistons;
     // //hatch pistons
     // private DoubleSolenoid leverPistons;
+    // private final DigitalInput ballLimitSwitch;
 
     /**
      * ClawSystem()
@@ -31,7 +32,8 @@ public class GripSystem extends Subsystem {
 
         // intakePistons = new DoubleSolenoid(RobotMap.intakePort1, RobotMap.intakePort2);
         // leverPistons = new DoubleSolenoid(RobotMap.leverPort1, RobotMap.leverPort2);
-        //TODO: Add limit switch
+
+        //ballLimitSwitch = new DigitalInput(RobotMap.ballLimitSwitch);
     }
 
     @Override
@@ -124,6 +126,9 @@ public class GripSystem extends Subsystem {
         // closeClaw();
         // closeHatch();
     }
+    // public boolean getBallLimitSwitch() {
+    //     return ballLimitSwtich.get();
+    // }
     
 }
 

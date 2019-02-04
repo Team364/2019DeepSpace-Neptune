@@ -21,7 +21,7 @@ public class TeleopLiftCommand extends Command {
 
     @Override
     protected void execute() {
-        double power = Robot.oi2.leftStick;
+        double power = Robot.oi2.controller2.getRawAxis(1);
         if(power >= 0.1){
             Robot.liftSystem.manualLiftControl(power);
         }else if(power <= 0.1){

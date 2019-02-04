@@ -8,11 +8,13 @@ import frc.robot.RobotMap;
 
 public class ArmSystem extends Subsystem {
 
+    //private TalonSRX arm
     /**
      * ArmSystem()
      */ 
     public ArmSystem() {
         //initialize talons and or victors here
+        // arm = new TalonSRX(RobotMap.arm);
     }
 
     @Override

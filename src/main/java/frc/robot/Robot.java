@@ -90,6 +90,8 @@ public class Robot extends TimedRobot {
     Auto3 = new StraightAuto();
     //Teleop Subroutine CommandGroups are assigned to commands
     Turn180 = new TeleopTurn180();
+    IntakeObject = new IntakeObject();
+    ScoreObject = new ScoreObject();
     //Sensors Reset
     driveSystem.resetHeading();
 
@@ -141,9 +143,9 @@ public class Robot extends TimedRobot {
     //Object state is set to Cargo
     //If Down on the D-pad is pressed,
     //Object state is set to Hatch
-    if(oi.controller.getPOV() == 0){
+    if(oi2.controller2.getPOV() == 0){
       objState = ObjectStates.CARGO_OBJ;
-    }else if(oi.controller.getPOV() == 180){
+    }else if(oi2.controller2.getPOV() == 180){
       objState = ObjectStates.HATCH_OBJ;
     }
     //If the right Trigger is pressed,
@@ -152,7 +154,7 @@ public class Robot extends TimedRobot {
     //it is checked whether or not the intake
     //object command is running because these
     //directly interfere with one another
-    if(oi.controller.getRawAxis(3) >= 0.5){
+    if(oi2.controller2.getRawAxis(3) >= 0.5){
       if(IntakeObject.isRunning()){
         IntakeObject.cancel();
       }
@@ -163,7 +165,7 @@ public class Robot extends TimedRobot {
     //it is checked whether or not the score
     //object command is running because these
     //directly interfere with one another
-    }else if(oi.controller.getRawAxis(2) >= 0.5){
+    }else if(oi2.controller2.getRawAxis(2) >= 0.5){
       if(ScoreObject.isRunning()){
         ScoreObject.cancel();
       }

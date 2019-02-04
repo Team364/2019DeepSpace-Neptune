@@ -31,6 +31,9 @@ public class RobotMap {
     public static final int rightClaw = 4;
     //Talon SRX
     public static final int leftClaw = 5;
+    //Arm
+    //Talon SRX
+    public static final int arm = 6;
 
     //TODO: Set these according to how the robot is wired
     public static final int shifterPort1 = 0;
@@ -50,5 +53,7 @@ public class RobotMap {
     //these are for HabWheels
     public static final int climbPort3 = 6;
     public static final int climbPort4 = 7;
+
+    public static final int ballLimitSwitch = 3;
 
 }

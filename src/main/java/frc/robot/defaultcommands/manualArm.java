@@ -21,7 +21,7 @@ public class manualArm extends Command {
 
     @Override
     protected void execute() {
-        Robot.armSystem.moveArm(Robot.oi2.rightStick);
+        Robot.armSystem.moveArm(Robot.oi2.controller2.getRawAxis(5));
     }
 
     @Override

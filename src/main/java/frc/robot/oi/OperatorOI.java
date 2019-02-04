@@ -49,12 +49,11 @@ public class OperatorOI{
      */
     public Joystick controller2;
 
-    public Double leftStick;
-    public Double rightStick;
     //Lift Buttons
     public JoystickButton setLiftPositionLow;
     public JoystickButton setLiftPositionMedium;
     public JoystickButton setLiftPositionHigh;
+    public JoystickButton setLiftPositionCargo;
 
 
     //Operator Buttons
@@ -67,20 +66,21 @@ public class OperatorOI{
 
         //Initialize Operator Controller
         controller2 = new Joystick(1);
-        leftStick = controller2.getRawAxis(1);
-        rightStick = controller2.getRawAxis(5);
         //Set state to cargo when left trigger is pulled
         // setObjectStateCargo = new JoystickTrigger(2);
         // setObjectStateCargo.whenActive(new SetObjectStateCargo());
-        //Set Lift Position to level 1
+        //Set Lift Position to level 1 for scoring in rocket and hatches on cargo ship
         setLiftPositionLow = new JoystickButton(controller2, 1);
-        setLiftPositionLow.whenPressed(new ElevateToPosition(1));
-        //Set Lift Position to level 2
+        setLiftPositionLow.whenPressed(new Elevate(1));
+        //Set Lift Position to level 2 for scoring in rocket
         setLiftPositionMedium = new JoystickButton(controller2, 2);
-        setLiftPositionMedium.whenPressed(new ElevateToPosition(2));
-        //Set Lift Position to level 3
+        setLiftPositionMedium.whenPressed(new Elevate(2));
+        //Set Lift Position to level 3 for scoring in rocket
         setLiftPositionHigh = new JoystickButton(controller2, 4);
-        setLiftPositionHigh.whenPressed(new ElevateToPosition(3));
+        setLiftPositionHigh.whenPressed(new Elevate(3));
+        //Set Lift Position to level 4 for scoring Cargo in Cargo Ship
+        setLiftPositionCargo = new JoystickButton(controller2, 3);
+        setLiftPositionCargo.whenPressed(new Elevate(4));
     }
 }
 
