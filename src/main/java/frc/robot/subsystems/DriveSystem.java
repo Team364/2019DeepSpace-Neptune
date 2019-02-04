@@ -16,43 +16,29 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 public class DriveSystem extends Subsystem {
 
     //Motor Controller Declarations
-    private TalonSRX leftTop;
-    private TalonSRX rightTop;
+    // private TalonSRX leftTop;
+    // private TalonSRX rightTop;
 
-    private VictorSPX leftFront;
-    private VictorSPX leftRear;
-    private VictorSPX rightFront;
-    private VictorSPX rightRear;
+    // private VictorSPX leftFront;
+    // private VictorSPX leftRear;
+    // private VictorSPX rightFront;
+    // private VictorSPX rightRear;
 
     // private TalonSRX extraTalon;
     // private PigeonIMU testPigeon;
     //Shifter
-    private DoubleSolenoid shifter;
-    //Gyro
-    public AHRS navX;
-    //PID Gyro
-    public PIDCalc pidNavX;
-    public double pidOutputNavX;
-    //PID Left
-    public PIDCalc pidLeft;
-    private double pidOutputLeft;
-    //PID Right
-    public PIDCalc pidRight;
-    private double pidOutputRight;
-    //PID Vision X 
-    public PIDCalc pidXvalue;
-    public double pidOutputXvalue;
-    //PID Vision Area
-    public PIDCalc pidAvalue;
-    public double pidOutputAvalue;
-    //Vision Right and Left
-    public double visionLeft;
-    public double visionRight;
-
-
-
-         
-
+    // private DoubleSolenoid shifter;
+    // //Gyro
+    // public AHRS navX;
+    // //PID Gyro
+    // public PIDCalc pidNavX;
+    // public double pidOutputNavX;
+    // //PID Left
+    // public PIDCalc pidLeft;
+    // private double pidOutputLeft;
+    // //PID Right
+    // public PIDCalc pidRight;
+    // private double pidOutputRight;
     /**
      * DriveSystem()
      * Constructor for the DriveSystem class
@@ -64,47 +50,47 @@ public class DriveSystem extends Subsystem {
      */ 
     public DriveSystem() {
         
-         // Initialize TalonSRX and VictorSPX objects
-         leftFront = new VictorSPX(RobotMap.leftFrontDrive);
-         leftTop = new TalonSRX(RobotMap.leftTopDrive);
-         leftRear = new VictorSPX(RobotMap.leftRearDrive);
+        //  // Initialize TalonSRX and VictorSPX objects
+        //  leftFront = new VictorSPX(RobotMap.leftFrontDrive);
+        //  leftTop = new TalonSRX(RobotMap.leftTopDrive);
+        //  leftRear = new VictorSPX(RobotMap.leftRearDrive);
  
-         rightFront = new VictorSPX(RobotMap.rightFrontDrive);
-         rightTop = new TalonSRX(RobotMap.rightTopDrive);
-         rightRear = new VictorSPX(RobotMap.rightRearDrive);
+        //  rightFront = new VictorSPX(RobotMap.rightFrontDrive);
+        //  rightTop = new TalonSRX(RobotMap.rightTopDrive);
+        //  rightRear = new VictorSPX(RobotMap.rightRearDrive);
          
-        //  extraTalon = new TalonSRX(RobotMap.extraTalon);
+        // //  extraTalon = new TalonSRX(RobotMap.extraTalon);
  
-         // Initialize DoubleSolenoid shifter object
-         shifter = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
+        //  // Initialize DoubleSolenoid shifter object
+        //  shifter = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
 
-        //Initialize PigeonIMU
-        //  testPigeon = new PigeonIMU(extraTalon);
+        // //Initialize PigeonIMU
+        // //  testPigeon = new PigeonIMU(extraTalon);
         
-         // Set the front drive motors to follow the rear
-         leftFront.follow(leftTop);
-         leftRear.follow(leftTop);
-         rightFront.follow(rightTop);
-         rightRear.follow(rightTop);
+        //  // Set the front drive motors to follow the rear
+        //  leftFront.follow(leftTop);
+        //  leftRear.follow(leftTop);
+        //  rightFront.follow(rightTop);
+        //  rightRear.follow(rightTop);
  
-         // Config PF on left side
-         leftRear.config_kP(0, 0.25, 100);
-         leftRear.config_kF(0, 1, 100);
+        //  // Config PF on left side
+        //  leftRear.config_kP(0, 0.25, 100);
+        //  leftRear.config_kF(0, 1, 100);
  
-         // Config PF on right side
-         rightRear.config_kP(0, 0.25, 100);
-         rightRear.config_kF(0, 1, 100);
+        //  // Config PF on right side
+        //  rightRear.config_kP(0, 0.25, 100);
+        //  rightRear.config_kF(0, 1, 100);
  
-         // Init the navX
-         //DriveSystem Gyro
-         navX = new AHRS(SPI.Port.kMXP);
-         //PIDCalc Init
-         //DriveSystem Gyro PID init
-         pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
-         //DriveSystem Left Side init
-         pidLeft = new PIDCalc(0.0005, 0, 0, 0, "Left");
-         //DriveSystem Right Side init
-         pidRight = new PIDCalc(0.0005, 0, 0, 0, "Right");
+        //  // Init the navX
+        //  //DriveSystem Gyro
+        //  navX = new AHRS(SPI.Port.kMXP);
+        //  //PIDCalc Init
+        //  //DriveSystem Gyro PID init
+        //  pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
+        //  //DriveSystem Left Side init
+        //  pidLeft = new PIDCalc(0.0005, 0, 0, 0, "Left");
+        //  //DriveSystem Right Side init
+        //  pidRight = new PIDCalc(0.0005, 0, 0, 0, "Right");
     }
 
     @Override
@@ -119,6 +105,8 @@ public class DriveSystem extends Subsystem {
      * @param right sets the right drive power
      */
     public void tankDrive(double left, double right) {
+        System.out.println("Left is set to: " + left);
+        System.out.println("Right is set to: " + right);
         // leftTop.set(ControlMode.PercentOutput, -left);
         // rightTop.set(ControlMode.PercentOutput, right);
     }
@@ -131,6 +119,8 @@ public class DriveSystem extends Subsystem {
      * @param steer adds power to left and subtracts power from right to turn
      */
     public void triggerDrive(double throttle, double steer){
+        System.out.println("Throttle is: " + throttle);
+        System.out.println("Steer is: " + steer);
         // double leftDrive;
         // double rightDrive;
         // leftDrive = throttle + steer;
@@ -156,6 +146,7 @@ public class DriveSystem extends Subsystem {
      * Use this in auto to stop the drivetrain inbetween commands
      */ 
     public void stop() {
+        System.out.println("The motors have been set to 0");
         // leftTop.set(ControlMode.PercentOutput, 0);
         // rightTop.set(ControlMode.PercentOutput, 0);
     }
@@ -204,7 +195,8 @@ public class DriveSystem extends Subsystem {
      * @return returns the navX angle (yaw)
      */
     public double getGyroAngle() {
-        return navX.getYaw();
+        // return navX.getYaw();
+        return 0;
     }
 
     /**
@@ -222,6 +214,7 @@ public class DriveSystem extends Subsystem {
      * Resets navX gyro heading
      */ 
     public void resetHeading() {
+        System.out.println("The heading has been reset");
         // navX.reset();
     }
     //TODO: Move to command
@@ -296,6 +289,7 @@ public class DriveSystem extends Subsystem {
      */ 
     public void shiftHigh() {
         // shifter.set(DoubleSolenoid.Value.kForward);
+        System.out.println("The shfiters have been set to High");
     }
 
     /**
@@ -303,6 +297,7 @@ public class DriveSystem extends Subsystem {
      * <p>Shifts the drivetrain into low gear
      */ 
     public void shiftLow() {
+        System.out.println("The shifters have been set to Low");
         // shifter.set(DoubleSolenoid.Value.kReverse);
     }
 
@@ -311,6 +306,15 @@ public class DriveSystem extends Subsystem {
      * Leaves the shifters where they're at
      */ 
     public void noShiftInput() {
+        System.out.println("The shifters have no Input");
         // shifter.set(DoubleSolenoid.Value.kOff);
+    }
+    public void setNavXPID(double kP, double kI, double kD, double kF){
+        // NavX.setPIDParamaters(kP, kI, kD, kF);
+        System.out.println("The NavX has been set to: " + kP + " " + kI + " " + kD + " " + kF);
+    }
+    public void resetNavXPID(){
+        // NavX.resetPID();
+        System.out.println("The navX PID has been reset");
     }
 }

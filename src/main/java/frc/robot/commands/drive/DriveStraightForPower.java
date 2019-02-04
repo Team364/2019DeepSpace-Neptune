@@ -18,13 +18,13 @@ public class DriveStraightForPower extends Command {
 
     @Override
     protected void initialize() {
-        Robot.driveSystem.pidNavX.setPIDParameters(0.00005, 0, 0, 0);
+        // Robot.driveSystem.pidNavX.setPIDParameters(0.00005, 0, 0, 0);
     }
 
     @Override
     protected void execute() {
         Robot.driveSystem.keepHeading(-m_power);
-        SmartDashboard.putNumber("pidOutputGyroStraight", Robot.driveSystem.pidOutputNavX);
+        // SmartDashboard.putNumber("pidOutputGyroStraight", Robot.driveSystem.pidOutputNavX);
 
     }
 

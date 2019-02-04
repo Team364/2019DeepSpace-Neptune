@@ -10,15 +10,15 @@ import frc.robot.RobotMap;
 
 public class ClimbSystem extends Subsystem {
 
-    private DoubleSolenoid Pistons;
-    private DoubleSolenoid Wheels;
+    // private DoubleSolenoid Pistons;
+    // private DoubleSolenoid Wheels;
     /**
      * ClimbSystem()
      */ 
     public ClimbSystem() {
         //initialize talons and or victors here
-        Pistons = new DoubleSolenoid(RobotMap.climbPort1, RobotMap.climbPort2);
-        Wheels = new DoubleSolenoid(RobotMap.climbPort3, RobotMap.climbPort4);
+        // Pistons = new DoubleSolenoid(RobotMap.climbPort1, RobotMap.climbPort2);
+        // Wheels = new DoubleSolenoid(RobotMap.climbPort3, RobotMap.climbPort4);
     }
 
     @Override
@@ -32,7 +32,8 @@ public class ClimbSystem extends Subsystem {
      * <p>Extend Climb Mechanism
      */ 
     public void release() {
-        Pistons.set(DoubleSolenoid.Value.kForward);
+        System.out.println("The pistons are set Forward");
+        // Pistons.set(DoubleSolenoid.Value.kForward);
     }
 
     /**
@@ -40,35 +41,40 @@ public class ClimbSystem extends Subsystem {
      * <p>Retract Climb Mechanism
      */ 
     public void retract() {
-        Pistons.set(DoubleSolenoid.Value.kReverse);
+        System.out.println("The pistons are set reverse");
+        // Pistons.set(DoubleSolenoid.Value.kReverse);
     }
     /**
      * noInput()
      * <p>Leaves the scoring mechanism where it is
      */ 
     public void noInput() {
-        Pistons.set(DoubleSolenoid.Value.kOff);
+        System.out.println("There pistons are off");
+        // Pistons.set(DoubleSolenoid.Value.kOff);
     }
     /**
      * releaseWheels()
      * <p>releases contact wheels for climbing
      */
     public void releaseWheels(){
-        Wheels.set(DoubleSolenoid.Value.kForward);
+        System.out.println("The wheels have been released");
+    // Wheels.set(DoubleSolenoid.Value.kForward);
     }
     /**
      * retractWheels()
      * <p>retracts contact wheels after climbing
      */
     public void retractWheels(){
-        Wheels.set(DoubleSolenoid.Value.kReverse);
+        System.out.println("The wheels have been retracted");
+        // Wheels.set(DoubleSolenoid.Value.kReverse);
     }
     /**
      * noInput()
      * <p>Leaves the contact mechanism where it is
      */ 
     public void noInputWheels() {
-        Wheels.set(DoubleSolenoid.Value.kOff);
+        System.out.println("The wheels are off");
+        // Wheels.set(DoubleSolenoid.Value.kOff);
     }
 
 }

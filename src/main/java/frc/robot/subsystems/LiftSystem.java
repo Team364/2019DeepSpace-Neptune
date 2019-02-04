@@ -14,11 +14,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class LiftSystem extends Subsystem {
 
 
-    private TalonSRX rightLift;
-    private TalonSRX leftLift;
+    // private TalonSRX rightLift;
+    // private TalonSRX leftLift;
 
-    public PIDCalc pidLift;
-    public double pidLiftOutput;
+    // public PIDCalc pidLift;
+    // public double pidLiftOutput;
     
     /**
      * LiftSystem()
@@ -41,6 +41,7 @@ public class LiftSystem extends Subsystem {
         //TODO: add lift encoder count soft limit here; if then command that won't allow this to be run
         //if the lift is beyond a certain encoder count
         // leftLift.set(ControlMode.PercentOutput, power);
+        System.out.println("The lift is moving at: " + power);
     }
     //TODO: Move to command
     /**
@@ -51,6 +52,7 @@ public class LiftSystem extends Subsystem {
         // leftLift.set(ControlMode.PercentOutput, pidLiftOutput);
         // SmartDashboard.putNumber("PidLiftFirstStageOutput", pidLiftOutput);
         // SmartDashboard.putBoolean("firstStageReachHeading", reachedPosition(Position));
+        System.out.println("The lift is moving to: " + Position);
     }
 
     /**

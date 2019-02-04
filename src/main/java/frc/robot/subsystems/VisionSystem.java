@@ -8,18 +8,18 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class VisionSystem extends Subsystem {
 
-    //Network Table
-    private NetworkTableInstance roboRioInstance;
-    private NetworkTable visionParameters;
-    //Network Table Input entries from Raspberry Pi
-    private NetworkTableEntry visibleTargets_angle;
-    private NetworkTableEntry visibleTargets_width;
-    private NetworkTableEntry visibleTargets_height;
-    private NetworkTableEntry visibleTargets_centerX;
-    private NetworkTableEntry visibleTargets_centerY;
-    private NetworkTableEntry visibleTargets_noTarget;
-    //Output entries to Raspberry Pi
-    private NetworkTableEntry configNumber;
+    // //Network Table
+    // private NetworkTableInstance roboRioInstance;
+    // private NetworkTable visionParameters;
+    // //Network Table Input entries from Raspberry Pi
+    // private NetworkTableEntry visibleTargets_angle;
+    // private NetworkTableEntry visibleTargets_width;
+    // private NetworkTableEntry visibleTargets_height;
+    // private NetworkTableEntry visibleTargets_centerX;
+    // private NetworkTableEntry visibleTargets_centerY;
+    // private NetworkTableEntry visibleTargets_noTarget;
+    // //Output entries to Raspberry Pi
+    // private NetworkTableEntry configNumber;
 
     /**
      * VisionSystem() interprets data from grip pipelines filtering images from the

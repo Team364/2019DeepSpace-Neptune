@@ -18,16 +18,16 @@ public class TurnToHeading extends Command {
     @Override
     protected void initialize() {
         if(wantedHeading >= 170){ 
-            Robot.driveSystem.pidNavX.setPIDParameters(0.0075, 0, 0, 0);
+             Robot.driveSystem.setNavXPID(0.0075, 0.0, 0.0, 0.0);
         }else if(wantedHeading >= 60){  
-            Robot.driveSystem.pidNavX.setPIDParameters(0.0095, 0, 0, 0);
+            Robot.driveSystem.setNavXPID(0.0095, 0.0, 0.0, 0.0);
         }else{      
-            Robot.driveSystem.pidNavX.setPIDParameters(0.015, 0, 0, 0);
+            Robot.driveSystem.setNavXPID(0.015, 0.0, 0.0, 0.0);
         }
       
         Robot.driveSystem.stop();
         Robot.driveSystem.resetHeading();
-        Robot.driveSystem.pidNavX.resetPID();
+        Robot.driveSystem.resetNavXPID();
     }
 
     @Override

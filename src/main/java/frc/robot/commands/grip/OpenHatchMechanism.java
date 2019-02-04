@@ -17,7 +17,7 @@ public class OpenHatchMechanism extends Command {
 
     @Override
     protected void execute() {
-        Robot.gripSystem.openLevers();;
+        Robot.gripSystem.openLevers();
     }
 
     @Override

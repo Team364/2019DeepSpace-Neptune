@@ -13,10 +13,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
-import frc.robot.*;
 import frc.robot.oi.*;
 import frc.robot.autos.*;
 import frc.robot.subroutines.pressed.drive.*;
+import frc.robot.subroutines.pressed.grip.IntakeObject;
+import frc.robot.subroutines.pressed.grip.ScoreObject;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -46,6 +47,8 @@ public class Robot extends TimedRobot {
   public static Command Auto3;
   //Subroutine Commands
   public static Command Turn180;
+  public static Command IntakeObject;
+  public static Command ScoreObject;
 
   //Auto Selector String
   private String autoSelected;
@@ -131,6 +134,41 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     putSmartDashVars();
+
+    //Control Logic
+    //Setting States
+    //If Up on the D-pad is pressed,
+    //Object state is set to Cargo
+    //If Down on the D-pad is pressed,
+    //Object state is set to Hatch
+    if(oi.controller.getPOV() == 0){
+      objState = ObjectStates.CARGO_OBJ;
+    }else if(oi.controller.getPOV() == 180){
+      objState = ObjectStates.HATCH_OBJ;
+    }
+    //If the right Trigger is pressed,
+    //the robot will outtake
+    //Before this executes,
+    //it is checked whether or not the intake
+    //object command is running because these
+    //directly interfere with one another
+    if(oi.controller.getRawAxis(3) >= 0.5){
+      if(IntakeObject.isRunning()){
+        IntakeObject.cancel();
+      }
+      ScoreObject.start();
+    //If the left Trigger is pressed,
+    //the robot will outtake
+    //Before this executes,
+    //it is checked whether or not the score
+    //object command is running because these
+    //directly interfere with one another
+    }else if(oi.controller.getRawAxis(2) >= 0.5){
+      if(ScoreObject.isRunning()){
+        ScoreObject.cancel();
+      }
+      IntakeObject.start();
+    }
 
   }
 

@@ -10,12 +10,12 @@ import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class GripSystem extends Subsystem {
-    private TalonSRX rightClaw;
-    private TalonSRX leftClaw;
-    //claw pistons
-    private DoubleSolenoid intakePistons;
-    //hatch pistons
-    private DoubleSolenoid leverPistons;
+    // private TalonSRX rightClaw;
+    // private TalonSRX leftClaw;
+    // //claw pistons
+    // private DoubleSolenoid intakePistons;
+    // //hatch pistons
+    // private DoubleSolenoid leverPistons;
 
     /**
      * ClawSystem()
@@ -41,12 +41,15 @@ public class GripSystem extends Subsystem {
     //These assignments are arbitrary
     //TODO: Test this
     public void runIntakeForward(){
+        System.out.println("The intake is running at -1");
         // leftClaw.set(ControlMode.PercentOutput, -1);
     }
     public void runIntakeBackward(){
+        System.out.println("The intake is running at 1");
         // leftClaw.set(ControlMode.PercentOutput, 1);
     }
     public void stop(){
+        System.out.println("The intake has been stopped");
         // leftClaw.set(ControlMode.PercentOutput, 0);
     }
     //TODO: Make sure these are set correctly. Open should open. Close should close
@@ -55,6 +58,7 @@ public class GripSystem extends Subsystem {
      * <p>Opens Claw
      */ 
     public void openClaw() {
+        System.out.println("The claw has been opened");
         // intakePistons.set(DoubleSolenoid.Value.kForward);
     }
 
@@ -63,6 +67,7 @@ public class GripSystem extends Subsystem {
      * <p>Closes Claw
      */ 
     public void closeClaw() {
+        System.out.println("The claw has been closed");
         // intakePistons.set(DoubleSolenoid.Value.kReverse);
     }
 
@@ -71,6 +76,7 @@ public class GripSystem extends Subsystem {
      * Leaves the claw pistons where they're at
      */ 
     public void noClawInput() {
+        System.out.println("The claw has no input");
         // intakePistons.set(DoubleSolenoid.Value.kOff);
     }
 
@@ -81,6 +87,7 @@ public class GripSystem extends Subsystem {
      * <p>Opens Hatch Scoring Mechanism
      */ 
     public void openLevers() {
+        System.out.println("The levers have been opened");
         // leverPistons.set(DoubleSolenoid.Value.kForward);
     }
 
@@ -89,6 +96,7 @@ public class GripSystem extends Subsystem {
      * <p>Closes Hatch Scoring Mechanism
      */ 
     public void closeLevers() {
+        System.out.println("The levers have been closed");
         // leverPistons.set(DoubleSolenoid.Value.kReverse);
     }
 
@@ -97,12 +105,14 @@ public class GripSystem extends Subsystem {
      * Leaves the hatch scoring pistons where they're at
      */ 
     public void noLeverInput() {
+        System.out.println("The levers have no input");
         // leverPistons.set(DoubleSolenoid.Value.kOff);
     }
     //Claw is open to receive ball. Hatch apparatus opens to make room for ball
     //Do not change this. If the desired effect is what occurs, test what the
     //methods openClaw and openHatch do
     public void setObjStateCargo(){
+        System.out.println("The state has been physically set to cargo");
         // openClaw();
         // openLevers();
     }
@@ -110,6 +120,7 @@ public class GripSystem extends Subsystem {
     //Do not change this. If the desired effect is what occurs, test what the
     //methods closeClaw and closeHatch do
     public void setObjStateHatch(){
+        System.out.println("The state has physically been set to hatch");
         // closeClaw();
         // closeHatch();
     }
