@@ -5,6 +5,7 @@ import frc.robot.Robot;
 
 public class manualArm extends Command {
 
+    public double rightStick;
     /**
      * Command used for teleop control specific to the arn System
      * <p>Operator controled manually
@@ -21,7 +22,16 @@ public class manualArm extends Command {
 
     @Override
     protected void execute() {
-        Robot.armSystem.moveArm(Robot.oi2.controller2.getRawAxis(5));
+        rightStick = Robot.oi2.controller2.getRawAxis(5)
+        if(rightStick >= 0.5){
+            Robot.armSystem.moveArm(1);
+        }else if(rightStick <= -0.5){
+            Robot.armSystem.moveArm(-1);
+        }else{
+            Robot.armSystem.moveArm(0);
+             //CounterAct Gravity Somehow
+        }
+       
     }
 
     @Override
