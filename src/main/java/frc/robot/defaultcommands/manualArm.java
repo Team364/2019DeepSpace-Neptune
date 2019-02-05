@@ -22,7 +22,7 @@ public class manualArm extends Command {
 
     @Override
     protected void execute() {
-        rightStick = Robot.oi2.controller2.getRawAxis(5)
+        rightStick = Robot.oi2.controller2.getRawAxis(5);
         if(rightStick >= 0.5){
             Robot.armSystem.moveArm(1);
         }else if(rightStick <= -0.5){
