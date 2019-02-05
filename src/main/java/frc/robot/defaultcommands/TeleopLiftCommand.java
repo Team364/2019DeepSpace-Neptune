@@ -28,6 +28,7 @@ public class TeleopLiftCommand extends Command {
             Robot.liftSystem.manualLiftControl(power);
         }else{
             Robot.liftSystem.manualLiftControl(0);
+            //Make sure to counteract gravity somehow. Maybe keep liftPosition PID?
         }
     }
 
