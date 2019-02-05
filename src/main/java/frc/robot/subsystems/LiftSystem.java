@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.defaultcommands.TeleopLiftCommand;
+import frc.robot.defaultcommands.LiftOpenLoop;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -34,9 +34,9 @@ public class LiftSystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new TeleopLiftCommand());
+        setDefaultCommand(new LiftOpenLoop());
     }
-    public void manualLiftControl(double power){
+    public void openLoop(double power){
         //TODO: add lift encoder count soft limit here; if then command that won't allow this to be run
         //if the lift is beyond a certain encoder count
         // leftLift.set(ControlMode.PercentOutput, power);

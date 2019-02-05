@@ -104,7 +104,7 @@ public class DriveSystem extends Subsystem {
      * @param left sets the left drive power
      * @param right sets the right drive power
      */
-    public void tankDrive(double left, double right) {
+    private void tankDrive(double left, double right) {
         System.out.println("Left is set to: " + left);
         System.out.println("Right is set to: " + right);
         // leftTop.set(ControlMode.PercentOutput, -left);
@@ -118,7 +118,7 @@ public class DriveSystem extends Subsystem {
      * @param throttle sets forward and backward values for drivetrain
      * @param steer adds power to left and subtracts power from right to turn
      */
-    public void triggerDrive(double throttle, double steer){
+    private void triggerDrive(double throttle, double steer){
         System.out.println("Throttle is: " + throttle);
         System.out.println("Steer is: " + steer);
         // double leftDrive;
@@ -126,6 +126,10 @@ public class DriveSystem extends Subsystem {
         // leftDrive = throttle + steer;
         // rightDrive = throttle - steer;
         // tankDrive(leftDrive, rightDrive);
+    }
+    
+    public void openLoop(double param1, double param2){
+        //triggerDrive(param1, param2);
     }
 
     /**

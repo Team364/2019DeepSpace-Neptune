@@ -3,14 +3,15 @@ package frc.robot.defaultcommands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class TeleopLiftCommand extends Command {
+public class ArmOpenLoop extends Command {
 
+    public double rightStick;
     /**
-     * Command used for teleop control specific to the lift System
+     * Command used for teleop control specific to the arn System
      * <p>Operator controled manually
      */
-    public TeleopLiftCommand() {
-        requires(Robot.liftSystem);
+    public ArmOpenLoop() {
+        requires(Robot.armSystem);
         //Other commands can interrupt this command
         setInterruptible(true);
     }
@@ -21,15 +22,16 @@ public class TeleopLiftCommand extends Command {
 
     @Override
     protected void execute() {
-        double power = Robot.oi2.controller2.getRawAxis(1);
-        if(power >= 0.1){
-            Robot.liftSystem.manualLiftControl(power);
-        }else if(power <= 0.1){
-            Robot.liftSystem.manualLiftControl(power);
+        rightStick = Robot.oi2.controller2.getRawAxis(5);
+        if(rightStick >= 0.5){
+            Robot.armSystem.ArmOpenLoop(1);
+        }else if(rightStick <= -0.5){
+            Robot.armSystem.ArmOpenLoop(-1);
         }else{
-            Robot.liftSystem.manualLiftControl(0);
-            //Make sure to counteract gravity somehow. Maybe keep liftPosition PID?
+            Robot.armSystem.stop();
+             //CounterAct Gravity Somehow
         }
+       
     }
 
     @Override
@@ -38,7 +40,7 @@ public class TeleopLiftCommand extends Command {
     }
     @Override
     protected void end() {
-        Robot.liftSystem.stop();
+        //Robot.armSystem.stop();
     }
 
     @Override

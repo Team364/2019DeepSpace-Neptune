@@ -79,7 +79,7 @@ public class TeleopDriveCommand extends Command {
         }
 
         //This is where the driveSystem is actually asked to run motors
-        Robot.driveSystem.triggerDrive(throttle, steer);
+        Robot.driveSystem.openLoop(throttle, steer);
 
     }
 

@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.defaultcommands.manualArm;
+import frc.robot.defaultcommands.ArmOpenLoop;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import frc.robot.RobotMap;
@@ -19,9 +19,9 @@ public class ArmSystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new manualArm());
+        setDefaultCommand(new ArmOpenLoop());
     }
-    public void moveArm(double power){
+    public void ArmOpenLoop(double power){
         //Move arm
         double adjustedPower = power*0.2;
         //Because the arm is supposed to be very powerful
@@ -34,4 +34,7 @@ public class ArmSystem extends Subsystem {
    
     }
 
+    public void stop(){
+        //Set the arm to zero here
+    }
 }
