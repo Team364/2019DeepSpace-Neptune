@@ -2,6 +2,7 @@ package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.States;
 
 
 public class RotateToPosition extends Command {
@@ -29,7 +30,7 @@ public class RotateToPosition extends Command {
     @Override
     protected void initialize() {
         // Robot.liftSystem.pidLift.setPIDParameters(0.001, 0, 0, 0);
-        if(Robot.objState == Robot.ObjectStates.HATCH_OBJ){
+        if(States.objState == States.ObjectStates.HATCH_OBJ){
             //TODO:
             //measure out where these values are before this is ran on
             //the acutual robot
@@ -37,7 +38,7 @@ public class RotateToPosition extends Command {
             perpendicularToGround = 200;
             scoreOnHigh = 300;
             startConfig = 0;
-        }else if(Robot.objState == Robot.ObjectStates.CARGO_OBJ){
+        }else if(States.objState == States.ObjectStates.CARGO_OBJ){
             intakeCargo = 150;
             perpendicularToGround = 250;
             scoreOnHigh = 350;
@@ -63,7 +64,7 @@ public class RotateToPosition extends Command {
         // pidLiftOutput = Robot.liftSystem.pidLift.calculateOutput(wantedPosition, Robot.liftSystem.getLiftPosition());
         // Robot.liftSystem.leftLift.set(ControlMode.PercentOutput, pidLiftOutput);
 
-        System.out.println("The Object State is: " + Robot.objState);
+        System.out.println("The Object State is: " + States.objState);
         System.out.println("The Position that has been selected is: " + desiredPosition);
         System.out.println("The encoder count being fed to the execute method is: " + wantedPosition);
     }

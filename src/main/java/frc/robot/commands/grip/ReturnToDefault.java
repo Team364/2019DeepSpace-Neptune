@@ -2,6 +2,7 @@ package frc.robot.commands.grip;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.States;
 
 
 public class ReturnToDefault extends Command {
@@ -17,9 +18,9 @@ public class ReturnToDefault extends Command {
 
     @Override
     protected void execute() {
-        if(Robot.objState == Robot.ObjectStates.HATCH_OBJ){
+        if(States.objState == States.ObjectStates.HATCH_OBJ){
             Robot.gripSystem.setObjStateHatch();
-        }else if(Robot.objState == Robot.ObjectStates.CARGO_OBJ){
+        }else if(States.objState == States.ObjectStates.CARGO_OBJ){
             Robot.gripSystem.setObjStateCargo();
         }
         

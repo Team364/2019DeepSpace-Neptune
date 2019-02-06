@@ -59,13 +59,6 @@ public class Robot extends TimedRobot {
   private static final String turnAuto = "Auto1";
   private static final String cargoAuto = "Auto2";
 
-  public static enum ObjectStates {
-    CARGO_OBJ,
-    HATCH_OBJ
-}
-
-  public static ObjectStates objState = ObjectStates.CARGO_OBJ;
-
   @Override
   public void robotInit() {
     //Auto Selector init
@@ -129,7 +122,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
       Scheduler.getInstance().removeAll();
-      System.out.println(objState);
+      System.out.println(States.objState);
   }
 
   @Override
@@ -144,9 +137,9 @@ public class Robot extends TimedRobot {
     //If Down on the D-pad is pressed,
     //Object state is set to Hatch
     if(oi2.controller2.getPOV() == 0){
-      objState = ObjectStates.CARGO_OBJ;
+      States.objState = States.ObjectStates.CARGO_OBJ;
     }else if(oi2.controller2.getPOV() == 180){
-      objState = ObjectStates.HATCH_OBJ;
+      States.objState = States.ObjectStates.HATCH_OBJ;
     }
     //If the right Trigger is pressed,
     //the robot will outtake
