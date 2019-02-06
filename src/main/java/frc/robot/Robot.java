@@ -125,11 +125,12 @@ public class Robot extends TimedRobot {
       System.out.println(States.objState);
   }
 
-  @Override
-  public void teleopPeriodic() {
-    Scheduler.getInstance().run();
-    putSmartDashVars();
-
+  /**
+   * Sets objectState
+   * <p>starts intakeObject
+   * <p>starts scoreObject
+   */
+  public void controlLoop(){
     //Control Logic
     //Setting States
     //If Up on the D-pad is pressed,
@@ -164,7 +165,13 @@ public class Robot extends TimedRobot {
       }
       IntakeObject.start();
     }
+  }
 
+  @Override
+  public void teleopPeriodic() {
+    Scheduler.getInstance().run();
+    putSmartDashVars();
+    controlLoop();
   }
 
   @Override
