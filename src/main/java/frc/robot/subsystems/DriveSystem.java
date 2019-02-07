@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.PIDCalc;
 import frc.robot.RobotMap;
+import frc.robot.States;
 import frc.robot.defaultcommands.TeleopDriveCommand;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -294,6 +295,7 @@ public class DriveSystem extends Subsystem {
     public void shiftHigh() {
         // shifter.set(DoubleSolenoid.Value.kForward);
         System.out.println("The shfiters have been set to High");
+        States.shiftState = States.ShfitStates.HIGH_SHIFT;
     }
 
     /**
@@ -303,6 +305,7 @@ public class DriveSystem extends Subsystem {
     public void shiftLow() {
         System.out.println("The shifters have been set to Low");
         // shifter.set(DoubleSolenoid.Value.kReverse);
+        States.shiftState = States.ShfitStates.LOW_SHIFT;
     }
 
     /**

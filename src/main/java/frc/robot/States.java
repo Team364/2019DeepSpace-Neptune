@@ -1,5 +1,7 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class States{
 
     //TODO: Write the logic for the rest of the states in the project
@@ -40,7 +42,11 @@ public class States{
     public static enum DriveStates{
         OPEN_LOOP,
         VISION,
-        AUTO
+        AUTO,
+    }
+    public static enum DriveMotionStates{
+        MOVING,
+        NOT_MOVING
     }
     /**
      * State tracks where the user is attempting to score based on button press and object state
@@ -67,6 +73,23 @@ public class States{
         CLOSED,
         OPEN
     }
+    /**
+     * State tracks where in climb robot is
+     */
+    public static enum ClimbStates{
+        START_CLIMB,
+        CLIMBING,
+        FINISHED_CLIMBING,
+        NOT_CLIMBING
+    }
+    public static enum ClimbPisonStates{
+        CLOSED,
+        OPEN
+    }
+    public static enum ClimbWheelStates{
+        CLOSED,
+        OPEN
+    }
     /*TODO: See if sensor can be mounted that will alert the robot as to whether or not
     a hatch is in possession beyond the pistons being engaged appropriately*/
 
@@ -78,9 +101,14 @@ public class States{
     public static ShfitStates shiftState = ShfitStates.LOW_SHIFT;
     public static LoopStates loopState = LoopStates.OPEN_LOOP;
     public static DriveStates driveState = DriveStates.OPEN_LOOP;
+    public static DriveMotionStates driveMotionState = DriveMotionStates.NOT_MOVING;
     public static ScoreStates scoreState = ScoreStates.NONE;
     public static ClawStates clawState = ClawStates.CLOSED;
     public static LeverStates leverState = LeverStates.CLOSED;
+    public static ClimbStates climbState = ClimbStates.NOT_CLIMBING;
+    public static ClimbPisonStates climbPisionState = ClimbPisonStates.CLOSED;
+    public static ClimbWheelStates climbWheelStates = ClimbWheelStates.CLOSED;
+
 }
 
 
