@@ -16,7 +16,7 @@ public class OpenClaw extends Command {
 
     @Override
     protected void execute() {
-        Robot.gripSystem.openClaw();;
+        Robot.gripSystem.openClaw();
     }
 
     @Override

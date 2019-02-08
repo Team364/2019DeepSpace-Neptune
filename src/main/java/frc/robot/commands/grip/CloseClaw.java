@@ -17,7 +17,7 @@ public class CloseClaw extends Command {
 
     @Override
     protected void execute() {
-        Robot.gripSystem.closeClaw();;
+        Robot.gripSystem.closeClaw();
     }
 
     @Override

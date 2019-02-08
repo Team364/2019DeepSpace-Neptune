@@ -17,7 +17,7 @@ public class CloseHatchMechanism extends Command {
 
     @Override
     protected void execute() {
-        Robot.gripSystem.closeLevers();;
+        Robot.gripSystem.closeLevers();
     }
 
     @Override
