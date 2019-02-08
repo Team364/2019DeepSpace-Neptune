@@ -1,12 +1,12 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.defaultcommands.TeleopGripCommand;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import frc.robot.RobotMap;
+import frc.robot.States;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class GripSystem extends Subsystem {
@@ -38,7 +38,6 @@ public class GripSystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new TeleopGripCommand());
     }
     //These assignments are arbitrary
     //TODO: Test this
@@ -62,6 +61,7 @@ public class GripSystem extends Subsystem {
     public void openClaw() {
         System.out.println("The claw has been opened");
         // intakePistons.set(DoubleSolenoid.Value.kForward);
+        States.clawState = States.ClawStates.OPEN;
     }
 
     /**
@@ -71,6 +71,7 @@ public class GripSystem extends Subsystem {
     public void closeClaw() {
         System.out.println("The claw has been closed");
         // intakePistons.set(DoubleSolenoid.Value.kReverse);
+        States.clawState = States.ClawStates.CLOSED;
     }
 
     /**
@@ -91,6 +92,7 @@ public class GripSystem extends Subsystem {
     public void openLevers() {
         System.out.println("The levers have been opened");
         // leverPistons.set(DoubleSolenoid.Value.kForward);
+        States.leverState = States.LeverStates.OPEN;
     }
 
     /**

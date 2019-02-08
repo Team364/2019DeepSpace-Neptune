@@ -40,7 +40,10 @@ public class LiftSystem extends Subsystem {
         //TODO: add lift encoder count soft limit here; if then command that won't allow this to be run
         //if the lift is beyond a certain encoder count
         // leftLift.set(ControlMode.PercentOutput, power);
-        System.out.println("The lift is moving at: " + power);
+        if(power > 0.2){
+            System.out.println("The lift is moving at: " + power);
+        }
+       
     }
     //TODO: Move to command
     /**

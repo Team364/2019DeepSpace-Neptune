@@ -3,7 +3,7 @@ package frc.robot.defaultcommands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class TeleopDriveCommand extends Command {
+public class DriveOpenLoop extends Command {
 
     static enum DriveStates {
         STATE_NOT_MOVING,
@@ -25,7 +25,7 @@ public class TeleopDriveCommand extends Command {
      * Command used for teleop control specific to the drive system
      * <p>Driver control
      */
-    public TeleopDriveCommand() {
+    public DriveOpenLoop() {
         requires(Robot.driveSystem);
         //Other commands can interrupt this command
         setInterruptible(true);
@@ -50,7 +50,6 @@ public class TeleopDriveCommand extends Command {
         backThrottle = Robot.oi.controller.getRawAxis(3);
         //Left and Right direction on the left Joystick
         steer = -Robot.oi.controller.getRawAxis(0);
-
         //normal Drive Control
         //If the robot isn't moving and then either Trigger is activated and pressed beyond 0.25, the robot will
         //change state into Direct Drive

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.PIDCalc;
 import frc.robot.RobotMap;
 import frc.robot.States;
-import frc.robot.defaultcommands.TeleopDriveCommand;
+import frc.robot.defaultcommands.DriveOpenLoop;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -96,7 +96,7 @@ public class DriveSystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new TeleopDriveCommand());
+        setDefaultCommand(new DriveOpenLoop());
     }
 
     /**
