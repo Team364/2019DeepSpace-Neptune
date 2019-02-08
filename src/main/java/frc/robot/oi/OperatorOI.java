@@ -5,10 +5,12 @@ import javax.sql.rowset.serial.SerialJavaObject;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.subroutines.pressed.grip.*;
 import frc.robot.commands.misc.*;
 import frc.robot.subroutines.pressed.lift.*;
+import frc.robot.States;
 //import frc.robot.commands.teleop.TestPGyro;
 
 public class OperatorOI{
@@ -55,6 +57,9 @@ public class OperatorOI{
     public JoystickButton setLiftPositionHigh;
     public JoystickButton setLiftPositionCargo;
 
+    public static Command IntakeObject;
+    public static Command ScoreObject;
+
 
     //Operator Buttons
     /**
@@ -81,6 +86,47 @@ public class OperatorOI{
         //Set Lift Position to level 4 for scoring Cargo in Cargo Ship
         setLiftPositionCargo = new JoystickButton(controller2, 3);
         setLiftPositionCargo.whenPressed(new Elevate(4));
+    }
+    /**
+   * Sets objectState
+   * <p>starts intakeObject
+   * <p>starts scoreObject
+   */
+    public void controlLoop(){
+  //Control Logic
+    //Setting States
+    //If Up on the D-pad is pressed,
+    //Object state is set to Cargo
+    //If Down on the D-pad is pressed,
+    //Object state is set to Hatch
+    if(controller2.getPOV() == 0){
+        States.objState = States.ObjectStates.CARGO_OBJ;
+      }else if(controller2.getPOV() == 180){
+        States.objState = States.ObjectStates.HATCH_OBJ;
+      }
+      //If the right Trigger is pressed,
+      //the robot will outtake
+      //Before this executes,
+      //it is checked whether or not the intake
+      //object command is running because these
+      //directly interfere with one another
+      if(controller2.getRawAxis(3) >= 0.5){
+        if(IntakeObject.isRunning()){
+          IntakeObject.cancel();
+        }
+        ScoreObject.start();
+      //If the left Trigger is pressed,
+      //the robot will outtake
+      //Before this executes,
+      //it is checked whether or not the score
+      //object command is running because these
+      //directly interfere with one another
+      }else if(controller2.getRawAxis(2) >= 0.5){
+        if(ScoreObject.isRunning()){
+          ScoreObject.cancel();
+        }
+        IntakeObject.start();
+      }
     }
 }
 
