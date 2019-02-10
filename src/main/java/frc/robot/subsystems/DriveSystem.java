@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.PIDCalc;
+import frc.robot.util.PIDCalc;
 import frc.robot.RobotMap;
 import frc.robot.States;
 import frc.robot.defaultcommands.DriveOpenLoop;

@@ -1,7 +1,6 @@
 package frc.robot.commands.lift;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.PIDCalc;
 import frc.robot.Robot;
 
 

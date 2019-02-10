@@ -18,6 +18,7 @@ import frc.robot.autos.*;
 import frc.robot.subroutines.pressed.drive.*;
 import frc.robot.subroutines.pressed.grip.IntakeObject;
 import frc.robot.subroutines.pressed.grip.ScoreObject;
+import frc.robot.util.*;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -39,6 +40,13 @@ public class Robot extends TimedRobot {
   //Controls
   public static DriverOI oi;
   public static OperatorOI oi2;
+
+  //State file
+  public static States states;
+  //Constants file
+  public static Constants constants;
+  //Instrumentation file
+  public static Instrumentation instrumentation;
 
   //Commands
   //Auto Commands
@@ -82,6 +90,8 @@ public class Robot extends TimedRobot {
     Auto3 = new StraightAuto();
     //Teleop Subroutine CommandGroups are assigned to commands
     Turn180 = new TeleopTurn180();
+    constants = new Constants();
+    instrumentation = new Instrumentation();
     //Sensors Reset
     driveSystem.resetHeading();
 
