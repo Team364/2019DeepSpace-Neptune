@@ -90,10 +90,6 @@ public class States{
         CLOSED,
         OPEN
     }
-    /*TODO: See if sensor can be mounted that will alert the robot as to whether or not
-    a hatch is in possession beyond the pistons being engaged appropriately*/
-
-
     //Object State is declared and set to cargo
     //TODO: Ensure that these mirror what the robots starting configuration is
     public static ObjectStates objState = ObjectStates.CARGO_OBJ;

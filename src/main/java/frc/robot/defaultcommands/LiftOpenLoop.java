@@ -3,6 +3,7 @@ package frc.robot.defaultcommands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.States;
+import frc.robot.subsystems.SuperStructure;
 
 public class LiftOpenLoop extends Command {
 
@@ -27,11 +28,16 @@ public class LiftOpenLoop extends Command {
         double counts = Robot.liftSystem.getLiftPosition();
         if((Math.abs(power) >= 0.1)&&(counts >= Robot.liftSystem.lowerBound)&&(counts < Robot.liftSystem.upperBound)){
             Robot.liftSystem.openLoop(power);
+            Robot.superStructure.liftOutofBounds = false;
         }else{
             System.out.println("lift motors should have stopped here");
             Robot.liftSystem.stop();
             //Make sure to counteract gravity somehow. Maybe keep liftPosition PID?
             //Name it retainPosition or something
+        }
+        if((counts <= Robot.liftSystem.lowerBound)||(counts > Robot.liftSystem.upperBound)){
+            System.out.println("The lift open Loop is out of bounds");
+            Robot.superStructure.liftOutofBounds = true;
         }
     }
 }

@@ -16,9 +16,6 @@ import frc.robot.subsystems.*;
 import frc.robot.oi.*;
 import frc.robot.autos.*;
 import frc.robot.subroutines.pressed.drive.*;
-import frc.robot.subroutines.pressed.grip.IntakeObject;
-import frc.robot.subroutines.pressed.grip.ScoreObject;
-import frc.robot.util.*;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -44,10 +41,6 @@ public class Robot extends TimedRobot {
 
   //State file
   public static States states;
-  //Constants file
-  public static Constants constants;
-  //Instrumentation file
-  public static Instrumentation instrumentation;
 
   //Commands
   //Auto Commands
@@ -92,8 +85,6 @@ public class Robot extends TimedRobot {
     Auto3 = new StraightAuto();
     //Teleop Subroutine CommandGroups are assigned to commands
     Turn180 = new TeleopTurn180();
-    constants = new Constants();
-    instrumentation = new Instrumentation();
     //Sensors Reset
     driveSystem.resetHeading();
     liftSystem.zeroLiftCounts();
@@ -153,6 +144,11 @@ public class Robot extends TimedRobot {
    SmartDashboard.putString("Object State: ", States.objState.toString());
    SmartDashboard.putString("Shift State: ", States.shiftState.toString());
    SmartDashboard.putString("Loop State:", States.loopState.toString());
+   SmartDashboard.putNumber("Lift Position", Robot.liftSystem.getLiftPosition());
+   SmartDashboard.putNumber("Lift Error", Robot.liftSystem.getLiftError());
+   SmartDashboard.putNumber("Lift Velocity", Robot.liftSystem.getLiftVelocity());
+   SmartDashboard.putBoolean("Lift Open Loop out of bounds", Robot.superStructure.liftOutofBounds);
+   SmartDashboard.putNumber("Lift Open loop Power", Robot.liftSystem.OpenLoopPower);
 }
 
 }

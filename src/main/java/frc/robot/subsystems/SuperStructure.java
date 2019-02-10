@@ -16,6 +16,8 @@ import frc.robot.defaultcommands.Periodic;
 public class SuperStructure extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  /**tracks whehter or not the lift is in bounds for open loop control */
+  public boolean liftOutofBounds = false;
 
   @Override
   public void initDefaultCommand() {

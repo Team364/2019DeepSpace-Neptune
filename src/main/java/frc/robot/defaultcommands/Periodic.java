@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.States;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+/**Controls state logic for variable robot funtionality */
 public class Periodic extends Command {
   private int loops = 0;
   public Periodic() {
@@ -29,9 +29,6 @@ public class Periodic extends Command {
   @Override
   protected void execute() {
     Robot.liftSystem.instrumentation();
-    SmartDashboard.putNumber("Lift Position", Robot.liftSystem.getLiftPosition());
-    SmartDashboard.putNumber("Lift Error", Robot.liftSystem.getLiftError());
-    SmartDashboard.putNumber("Lift Velocity", Robot.liftSystem.getLiftVelocity());
     System.out.println(Robot.liftSystem.reachedPosition());
     // if(Robot.liftSystem.reachedPosition());
     if(States.loopState == States.LoopStates.CLOSED_LOOP){
