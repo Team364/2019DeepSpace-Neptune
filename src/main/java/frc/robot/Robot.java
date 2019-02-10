@@ -36,6 +36,7 @@ public class Robot extends TimedRobot {
   public static ArmSystem armSystem;
   public static GripSystem gripSystem;
   public static ClimbSystem climbSystem;
+  public static SuperStructure superStructure;
 
   //Controls
   public static DriverOI oi;
@@ -81,6 +82,7 @@ public class Robot extends TimedRobot {
     gripSystem = new GripSystem();
     armSystem = new ArmSystem();
     climbSystem = new ClimbSystem();
+    superStructure = new SuperStructure();
     //Controls init
     oi = new DriverOI();
     oi2 = new OperatorOI();
@@ -94,7 +96,7 @@ public class Robot extends TimedRobot {
     instrumentation = new Instrumentation();
     //Sensors Reset
     driveSystem.resetHeading();
-
+    liftSystem.zeroLiftCounts();
 
   }
 
@@ -130,6 +132,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
       Scheduler.getInstance().removeAll();
       System.out.println(States.objState);
+      liftSystem.zeroLiftCounts();
   }
 
   @Override
@@ -149,7 +152,7 @@ public class Robot extends TimedRobot {
    SmartDashboard.putNumber("GetRightContr: ",  -Robot.oi.controller.getRawAxis(1));
    SmartDashboard.putString("Object State: ", States.objState.toString());
    SmartDashboard.putString("Shift State: ", States.shiftState.toString());
-   
+   SmartDashboard.putString("Loop State:", States.loopState.toString());
 }
 
 }

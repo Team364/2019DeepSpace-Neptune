@@ -24,21 +24,25 @@ public class ElevateToPosition extends Command {
     public ElevateToPosition(int Height) {
         desiredHeight = Height;  
         setTimeout(0.2);
+        requires(Robot.liftSystem);
     }
 
     @Override
     protected void initialize() {
+        /*One must keep in mind that a Position of 4096 is only a full rotation of the axle the encoder
+        corresponds to. This means that these values may be quite large in practice.
+        Writing an equation which converts the inches on the lift to raw sensor units would be beyond useful */
         // Robot.liftSystem.pidLift.setPIDParameters(0.001, 0, 0, 0);
         if(States.objState == States.ObjectStates.HATCH_OBJ){
-            low = 1000;
-            med = 2000;
-            high = 3000;
-            cargo = 1500;
+            low = 10000;
+            med = 20000;
+            high = 30000;
+            cargo = 15000;
         }else if(States.objState == States.ObjectStates.CARGO_OBJ){
-            low = 1500;
-            med = 2500;
-            high = 3500;
-            cargo = 2000;
+            low = 15000;
+            med = 25000;
+            high = 35000;
+            cargo = 20000;
         }
         
         if(desiredHeight == 1){
@@ -62,6 +66,8 @@ public class ElevateToPosition extends Command {
         System.out.println("The Object State is: " + States.objState);
         System.out.println("The Height that has been selected is: " + desiredHeight);
         System.out.println("The encoder count being fed to the execute method is: " + wantedPosition);
+        Robot.liftSystem.setLiftPosition(wantedPosition);
+        States.loopState = States.LoopStates.CLOSED_LOOP;
     }
 
     @Override

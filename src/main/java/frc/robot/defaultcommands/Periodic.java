@@ -9,11 +9,15 @@ package frc.robot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.States;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Periodic extends Command {
+  private int loops = 0;
   public Periodic() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.superStructure);
   }
 
   // Called just before this Command runs the first time
@@ -25,6 +29,20 @@ public class Periodic extends Command {
   @Override
   protected void execute() {
     Robot.liftSystem.instrumentation();
+    SmartDashboard.putNumber("Lift Position", Robot.liftSystem.getLiftPosition());
+    SmartDashboard.putNumber("Lift Error", Robot.liftSystem.getLiftError());
+    SmartDashboard.putNumber("Lift Velocity", Robot.liftSystem.getLiftVelocity());
+    System.out.println(Robot.liftSystem.reachedPosition());
+    // if(Robot.liftSystem.reachedPosition());
+    if(States.loopState == States.LoopStates.CLOSED_LOOP){
+      ++loops;
+      if(loops > 20){
+      if(Robot.liftSystem.reachedPosition()){
+        States.loopState = States.LoopStates.OPEN_LOOP;
+        loops = 0;
+      }
+    }
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
