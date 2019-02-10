@@ -10,6 +10,7 @@ public class LiftOpenLoop extends Command {
     /**
      * Command used for teleop control specific to the lift System
      * <p>Operator controled manually
+     * WORKS
      */
     public LiftOpenLoop() {
         requires(Robot.liftSystem);

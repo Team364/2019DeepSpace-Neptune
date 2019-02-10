@@ -20,6 +20,7 @@ public class ElevateToPosition extends Command {
      * <p>3: high on rocket
      * <p>4: cargo height for scoring on Cargo Ship
      * @param Height
+     * WORKS
      */
     public ElevateToPosition(int Height) {
         desiredHeight = Height;  
@@ -58,11 +59,6 @@ public class ElevateToPosition extends Command {
 
     @Override
     protected void execute() {
-        // double pidLiftOutput;
-        // Robot.liftSystem.setLiftPosition(wantedPosition);
-        // pidLiftOutput = Robot.liftSystem.pidLift.calculateOutput(wantedPosition, Robot.liftSystem.getLiftPosition());
-        // Robot.liftSystem.leftLift.set(ControlMode.PercentOutput, pidLiftOutput);
-
         System.out.println("The Object State is: " + States.objState);
         System.out.println("The Height that has been selected is: " + desiredHeight);
         System.out.println("The encoder count being fed to the execute method is: " + wantedPosition);
