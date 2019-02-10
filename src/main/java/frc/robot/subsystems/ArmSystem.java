@@ -15,10 +15,10 @@ public class ArmSystem extends Subsystem {
     private TalonSRX arm;
     /**Tracks the target angle for instrumentation */
     private double TargetAngle;
-    /**highest absolute count that the arm can rotate to */
-    public double upperBound = 4096;
-    /**lowest absolute count that the arm can rotate to*/
-    public double lowerBound = 0;
+    // /**highest absolute count that the arm can rotate to */
+    // public double upperBound = 4096;
+    // /**lowest absolute count that the arm can rotate to*/
+    // public double lowerBound = 0;
     
     /* Used to build string throughout loop */
     StringBuilder sb = new StringBuilder();
@@ -111,20 +111,20 @@ public class ArmSystem extends Subsystem {
         double raw = units * 4096.0 / 360.0;
         return raw;
     }
-  public double getAbsolutePosition() {
-    /* get the absolute pulse width position */
-    int pulseWidth = arm.getSensorCollection().getPulseWidthPosition();
+//   public double getAbsolutePosition() {
+//     /* get the absolute pulse width position */
+//     int pulseWidth = arm.getSensorCollection().getPulseWidthPosition();
 
-    /**
-     * Mask out the bottom 12 bits to normalize to [0,4095],
-     * or in other words, to stay within [0,360) degrees 
-     */
-    pulseWidth = pulseWidth & 0xFFF;
+//     /**
+//      * Mask out the bottom 12 bits to normalize to [0,4095],
+//      * or in other words, to stay within [0,360) degrees 
+//      */
+//     pulseWidth = pulseWidth & 0xFFF;
 
-    /* Update Quadrature position */
-    arm.getSensorCollection().setQuadraturePosition(pulseWidth, Constants.kTimeoutMs);    
-    return ToDeg(arm.getSensorCollection().getQuadraturePosition());
-}
+//     /* Update Quadrature position */
+//     arm.getSensorCollection().setQuadraturePosition(pulseWidth, Constants.kTimeoutMs);    
+//     return ToDeg(arm.getSensorCollection().getQuadraturePosition());
+// }
     private double getTargetAngle(){
     return TargetAngle;
 }
