@@ -25,7 +25,7 @@ public class Elevate extends CommandGroup {
      * @param Position
      */
     public Elevate(int Position) {
-        addParallel(new RotateToPosition(Position));
+        addParallel(new RotateToAngle(Position));
         addSequential(new ElevateToPosition(Position));
 
     

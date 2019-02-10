@@ -24,23 +24,23 @@ public class LiftOpenLoop extends Command {
 
     @Override
     protected void execute() {
-        if(States.loopState == States.LoopStates.OPEN_LOOP){
-        double power = Robot.oi2.controller2.getRawAxis(1);
-        double counts = Robot.liftSystem.getLiftPosition();
-        if((Math.abs(power) >= 0.1)&&(counts >= Robot.liftSystem.lowerBound)&&(counts < Robot.liftSystem.upperBound)){
-            Robot.liftSystem.openLoop(power);
-            Robot.superStructure.liftOutofBounds = false;
-        }else{
-            System.out.println("lift motors should have stopped here");
-            Robot.liftSystem.stop();
-            //Make sure to counteract gravity somehow. Maybe keep liftPosition PID?
-            //Name it retainPosition or something
-        }
-        if((counts <= Robot.liftSystem.lowerBound)||(counts > Robot.liftSystem.upperBound)){
-            System.out.println("The lift open Loop is out of bounds");
-            Robot.superStructure.liftOutofBounds = true;
-        }
-    }
+    //     if(States.loopState == States.LoopStates.OPEN_LOOP){
+    //     double power = Robot.oi2.controller2.getRawAxis(1);
+    //     double counts = Robot.liftSystem.getLiftPosition();
+    //     if((Math.abs(power) >= 0.1)&&(counts >= Robot.liftSystem.lowerBound)&&(counts < Robot.liftSystem.upperBound)){
+    //         Robot.liftSystem.openLoop(power);
+    //         Robot.superStructure.liftOutofBounds = false;
+    //     }else{
+    //         System.out.println("lift motors should have stopped here");
+    //         Robot.liftSystem.stop();
+    //         //Make sure to counteract gravity somehow. Maybe keep liftPosition PID?
+    //         //Name it retainPosition or something
+    //     }
+    //     if((counts <= Robot.liftSystem.lowerBound)||(counts > Robot.liftSystem.upperBound)){
+    //         System.out.println("The lift open Loop is out of bounds");
+    //         Robot.superStructure.liftOutofBounds = true;
+    //     }
+    // }
 }
 
     @Override

@@ -87,7 +87,7 @@ public class Robot extends TimedRobot {
     Turn180 = new TeleopTurn180();
     //Sensors Reset
     driveSystem.resetHeading();
-    liftSystem.zeroLiftCounts();
+    superStructure.resetEncoders();
 
   }
 
@@ -123,7 +123,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
       Scheduler.getInstance().removeAll();
       System.out.println(States.objState);
-      liftSystem.zeroLiftCounts();
+      superStructure.resetEncoders();
   }
 
   @Override
@@ -149,6 +149,7 @@ public class Robot extends TimedRobot {
    SmartDashboard.putNumber("Lift Velocity", Robot.liftSystem.getLiftVelocity());
    SmartDashboard.putBoolean("Lift Open Loop out of bounds", Robot.superStructure.liftOutofBounds);
    SmartDashboard.putNumber("Lift Open loop Power", Robot.liftSystem.OpenLoopPower);
+   SmartDashboard.putNumber("Arm Position", Robot.armSystem.getPosition());
 }
 
 }

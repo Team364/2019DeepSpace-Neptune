@@ -62,7 +62,8 @@ public class LiftSystem extends Subsystem {
 
 		// /* Set the peak and nominal outputs */
 		// leftLift.configNominalOutputForward(0, Constants.kTimeoutMs);
-		// leftLift.configNominalOutputReverse(0, Constants.kTimeoutMs);
+        // leftLift.configNominalOutputReverse(0, Constants.kTimeoutMs);
+        //TODO: Change these accordingly
 		// leftLift.configPeakOutputForward(0.25, Constants.kTimeoutMs);
 		// leftLift.configPeakOutputReverse(-0.25, Constants.kTimeoutMs);
 
@@ -147,7 +148,7 @@ public class LiftSystem extends Subsystem {
      */
     public void stop(){
         // leftLift.set(ControlMode.PercentOutput, 0);
-        System.out.println("Lift Motors have stopped");
+        // System.out.println("Lift Motors have stopped");
     }
     /**Run instrumentation */
     public void instrumentation(){
@@ -155,6 +156,7 @@ public class LiftSystem extends Subsystem {
 		// /* Get current Talon SRX motor output */
 		// double motorOutput = leftLift.getMotorOutputPercent();
         // /* Prepare line to print */
+        // sb.append("Lift:");
 		// sb.append("\tOut%:");
 		// sb.append(motorOutput);
 		// sb.append("\tVel:");
@@ -165,7 +167,7 @@ public class LiftSystem extends Subsystem {
         // sb.append(getTargetPosition());
         // Instrumentation.Process(leftLift, sb);
     }
-    public void zeroLiftCounts(){
+    public void zero(){
         // leftLift.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
     }
 }

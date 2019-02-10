@@ -10,6 +10,6 @@ public class Retract extends CommandGroup {
     /**
      */
     public Retract() {
-        addSequential(new RotateToPosition(4));
+        addSequential(new RotateToAngle(4));
     }
 }

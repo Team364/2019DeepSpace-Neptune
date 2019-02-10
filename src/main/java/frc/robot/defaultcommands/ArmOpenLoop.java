@@ -2,6 +2,7 @@ package frc.robot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.States;
 
 public class ArmOpenLoop extends Command {
 
@@ -22,15 +23,33 @@ public class ArmOpenLoop extends Command {
 
     @Override
     protected void execute() {
-        rightStick = Robot.oi2.controller2.getRawAxis(5);
-        if(rightStick >= 0.5){
-            Robot.armSystem.ArmOpenLoop(1);
-        }else if(rightStick <= -0.5){
-            Robot.armSystem.ArmOpenLoop(-1);
+        // rightStick = Robot.oi2.controller2.getRawAxis(5);
+        // if(Math.abs(rightStick) >= 0.5){
+        //     Robot.armSystem.ArmOpenLoop(rightStick);
+        // }else{
+        //     Robot.armSystem.stop();
+        //      //CounterAct Gravity Somehow
+        // }
+        if(States.loopState == States.LoopStates.OPEN_LOOP){
+        double power = Robot.oi2.controller2.getRawAxis(5);
+        double counts = Robot.armSystem.getAbsolutePosition();
+        if((Math.abs(power) >= 0.1)&&(counts >= Robot.armSystem.lowerBound)&&(counts < Robot.armSystem.upperBound)){
+            Robot.armSystem.openLoop(power);
+            Robot.superStructure.armOutofBounds = false;
         }else{
+            System.out.println("arm motors should have stopped here");
             Robot.armSystem.stop();
-             //CounterAct Gravity Somehow
+            //Make sure to counteract gravity somehow. Maybe keep liftPosition PID?
+            //Name it retainPosition or something
         }
+        if((counts <= Robot.armSystem.lowerBound)||(counts > Robot.armSystem.upperBound)){
+            System.out.println("The arm open Loop is out of bounds");
+            Robot.superStructure.armOutofBounds = true;
+        }
+        if(Robot.oi2.controller2.getRawButton(7)){
+            Robot.armSystem.zero();
+        }
+    }
        
     }
 
