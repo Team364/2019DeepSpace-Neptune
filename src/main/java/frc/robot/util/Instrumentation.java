@@ -5,6 +5,8 @@
 package frc.robot.util;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.TalonBase;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -15,10 +17,10 @@ public class Instrumentation {
 
 	public static void Process(TalonSRX tal, StringBuilder sb) {
 		/* Smart dash plots */
-		SmartDashboard.putNumber("SensorVel", tal.getSelectedSensorVelocity(Constants.kPIDLoopIdx));
-		SmartDashboard.putNumber("SensorPos", tal.getSelectedSensorPosition(Constants.kPIDLoopIdx));
+		SmartDashboard.putNumber("SensorVel", tal.getSelectedSensorVelocity(TalonBase.PIDLoopIdx));
+		SmartDashboard.putNumber("SensorPos", tal.getSelectedSensorPosition(TalonBase.PIDLoopIdx));
 		SmartDashboard.putNumber("MotorOutputPercent", tal.getMotorOutputPercent());
-		SmartDashboard.putNumber("ClosedLoopError", tal.getClosedLoopError(Constants.kPIDLoopIdx));
+		SmartDashboard.putNumber("ClosedLoopError", tal.getClosedLoopError(TalonBase.PIDLoopIdx));
 		
 		/* Check if Talon SRX is performing Motion Magic */
 		if (tal.getControlMode() == ControlMode.MotionMagic) {
@@ -29,7 +31,7 @@ public class Instrumentation {
 
 		if (timesInMotionMagic > 10) {
 			/* Print the Active Trajectory Point Motion Magic is servoing towards */
-			SmartDashboard.putNumber("ClosedLoopTarget", tal.getClosedLoopTarget(Constants.kPIDLoopIdx));
+			SmartDashboard.putNumber("ClosedLoopTarget", tal.getClosedLoopTarget(TalonBase.PIDLoopIdx));
     		SmartDashboard.putNumber("ActTrajVelocity", tal.getActiveTrajectoryVelocity());
     		SmartDashboard.putNumber("ActTrajPosition", tal.getActiveTrajectoryPosition());
 		}

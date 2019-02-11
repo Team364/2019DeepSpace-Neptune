@@ -45,12 +45,10 @@ public class RobotMap {
     public static final int leverPort1 = 4;
     public static final int leverPort2 = 5;
 
-    //these are for cylinders for climbing
+    //Back Pistons
     public static final int climbPort1 = 4;
     public static final int climbPort2 = 5;
-
-    //TODO: change these to correct values
-    //these are for HabWheels
+    //Wheel Pistons
     public static final int climbPort3 = 6;
     public static final int climbPort4 = 7;
 
@@ -58,5 +56,6 @@ public class RobotMap {
     public static final int armLimitSwitch = 2;
     public static final int lowerLiftLimitSwitch = 1;
     public static final int upperLiftLimitSwitch = 4;
+    
 
 }

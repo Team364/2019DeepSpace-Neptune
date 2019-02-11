@@ -10,8 +10,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import frc.robot.util.Constants;
 import frc.robot.util.Instrumentation;
+import frc.robot.util.TalonGains;
   /**
    * TalonBase subsystem with getters and setters for all relevant funtionality
    * <p>includes closed loop and open loop funtionality
@@ -31,6 +31,33 @@ import frc.robot.util.Instrumentation;
      * <p>set to one for no effect
    */
 public class TalonBase extends Subsystem {
+    	/**
+	 * Which PID slot to pull gains from. Starting 2018, you can choose from
+	 * 0,1,2 or 3. Only the first two (0,1) are visible in web-based
+	 * configuration.
+	 */
+    public static final int SlotIdx = 0;
+    /**
+	 * Talon SRX/ Victor SPX will supported multiple (cascaded) PID loops. For
+	 * now we just want the primary one.
+	 */
+	public static final int PIDLoopIdx = 0;
+	/**
+	 * set to zero to skip waiting for confirmation, set to nonzero to wait and
+	 * report to DS if action fails.
+	 */
+	public static final int TimeoutMs = 30;
+	/**
+	 * Gains used in Motion Magic, to be adjusted accordingly
+     * Gains(kp, ki, kd, kf, izone, peak output);
+     */
+    public final double kP;
+	public final double kI;
+	public final double kD;
+	public final double kF;
+	public final int kIzone;
+	public final double kPeakOutput;
+    public static final TalonGains Gains = new TalonGains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
     /**highest raw encoder count that the talon can reach */
     public double upperBound = 30000;
     /**lowest raw encoder count that the talon can reach */
@@ -101,8 +128,8 @@ public class TalonBase extends Subsystem {
 
 		/* Configure Sensor Source for Pirmary PID */
 		talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,
-											Constants.kPIDLoopIdx, 
-											Constants.kTimeoutMs);
+											PIDLoopIdx, 
+											TimeoutMs);
 
 		/**
 		 * Configure Talon SRX Output and Sesnor direction accordingly
@@ -113,28 +140,28 @@ public class TalonBase extends Subsystem {
 		talon.setInverted(false);
 
 		/* Set relevant frame periods to be at least as fast as periodic rate */
-		talon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.kTimeoutMs);
-		talon.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.kTimeoutMs);
+		talon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, TimeoutMs);
+		talon.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, TimeoutMs);
 
 		/* Set the peak and nominal outputs */
-		talon.configNominalOutputForward(nominalOutputForward, Constants.kTimeoutMs);
-        talon.configNominalOutputReverse(nominalOutputReverse, Constants.kTimeoutMs);
-		talon.configPeakOutputForward(peakOutputForward, Constants.kTimeoutMs);
-		talon.configPeakOutputReverse(peakOutputReverse, Constants.kTimeoutMs);
+		talon.configNominalOutputForward(nominalOutputForward, TimeoutMs);
+        talon.configNominalOutputReverse(nominalOutputReverse, TimeoutMs);
+		talon.configPeakOutputForward(peakOutputForward, TimeoutMs);
+		talon.configPeakOutputReverse(peakOutputReverse, TimeoutMs);
 
 		/* Set Motion Magic gains in slot0 - see documentation */
-		talon.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
-		talon.config_kF(Constants.kSlotIdx, Constants.kGains.kF, Constants.kTimeoutMs);
-		talon.config_kP(Constants.kSlotIdx, Constants.kGains.kP, Constants.kTimeoutMs);
-		talon.config_kI(Constants.kSlotIdx, Constants.kGains.kI, Constants.kTimeoutMs);
-		talon.config_kD(Constants.kSlotIdx, Constants.kGains.kD, Constants.kTimeoutMs);
+		talon.selectProfileSlot(SlotIdx, PIDLoopIdx);
+		talon.config_kF(SlotIdx, Gains.kF, TimeoutMs);
+		talon.config_kP(SlotIdx, Gains.kP, TimeoutMs);
+		talon.config_kI(SlotIdx, Gains.kI, TimeoutMs);
+		talon.config_kD(SlotIdx, Gains.kD, TimeoutMs);
 
 		/* Set acceleration and vcruise velocity - see documentation */
-		talon.configMotionCruiseVelocity(cruiseVelocity, Constants.kTimeoutMs);
-		talon.configMotionAcceleration(acceleration, Constants.kTimeoutMs);
+		talon.configMotionCruiseVelocity(cruiseVelocity, TimeoutMs);
+		talon.configMotionAcceleration(acceleration, TimeoutMs);
 
 		/* Zero the sensor */
-		talon.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+		talon.setSelectedSensorPosition(0, PIDLoopIdx, TimeoutMs);
         
     }
         /**Treat this as abstract */
@@ -200,7 +227,7 @@ public class TalonBase extends Subsystem {
     }
     /**Sets the encoder value to zero */
     public void zero(){
-        talon.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+        talon.setSelectedSensorPosition(0, PIDLoopIdx, TimeoutMs);
    }
     /**
      * MoveToPosition Closed Loop
@@ -238,7 +265,7 @@ public class TalonBase extends Subsystem {
      * @return velocity of the talon
      */
     public double getVelocity(){
-        return this.talon.getSelectedSensorVelocity(Constants.kPIDLoopIdx);
+        return this.talon.getSelectedSensorVelocity(PIDLoopIdx);
     }
 
     /**
@@ -246,7 +273,7 @@ public class TalonBase extends Subsystem {
      * @return Encoder count of talon
      */
     public double getPosition(){
-        return this.talon.getSelectedSensorPosition(Constants.kPIDLoopIdx);
+        return this.talon.getSelectedSensorPosition(PIDLoopIdx);
     }
 
 
@@ -260,14 +287,21 @@ public class TalonBase extends Subsystem {
 		sb.append("\tOut%:");
 		sb.append(motorOutput);
 		sb.append("\tVel:");
-		sb.append(talon.getSelectedSensorVelocity(Constants.kPIDLoopIdx));
+		sb.append(talon.getSelectedSensorVelocity(PIDLoopIdx));
         sb.append("\terr:");
-        sb.append(talon.getClosedLoopError(Constants.kPIDLoopIdx));
+        sb.append(talon.getClosedLoopError(PIDLoopIdx));
         sb.append("\ttrg:");
         sb.append(getTargetPosition());
         Instrumentation.Process(talon, sb);
     }
 
-
+	public void TalonGains(double _kP, double _kI, double _kD, double _kF, int _kIzone, double _kPeakOutput){
+		kP = _kP;
+		kI = _kI;
+		kD = _kD;
+		kF = _kF;
+		kIzone = _kIzone;
+		kPeakOutput = _kPeakOutput;
+	}
 
 }
