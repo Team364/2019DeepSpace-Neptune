@@ -1,4 +1,5 @@
 package frc.robot.commands.grip;
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -6,7 +7,7 @@ import frc.robot.Robot;
 public class OpenClaw extends Command {
 
     public OpenClaw() {
-        requires(Robot.gripSystem);
+        requires(Robot.superStructure.claw);
         setTimeout(0.1);
     }
 
@@ -16,7 +17,7 @@ public class OpenClaw extends Command {
 
     @Override
     protected void execute() {
-        Robot.gripSystem.openClaw();
+        Robot.superStructure.claw.open();
     }
 
     @Override
@@ -26,7 +27,7 @@ public class OpenClaw extends Command {
 
     @Override
     protected void end() {
-        Robot.gripSystem.noClawInput();
+        Robot.superStructure.claw.noInput();
     }
 
     @Override

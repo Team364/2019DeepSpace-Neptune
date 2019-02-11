@@ -38,7 +38,7 @@ public class PistonBase extends Subsystem {
    * noInput()
    * Leaves the piston where it is
    */ 
-  public void noClawInput() {
+  public void noInput() {
       piston.set(DoubleSolenoid.Value.kOff);
   }
   /**Treat as abstract */

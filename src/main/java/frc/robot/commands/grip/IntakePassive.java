@@ -5,10 +5,11 @@ import frc.robot.Robot;
 import frc.robot.States;
 
 
-public class ReturnToDefault extends Command {
+public class IntakePassive extends Command {
 
-    public ReturnToDefault() {
-        requires(Robot.gripSystem);
+    public IntakePassive() {
+        requires(Robot.superStructure.claw);
+        requires(Robot.superStructure.lever);
         setTimeout(0.1);
     }
 
@@ -19,9 +20,11 @@ public class ReturnToDefault extends Command {
     @Override
     protected void execute() {
         if(States.objState == States.ObjectStates.HATCH_OBJ){
-            Robot.gripSystem.setObjStateHatch();
+            Robot.superStructure.claw.close();
+            Robot.superStructure.lever.close();
         }else if(States.objState == States.ObjectStates.CARGO_OBJ){
-            Robot.gripSystem.setObjStateCargo();
+            Robot.superStructure.claw.open();
+            Robot.superStructure.lever.open();
         }
         
         
@@ -34,7 +37,8 @@ public class ReturnToDefault extends Command {
 
     @Override
     protected void end() {
-        Robot.gripSystem.noClawInput();
+        Robot.superStructure.claw.noInput();
+        Robot.superStructure.lever.noInput();
     }
 
     @Override

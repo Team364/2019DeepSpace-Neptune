@@ -7,7 +7,7 @@ import frc.robot.Robot;
 public class Retract extends Command {
 
     public Retract() {
-        requires(Robot.climbSystem);
+        requires(Robot.superStructure.back);
         setTimeout(0.1);
     }
 
@@ -17,7 +17,7 @@ public class Retract extends Command {
 
     @Override
     protected void execute() {
-        Robot.climbSystem.retract();
+        Robot.superStructure.back.close();
     }
 
     @Override
@@ -27,7 +27,7 @@ public class Retract extends Command {
 
     @Override
     protected void end() {
-        Robot.climbSystem.noInput();
+        Robot.superStructure.back.noInput();
     }
 
     @Override

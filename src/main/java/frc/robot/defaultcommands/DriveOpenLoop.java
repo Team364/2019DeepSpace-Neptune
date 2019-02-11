@@ -28,7 +28,8 @@ public class DriveOpenLoop extends Command {
      * <p>Driver control
      */
     public DriveOpenLoop() {
-        requires(Robot.driveSystem);
+        requires(Robot.superStructure.leftDrive);
+        requires(Robot.superStructure.rightDrive);
         //Other commands can interrupt this command
         setInterruptible(true);
     }
@@ -41,7 +42,7 @@ public class DriveOpenLoop extends Command {
 
     @Override
     protected void end() {
-        Robot.driveSystem.stop();
+        Robot.superStructure.stopDrive();
     }
 
     @Override

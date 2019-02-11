@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 
-public class OpenHatchMechanism extends Command {
+public class OpenLever extends Command {
 
-    public OpenHatchMechanism() {
-        requires(Robot.gripSystem);
+    public OpenLever() {
+        requires(Robot.superStructure.lever);
         setTimeout(0.1);
     }
 
@@ -17,7 +17,7 @@ public class OpenHatchMechanism extends Command {
 
     @Override
     protected void execute() {
-        Robot.gripSystem.openLevers();
+        Robot.superStructure.lever.open();
     }
 
     @Override
@@ -27,7 +27,7 @@ public class OpenHatchMechanism extends Command {
 
     @Override
     protected void end() {
-        Robot.gripSystem.noLeverInput();
+        Robot.superStructure.lever.noInput();
     }
 
     @Override

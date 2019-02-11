@@ -26,7 +26,7 @@ public class RotateToAngle extends Command {
      */
     public RotateToAngle(int Angle) {
         desiredAngle = Angle;  
-        requires(Robot.armSystem);
+        requires(Robot.superStructure.arm);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class RotateToAngle extends Command {
         // pidLiftOutput = Robot.liftSystem.pidLift.calculateOutput(wantedAngle, Robot.liftSystem.getLiftPosition());
         // Robot.liftSystem.leftLift.set(ControlMode.PercentOutput, pidLiftOutput);
         ++loops;
-        Robot.armSystem.setArmAngle(wantedAngle);
+        Robot.superStructure.arm.MoveToPosition(wantedAngle);
         System.out.println("The Object State is: " + States.objState);
         System.out.println("The Angle that has been selected is: " + desiredAngle);
         System.out.println("The encoder count being fed to the execute method is: " + wantedAngle);
@@ -76,7 +76,7 @@ public class RotateToAngle extends Command {
     @Override
     protected boolean isFinished() {
         //TODO: replicate in lift
-        return Robot.armSystem.reachedPosition() && (loops > 20);
+        return Robot.superStructure.arm.reachedPosition() && (loops > 20);
     }
 
     @Override

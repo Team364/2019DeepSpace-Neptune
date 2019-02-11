@@ -27,12 +27,7 @@ public class Robot extends TimedRobot {
   //Declarations
 
   //Subsystems
-  public static DriveSystem driveSystem;
-  public static VisionSystem visionSystem;
-  public static LiftSystem liftSystem;
-  public static ArmSystem armSystem;
-  public static GripSystem gripSystem;
-  public static ClimbSystem climbSystem;
+  public static Vision vision;
   public static SuperStructure superStructure;
 
   //Controls
@@ -47,10 +42,7 @@ public class Robot extends TimedRobot {
   public static Command Auto1;
   public static Command Auto2;
   public static Command Auto3;
-  //Subroutine Commands
-  public static Command Turn180;
  
-
   //Auto Selector String
   private String autoSelected;
   //Auto Chooser
@@ -69,12 +61,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto choices", m_chooser);
 
     //Subsystem init
-    driveSystem = new DriveSystem();
-    visionSystem = new VisionSystem();
-    liftSystem = new LiftSystem();
-    gripSystem = new GripSystem();
-    armSystem = new ArmSystem();
-    climbSystem = new ClimbSystem();
+    vision = new Vision();
     superStructure = new SuperStructure();
     //Controls init
     oi = new DriverOI();
@@ -84,9 +71,7 @@ public class Robot extends TimedRobot {
     Auto2 = new CargoAuto();
     Auto3 = new StraightAuto();
     //Teleop Subroutine CommandGroups are assigned to commands
-    Turn180 = new TeleopTurn180();
     //Sensors Reset
-    driveSystem.resetHeading();
     superStructure.resetEncoders();
 
   }
@@ -100,7 +85,6 @@ public class Robot extends TimedRobot {
     autoSelected = m_chooser.getSelected();
     System.out.println("Auto selected: " + autoSelected);
     Scheduler.getInstance().removeAll();
-    driveSystem.resetHeading();
   }
 
   @Override
@@ -138,18 +122,11 @@ public class Robot extends TimedRobot {
   }
 
   private void putSmartDashVars() {
-   SmartDashboard.putNumber("Gyro Angle", driveSystem.getGyroAngle());
    SmartDashboard.putNumber("GetLeftContr: ", -Robot.oi.controller.getRawAxis(5));
    SmartDashboard.putNumber("GetRightContr: ",  -Robot.oi.controller.getRawAxis(1));
    SmartDashboard.putString("Object State: ", States.objState.toString());
    SmartDashboard.putString("Shift State: ", States.shiftState.toString());
    SmartDashboard.putString("Loop State:", States.loopState.toString());
-   SmartDashboard.putNumber("Lift Position", Robot.liftSystem.getLiftPosition());
-   SmartDashboard.putNumber("Lift Error", Robot.liftSystem.getLiftError());
-   SmartDashboard.putNumber("Lift Velocity", Robot.liftSystem.getLiftVelocity());
-   SmartDashboard.putBoolean("Lift Open Loop out of bounds", Robot.superStructure.liftOutofBounds);
-   SmartDashboard.putNumber("Lift Open loop Power", Robot.liftSystem.OpenLoopPower);
-   SmartDashboard.putNumber("Arm Position", Robot.armSystem.getPosition());
 }
 
 }

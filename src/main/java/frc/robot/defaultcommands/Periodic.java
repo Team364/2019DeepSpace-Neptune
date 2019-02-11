@@ -28,31 +28,15 @@ public class Periodic extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //System.out.println(Robot.armSystem.getAbsolutePosition());
-      Robot.armSystem.instrumentation();
     if(States.loopState == States.LoopStates.CLOSED_LOOP){
       ++loops;
       if(loops > 20){
-      if(Robot.armSystem.reachedPosition()){
+      if(Robot.superStructure.arm.reachedPosition()||Robot.superStructure.lift.reachedPosition()){
         States.loopState = States.LoopStates.OPEN_LOOP;
         loops = 0;
       }
     }
     }
-    // Robot.liftSystem.instrumentation();
-    // // if(Robot.liftSystem.reachedPosition());
-    // if(States.loopState == States.LoopStates.CLOSED_LOOP){
-    //   ++loops;
-    //   if(loops > 20){
-    //   if(Robot.liftSystem.reachedPosition()){
-    //     States.loopState = States.LoopStates.OPEN_LOOP;
-    //     loops = 0;
-    //   }
-    // }
-    // }
-  }
-  public double getLoops(){
-    return loops;
   }
   // Make this return true when this Command no longer needs to run execute()
   @Override

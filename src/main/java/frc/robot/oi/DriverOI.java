@@ -78,11 +78,11 @@ public class DriverOI {
         shiftHigh = new JoystickButton(controller, 6);
         shiftHigh.whenPressed(new ShiftUp());
 
-        //Robot uses NavX Gyro to turn approximately 180 degrees(yaw)
-        //Button is pressed once
-        //Green A button
-        turn180Button = new JoystickButton(controller, 1);
-        turn180Button.whenPressed(new TeleopTurn180());
+        // //Robot uses NavX Gyro to turn approximately 180 degrees(yaw)
+        // //Button is pressed once
+        // //Green A button
+        // turn180Button = new JoystickButton(controller, 1);
+        // turn180Button.whenPressed(new TeleopTurn180());
 
         //Does nothing
         //Button is held to run command

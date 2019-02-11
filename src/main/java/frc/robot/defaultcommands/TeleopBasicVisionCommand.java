@@ -10,7 +10,7 @@ public class TeleopBasicVisionCommand extends Command {
      * Prints Vision Target Data to Console
      */
     public TeleopBasicVisionCommand() {
-        requires(Robot.visionSystem);
+        requires(Robot.vision);
         setInterruptible(true);
 
     }

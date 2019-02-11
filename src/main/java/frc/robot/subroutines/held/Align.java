@@ -9,8 +9,9 @@ public class Align extends Command {
      *No Code yet - put vision stuff here 
      */
     public Align() {
-        requires(Robot.visionSystem);
-        requires(Robot.driveSystem);
+        requires(Robot.vision);
+        requires(Robot.superStructure.rightDrive);
+        requires(Robot.superStructure.leftDrive);
     }
 
     @Override
@@ -28,6 +29,8 @@ public class Align extends Command {
 
     @Override
     protected void end() {
+        Robot.superStructure.rightDrive.stop();
+        Robot.superStructure.leftDrive.stop();
     }
 
 }

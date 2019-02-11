@@ -13,15 +13,16 @@ public class ScoreObject extends CommandGroup {
     /**
      * Uses Object State to determine which subroutine to run to score
      */
+    //TODO:Move the logic into a command. Introduce timed delays with a loop counter
     public ScoreObject() {
         if(States.objState == States.ObjectStates.HATCH_OBJ){
             //Score Hatch Subroutine
-            addSequential(new CloseHatchMechanism());
-            addSequential(new ReturnToDefault());
+            addSequential(new CloseLever());
+            addSequential(new IntakePassive());
         }else if(States.objState == States.ObjectStates.CARGO_OBJ){
             //Score Cube Subroutine
             addSequential(new OuttakeCargo());
-            addSequential(new ReturnToDefault());
+            addSequential(new IntakePassive());
         }
 
     

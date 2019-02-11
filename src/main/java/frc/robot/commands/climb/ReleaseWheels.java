@@ -7,7 +7,7 @@ import frc.robot.Robot;
 public class ReleaseWheels extends Command {
 
     public ReleaseWheels() {
-        requires(Robot.climbSystem);
+        requires(Robot.superStructure.wheels);
         setTimeout(0.1);
     }
 
@@ -17,7 +17,7 @@ public class ReleaseWheels extends Command {
 
     @Override
     protected void execute() {
-        Robot.climbSystem.releaseWheels();
+        Robot.superStructure.wheels.open();
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ReleaseWheels extends Command {
 
     @Override
     protected void end() {
-        Robot.climbSystem.noInputWheels();
+        Robot.superStructure.wheels.noInput();
     }
 
     @Override

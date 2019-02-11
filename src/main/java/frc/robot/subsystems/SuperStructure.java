@@ -2,66 +2,138 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.defaultcommands.Periodic;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.util.OpenLoop;
+import frc.robot.util.PIDCalc;
+import frc.robot.util.PistonBase;
 import frc.robot.util.TalonBase;
-import frc.robot.defaultcommands.testOpenLoop;
-
+import frc.robot.defaultcommands.DriveOpenLoop;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.SPI;
 /**
  * Add your docs here.
  */
 public class SuperStructure extends Subsystem {
-  //TLDR: The subsystem code is SUPER repetitve and it wouldn't hurt to reduce the code to
-  //instances of template classes and running methods in here because all the important custom
-  //stuff is run in commands
+  public TalonBase rightDrive;
+  public TalonBase leftDrive;
+  public TalonBase lift;
+  public TalonBase arm;
+  public TalonBase intake;
+  
+  private TalonSRX rDrive;
+  private TalonSRX lDrive;
+  private TalonSRX lt;
+  private TalonSRX a;
+  private TalonSRX in;
 
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-  /**tracks whehter or not the lift is in bounds for open loop control */
-  //TODO: Get testSystem to work and then move lift and arm into here -- possibly move drive into here as well
-  //Move NavX into here as well
-  //Really all the specific things are done in commands, so having duplicate subsystem files seem redundant.
-  //Would be easier to follow if everything was delegated from a superstructure instead
-  //Grip and climb can be there own commands perhaps
-  //Grip system may not need its own system either
-  //Children of superstructure can be required so that other commands cannot access them
-  //But arm, lift, and drive are going to be redundant.
-  //Auto will mostly be running closed loop stuff with commands
-  //Methods aren't really needed and so using TalonBases won't be an issue at all
-  //Theres probably only going to be the superstructure subsystem class and maybe vision
-  //But honestly those methods can be placed in here too
-  public boolean liftOutofBounds = false;
-  public boolean armOutofBounds = false;
-  public TalonBase testSystem;
-  public TalonSRX testTalon;
-  public VictorSPX testSlave;
+  private VictorSPX lRearDriveSlave;
+  private VictorSPX lFrontDriveSlave;
+  private VictorSPX rRearDriveSlave;
+  private VictorSPX rFrontDriveSlave;
+  private VictorSPX liftSlave;
+  private VictorSPX intakeSlave;
+
+  public PistonBase claw;
+  public PistonBase lever;
+  public PistonBase back;
+  public PistonBase wheels;
+  public PistonBase shifter;
+
+  private DoubleSolenoid cl;
+  private DoubleSolenoid le;
+  private DoubleSolenoid ba;
+  private DoubleSolenoid wh;
+  private DoubleSolenoid sh;
+
+  public AHRS navX;
+  public PIDCalc pidNavX;
+
   public SuperStructure(){
-    testTalon = new TalonSRX(0);
-    testSlave = new VictorSPX(2);
-    testSystem = new TalonBase(testTalon, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.4);
-    testSystem.setDefaultCommand(new OpenLoop(testSystem, 0, 0.1, false, 0.0, 0.0));
-    testSlave.follow(testTalon);
+    //masters
+    rDrive = new TalonSRX(RobotMap.rightTopDrive);
+    lDrive = new TalonSRX(RobotMap.leftTopDrive);
+    lt = new TalonSRX(RobotMap.leftLift);
+    a = new TalonSRX(RobotMap.arm);
+    in = new TalonSRX(RobotMap.rightClaw);
+
+    //followers
+    lRearDriveSlave = new VictorSPX(RobotMap.leftRearDrive);
+    lFrontDriveSlave = new VictorSPX(RobotMap.leftFrontDrive);
+    rRearDriveSlave = new VictorSPX(RobotMap.rightRearDrive);
+    rFrontDriveSlave = new VictorSPX(RobotMap.rightFrontDrive);
+    liftSlave = new VictorSPX(RobotMap.rightLift);
+    intakeSlave = new VictorSPX(RobotMap.leftClaw);
+
+    //Pistons
+    cl = new DoubleSolenoid(RobotMap.intakePort1, RobotMap.intakePort2);
+    le = new DoubleSolenoid(RobotMap.leverPort1, RobotMap.leverPort2);
+    ba = new DoubleSolenoid(RobotMap.climbPort1, RobotMap.climbPort2);
+    wh = new DoubleSolenoid(RobotMap.climbPort3, RobotMap.climbPort4);
+    sh = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
+
+    //Right Drive Train
+    rightDrive = new TalonBase(rDrive, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.4);
+    rightDrive.setDefaultCommand(new DriveOpenLoop());
+    rRearDriveSlave.follow(rDrive);
+    rFrontDriveSlave.follow(rDrive);
+
+    //Left Drive Train
+    leftDrive = new TalonBase(lDrive, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.4);
+    leftDrive.setDefaultCommand(new DriveOpenLoop());
+    lRearDriveSlave.follow(lDrive);
+    lFrontDriveSlave.follow(lDrive);
+
+    //Lift
+    lift = new TalonBase(lt, 0, 0, 0.25, -0.25, 3750, 1500, true, 0, 10000, 0.4);
+    lift.setDefaultCommand(new OpenLoop(lift, 0, 0.1));
+    liftSlave.follow(lt);
+    
+    //Arm
+    arm = new TalonBase(a, 0, 0, 0.25, -0.25, 3750, 1500, true, 0, 10000, 0.4);
+    arm.setDefaultCommand(new OpenLoop(arm, 0, 0.1));
+
+    //Intake 
+    intake = new TalonBase(in, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.67);
+
+    //Pistons
+    claw = new PistonBase(cl);
+    lever = new PistonBase(le);
+    back = new PistonBase(ba);
+    wheels = new PistonBase(wh);
+    shifter = new PistonBase(sh);
+
+    //Gyro
+    navX = new AHRS(SPI.Port.kMXP);
+    pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
+
   }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
      setDefaultCommand(new Periodic());
   }
-  public void runTestTalon(){
-    System.out.println("Test talon position: " + testSystem.getPosition());
-  }
   public void driveOpenLoop(double right, double left){
-  //Possibly use seperate talonBase objects for each side of the drive train
+    rightDrive.openLoop(right);
+    leftDrive.openLoop(left);
+  }
+  public void stopDrive(){
+    rightDrive.stop();
+    leftDrive.stop();
   }
   public void resetEncoders(){
-    Robot.liftSystem.zero();
-    Robot.armSystem.zero();
+    lift.zero();
+    arm.zero();
   }
   public void postImplementation(){
-    //Run all the implementations
+    lift.instrumentation();
+    arm.instrumentation();
+    rightDrive.instrumentation();
+    leftDrive.instrumentation();
   }
 }

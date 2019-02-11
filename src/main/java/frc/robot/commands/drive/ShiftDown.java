@@ -7,7 +7,7 @@ import frc.robot.Robot;
 public class ShiftDown extends Command {
 
     public ShiftDown() {
-        requires(Robot.driveSystem);
+        requires(Robot.superStructure.shifter);
         setTimeout(0.1);
     }
 
@@ -17,7 +17,7 @@ public class ShiftDown extends Command {
 
     @Override
     protected void execute() {
-        Robot.driveSystem.shiftLow();
+        Robot.superStructure.shifter.close();
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ShiftDown extends Command {
 
     @Override
     protected void end() {
-        Robot.driveSystem.noShiftInput();
+        Robot.superStructure.shifter.noInput();
     }
 
     @Override

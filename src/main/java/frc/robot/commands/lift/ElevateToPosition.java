@@ -25,7 +25,7 @@ public class ElevateToPosition extends Command {
     public ElevateToPosition(int Height) {
         desiredHeight = Height;  
         setTimeout(0.2);
-        requires(Robot.liftSystem);
+        requires(Robot.superStructure.lift);
     }
 
     @Override
@@ -62,18 +62,18 @@ public class ElevateToPosition extends Command {
         System.out.println("The Object State is: " + States.objState);
         System.out.println("The Height that has been selected is: " + desiredHeight);
         System.out.println("The encoder count being fed to the execute method is: " + wantedPosition);
-        Robot.liftSystem.setLiftPosition(wantedPosition);
+        Robot.superStructure.lift.MoveToPosition(wantedPosition);
         States.loopState = States.LoopStates.CLOSED_LOOP;
     }
 
     @Override
     protected boolean isFinished() {
-        // return Robot.liftSystem.reachedPosition(wantedPosition) || isTimedOut();
-         return isTimedOut();
+        return Robot.superStructure.lift.reachedPosition();
     }
 
     @Override
     protected void end() {
+        Robot.superStructure.lift.stop();
     }
 
     @Override

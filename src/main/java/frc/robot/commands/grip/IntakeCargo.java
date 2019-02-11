@@ -7,7 +7,7 @@ import frc.robot.Robot;
 public class IntakeCargo extends Command {
 
     public IntakeCargo() {
-        requires(Robot.gripSystem);
+        requires(Robot.superStructure.intake);
         setTimeout(0.5);
     }
 
@@ -17,18 +17,18 @@ public class IntakeCargo extends Command {
 
     @Override
     protected void execute() {
-        Robot.gripSystem.runIntakeForward();
+        Robot.superStructure.intake.openLoop(1);
     }
 
     @Override
     protected boolean isFinished() {
         return isTimedOut();
-        //return Robot.gripSystem.getBallLimitSwitch() || isTimedOut();
+        //return Robot.superStructure.getBallLimitSwitch() || isTimedOut();
     }
 
     @Override
     protected void end() {
-        Robot.gripSystem.stop();
+        Robot.superStructure.intake.stop();
     }
 
     @Override

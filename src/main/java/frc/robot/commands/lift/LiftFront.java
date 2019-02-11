@@ -8,7 +8,7 @@ public class LiftFront extends Command {
 
 
     public LiftFront() {
-        requires(Robot.liftSystem);
+        requires(Robot.superStructure.lift);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class LiftFront extends Command {
 
     @Override
     protected void end() {
-        Robot.liftSystem.stop();
+        Robot.superStructure.lift.stop();
     }
 
     @Override

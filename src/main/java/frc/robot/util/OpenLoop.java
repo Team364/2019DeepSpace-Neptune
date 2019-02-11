@@ -26,18 +26,15 @@ public class OpenLoop extends Command {
     public OpenLoop(
         TalonBase talonBase, 
         int axis, 
-        double deadband, 
-        boolean bounded,
-        double upperBound,
-        double lowerBound) {
+        double deadband) {
         requires(talonBase);
         setInterruptible(true);
         this.talonBase = talonBase;
         this.axis = axis;
         this.deadband = deadband;
-        this.bounded = bounded;
-        this.upperBound = upperBound;
-        this.lowerBound = lowerBound;
+        this.bounded = talonBase.bounded;
+        this.upperBound = talonBase.upperBound;
+        this.lowerBound = talonBase.lowerBound;
     }
 
     @Override

@@ -14,7 +14,7 @@ public class IntakeObject extends CommandGroup {
     public IntakeObject() {
         if(States.objState == States.ObjectStates.HATCH_OBJ){
             //Score Hatch Subroutine
-            addSequential(new OpenHatchMechanism());
+            addSequential(new OpenLever());
         }else if(States.objState == States.ObjectStates.CARGO_OBJ){
             //Score Cargo Subroutine
             addSequential(new IntakeCargo());

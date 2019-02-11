@@ -6,7 +6,7 @@ import frc.robot.defaultcommands.TeleopBasicVisionCommand;
 // import edu.wpi.first.networktables.NetworkTableEntry;
 // import edu.wpi.first.networktables.NetworkTableInstance;
 
-public class VisionSystem extends Subsystem {
+public class Vision extends Subsystem {
 
     // //Network Table
     // private NetworkTableInstance roboRioInstance;
@@ -22,10 +22,10 @@ public class VisionSystem extends Subsystem {
     // private NetworkTableEntry configNumber;
 
     /**
-     * VisionSystem() interprets data from grip pipelines filtering images from the
+     * Vision() interprets data from grip pipelines filtering images from the
      * usb camera
      */
-    public VisionSystem() {
+    public Vision() {
         //Init Network Table
         // roboRioInstance = NetworkTableInstance.getDefault();
         // visionParameters = roboRioInstance.getTable("visionParameters");
