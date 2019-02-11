@@ -3,7 +3,7 @@ package frc.robot.util;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
-import frc.robot.States;
+import frc.robot.util.States;
 import frc.robot.subsystems.SuperStructure;
     /**
      * Used for operator only

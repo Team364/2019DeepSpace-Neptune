@@ -2,7 +2,6 @@ package frc.robot.subroutines.pressed.grip;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
-import frc.robot.States;
 import frc.robot.commands.grip.*;
 
 /**

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.subroutines.pressed.grip.*;
 import frc.robot.commands.misc.*;
 import frc.robot.subroutines.pressed.lift.*;
-import frc.robot.States;
+import frc.robot.util.States;
 //import frc.robot.commands.teleop.TestPGyro;
 
 public class OperatorOI{

@@ -2,8 +2,7 @@ package frc.robot.commands.grip;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.States;
-
+import frc.robot.util.States;
 
 public class IntakePassive extends Command {
 

@@ -9,7 +9,7 @@ package frc.robot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.States;
+import frc.robot.util.States;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**Controls state logic for variable robot funtionality */
 public class Periodic extends Command {
