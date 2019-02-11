@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.subroutines.*;
-import frc.robot.subroutines.grip.*;
+import frc.robot.subroutines.*;
 import frc.robot.util.States;
 //import frc.robot.commands.teleop.TestPGyro;
 
