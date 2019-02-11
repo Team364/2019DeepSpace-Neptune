@@ -3,6 +3,7 @@ package frc.robot.subroutines.pressed.grip;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
 import frc.robot.commands.grip.*;
+import frc.robot.util.States;
 
 /**
  * Subroutine to be run in teleop on button press
@@ -17,5 +18,6 @@ public class ScoreHatch extends CommandGroup {
             //Score Hatch Subroutine
             addSequential(new CloseLever());
             addSequential(new IntakePassive());
+            States.actionState = States.ActionStates.SCORE_ACT;
     }
 }

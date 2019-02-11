@@ -3,13 +3,13 @@ package frc.robot.defaultcommands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class TeleopBasicVisionCommand extends Command {
+public class VisionPeriodic extends Command {
 
     /**
      * Command that runs automatically for visionSystem
      * Prints Vision Target Data to Console
      */
-    public TeleopBasicVisionCommand() {
+    public VisionPeriodic() {
         requires(Robot.vision);
         setInterruptible(true);
 

@@ -17,11 +17,11 @@ public class PistonBase extends Subsystem {
 
   private DoubleSolenoid piston;
   /** State tracks what position piston is in */
-      public static enum PistonStates{
+      public enum PistonStates{
         OPEN,
         CLOSED
     }
-    public static PistonStates pistonState = PistonStates.CLOSED;
+    public PistonStates pistonState = PistonStates.CLOSED;
 
   public PistonBase(DoubleSolenoid piston){
     this.piston = piston;
