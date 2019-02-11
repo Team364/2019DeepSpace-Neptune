@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.defaultcommands.Periodic;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
+import frc.robot.util.RobotMap;
 import frc.robot.util.OpenLoop;
 import frc.robot.util.PIDCalc;
 import frc.robot.util.PistonBase;
@@ -130,6 +130,7 @@ public class SuperStructure extends Subsystem {
     // Set the default command for a subsystem here.
      setDefaultCommand(new Periodic());
   }
+  //Drive Train
   public void driveOpenLoop(double right, double left){
     rightDrive.openLoop(right);
     leftDrive.openLoop(left);
@@ -138,6 +139,18 @@ public class SuperStructure extends Subsystem {
     rightDrive.stop();
     leftDrive.stop();
   }
+  public void resetDriveEncoders(){
+    rightDrive.zero();
+    leftDrive.zero();
+  }
+  //Gyro
+  public void getYaw(){
+    navX.getYaw();
+  }
+  public void zeroYaw(){
+    navX.reset();
+  }
+  //Misc
   public void resetEncoders(){
     lift.zero();
     arm.zero();
@@ -148,6 +161,7 @@ public class SuperStructure extends Subsystem {
     rightDrive.instrumentation();
     leftDrive.instrumentation();
   }
+  //Limit Switches
   private boolean getCargoLimitSwitch(){
     return iL.get();
   }
