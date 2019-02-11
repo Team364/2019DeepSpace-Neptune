@@ -65,6 +65,12 @@ public class TalonBase extends Subsystem {
     private double peakOutputForward = 0.25;
     /**highest speed the trajectory can run at in the reverse direction */
     private double peakOutputReverse = -0.25;
+    /**Tracks what loop State the talon is in */
+    public enum LoopStates{
+        OPEN_LOOP,
+        CLOSED_LOOP
+    }
+    public LoopStates loopState = LoopStates.OPEN_LOOP;
     public TalonBase(
                     TalonSRX talon, 
                     double nominalOutputForward, 
@@ -170,6 +176,7 @@ public class TalonBase extends Subsystem {
     }
     /**Open loop is to run in the default command */
     public void openLoop(double power){
+        loopState = LoopStates.OPEN_LOOP;
         /*Deadband of 10% */
         if(Math.abs(power) < 0.1){
             power = 0;
@@ -199,6 +206,7 @@ public class TalonBase extends Subsystem {
      * MoveToPosition Closed Loop
      */
     public void MoveToPosition(double Position){
+        loopState = LoopStates.CLOSED_LOOP;
         System.out.println("The talon is moving to: " + Position);
         this.talon.set(ControlMode.MotionMagic, Position);
         TargetPosition = Position;
@@ -220,6 +228,7 @@ public class TalonBase extends Subsystem {
      */
     public boolean reachedPosition(){
         if(this.talon.getSelectedSensorVelocity() == 0){
+            loopState = LoopStates.OPEN_LOOP;
             return true;
         }else{
             return false;
