@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.defaultcommands.VisionPeriodic;;
+import frc.robot.defaultcommands.VisionPeriodic;
 // import edu.wpi.first.networktables.NetworkTable;
 // import edu.wpi.first.networktables.NetworkTableEntry;
 // import edu.wpi.first.networktables.NetworkTableInstance;

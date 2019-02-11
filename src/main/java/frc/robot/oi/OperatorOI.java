@@ -1,13 +1,8 @@
 package frc.robot.oi;
 
-import javax.sql.rowset.serial.SerialJavaObject;
-
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.subroutines.*;
 import frc.robot.subroutines.*;
 import frc.robot.util.States;
 //import frc.robot.commands.teleop.TestPGyro;

@@ -1,10 +1,8 @@
 package frc.robot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.util.States;
-import frc.robot.subsystems.SuperStructure;
 import frc.robot.subsystems.TalonBase;
     /**
      * Used for operator only

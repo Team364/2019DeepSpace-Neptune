@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 // import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -138,10 +137,10 @@ public class TalonBase extends Subsystem {
 		talon.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, TimeoutMs);
 
 		/* Set the peak and nominal outputs */
-		talon.configNominalOutputForward(nominalOutputForward, TimeoutMs);
-        talon.configNominalOutputReverse(nominalOutputReverse, TimeoutMs);
-		talon.configPeakOutputForward(peakOutputForward, TimeoutMs);
-		talon.configPeakOutputReverse(peakOutputReverse, TimeoutMs);
+		talon.configNominalOutputForward(this.nominalOutputForward, TimeoutMs);
+        talon.configNominalOutputReverse(this.nominalOutputReverse, TimeoutMs);
+		talon.configPeakOutputForward(this.peakOutputForward, TimeoutMs);
+		talon.configPeakOutputReverse(this.peakOutputReverse, TimeoutMs);
 
 		/* Set Motion Magic gains in slot0 - see documentation */
 		talon.selectProfileSlot(SlotIdx, PIDLoopIdx);
@@ -151,8 +150,8 @@ public class TalonBase extends Subsystem {
 		talon.config_kD(SlotIdx, Gains.kD, TimeoutMs);
 
 		/* Set acceleration and vcruise velocity - see documentation */
-		talon.configMotionCruiseVelocity(cruiseVelocity, TimeoutMs);
-		talon.configMotionAcceleration(acceleration, TimeoutMs);
+		talon.configMotionCruiseVelocity(this.cruiseVelocity, TimeoutMs);
+		talon.configMotionAcceleration(this.acceleration, TimeoutMs);
 
 		/* Zero the sensor */
 		talon.setSelectedSensorPosition(0, PIDLoopIdx, TimeoutMs);

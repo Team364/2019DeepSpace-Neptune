@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.robot.subsystems.PistonBase;
 
 /**Modes:
