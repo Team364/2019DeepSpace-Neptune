@@ -111,6 +111,7 @@ public class ArmSystem extends Subsystem {
         double raw = units * 4096.0 / 360.0;
         return raw;
     }
+    //This  will limit one in between 0 and -4096
 //   public double getAbsolutePosition() {
 //     /* get the absolute pulse width position */
 //     int pulseWidth = arm.getSensorCollection().getPulseWidthPosition();

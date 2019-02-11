@@ -25,7 +25,6 @@ public class ArmOpenLoop extends Command {
     protected void execute() {
         if(States.loopState == States.LoopStates.OPEN_LOOP){
         double power = Robot.oi2.controller2.getRawAxis(5);
-        // double counts = Robot.armSystem.getAbsolutePosition();
         if((Math.abs(power) >= 0.1)){
             Robot.armSystem.openLoop(power);
             Robot.superStructure.armOutofBounds = false;
@@ -34,10 +33,6 @@ public class ArmOpenLoop extends Command {
             Robot.armSystem.stop();
             //Make sure to counteract gravity somehow. Maybe keep liftPosition PID?
             //Name it retainPosition or something
-        }
-
-        if(Robot.oi2.controller2.getRawButton(7)){
-            Robot.armSystem.zero();
         }
     }
        
