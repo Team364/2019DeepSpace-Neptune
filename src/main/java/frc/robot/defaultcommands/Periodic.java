@@ -33,7 +33,8 @@ public class Periodic extends Command {
     if(States.loopState == States.LoopStates.CLOSED_LOOP){
       ++loops;
       if(loops > 20){
-      if(Robot.superStructure.arm.reachedPosition()||Robot.superStructure.lift.reachedPosition()){
+      // if(Robot.superStructure.arm.reachedPosition()||Robot.superStructure.lift.reachedPosition()){
+        if(Robot.superStructure.arm.reachedPosition()){
         States.loopState = States.LoopStates.OPEN_LOOP;
         loops = 0;
       }
@@ -54,13 +55,13 @@ public class Periodic extends Command {
       Elevate.start();
     }
     //Drive Train Motion State Assignment
-    double rVel = Robot.superStructure.rightDrive.getVelocity();
-    double lVel = Robot.superStructure.leftDrive.getVelocity();
-    if((Math.abs(rVel) > 0) || (Math.abs(lVel) > 0)){
-      States.driveMotionState = States.DriveMotionStates.MOVING;
-    }else if((rVel == 0)&&(lVel == 0)){
-      States.driveMotionState = States.DriveMotionStates.NOT_MOVING;
-    }
+    // double rVel = Robot.superStructure.rightDrive.getVelocity();
+    // double lVel = Robot.superStructure.leftDrive.getVelocity();
+    // if((Math.abs(rVel) > 0) || (Math.abs(lVel) > 0)){
+    //   States.driveMotionState = States.DriveMotionStates.MOVING;
+    // }else if((rVel == 0)&&(lVel == 0)){
+    //   States.driveMotionState = States.DriveMotionStates.NOT_MOVING;
+    // }
 
   }
   // Make this return true when this Command no longer needs to run execute()

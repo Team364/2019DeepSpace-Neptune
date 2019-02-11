@@ -36,21 +36,25 @@ public class RobotMap {
     public static final int arm = 6;
 
     //TODO: Set these according to how the robot is wired
-    public static final int shifterPort1 = 0;
-    public static final int shifterPort2 = 7;
+    //PCM 1
+    public static final int robotPCM = 0;
+    public static final int shifterPort1 = 1;
+    public static final int shifterPort2 = 2;
 
-    public static final int intakePort1 = 2;
-    public static final int intakePort2 = 3;
+    public static final int intakePort1 = 3;
+    public static final int intakePort2 = 4;
     
-    public static final int leverPort1 = 4;
-    public static final int leverPort2 = 5;
+    public static final int leverPort1 = 5;
+    public static final int leverPort2 = 6;
 
+    //PCM 2
     //Back Pistons
-    public static final int climbPort1 = 4;
-    public static final int climbPort2 = 5;
+    public static final int climbPCM = 1;
+    public static final int climbPort1 = 2;
+    public static final int climbPort2 = 3;
     //Wheel Pistons
-    public static final int climbPort3 = 6;
-    public static final int climbPort4 = 7;
+    public static final int climbPort3 = 4;
+    public static final int climbPort4 = 5;
 
     public static final int ballLimitSwitch = 3;
     public static final int armLimitSwitch = 2;

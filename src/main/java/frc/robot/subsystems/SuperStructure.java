@@ -16,11 +16,16 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.defaultcommands.*;
 
 public class SuperStructure extends Subsystem {
-  public TalonBase rightDrive;
-  public TalonBase leftDrive;
-  public TalonBase lift;
+  // public TalonBase rightDrive;
+  // public TalonBase leftDrive;
+  // public TalonBase lift;
   public TalonBase arm;
-  public TalonBase intake;
+  // public TalonBase intake;
+
+  public BasicTalon rightDrive;
+  public BasicTalon leftDrive;
+  public BasicTalon lift;
+  public BasicTalon intake;
   
   private TalonSRX rDrive;
   private TalonSRX lDrive;
@@ -73,27 +78,34 @@ public class SuperStructure extends Subsystem {
     intakeSlave = new VictorSPX(RobotMap.leftClaw);
 
     //Pistons
-    cl = new DoubleSolenoid(RobotMap.intakePort1, RobotMap.intakePort2);
-    le = new DoubleSolenoid(RobotMap.leverPort1, RobotMap.leverPort2);
-    ba = new DoubleSolenoid(RobotMap.climbPort1, RobotMap.climbPort2);
-    wh = new DoubleSolenoid(RobotMap.climbPort3, RobotMap.climbPort4);
-    sh = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
+    //PCM 1
+    cl = new DoubleSolenoid(RobotMap.robotPCM, RobotMap.intakePort1, RobotMap.intakePort2);
+    le = new DoubleSolenoid(RobotMap.robotPCM, RobotMap.leverPort1, RobotMap.leverPort2);
+    sh = new DoubleSolenoid(RobotMap.robotPCM, RobotMap.shifterPort1, RobotMap.shifterPort2);
+    //PCM 2
+    ba = new DoubleSolenoid(RobotMap.climbPCM, RobotMap.climbPort1, RobotMap.climbPort2);
+    wh = new DoubleSolenoid(RobotMap.climbPCM, RobotMap.climbPort3, RobotMap.climbPort4);
+   
 
     //Right Drive Train
-    rightDrive = new TalonBase(rDrive, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.4);
-    rightDrive.setDefaultCommand(new DriveOpenLoop());
+    // rightDrive = new TalonBase(rDrive, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.4);
+    rightDrive = new BasicTalon(rDrive, 0.5);
     rRearDriveSlave.follow(rDrive);
     rFrontDriveSlave.follow(rDrive);
 
     //Left Drive Train
-    leftDrive = new TalonBase(lDrive, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.4);
-    leftDrive.setDefaultCommand(new DriveOpenLoop());
+    // leftDrive = new TalonBase(lDrive, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.4);
+    leftDrive = new BasicTalon(lDrive, 0.5);
     lRearDriveSlave.follow(lDrive);
     lFrontDriveSlave.follow(lDrive);
 
+    //DriveTrain Default Command 
+    rightDrive.setDefaultCommand(new DriveOpenLoop());
+    leftDrive.setDefaultCommand(new DriveOpenLoop());
     //Lift
-    lift = new TalonBase(lt, 0, 0, 0.25, -0.25, 3750, 1500, true, 0, 10000, 0.4);
-    lift.setDefaultCommand(new OpenLoop(lift, 0, 0.1));
+    // lift = new TalonBase(lt, 0, 0, 0.25, -0.25, 3750, 1500, true, 0, 10000, 0.4);
+    lift = new BasicTalon(lt, 0.5);
+    lift.setDefaultCommand(new BasicOpenLoop(lift, 0, 0.1));
     liftSlave.follow(lt);
     lLL = new DigitalInput(RobotMap.lowerLiftLimitSwitch);
     uLL = new DigitalInput(RobotMap.upperLiftLimitSwitch);
@@ -104,7 +116,8 @@ public class SuperStructure extends Subsystem {
     aL = new DigitalInput(RobotMap.armLimitSwitch);
 
     //Intake 
-    intake = new TalonBase(in, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.67);
+    // intake = new TalonBase(in, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.67);
+    intake = new BasicTalon(in, 0.67);
     intakeSlave.follow(in);
     iL = new DigitalInput(RobotMap.ballLimitSwitch);
 
@@ -135,8 +148,8 @@ public class SuperStructure extends Subsystem {
     leftDrive.stop();
   }
   public void resetDriveEncoders(){
-    rightDrive.zero();
-    leftDrive.zero();
+    // rightDrive.zero();
+    // leftDrive.zero();
   }
   //Gyro
   public void getYaw(){
@@ -147,27 +160,31 @@ public class SuperStructure extends Subsystem {
   }
   //Misc
   public void resetEncoders(){
-    lift.zero();
+    // lift.zero();
     arm.zero();
   }
   public void postImplementation(){
-    lift.instrumentation();
-    arm.instrumentation();
-    rightDrive.instrumentation();
-    leftDrive.instrumentation();
+    // lift.instrumentation();
+    // arm.instrumentation();
+    // rightDrive.instrumentation();
+    // leftDrive.instrumentation();
   }
   //Limit Switches
   private boolean getCargoLimitSwitch(){
-    return iL.get();
+    // return iL.get();
+    return false;
   }
   private boolean getArmLimitSwitch(){
-    return aL.get();
+    // return aL.get();
+    return false;
   }
   private boolean getLowerLiftLimitSwitch(){
-    return lLL.get();
+    // return lLL.get();
+    return false;
   }
   private boolean getUpperLiftLimitSwitch(){
-    return uLL.get();
+    // return uLL.get();
+    return false;
   }
   /**Access limit switches as follows
    * <p>0: Cargo

@@ -62,6 +62,8 @@ public class OpenLoop extends Command {
     }else{
         if(Math.abs(power) >= deadband){
             talonBase.openLoop(power);
+        }else{
+            talonBase.stop();
         }
     }
     }
