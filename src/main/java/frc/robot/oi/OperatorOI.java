@@ -57,8 +57,10 @@ public class OperatorOI{
     public JoystickButton setLiftPositionHigh;
     public JoystickButton setLiftPositionCargo;
 
-    public static Command IntakeObject;
-    public static Command ScoreObject;
+    public static Command IntakeCargo = new IntakeCargo();
+    public static Command IntakeHatch = new IntakeHatch();
+    public static Command ScoreCargo = new ScoreCargo();
+    public static Command ScoreHatch = new ScoreHatch();
 
 
     //Operator Buttons
@@ -111,10 +113,17 @@ public class OperatorOI{
       //object command is running because these
       //directly interfere with one another
       if(controller2.getRawAxis(3) >= 0.5){
-        if(IntakeObject.isRunning()){
-          IntakeObject.cancel();
+        if(IntakeCargo.isRunning()){
+          IntakeCargo.cancel();
+        }else if(IntakeHatch.isRunning()){
+          IntakeHatch.cancel();
         }
-        ScoreObject.start();
+        if(States.objState == States.ObjectStates.CARGO_OBJ){
+          ScoreCargo.start();
+        }else if(States.objState == States.ObjectStates.HATCH_OBJ){
+          ScoreHatch.start();
+        }
+      
       //If the left Trigger is pressed,
       //the robot will outtake
       //Before this executes,
@@ -122,10 +131,16 @@ public class OperatorOI{
       //object command is running because these
       //directly interfere with one another
       }else if(controller2.getRawAxis(2) >= 0.5){
-        if(ScoreObject.isRunning()){
-          ScoreObject.cancel();
+        if(ScoreCargo.isRunning()){
+          ScoreCargo.cancel();
+        }else if(ScoreHatch.isRunning()){
+          ScoreHatch.cancel();
         }
-        IntakeObject.start();
+        if(States.objState == States.ObjectStates.CARGO_OBJ){
+          IntakeCargo.start();
+        }else if(States.objState == States.ObjectStates.HATCH_OBJ){
+          IntakeHatch.start();
+        }
       }
     }
 }
