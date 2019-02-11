@@ -1,5 +1,4 @@
 /*
- * George and Keandre:
  * This is the PID calculation class. It calculates a PIDF output for
  * a motor using a setpoint and actual values.
  * Create an object for each subsystem that needs to use PID and run resetPID() and then

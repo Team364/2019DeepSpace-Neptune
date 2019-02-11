@@ -28,7 +28,7 @@ public class StopDriveMotors extends Command {
 
     @Override
     protected void end() {
-        Robot.driveSystem.noShiftInput();
+        Robot.superStructure.shifter.noInput();
     }
 
     @Override
