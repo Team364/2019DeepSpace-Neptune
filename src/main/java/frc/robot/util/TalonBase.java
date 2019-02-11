@@ -247,7 +247,7 @@ public class TalonBase extends Subsystem {
 		/* Get current Talon SRX motor output */
 		double motorOutput = talon.getMotorOutputPercent();
         /* Prepare line to print */
-        sb.append("Talon:");
+        sb.append(talon);
 		sb.append("\tOut%:");
 		sb.append(motorOutput);
 		sb.append("\tVel:");
