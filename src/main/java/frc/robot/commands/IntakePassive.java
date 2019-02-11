@@ -1,10 +1,14 @@
-package frc.robot.commands.grip;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.States;
+import frc.robot.commands.*;
 
 public class IntakePassive extends Command {
+
+    private Command cl;
+    private Command le;
 
     public IntakePassive() {
         requires(Robot.superStructure.claw);
@@ -19,11 +23,15 @@ public class IntakePassive extends Command {
     @Override
     protected void execute() {
         if(States.objState == States.ObjectStates.HATCH_OBJ){
-            Robot.superStructure.claw.close();
-            Robot.superStructure.lever.close();
+            cl = new SetPiston(Robot.superStructure.claw, 1);
+            le = new SetPiston(Robot.superStructure.lever, 1);
+            cl.start();
+            le.start();
         }else if(States.objState == States.ObjectStates.CARGO_OBJ){
-            Robot.superStructure.claw.open();
-            Robot.superStructure.lever.open();
+            cl = new SetPiston(Robot.superStructure.claw, 0);
+            le = new SetPiston(Robot.superStructure.lever, 0);
+            cl.start();
+            le.start();
         }
         
         

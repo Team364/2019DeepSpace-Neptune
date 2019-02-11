@@ -1,13 +1,14 @@
-package frc.robot.commands.climb;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 
-public class Retract extends Command {
+public class StopDriveMotors extends Command {
 
-    public Retract() {
-        requires(Robot.superStructure.back);
+    public StopDriveMotors() {
+        requires(Robot.superStructure.leftDrive);
+        requires(Robot.superStructure.rightDrive);
         setTimeout(0.1);
     }
 
@@ -17,7 +18,7 @@ public class Retract extends Command {
 
     @Override
     protected void execute() {
-        Robot.superStructure.back.close();
+        Robot.superStructure.stopDrive();
     }
 
     @Override
@@ -27,7 +28,7 @@ public class Retract extends Command {
 
     @Override
     protected void end() {
-        Robot.superStructure.back.noInput();
+        Robot.superStructure.shifter.noInput();
     }
 
     @Override

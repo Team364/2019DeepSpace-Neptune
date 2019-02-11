@@ -1,8 +1,7 @@
-package frc.robot.subroutines.pressed.lift;
+package frc.robot.subroutines;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.lift.*;
-import frc.robot.commands.arm.*;
+import frc.robot.commands.*;
 
 /**
  * Subroutine to be run in teleop on button press

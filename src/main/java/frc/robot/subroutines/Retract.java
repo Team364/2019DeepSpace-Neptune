@@ -1,7 +1,7 @@
-package frc.robot.subroutines.pressed.arm;
+package frc.robot.subroutines;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.arm.*;
+import frc.robot.commands.*;
 
 /**
  * 

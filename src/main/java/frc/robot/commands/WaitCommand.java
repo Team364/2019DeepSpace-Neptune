@@ -1,15 +1,13 @@
-package frc.robot.commands.drive;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 
 
-public class StopDriveMotors extends Command {
+public class WaitCommand extends Command {
 
-    public StopDriveMotors() {
-        requires(Robot.superStructure.leftDrive);
-        requires(Robot.superStructure.rightDrive);
-        setTimeout(0.1);
+
+    public WaitCommand(double time) {
+        setTimeout(time);
     }
 
     @Override
@@ -18,7 +16,6 @@ public class StopDriveMotors extends Command {
 
     @Override
     protected void execute() {
-        Robot.superStructure.stopDrive();
     }
 
     @Override
@@ -28,7 +25,6 @@ public class StopDriveMotors extends Command {
 
     @Override
     protected void end() {
-        Robot.superStructure.shifter.noInput();
     }
 
     @Override

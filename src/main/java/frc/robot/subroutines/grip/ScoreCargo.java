@@ -1,8 +1,8 @@
-package frc.robot.subroutines.pressed.grip;
+package frc.robot.subroutines.grip;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
-import frc.robot.commands.grip.*;
+import frc.robot.commands.*;
 import frc.robot.util.States;
 
 /**
@@ -10,14 +10,11 @@ import frc.robot.util.States;
  * <p>Robot turns approximately 180 degrees
  */
 public class ScoreCargo extends CommandGroup {
-    /**
-     * Uses Object State to determine which subroutine to run to score
-     */
-    //TODO:Move the logic into a command. Introduce timed delays with a loop counter
+
     public ScoreCargo() {
 
         //Score Cargo Subroutine
-        addSequential(new OuttakeCargo());
+        addSequential(new runIntake(-0.75, false));
         addSequential(new IntakePassive());
         States.actionState = States.ActionStates.SCORE_ACT;
 
