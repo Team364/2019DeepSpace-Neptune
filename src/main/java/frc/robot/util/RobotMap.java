@@ -13,7 +13,7 @@ public class RobotMap {
     //Victor SPX
     public static final int rightFrontDrive = 4;
     //Talon SRX
-    public static final int rightTopDrive = 10;
+    public static final int rightTopDrive = 5;//10
     //Victor SPX
     public static final int rightRearDrive = 1;
 

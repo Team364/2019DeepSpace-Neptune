@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -30,6 +32,8 @@ public class Robot extends TimedRobot {
   public static Vision vision;
   public static SuperStructure superStructure;
 
+  public static TalonBase test;
+  public static TalonSRX testTalon;
   //Controls
   public static DriverOI oi;
   public static OperatorOI oi2;

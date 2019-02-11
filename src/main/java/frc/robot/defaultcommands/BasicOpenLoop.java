@@ -20,6 +20,7 @@ public class BasicOpenLoop extends Command {
     this.talon = talon;
     this.deadband = deadband;
     this.axis = axis;
+    requires(talon);
   }
 
   @Override

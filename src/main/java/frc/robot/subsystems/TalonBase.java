@@ -85,6 +85,8 @@ public class TalonBase extends Subsystem {
     private double peakOutputForward = 0.25;
     /**highest speed the trajectory can run at in the reverse direction */
     private double peakOutputReverse = -0.25;
+    /**Name of Talon */
+    private String name = "No Name";
     /**Tracks what loop State the talon is in */
     public enum LoopStates{
         OPEN_LOOP,
@@ -102,7 +104,8 @@ public class TalonBase extends Subsystem {
                     boolean bounded,
                     double upperBound,
                     double lowerBound,
-                    double dampen
+                    double dampen,
+                    String name
                     ) {
         this.talon = talon;
         this.nominalOutputForward = nominalOutputForward;
@@ -115,6 +118,7 @@ public class TalonBase extends Subsystem {
         this.upperBound = upperBound;
         this.lowerBound = lowerBound;
         this.Dampen = dampen;
+        this.name = name;
         /* Factory default hardware to prevent unexpected behavior */
         talon.configFactoryDefault();
         //All followers will do the same
@@ -165,6 +169,7 @@ public class TalonBase extends Subsystem {
     /**Sets the lowest speed the trajectory can run at in the forward direction */
     public void setNominalOutputForward(double percentOutput){
         talon.configNominalOutputForward(percentOutput);
+        
     }
     /**Sets the lowest speed the trajectory can run at in the reverse direction */
     public void setNominalOutputReverse(double percentOutput){
@@ -216,7 +221,6 @@ public class TalonBase extends Subsystem {
      */
     public void stop(){
         this.talon.set(ControlMode.PercentOutput, 0);
-        System.out.println(talon + " has stopped");
     }
     /**Sets the encoder value to zero */
     public void zero(){
@@ -269,14 +273,13 @@ public class TalonBase extends Subsystem {
         return this.talon.getSelectedSensorPosition(PIDLoopIdx);
     }
 
-
     /**Run instrumentation */
     public void instrumentation(){
         
 		/* Get current Talon SRX motor output */
 		double motorOutput = talon.getMotorOutputPercent();
         /* Prepare line to print */
-        sb.append(talon);
+        sb.append(this.name);
 		sb.append("\tOut%:");
 		sb.append(motorOutput);
 		sb.append("\tVel:");

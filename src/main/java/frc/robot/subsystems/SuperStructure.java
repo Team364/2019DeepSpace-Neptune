@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.defaultcommands.*;
+import frc.robot.subsystems.DriveTrain;
 
 public class SuperStructure extends Subsystem {
   // public TalonBase rightDrive;
@@ -32,6 +33,8 @@ public class SuperStructure extends Subsystem {
   private TalonSRX lt;
   private TalonSRX a;
   private TalonSRX in;
+
+  public DriveTrain driveTrain;
 
   private VictorSPX lRearDriveSlave;
   private VictorSPX lFrontDriveSlave;
@@ -66,8 +69,10 @@ public class SuperStructure extends Subsystem {
     rDrive = new TalonSRX(RobotMap.rightTopDrive);
     lDrive = new TalonSRX(RobotMap.leftTopDrive);
     lt = new TalonSRX(RobotMap.leftLift);
-    a = new TalonSRX(RobotMap.arm);
+    // a = new TalonSRX(RobotMap.arm);
     in = new TalonSRX(RobotMap.rightClaw);
+
+    a = new TalonSRX(10);
 
     //followers
     lRearDriveSlave = new VictorSPX(RobotMap.leftRearDrive);
@@ -99,20 +104,25 @@ public class SuperStructure extends Subsystem {
     lRearDriveSlave.follow(lDrive);
     lFrontDriveSlave.follow(lDrive);
 
-    //DriveTrain Default Command 
-    rightDrive.setDefaultCommand(new DriveOpenLoop());
-    leftDrive.setDefaultCommand(new DriveOpenLoop());
+    driveTrain = new DriveTrain(leftDrive, rightDrive);
+    
     //Lift
     // lift = new TalonBase(lt, 0, 0, 0.25, -0.25, 3750, 1500, true, 0, 10000, 0.4);
-    lift = new BasicTalon(lt, 0.5);
-    lift.setDefaultCommand(new BasicOpenLoop(lift, 0, 0.1));
+    lift = new BasicTalon(lt, 0.5){ 
+      public void initDefaultCommand(){
+        lift.setDefaultCommand(new BasicOpenLoop(lift, 0, 0.1));
+      }
+    };
     liftSlave.follow(lt);
     lLL = new DigitalInput(RobotMap.lowerLiftLimitSwitch);
     uLL = new DigitalInput(RobotMap.upperLiftLimitSwitch);
     
     //Arm
-    arm = new TalonBase(a, 0, 0, 0.25, -0.25, 3750, 1500, true, 0, 10000, 0.4);
-    arm.setDefaultCommand(new OpenLoop(arm, 0, 0.1));
+    arm = new TalonBase(a, 0, 0, 0.8, -0.8, 15000, 6000, false, 0, 10000, 0.8, "Arm"){
+      public void initDefaultCommand(){
+        arm.setDefaultCommand(new OpenLoop(arm, 5, 0.1));
+      }
+    };
     aL = new DigitalInput(RobotMap.armLimitSwitch);
 
     //Intake 
@@ -139,9 +149,8 @@ public class SuperStructure extends Subsystem {
      setDefaultCommand(new Periodic());
   }
   //Drive Train
-  public void driveOpenLoop(double right, double left){
-    rightDrive.openLoop(right);
-    leftDrive.openLoop(left);
+  public void driveOpenLoop(double left, double right){
+    driveTrain.openLoop(left, right);
   }
   public void stopDrive(){
     rightDrive.stop();
