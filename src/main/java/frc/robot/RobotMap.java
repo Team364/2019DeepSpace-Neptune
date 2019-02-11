@@ -55,5 +55,8 @@ public class RobotMap {
     public static final int climbPort4 = 7;
 
     public static final int ballLimitSwitch = 3;
+    public static final int armLimitSwitch = 2;
+    public static final int lowerLiftLimitSwitch = 1;
+    public static final int upperLiftLimitSwitch = 4;
 
 }

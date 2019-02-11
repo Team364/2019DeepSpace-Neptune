@@ -16,6 +16,7 @@ import frc.robot.util.TalonBase;
 import frc.robot.defaultcommands.DriveOpenLoop;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.DigitalInput;
 /**
  * Add your docs here.
  */
@@ -53,6 +54,12 @@ public class SuperStructure extends Subsystem {
 
   public AHRS navX;
   public PIDCalc pidNavX;
+
+  private DigitalInput iL;
+  private DigitalInput aL;
+  private DigitalInput lLL;
+  private DigitalInput uLL;
+
 
   public SuperStructure(){
     //masters
@@ -93,13 +100,18 @@ public class SuperStructure extends Subsystem {
     lift = new TalonBase(lt, 0, 0, 0.25, -0.25, 3750, 1500, true, 0, 10000, 0.4);
     lift.setDefaultCommand(new OpenLoop(lift, 0, 0.1));
     liftSlave.follow(lt);
+    lLL = new DigitalInput(RobotMap.lowerLiftLimitSwitch);
+    uLL = new DigitalInput(RobotMap.upperLiftLimitSwitch);
     
     //Arm
     arm = new TalonBase(a, 0, 0, 0.25, -0.25, 3750, 1500, true, 0, 10000, 0.4);
     arm.setDefaultCommand(new OpenLoop(arm, 0, 0.1));
+    aL = new DigitalInput(RobotMap.armLimitSwitch);
 
     //Intake 
     intake = new TalonBase(in, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.67);
+    intakeSlave.follow(in);
+    iL = new DigitalInput(RobotMap.ballLimitSwitch);
 
     //Pistons
     claw = new PistonBase(cl);
@@ -136,4 +148,24 @@ public class SuperStructure extends Subsystem {
     rightDrive.instrumentation();
     leftDrive.instrumentation();
   }
-}
+  private boolean getCargoLimitSwitch(){
+    return iL.get();
+  }
+  private boolean getArmLimitSwitch(){
+    return aL.get();
+  }
+  private boolean getLowerLiftLimitSwitch(){
+    return lLL.get();
+  }
+  private boolean getUpperLiftLimitSwitch(){
+    return uLL.get();
+  }
+  /**Access limit switches as follows
+   * <p>0: Cargo
+   * <p>1: Arm
+   * <p>2: Lower Lift
+   * <p>3: Upper Lift
+   */
+  public boolean[] limitArray = {getCargoLimitSwitch(), getArmLimitSwitch(), getLowerLiftLimitSwitch(), getUpperLiftLimitSwitch()};
+  }
+

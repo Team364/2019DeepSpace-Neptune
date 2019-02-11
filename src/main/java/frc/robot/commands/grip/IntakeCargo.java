@@ -22,7 +22,7 @@ public class IntakeCargo extends Command {
 
     @Override
     protected boolean isFinished() {
-        return isTimedOut();
+        return isTimedOut() || Robot.superStructure.limitArray[0];
         //return Robot.superStructure.getBallLimitSwitch() || isTimedOut();
     }
 
