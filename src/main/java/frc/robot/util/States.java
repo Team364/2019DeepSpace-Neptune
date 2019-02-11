@@ -25,11 +25,6 @@ public class States{
         SCORE_ACT,
         NO_ACT
     }
-    /** State tracks what gear the driveTrain is */
-    public static enum ShfitStates{
-        HIGH_SHIFT,
-        LOW_SHIFT
-    }
     /** If the robot is is closed loop then the users cannot directly affect arm or
     elevator movement. This state refers to scoring mechanisms directly(i.e. arm, elevator)
     */
@@ -59,20 +54,7 @@ public class States{
         CARGO_HIGH,
         NONE
     }
-    /**
-     * State tracks pistons on grip for claw
-     */
-    public static enum ClawStates{
-        CLOSED,
-        OPEN
-    }
-    /**
-     * State tracks pistons on grip for lever
-     */
-    public static enum LeverStates{
-        CLOSED,
-        OPEN
-    }
+
     /**
      * State tracks where in climb robot is
      */
@@ -82,29 +64,15 @@ public class States{
         FINISHED_CLIMBING,
         NOT_CLIMBING
     }
-    public static enum ClimbPisonStates{
-        CLOSED,
-        OPEN
-    }
-    public static enum ClimbWheelStates{
-        CLOSED,
-        OPEN
-    }
     //Object State is declared and set to cargo
     //TODO: Ensure that these mirror what the robots starting configuration is
     public static ObjectStates objState = ObjectStates.CARGO_OBJ;
     public static ActionStates actionState = ActionStates.NO_ACT;
-    public static ShfitStates shiftState = ShfitStates.LOW_SHIFT;
     public static LoopStates loopState = LoopStates.OPEN_LOOP;
     public static DriveStates driveState = DriveStates.OPEN_LOOP;
     public static DriveMotionStates driveMotionState = DriveMotionStates.NOT_MOVING;
     public static ScoreStates scoreState = ScoreStates.NONE;
-    public static ClawStates clawState = ClawStates.CLOSED;
-    public static LeverStates leverState = LeverStates.CLOSED;
     public static ClimbStates climbState = ClimbStates.NOT_CLIMBING;
-    public static ClimbPisonStates climbPisionState = ClimbPisonStates.CLOSED;
-    public static ClimbWheelStates climbWheelStates = ClimbWheelStates.CLOSED;
-
 }
 
 

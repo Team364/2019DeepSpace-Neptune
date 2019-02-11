@@ -126,7 +126,6 @@ public class Robot extends TimedRobot {
    SmartDashboard.putNumber("GetLeftContr: ", -Robot.oi.controller.getRawAxis(5));
    SmartDashboard.putNumber("GetRightContr: ",  -Robot.oi.controller.getRawAxis(1));
    SmartDashboard.putString("Object State: ", States.objState.toString());
-   SmartDashboard.putString("Shift State: ", States.shiftState.toString());
    SmartDashboard.putString("Loop State:", States.loopState.toString());
 }
 

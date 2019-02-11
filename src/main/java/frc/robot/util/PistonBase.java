@@ -16,6 +16,12 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public class PistonBase extends Subsystem {
 
   private DoubleSolenoid piston;
+  /** State tracks what position piston is in */
+      public static enum PistonStates{
+        OPEN,
+        CLOSED
+    }
+    public static PistonStates pistonState = PistonStates.CLOSED;
 
   public PistonBase(DoubleSolenoid piston){
     this.piston = piston;
@@ -25,6 +31,7 @@ public class PistonBase extends Subsystem {
      */ 
     public void open() {
       piston.set(DoubleSolenoid.Value.kForward);
+      pistonState = PistonStates.OPEN;
   }
 
   /**
@@ -32,6 +39,7 @@ public class PistonBase extends Subsystem {
    */ 
   public void close() {
       piston.set(DoubleSolenoid.Value.kReverse);
+      pistonState = PistonStates.CLOSED;
   }
 
   /**
