@@ -3,9 +3,11 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.defaultcommands.Periodic;
 import frc.robot.Robot;
+import frc.robot.util.OpenLoop;
 import frc.robot.util.TalonBase;
 import frc.robot.defaultcommands.testOpenLoop;
 
@@ -16,7 +18,7 @@ public class SuperStructure extends Subsystem {
   //TLDR: The subsystem code is SUPER repetitve and it wouldn't hurt to reduce the code to
   //instances of template classes and running methods in here because all the important custom
   //stuff is run in commands
-  
+
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   /**tracks whehter or not the lift is in bounds for open loop control */
@@ -41,7 +43,7 @@ public class SuperStructure extends Subsystem {
     testTalon = new TalonSRX(0);
     testSlave = new VictorSPX(2);
     testSystem = new TalonBase(testTalon, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.4);
-    testSystem.setDefaultCommand(new testOpenLoop());
+    testSystem.setDefaultCommand(new OpenLoop(testSystem, 0, 0.1, false, 0.0, 0.0));
     testSlave.follow(testTalon);
   }
   @Override

@@ -39,8 +39,8 @@ public class TalonBase extends Subsystem {
     public boolean bounded = false;
     /**Power that the talon is set to in Open Loop */
     public double openLoopPower = 0;
-    /**Default Command */
-    public Command defaultCommand;
+    /**Open loop out of bounds */
+    public boolean outOfBounds;
 
     /**Talon */
     private TalonSRX talon;
@@ -131,6 +131,10 @@ public class TalonBase extends Subsystem {
 		talon.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
         
     }
+        /**Treat this as abstract */
+        @Override
+        protected void initDefaultCommand() {
+        }
 
     /**Sets the lowest speed the trajectory can run at in the forward direction */
     public void setNominalOutputForward(double percentOutput){
@@ -256,8 +260,5 @@ public class TalonBase extends Subsystem {
     }
 
 
-    /**Treat this as abstract */
-    @Override
-    protected void initDefaultCommand() {
-    }
+
 }
