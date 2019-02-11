@@ -16,9 +16,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.defaultcommands.*;
-/**
- * Add your docs here.
- */
+
 public class SuperStructure extends Subsystem {
   public TalonBase rightDrive;
   public TalonBase leftDrive;

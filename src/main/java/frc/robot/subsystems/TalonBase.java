@@ -51,12 +51,6 @@ public class TalonBase extends Subsystem {
 	 * Gains used in Motion Magic, to be adjusted accordingly
      * Gains(kp, ki, kd, kf, izone, peak output);
      */
-    public final double kP;
-	public final double kI;
-	public final double kD;
-	public final double kF;
-	public final int kIzone;
-	public final double kPeakOutput;
     public static final TalonGains Gains = new TalonGains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
     /**highest raw encoder count that the talon can reach */
     public double upperBound = 30000;
@@ -295,13 +289,6 @@ public class TalonBase extends Subsystem {
         Instrumentation.Process(talon, sb);
     }
 
-	public void TalonGains(double _kP, double _kI, double _kD, double _kF, int _kIzone, double _kPeakOutput){
-		kP = _kP;
-		kI = _kI;
-		kD = _kD;
-		kF = _kF;
-		kIzone = _kIzone;
-		kPeakOutput = _kPeakOutput;
-	}
+
 
 }
