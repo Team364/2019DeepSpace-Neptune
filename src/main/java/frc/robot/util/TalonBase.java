@@ -12,12 +12,31 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.util.Constants;
 import frc.robot.util.Instrumentation;
-
+  /**
+   * TalonBase subsystem with getters and setters for all relevant funtionality
+   * <p>includes closed loop and open loop funtionality
+   * @param talon talon that is to be used in the talonBase
+   * @param nominalOutputForward lowest speed the trajectory can run at in the reverse direction
+   * @param nominalOutputReverse lowest speed the trajectory can run at in the reverse direction
+   * @param peakOutputForward highest speed the trajectory can run at in the forward direction
+   * @param peakOutputReverse highest speed the trajectory can run at in the forward direction
+   * @param cruiseVelocity talon Cruise velocity maximum for motion magic closed loop control
+   * <p>Sensor units per 100ms - 4096 sensor units per revolution
+   * @param acceleration talon Acceleration for motion magic closed loop control
+     * <p>Sensor units per 100ms - 4096 sensor units per revolution
+   * @param bounded if bounds are to be set in open loop
+   * @param upperBound highest raw encoder count that the talon can reach
+   * @param lowerBound lowest raw encoder count that the talon can reach
+   * @param dampen Dampening variable to scale down the motor output in open loop 
+     * <p>set to one for no effect
+   */
 public class TalonBase extends Subsystem {
     /**highest raw encoder count that the talon can reach */
     public double upperBound = 30000;
     /**lowest raw encoder count that the talon can reach */
     public double lowerBound = 0;
+    /**If bounds are to be set in open loop */
+    public boolean bounded = false;
     /**Power that the talon is set to in Open Loop */
     public double openLoopPower = 0;
     /**Default Command */
@@ -46,11 +65,30 @@ public class TalonBase extends Subsystem {
     private double peakOutputForward = 0.25;
     /**highest speed the trajectory can run at in the reverse direction */
     private double peakOutputReverse = -0.25;
-    /**
-     * TalonBase()
-     */ 
-    public TalonBase(TalonSRX talon) {
+    public TalonBase(
+                    TalonSRX talon, 
+                    double nominalOutputForward, 
+                    double nominalOutputReverse,
+                    double peakOutputForward,
+                    double peakOutputReverse,
+                    int cruiseVelocity,
+                    int acceleration,
+                    boolean bounded,
+                    double upperBound,
+                    double lowerBound,
+                    double dampen
+                    ) {
         this.talon = talon;
+        this.nominalOutputForward = nominalOutputForward;
+        this.nominalOutputReverse = nominalOutputReverse;
+        this.peakOutputForward = peakOutputForward;
+        this.peakOutputReverse = peakOutputReverse;
+        this.cruiseVelocity = cruiseVelocity;
+        this.acceleration = acceleration;
+        this.bounded = bounded;
+        this.upperBound = upperBound;
+        this.lowerBound = lowerBound;
+        this.Dampen = dampen;
         /* Factory default hardware to prevent unexpected behavior */
         talon.configFactoryDefault();
         //All followers will do the same
@@ -110,7 +148,22 @@ public class TalonBase extends Subsystem {
     public void setPeakOutputReverse(double percentOutput){
         talon.configPeakOutputReverse(percentOutput);
     }
-
+    /**Maximum encoder counts that open loop may reach */
+    public void setUpperBound(double counts){
+        upperBound = counts;
+    }
+    /**Minimum encoder counts that open loop may reach */
+    public void setLowerBound(double counts){
+        lowerBound = counts;
+    }
+    /**Determines whether or not open loop will be confied to stay within an encoder count range */
+    public void setBounds(boolean verdict){
+        bounded = verdict;
+    }
+    /**Gets whether or not open loop is bounded */
+      public boolean getBounded(){
+        return bounded;
+    }
     /**Open loop is to run in the default command */
     public void openLoop(double power){
         /*Deadband of 10% */

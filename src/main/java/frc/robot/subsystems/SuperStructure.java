@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.defaultcommands.Periodic;
@@ -16,14 +17,24 @@ public class SuperStructure extends Subsystem {
   // here. Call these from Commands.
   /**tracks whehter or not the lift is in bounds for open loop control */
   //TODO: Get testSystem to work and then move lift and arm into here -- possibly move drive into here as well
+  //Move NavX into here as well
+  //Really all the specific things are done in commands, so having duplicate subsystem files seem redundant.
+  //Would be easier to follow if everything was delegated from a superstructure instead
+  //Grip and climb can be there own commands perhaps
+  //But arm, lift, and drive are going to be redundant.
+  //Auto will mostly be running closed loop stuff with commands
+  //Methods aren't really needed and so using TalonBases won't be an issue at all
   public boolean liftOutofBounds = false;
   public boolean armOutofBounds = false;
   public TalonBase testSystem;
   public TalonSRX testTalon;
+  public VictorSPX testSlave;
   public SuperStructure(){
     testTalon = new TalonSRX(0);
-    testSystem = new TalonBase(testTalon);
+    testSlave = new VictorSPX(2);
+    testSystem = new TalonBase(testTalon, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.4);
     testSystem.setDefaultCommand(new testOpenLoop());
+    testSlave.follow(testTalon);
   }
   @Override
   public void initDefaultCommand() {
@@ -33,9 +44,14 @@ public class SuperStructure extends Subsystem {
   public void runTestTalon(){
     System.out.println("Test talon position: " + testSystem.getPosition());
   }
-  
+  public void driveOpenLoop(double right, double left){
+  //Possibly use seperate talonBase objects for each side of the drive train
+  }
   public void resetEncoders(){
     Robot.liftSystem.zero();
     Robot.armSystem.zero();
+  }
+  public void postImplementation(){
+    //Run all the implementations
   }
 }

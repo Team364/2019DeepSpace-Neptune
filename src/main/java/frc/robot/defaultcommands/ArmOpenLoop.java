@@ -49,7 +49,7 @@ public class ArmOpenLoop extends Command {
     }
     @Override
     protected void end() {
-        //Robot.armSystem.stop();
+        Robot.armSystem.stop();
     }
 
     @Override

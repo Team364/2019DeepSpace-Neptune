@@ -20,6 +20,8 @@ public class DriveOpenLoop extends Command {
     private double frontThrottle;
     //Left Trigger of Driver Controller
     private double backThrottle;
+    private double leftPower;
+    private double rightPower;
 
     /**
      * Command used for teleop control specific to the drive system
@@ -78,7 +80,11 @@ public class DriveOpenLoop extends Command {
         }
 
         //This is where the driveSystem is actually asked to run motors
-        Robot.driveSystem.openLoop(throttle, steer);
+        // Robot.driveSystem.openLoop(throttle, steer);
+        leftPower = throttle + steer;
+        rightPower = throttle - steer;
+        Robot.superStructure.driveOpenLoop(rightPower, leftPower);
+    
 
     }
 
