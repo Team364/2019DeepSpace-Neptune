@@ -36,9 +36,6 @@ public class Robot extends TimedRobot {
   public static DriverOI oi;
   public static OperatorOI oi2;
 
-  //State file
-  public static States states;
-
   //Commands
   //Auto Commands
   public static Command Auto1;

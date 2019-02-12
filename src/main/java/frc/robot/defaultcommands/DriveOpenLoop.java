@@ -68,10 +68,6 @@ public class DriveOpenLoop extends Command {
                 System.out.println("STATE_DIRECT_DRIVE->STATE_RAMP_DOWN");
                 driveState = DriveStates.STATE_RAMP_DOWN;
             }
-        //Nothing happens in Ramp Down
-        //State is changed to Not Moving
-        //If robot tips over whenever the driver stops moving, then this will
-        //need to be implemented
         } else if (driveState == DriveStates.STATE_RAMP_DOWN) {
             driveState = DriveStates.STATE_NOT_MOVING;
         } else {

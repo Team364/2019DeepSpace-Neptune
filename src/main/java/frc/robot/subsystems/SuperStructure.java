@@ -71,10 +71,10 @@ public class SuperStructure extends Subsystem {
     rDrive = new TalonSRX(RobotMap.rightTopDrive);
     lDrive = new TalonSRX(RobotMap.leftTopDrive);
     lt = new TalonSRX(RobotMap.leftLift);
-    // a = new TalonSRX(RobotMap.arm);
+    a = new TalonSRX(RobotMap.arm);
     in = new TalonSRX(RobotMap.rightClaw);
 
-    a = new TalonSRX(10);
+    // a = new TalonSRX(10);
 
     //followers
     lRearDriveSlave = new VictorSPX(RobotMap.leftRearDrive);

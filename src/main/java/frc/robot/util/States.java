@@ -21,7 +21,7 @@ public class States{
         INTAKE_ACT,
         FERRY_ACT,
         SCORE_ACT,
-        NO_ACT
+        PASSIVE
     }
     /** If the robot is is closed loop then the users cannot directly affect arm or
     elevator movement. This state refers to scoring mechanisms directly(i.e. arm, elevator)
@@ -65,7 +65,7 @@ public class States{
     //Object State is declared and set to cargo
     //TODO: Ensure that these mirror what the robots starting configuration is
     public static ObjectStates objState = ObjectStates.CARGO_OBJ;
-    public static ActionStates actionState = ActionStates.NO_ACT;
+    public static ActionStates actionState = ActionStates.PASSIVE;
     public static LoopStates loopState = LoopStates.OPEN_LOOP;
     public static DriveStates driveState = DriveStates.OPEN_LOOP;
     public static DriveMotionStates driveMotionState = DriveMotionStates.NOT_MOVING;
