@@ -2,6 +2,7 @@ package frc.robot.util.prefabs.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Piston opens, closes, and has no input
@@ -9,6 +10,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public class PistonBase extends Subsystem {
 
   private DoubleSolenoid piston;
+  private String name;
   /** State tracks what position piston is in */
       public enum PistonStates{
         OPEN,
@@ -16,8 +18,9 @@ public class PistonBase extends Subsystem {
     }
     public PistonStates pistonState = PistonStates.CLOSED;
 
-  public PistonBase(DoubleSolenoid piston){
+  public PistonBase(DoubleSolenoid piston, String name){
     this.piston = piston;
+    this.name = name;
   }
     /**
      * open piston
@@ -45,5 +48,9 @@ public class PistonBase extends Subsystem {
   /**Treat as abstract */
   @Override
   public void initDefaultCommand() {
+  }
+  public void postSmartDashVars(){
+    String string = this.name + " Piston State";
+    SmartDashboard.putString(string, pistonState.toString());
   }
 }

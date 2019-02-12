@@ -48,7 +48,7 @@ public class SuperStructure extends Subsystem {
   public PistonBase claw;
   public PistonBase lever;
   public PistonBase back;
-  public PistonBase wheels;
+  public PistonBase front;
   public PistonBase shifter;
 
   private DoubleSolenoid cl;
@@ -134,29 +134,15 @@ public class SuperStructure extends Subsystem {
     iL = new DigitalInput(RobotMap.ballLimitSwitch);
 
     //Pistons
-    claw = new PistonBase(cl);
-    lever = new PistonBase(le);
-    back = new PistonBase(ba);
-    wheels = new PistonBase(wh);
-    shifter = new PistonBase(sh);
+    claw = new PistonBase(cl, "Claw");
+    lever = new PistonBase(le, "Lever");
+    back = new PistonBase(ba, "Back");
+    front = new PistonBase(wh, "Front");
+    shifter = new PistonBase(sh, "Shifter");
 
     //Gyro
     navX = new AHRS(SPI.Port.kMXP);
     pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
-
-    /*//Talons
-    this.addChild(rightDrive); 
-    this.addChild(leftDrive);
-    this.addChild(driveTrain);
-    this.addChild(lift);
-    this.addChild(arm);
-    this.addChild(intake);
-    //Pistons
-    this.addChild(claw);
-    this.addChild(lever);
-    this.addChild(back);
-    this.addChild(wheels);
-    this.addChild(shifter);*/
   }
   @Override
   public void initDefaultCommand() {
@@ -220,6 +206,11 @@ public class SuperStructure extends Subsystem {
 
   public void postSmartDashVars(){
     arm.postSmartDashVars();
+    claw.postSmartDashVars();
+    lever.postSmartDashVars();
+    back.postSmartDashVars();
+    front.postSmartDashVars();
+    shifter.postSmartDashVars();
     SmartDashboard.putString("Object State:", States.objState.toString());
     SmartDashboard.putString("Action State:", States.actionState.toString());
     SmartDashboard.putString("Loop State:", States.loopState.toString());
