@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.subsystems.BasicTalon;
+import frc.robot.subsystems.talons.BasicTalon;
 import frc.robot.defaultcommands.DriveOpenLoop;
 /**
  * Add your docs here.

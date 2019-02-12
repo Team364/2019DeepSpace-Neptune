@@ -34,6 +34,7 @@ public class Periodic extends Command {
       ++loops;
       if(loops > 20){
       // if(Robot.superStructure.arm.reachedPosition()||Robot.superStructure.lift.reachedPosition()){
+        // if(Robot.superStructure.lift.reachedPosition()){
         if(Robot.superStructure.arm.reachedPosition()){
         States.loopState = States.LoopStates.OPEN_LOOP;
         loops = 0;

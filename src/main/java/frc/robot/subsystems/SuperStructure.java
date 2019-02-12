@@ -8,7 +8,8 @@ import frc.robot.defaultcommands.Periodic;
 import frc.robot.util.RobotMap;
 import frc.robot.util.PIDCalc;
 import frc.robot.subsystems.PistonBase;
-import frc.robot.subsystems.TalonBase;
+import frc.robot.subsystems.talons.TalonBase;
+import frc.robot.subsystems.talons.BasicTalon;
 import frc.robot.defaultcommands.DriveOpenLoop;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SPI;
@@ -33,6 +34,7 @@ public class SuperStructure extends Subsystem {
   private TalonSRX lt;
   private TalonSRX a;
   private TalonSRX in;
+
 
   public DriveTrain driveTrain;
 
@@ -118,7 +120,7 @@ public class SuperStructure extends Subsystem {
     uLL = new DigitalInput(RobotMap.upperLiftLimitSwitch);
     
     //Arm
-    arm = new TalonBase(a, 0, 0, 0.8, -0.8, 15000, 6000, false, 0, 10000, 0.8, "Arm"){
+    arm = new TalonBase(a, 0, 0, 1, -1, 20000, 8000, false, 0, 10000, 0.8, "Arm"){
       public void initDefaultCommand(){
         arm.setDefaultCommand(new OpenLoop(arm, 5, 0.1));
       }
@@ -142,6 +144,19 @@ public class SuperStructure extends Subsystem {
     navX = new AHRS(SPI.Port.kMXP);
     pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
 
+    /*//Talons
+    this.addChild(rightDrive); 
+    this.addChild(leftDrive);
+    this.addChild(driveTrain);
+    this.addChild(lift);
+    this.addChild(arm);
+    this.addChild(intake);
+    //Pistons
+    this.addChild(claw);
+    this.addChild(lever);
+    this.addChild(back);
+    this.addChild(wheels);
+    this.addChild(shifter);*/
   }
   @Override
   public void initDefaultCommand() {
@@ -174,7 +189,7 @@ public class SuperStructure extends Subsystem {
   }
   public void postImplementation(){
     // lift.instrumentation();
-    // arm.instrumentation();
+    arm.instrumentation();
     // rightDrive.instrumentation();
     // leftDrive.instrumentation();
   }
@@ -202,5 +217,8 @@ public class SuperStructure extends Subsystem {
    * <p>3: Upper Lift
    */
   public boolean[] limitArray = {getCargoLimitSwitch(), getArmLimitSwitch(), getLowerLiftLimitSwitch(), getUpperLiftLimitSwitch()};
+  public void postSmartDashVars(){
+    arm.postSmartDashVars();
+  }
   }
 

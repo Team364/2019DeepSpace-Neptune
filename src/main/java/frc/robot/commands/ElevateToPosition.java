@@ -12,7 +12,7 @@ public class ElevateToPosition extends Command {
     private double med;
     private double high;
     private double desiredHeight;
-
+    private int loops;
     /**
      * Heights
      * <p>1: low on rocket, scoring hatches on rocket level 1 and Cargo Ship
@@ -59,6 +59,7 @@ public class ElevateToPosition extends Command {
 
     @Override
     protected void execute() {
+        ++loops;
         System.out.println("The Object State is: " + States.objState);
         System.out.println("The Height that has been selected is: " + desiredHeight);
         System.out.println("The encoder count being fed to the execute method is: " + wantedPosition);
@@ -68,7 +69,7 @@ public class ElevateToPosition extends Command {
 
     @Override
     protected boolean isFinished() {
-        // return Robot.superStructure.lift.reachedPosition();
+        // return Robot.superStructure.lift.reachedPosition()&& (loops > 20);
         return true;
     }
 

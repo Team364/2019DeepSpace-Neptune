@@ -3,7 +3,7 @@ package frc.robot.defaultcommands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.States;
-import frc.robot.subsystems.TalonBase;
+import frc.robot.subsystems.talons.*;
     /**
      * Used for operator only
      * @param talonBase //talon Base to run command

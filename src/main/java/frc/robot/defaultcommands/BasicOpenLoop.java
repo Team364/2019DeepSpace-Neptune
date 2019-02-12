@@ -8,7 +8,7 @@
 package frc.robot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.BasicTalon;
+import frc.robot.subsystems.talons.BasicTalon;
 import frc.robot.Robot;
 
 public class BasicOpenLoop extends Command {

@@ -1,6 +1,8 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems.talons;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 // import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -119,6 +121,8 @@ public class TalonBase extends Subsystem {
         this.lowerBound = lowerBound;
         this.Dampen = dampen;
         this.name = name;
+        /*Sets the name of the subsystem */
+        this.setName(this.name, this.name);
         /* Factory default hardware to prevent unexpected behavior */
         talon.configFactoryDefault();
         //All followers will do the same
@@ -165,7 +169,6 @@ public class TalonBase extends Subsystem {
         @Override
         protected void initDefaultCommand() {
         }
-
     /**Sets the lowest speed the trajectory can run at in the forward direction */
     public void setNominalOutputForward(double percentOutput){
         talon.configNominalOutputForward(percentOutput);
@@ -289,6 +292,15 @@ public class TalonBase extends Subsystem {
         sb.append("\ttrg:");
         sb.append(getTargetPosition());
         Instrumentation.Process(talon, sb);
+    }
+    public void postSmartDashVars(){
+        String name = this.name;
+        String vel = name + " Velocity: ";
+        String pos = name + " Position: ";
+        String err = name + " Error: ";
+        SmartDashboard.putNumber(pos, getTargetPosition());
+        SmartDashboard.putNumber(vel, getVelocity());
+        SmartDashboard.putNumber(err, getError());
     }
 
 

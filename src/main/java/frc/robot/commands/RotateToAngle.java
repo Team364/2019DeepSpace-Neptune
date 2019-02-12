@@ -59,11 +59,6 @@ public class RotateToAngle extends Command {
 
     @Override
     protected void execute() {
-        //TODO: Change this to arm stuff
-        // double pidLiftOutput;
-        // Robot.liftSystem.setLiftPosition(wantedAngle);
-        // pidLiftOutput = Robot.liftSystem.pidLift.calculateOutput(wantedAngle, Robot.liftSystem.getLiftPosition());
-        // Robot.liftSystem.leftLift.set(ControlMode.PercentOutput, pidLiftOutput);
         ++loops;
         Robot.superStructure.arm.MoveToPosition(wantedAngle);
         System.out.println("The Object State is: " + States.objState);
@@ -73,7 +68,6 @@ public class RotateToAngle extends Command {
 
     @Override
     protected boolean isFinished() {
-        //TODO: replicate in lift
         return Robot.superStructure.arm.reachedPosition() && (loops > 20);
     }
 

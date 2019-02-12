@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.subsystems.talons;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -45,7 +45,6 @@ public class BasicTalon extends Subsystem {
      */
     public void stop(){
         this.talon.set(ControlMode.PercentOutput, 0);
-        System.out.println(talon + " has stopped");
     }
 
   @Override
