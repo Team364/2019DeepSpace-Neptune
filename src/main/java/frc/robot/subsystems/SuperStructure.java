@@ -15,7 +15,8 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.defaultcommands.*;
 import frc.robot.subsystems.DriveTrain;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.util.States;
 public class SuperStructure extends Subsystem {
   // public TalonBase rightDrive;
   // public TalonBase leftDrive;
@@ -216,8 +217,16 @@ public class SuperStructure extends Subsystem {
    * <p>3: Upper Lift
    */
   public boolean[] limitArray = {getCargoLimitSwitch(), getArmLimitSwitch(), getLowerLiftLimitSwitch(), getUpperLiftLimitSwitch()};
+
   public void postSmartDashVars(){
     arm.postSmartDashVars();
+    SmartDashboard.putString("Object State:", States.objState.toString());
+    SmartDashboard.putString("Action State:", States.actionState.toString());
+    SmartDashboard.putString("Loop State:", States.loopState.toString());
+    SmartDashboard.putString("Drive State:", States.driveState.toString());
+    SmartDashboard.putString("Drive Motion State:", States.driveMotionState.toString());
+    SmartDashboard.putString("Score State:", States.scoreState.toString());
+    SmartDashboard.putString("Climb State:", States.climbState.toString());
   }
   }
 
