@@ -99,9 +99,9 @@ public class OperatorOI{
       }
       /**Sets action state for scoring and then runs the grip subroutine */
       if((controller2.getRawAxis(3) >= 0.5)||(controller2.getRawAxis(2) >= 0.5)){
-        if(controller2.getRawAxis(3) >= 0.5){
+        if(controller2.getRawAxis(2) >= 0.5){
           States.actionState = States.ActionStates.INTAKE_ACT;
-        }else if(controller2.getRawAxis(2) >= 0.5){
+        }else if(controller2.getRawAxis(3) >= 0.5){
           States.actionState = States.ActionStates.SCORE_ACT;
         }
         runGrip.start();
