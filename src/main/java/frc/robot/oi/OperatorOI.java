@@ -51,10 +51,7 @@ public class OperatorOI{
     public JoystickButton setLiftPositionHigh;
     public JoystickButton setLiftPositionCargo;
 
-    public static Command IntakeCargo = new IntakeCargo();
-    public static Command IntakeHatch = new IntakeHatch();
-    public static Command ScoreCargo = new ScoreCargo();
-    public static Command ScoreHatch = new ScoreHatch();
+    public static Command runGrip = new RunGrip();
 
 
     //Operator Buttons
@@ -100,42 +97,54 @@ public class OperatorOI{
       }else if(controller2.getPOV() == 180){
         States.objState = States.ObjectStates.HATCH_OBJ;
       }
-      //If the right Trigger is pressed,
-      //the robot will outtake
-      //Before this executes,
-      //it is checked whether or not the intake
-      //object command is running because these
-      //directly interfere with one another
-      if(controller2.getRawAxis(3) >= 0.5){
-        if(IntakeCargo.isRunning()){
-          IntakeCargo.cancel();
-        }else if(IntakeHatch.isRunning()){
-          IntakeHatch.cancel();
+      if((controller2.getRawAxis(3) >= 0.5)||(controller2.getRawAxis(2) >= 0.5)){
+        if(controller2.getRawAxis(3) >= 0.5){
+          States.actionState = States.ActionStates.INTAKE_ACT;
+        }else if(controller2.getRawAxis(2) >= 0.5){
+          States.actionState = States.ActionStates.SCORE_ACT;
         }
-        if(States.objState == States.ObjectStates.CARGO_OBJ){
-          ScoreCargo.start();
-        }else if(States.objState == States.ObjectStates.HATCH_OBJ){
-          ScoreHatch.start();
-        }
-      
-      //If the left Trigger is pressed,
-      //the robot will outtake
-      //Before this executes,
-      //it is checked whether or not the score
-      //object command is running because these
-      //directly interfere with one another
-      }else if(controller2.getRawAxis(2) >= 0.5){
-        if(ScoreCargo.isRunning()){
-          ScoreCargo.cancel();
-        }else if(ScoreHatch.isRunning()){
-          ScoreHatch.cancel();
-        }
-        if(States.objState == States.ObjectStates.CARGO_OBJ){
-          IntakeCargo.start();
-        }else if(States.objState == States.ObjectStates.HATCH_OBJ){
-          IntakeHatch.start();
-        }
+        runGrip.start();
       }
+      // //If the right Trigger is pressed,
+      // //the robot will outtake
+      // //Before this executes,
+      // //it is checked whether or not the intake
+      // //object command is running because these
+      // //directly interfere with one another
+      // if(controller2.getRawAxis(3) >= 0.5){
+      //   if(IntakeCargo.isRunning()){
+      //     IntakeCargo.cancel();
+      //   }else if(IntakeHatch.isRunning()){
+      //     IntakeHatch.cancel();
+      //   }
+      //   if(States.objState == States.ObjectStates.CARGO_OBJ){
+      //     ScoreCargo.start();
+      //     States.actionState = States.ActionStates.SCORE_ACT;
+      //   }else if(States.objState == States.ObjectStates.HATCH_OBJ){
+      //     ScoreHatch.start();
+      //     States.actionState = States.ActionStates.SCORE_ACT;
+      //   }
+      
+      // //If the left Trigger is pressed,
+      // //the robot will outtake
+      // //Before this executes,
+      // //it is checked whether or not the score
+      // //object command is running because these
+      // //directly interfere with one another
+      // }else if(controller2.getRawAxis(2) >= 0.5){
+      //   if(ScoreCargo.isRunning()){
+      //     ScoreCargo.cancel();
+      //   }else if(ScoreHatch.isRunning()){
+      //     ScoreHatch.cancel();
+      //   }
+      //   if(States.objState == States.ObjectStates.CARGO_OBJ){
+      //     IntakeCargo.start();
+      //     States.actionState = States.ActionStates.INTAKE_ACT;
+      //   }else if(States.objState == States.ObjectStates.HATCH_OBJ){
+      //     IntakeHatch.start();
+      //     States.actionState = States.ActionStates.INTAKE_ACT;
+      //   }
+      // }
     }
 }
 
