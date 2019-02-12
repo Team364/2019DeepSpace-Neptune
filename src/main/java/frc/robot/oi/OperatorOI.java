@@ -86,17 +86,18 @@ public class OperatorOI{
    * <p>starts scoreObject
    */
     public void controlLoop(){
-  //Control Logic
-    //Setting States
-    //If Up on the D-pad is pressed,
-    //Object state is set to Cargo
-    //If Down on the D-pad is pressed,
-    //Object state is set to Hatch
+
+    /*Setting States
+    If Up on the D-pad is pressed,
+    Object state is set to Cargo
+    If Down on the D-pad is pressed,
+    Object state is set to Hatch*/
     if(controller2.getPOV() == 0){
         States.objState = States.ObjectStates.CARGO_OBJ;
       }else if(controller2.getPOV() == 180){
         States.objState = States.ObjectStates.HATCH_OBJ;
       }
+      /**Sets action state for scoring and then runs the grip subroutine */
       if((controller2.getRawAxis(3) >= 0.5)||(controller2.getRawAxis(2) >= 0.5)){
         if(controller2.getRawAxis(3) >= 0.5){
           States.actionState = States.ActionStates.INTAKE_ACT;
@@ -105,46 +106,6 @@ public class OperatorOI{
         }
         runGrip.start();
       }
-      // //If the right Trigger is pressed,
-      // //the robot will outtake
-      // //Before this executes,
-      // //it is checked whether or not the intake
-      // //object command is running because these
-      // //directly interfere with one another
-      // if(controller2.getRawAxis(3) >= 0.5){
-      //   if(IntakeCargo.isRunning()){
-      //     IntakeCargo.cancel();
-      //   }else if(IntakeHatch.isRunning()){
-      //     IntakeHatch.cancel();
-      //   }
-      //   if(States.objState == States.ObjectStates.CARGO_OBJ){
-      //     ScoreCargo.start();
-      //     States.actionState = States.ActionStates.SCORE_ACT;
-      //   }else if(States.objState == States.ObjectStates.HATCH_OBJ){
-      //     ScoreHatch.start();
-      //     States.actionState = States.ActionStates.SCORE_ACT;
-      //   }
-      
-      // //If the left Trigger is pressed,
-      // //the robot will outtake
-      // //Before this executes,
-      // //it is checked whether or not the score
-      // //object command is running because these
-      // //directly interfere with one another
-      // }else if(controller2.getRawAxis(2) >= 0.5){
-      //   if(ScoreCargo.isRunning()){
-      //     ScoreCargo.cancel();
-      //   }else if(ScoreHatch.isRunning()){
-      //     ScoreHatch.cancel();
-      //   }
-      //   if(States.objState == States.ObjectStates.CARGO_OBJ){
-      //     IntakeCargo.start();
-      //     States.actionState = States.ActionStates.INTAKE_ACT;
-      //   }else if(States.objState == States.ObjectStates.HATCH_OBJ){
-      //     IntakeHatch.start();
-      //     States.actionState = States.ActionStates.INTAKE_ACT;
-      //   }
-      // }
     }
 }
 

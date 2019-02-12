@@ -7,8 +7,7 @@ import frc.robot.Robot;
 public class StopDriveMotors extends Command {
 
     public StopDriveMotors() {
-        requires(Robot.superStructure.leftDrive);
-        requires(Robot.superStructure.rightDrive);
+        requires(Robot.superStructure.driveTrain);
         setTimeout(0.1);
     }
 
