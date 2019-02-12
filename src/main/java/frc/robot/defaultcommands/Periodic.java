@@ -42,7 +42,7 @@ public class Periodic extends Command {
     }
     }
     //If a ball is in stow then the action state is ferry
-    if(((Robot.superStructure.limitArray[0])&&(States.objState == States.objState.CARGO_OBJ))||((Robot.superStructure.lever.pistonState.toString() == "OPEN")&&(States.objState == States.objState.HATCH_OBJ))){
+    if(((Robot.superStructure.limitArray[0])&&(States.objState == States.ObjectStates.CARGO_OBJ))||((Robot.superStructure.lever.pistonState.toString() == "OPEN")&&(States.objState == States.ObjectStates.HATCH_OBJ))){
       States.actionState = States.ActionStates.FERRY_ACT;
     }else if(!(States.actionState == States.ActionStates.INTAKE_ACT)&&!(States.actionState == States.ActionStates.SCORE_ACT)){
       States.actionState = States.ActionStates.PASSIVE;

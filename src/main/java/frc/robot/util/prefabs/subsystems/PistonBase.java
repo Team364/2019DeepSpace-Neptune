@@ -51,6 +51,8 @@ public class PistonBase extends Subsystem {
   }
   public void postSmartDashVars(){
     String string = this.name + " Piston State";
+    String com = this.name + " Current Command";
     SmartDashboard.putString(string, pistonState.toString());
+    SmartDashboard.putString(com, this.getCurrentCommandName());
   }
 }

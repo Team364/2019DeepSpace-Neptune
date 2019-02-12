@@ -34,20 +34,24 @@ public class RunGrip extends CommandGroup {
     if(cargo && intake){
       addSequential(new runIntake(0.5, true)); //Intake
       addSequential(new SetPiston(Robot.superStructure.claw, 1)); //Close Claw
+      States.actionState = States.ActionStates.PASSIVE;
     }
     //Get Hatch
     if(!cargo && intake){
       addSequential(new SetPiston(Robot.superStructure.lever, 0)); //Open lever
+      States.actionState = States.ActionStates.PASSIVE;
     }
     //Score Cargo
     if(cargo && !intake){
     addSequential(new runIntake(-0.75, false)); //Outtake
     addSequential(new IntakePassive()); //Set intake to passive mode for current state
+    States.actionState = States.ActionStates.PASSIVE;
     }
     //Score Hatch
     if(!cargo && !intake){
       addSequential(new SetPiston(Robot.superStructure.lever, 1)); //Close lever
       addSequential(new IntakePassive()); //Set levers to passive mode for state
+      States.actionState = States.ActionStates.PASSIVE;
     }
 
 }
