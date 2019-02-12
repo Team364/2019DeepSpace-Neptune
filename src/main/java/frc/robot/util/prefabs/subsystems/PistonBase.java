@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.robot.util.prefabs.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;

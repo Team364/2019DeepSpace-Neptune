@@ -2,7 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.PistonBase;
+import frc.robot.util.prefabs.subsystems.*;
 
 /**Modes:
  * <p>0: Open

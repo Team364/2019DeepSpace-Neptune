@@ -1,9 +1,9 @@
-package frc.robot.commands;
+package frc.robot.util.prefabs.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.States;
-import frc.robot.subsystems.talons.ComplexTalon;;
+import frc.robot.util.prefabs.subsystems.ComplexTalon;;
 
 public class ClosedLoop extends Command {
 

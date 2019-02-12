@@ -5,10 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.defaultcommands;
+package frc.robot.util.prefabs.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.talons.BasicTalon;
+import frc.robot.util.prefabs.subsystems.BasicTalon;
 import frc.robot.Robot;
 
 public class BasicOpenLoop extends Command {

@@ -1,9 +1,9 @@
-package frc.robot.defaultcommands;
+package frc.robot.util.prefabs.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.States;
-import frc.robot.subsystems.talons.*;
+import frc.robot.util.prefabs.subsystems.ComplexTalon;
     /**
      * Used for operator only
      * @param talonBase //talon Base to run command
