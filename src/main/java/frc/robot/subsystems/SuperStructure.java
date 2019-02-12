@@ -8,7 +8,7 @@ import frc.robot.defaultcommands.Periodic;
 import frc.robot.util.RobotMap;
 import frc.robot.util.PIDCalc;
 import frc.robot.subsystems.PistonBase;
-import frc.robot.subsystems.talons.TalonBase;
+import frc.robot.subsystems.talons.ComplexTalon;
 import frc.robot.subsystems.talons.BasicTalon;
 import frc.robot.defaultcommands.DriveOpenLoop;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -21,7 +21,7 @@ public class SuperStructure extends Subsystem {
   // public TalonBase rightDrive;
   // public TalonBase leftDrive;
   // public TalonBase lift;
-  public TalonBase arm;
+  public ComplexTalon arm;
   // public TalonBase intake;
 
   public BasicTalon rightDrive;
@@ -120,7 +120,7 @@ public class SuperStructure extends Subsystem {
     uLL = new DigitalInput(RobotMap.upperLiftLimitSwitch);
     
     //Arm
-    arm = new TalonBase(a, 0, 0, 1, -1, 20000, 8000, false, 0, 10000, 0.8, "Arm"){
+    arm = new ComplexTalon(a, 0, 0, 1, -1, 20000, 8000, false, 0, 10000, 0.8, "Arm"){
       public void initDefaultCommand(){
         arm.setDefaultCommand(new OpenLoop(arm, 5, 0.1));
       }

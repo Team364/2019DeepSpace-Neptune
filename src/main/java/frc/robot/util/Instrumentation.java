@@ -5,7 +5,7 @@
 package frc.robot.util;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.talons.TalonBase;
+import frc.robot.subsystems.talons.ComplexTalon;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -27,7 +27,7 @@ public class Instrumentation {
 
 		if (timesInMotionMagic > 10) {
 			/* Print the Active Trajectory Point Motion Magic is servoing towards */
-			SmartDashboard.putNumber("ClosedLoopTarget", tal.getClosedLoopTarget(TalonBase.PIDLoopIdx));
+			SmartDashboard.putNumber("ClosedLoopTarget", tal.getClosedLoopTarget(ComplexTalon.PIDLoopIdx));
     		SmartDashboard.putNumber("ActTrajVelocity", tal.getActiveTrajectoryVelocity());
     		SmartDashboard.putNumber("ActTrajPosition", tal.getActiveTrajectoryPosition());
 		}

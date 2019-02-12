@@ -15,7 +15,7 @@ import frc.robot.subsystems.talons.*;
      */
 public class OpenLoop extends Command {
 
-    private TalonBase talonBase;
+    private ComplexTalon talonBase;
     private int axis;
     private double deadband;
     private boolean bounded;
@@ -23,7 +23,7 @@ public class OpenLoop extends Command {
     private double lowerBound;
 
     public OpenLoop(
-        TalonBase talonBase, 
+        ComplexTalon talonBase, 
         int axis, 
         double deadband) {
         requires(talonBase);

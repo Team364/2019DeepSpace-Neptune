@@ -31,7 +31,7 @@ import frc.robot.util.TalonGains;
    * @param dampen Dampening variable to scale down the motor output in open loop 
      * <p>set to one for no effect
    */
-public class TalonBase extends Subsystem {
+public class ComplexTalon extends Subsystem {
     	/**
 	 * Which PID slot to pull gains from. Starting 2018, you can choose from
 	 * 0,1,2 or 3. Only the first two (0,1) are visible in web-based
@@ -95,7 +95,7 @@ public class TalonBase extends Subsystem {
         CLOSED_LOOP
     }
     public LoopStates loopState = LoopStates.OPEN_LOOP;
-    public TalonBase(
+    public ComplexTalon(
                     TalonSRX talon, 
                     double nominalOutputForward, 
                     double nominalOutputReverse,
