@@ -11,8 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import frc.robot.util.Instrumentation;
-import frc.robot.util.TalonGains;
+import frc.robot.util.prefabs.subsystems.complextalonutil.*;
   /**
    * TalonBase subsystem with getters and setters for all relevant funtionality
    * <p>includes closed loop and open loop funtionality

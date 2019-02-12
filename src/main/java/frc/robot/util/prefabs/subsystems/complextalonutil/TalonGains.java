@@ -1,7 +1,7 @@
 /**
  *  Class that organizes gains used when assigning values to slots
  */
-package frc.robot.util;
+package frc.robot.util.prefabs.subsystems.complextalonutil;
 
 public class TalonGains {
 	public final double kP;
