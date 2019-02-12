@@ -11,7 +11,7 @@ import frc.robot.util.prefabs.subsystems.*;
  */
 public class SetPiston extends Command {
 
-    private PistonBase piston;
+    private Piston piston;
     private int mode;
     private boolean open;
     /**Modes:
@@ -19,7 +19,7 @@ public class SetPiston extends Command {
  * <p>1: Close
  * @param mode
  */
-    public SetPiston(PistonBase piston, int mode) {
+    public SetPiston(Piston piston, int mode) {
         requires(Robot.superStructure.claw);
         setTimeout(0.1);
         this.piston = piston;

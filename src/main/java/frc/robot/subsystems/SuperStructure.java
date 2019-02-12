@@ -45,11 +45,11 @@ public class SuperStructure extends Subsystem {
   private VictorSPX liftSlave;
   private VictorSPX intakeSlave;
 
-  public PistonBase claw;
-  public PistonBase lever;
-  public PistonBase back;
-  public PistonBase front;
-  public PistonBase shifter;
+  public Piston claw;
+  public Piston lever;
+  public Piston back;
+  public Piston front;
+  public Piston shifter;
 
   private DoubleSolenoid cl;
   private DoubleSolenoid le;
@@ -134,11 +134,11 @@ public class SuperStructure extends Subsystem {
     iL = new DigitalInput(RobotMap.ballLimitSwitch);
 
     //Pistons
-    claw = new PistonBase(cl, "Claw");
-    lever = new PistonBase(le, "Lever");
-    back = new PistonBase(ba, "Back");
-    front = new PistonBase(wh, "Front");
-    shifter = new PistonBase(sh, "Shifter");
+    claw = new Piston(cl, "Claw");
+    lever = new Piston(le, "Lever");
+    back = new Piston(ba, "Back");
+    front = new Piston(wh, "Front");
+    shifter = new Piston(sh, "Shifter");
 
     //Gyro
     navX = new AHRS(SPI.Port.kMXP);

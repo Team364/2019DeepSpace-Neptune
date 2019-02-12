@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Piston opens, closes, and has no input
  */
-public class PistonBase extends Subsystem {
+public class Piston extends Subsystem {
 
   private DoubleSolenoid piston;
   private String name;
@@ -18,7 +18,7 @@ public class PistonBase extends Subsystem {
     }
     public PistonStates pistonState = PistonStates.CLOSED;
 
-  public PistonBase(DoubleSolenoid piston, String name){
+  public Piston(DoubleSolenoid piston, String name){
     this.piston = piston;
     this.name = name;
   }
