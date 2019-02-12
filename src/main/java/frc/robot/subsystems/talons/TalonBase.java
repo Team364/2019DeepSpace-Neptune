@@ -247,6 +247,10 @@ public class TalonBase extends Subsystem {
     public double getError(){
         return this.talon.getClosedLoopError();
     }
+    /**returns raw motor output */
+    public double getRawOutput(){
+        return this.talon.getMotorOutputPercent();
+    }
     /**
      * ReachedPosition
      * <p>Once the closed loop gets to about 200 error in raw encoder count it stops moving;
@@ -299,10 +303,12 @@ public class TalonBase extends Subsystem {
         String pos = name + " Position: ";
         String err = name + " Error: ";
         String cCom = name + " Current Command: ";
+        String out = name + " Raw Output: ";
         SmartDashboard.putNumber(pos, getTargetPosition());
         SmartDashboard.putNumber(vel, getVelocity());
         SmartDashboard.putNumber(err, getError());
         SmartDashboard.putString(cCom, getCurrentCommandName());
+        SmartDashboard.putNumber(out, getRawOutput());
     }
 
 

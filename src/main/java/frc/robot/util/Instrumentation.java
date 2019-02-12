@@ -11,7 +11,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class Instrumentation {
-	/* Tracking variables for instrumentation */
+	/* Tracking variables for instrumentation
+	of motion magic trajectories */
 	private static int loops = 0;
 	private static int timesInMotionMagic = 0;
 
