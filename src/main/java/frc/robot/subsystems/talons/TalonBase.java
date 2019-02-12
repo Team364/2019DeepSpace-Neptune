@@ -298,9 +298,11 @@ public class TalonBase extends Subsystem {
         String vel = name + " Velocity: ";
         String pos = name + " Position: ";
         String err = name + " Error: ";
+        String cCom = name + " Current Command: ";
         SmartDashboard.putNumber(pos, getTargetPosition());
         SmartDashboard.putNumber(vel, getVelocity());
         SmartDashboard.putNumber(err, getError());
+        SmartDashboard.putString(cCom, getCurrentCommandName());
     }
 
 

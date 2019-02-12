@@ -16,11 +16,6 @@ public class Instrumentation {
 	private static int timesInMotionMagic = 0;
 
 	public static void Process(TalonSRX tal, StringBuilder sb) {
-		/* Smart dash plots */
-		SmartDashboard.putNumber("SensorVel", tal.getSelectedSensorVelocity(TalonBase.PIDLoopIdx));
-		SmartDashboard.putNumber("SensorPos", tal.getSelectedSensorPosition(TalonBase.PIDLoopIdx));
-		SmartDashboard.putNumber("MotorOutputPercent", tal.getMotorOutputPercent());
-		SmartDashboard.putNumber("ClosedLoopError", tal.getClosedLoopError(TalonBase.PIDLoopIdx));
 		
 		/* Check if Talon SRX is performing Motion Magic */
 		if (tal.getControlMode() == ControlMode.MotionMagic) {
@@ -35,14 +30,5 @@ public class Instrumentation {
     		SmartDashboard.putNumber("ActTrajVelocity", tal.getActiveTrajectoryVelocity());
     		SmartDashboard.putNumber("ActTrajPosition", tal.getActiveTrajectoryPosition());
 		}
-
-		/* Periodically print to console */
-		if (++loops >= 20) {
-			loops = 0;
-			System.out.println(sb.toString());
-		}
-
-		/* Reset created string for next loop */
-		sb.setLength(0);
 	}
 }

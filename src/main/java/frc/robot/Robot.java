@@ -130,9 +130,9 @@ public class Robot extends TimedRobot {
    SmartDashboard.putNumber("GetRightContr: ",  -Robot.oi.controller.getRawAxis(1));
    SmartDashboard.putString("Object State: ", States.objState.toString());
    SmartDashboard.putString("Loop State:", States.loopState.toString());
-   SmartDashboard.putNumber("Arm Position:", Robot.superStructure.arm.getPosition()/4096 * 360);
-   SmartDashboard.putNumber("Arm Velocity: ", Robot.superStructure.arm.getVelocity());
-   SmartDashboard.putNumber("Arm Error: ", Robot.superStructure.arm.getError());
+  //  SmartDashboard.putNumber("Arm Position:", Robot.superStructure.arm.getPosition()/4096 * 360);
+  //  SmartDashboard.putNumber("Arm Velocity: ", Robot.superStructure.arm.getVelocity());
+  //  SmartDashboard.putNumber("Arm Error: ", Robot.superStructure.arm.getError());
    SmartDashboard.putString("Arm Current Command:", Robot.superStructure.arm.getCurrentCommandName().toString());
   // SmartDashboard.putNumber("Lift Position", Robot.superStructure.lift.getPosition());
 }
