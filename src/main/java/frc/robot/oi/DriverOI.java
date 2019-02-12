@@ -3,7 +3,7 @@ package frc.robot.oi;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.Robot;
-import frc.robot.commands.SetPiston;
+import frc.robot.util.prefabs.commands.SetPiston;
 import frc.robot.subroutines.Align;
 //import frc.robot.commands.teleop.TestPGyro;
 
