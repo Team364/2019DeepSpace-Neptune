@@ -107,9 +107,7 @@ public class OperatorOI{
       }else if(controller2.getRawAxis(3) >= 0.5){
         States.actionState = States.ActionStates.SCORE_ACT;
       }else{
-        if(runGrip.isCompleted()){
-          States.actionState = States.ActionStates.PASSIVE;
-        }
+          States.actionState = States.ActionStates.PASSIVE;  
       }
       /**Sets action state for scoring and then runs the grip subroutine */
       if(States.objState == States.ObjectStates.CARGO_OBJ) {cargo = true;}
@@ -124,11 +122,11 @@ public class OperatorOI{
 
 
       if((controller2.getRawAxis(3) >= 0.5)||(controller2.getRawAxis(2) >= 0.5)){
+        Command runGrip = new RunGrip(gripSet);
         runGrip.start();
       }
       SmartDashboard.putNumber("Grip Set: ", gripSet);
     }
-    public Command runGrip = new RunGrip(gripSet);
 
 }
 
