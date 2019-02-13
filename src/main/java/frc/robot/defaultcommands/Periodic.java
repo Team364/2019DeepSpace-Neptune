@@ -69,8 +69,8 @@ public class Periodic extends Command {
     As of now there is not one, so it is going to be set to 1
     0 will be the integer associated with the intake position*/
     if(States.actionState == States.ActionStates.PASSIVE){
-      Elevate = new Elevate(1);
-      Elevate.start();
+      // Elevate = new Elevate(1);
+      // Elevate.start();
     }
     //Drive Train Motion State Assignment
     // double rVel = Robot.superStructure.rightDrive.getVelocity();

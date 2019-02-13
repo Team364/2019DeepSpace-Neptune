@@ -107,7 +107,12 @@ public class OperatorOI{
       }else if(controller2.getRawAxis(3) >= 0.5){
         States.actionState = States.ActionStates.SCORE_ACT;
       }else{
+        if((gripSet == 3)||(gripSet == 4)){
           States.actionState = States.ActionStates.PASSIVE;  
+        }else{
+          States.actionState = States.ActionStates.FERRY_ACT;
+        }
+ 
       }
       /**Sets action state for scoring and then runs the grip subroutine */
       if(States.objState == States.ObjectStates.CARGO_OBJ) {cargo = true;}
