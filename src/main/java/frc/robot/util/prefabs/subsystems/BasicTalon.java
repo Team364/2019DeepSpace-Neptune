@@ -50,12 +50,21 @@ public class BasicTalon extends Subsystem {
     public void stop(){
         this.talon.set(ControlMode.PercentOutput, 0);
     }
+    public boolean noCommand(){
+      if(this.getCurrentCommandName() == ""){
+        return true;
+      }else{
+        return false;
+      }
+    }
 
     public void postSmartDashVars(){
       String mOut = name + " Motor Output: ";
       String cCome = name + " Current Command: ";
+      String cNam = this.getCurrentCommandName();
       SmartDashboard.putNumber(mOut, this.talon.getMotorOutputPercent());
       SmartDashboard.putString(cCome, this.getCurrentCommandName());
+      SmartDashboard.putBoolean("Empty Command", noCommand());
     }
   @Override
   public void initDefaultCommand() {

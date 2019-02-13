@@ -45,6 +45,15 @@ public class Piston extends Subsystem {
   public void noInput() {
       piston.set(DoubleSolenoid.Value.kOff);
   }
+
+  public boolean noCommand(){
+    if(this.getCurrentCommandName() == ""){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  
   /**Treat as abstract */
   @Override
   public void initDefaultCommand() {

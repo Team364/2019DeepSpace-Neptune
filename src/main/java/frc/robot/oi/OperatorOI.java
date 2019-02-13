@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.subroutines.*;
 import frc.robot.util.States;
 //import frc.robot.commands.teleop.TestPGyro;
@@ -125,7 +126,7 @@ public class OperatorOI{
       else if(!cargo && !intake){gripSet  = 4;} //Score Hatch 
       else{gripSet = 0;}//Should never happen
 
-
+      
       if((controller2.getRawAxis(3) >= 0.5)||(controller2.getRawAxis(2) >= 0.5)){
         Command runGrip = new RunGrip(gripSet);
         runGrip.start();

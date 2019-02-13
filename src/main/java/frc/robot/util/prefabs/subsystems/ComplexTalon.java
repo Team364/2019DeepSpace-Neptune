@@ -283,6 +283,14 @@ public class ComplexTalon extends Subsystem {
         return this.talon.getSelectedSensorPosition(PIDLoopIdx);
     }
 
+    public boolean noCommand(){
+        if(this.getCurrentCommandName() == ""){
+          return true;
+        }else{
+          return false;
+        }
+      }
+
     /**Run instrumentation */
     public void instrumentation(){
         Instrumentation.Process(talon);
