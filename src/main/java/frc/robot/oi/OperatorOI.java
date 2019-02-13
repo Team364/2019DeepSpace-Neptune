@@ -51,6 +51,10 @@ public class OperatorOI{
     public JoystickButton setLiftPositionHigh;
     public JoystickButton setLiftPositionCargo;
 
+    private boolean cargo;
+    private boolean intake;
+    private int set;
+
     public static Command runGrip = new RunGrip();
 
 
@@ -107,6 +111,33 @@ public class OperatorOI{
         }
       }
       /**Sets action state for scoring and then runs the grip subroutine */
+      if(States.objState == States.ObjectStates.CARGO_OBJ){
+        cargo = true;
+      }else if(States.objState == States.ObjectStates.HATCH_OBJ){
+        cargo = false;
+      }
+      if(States.actionState == States.ActionStates.SCORE_ACT){
+          intake = false;
+      }else if(States.actionState == States.ActionStates.INTAKE_ACT){
+          intake = true;
+      }
+      //Get Cargo
+      if(cargo && intake){
+        set = 1;
+      }
+      //Get Hatch
+      if(!cargo && intake){
+        set = 2;
+      }
+      //Score Cargo
+      if(cargo && !intake){
+        set = 3;
+      } 
+      //Score Hatch
+      if(!cargo && !intake){
+        set = 4;
+      }
+  
       if((controller2.getRawAxis(3) >= 0.5)||(controller2.getRawAxis(2) >= 0.5)){
         runGrip.start();
       }

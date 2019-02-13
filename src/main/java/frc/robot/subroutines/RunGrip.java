@@ -35,6 +35,7 @@ public class RunGrip extends CommandGroup {
       States.actionState = States.ActionStates.PASSIVE;
     }
   public RunGrip() {
+    addSequential(new runIntake(0.5, true)); //Intake
     //Intake Cargo
     if(cargo && intake){
       addSequential(new runIntake(0.5, true)); //Intake
