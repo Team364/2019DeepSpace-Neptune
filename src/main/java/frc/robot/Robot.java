@@ -18,6 +18,7 @@ import frc.robot.subsystems.*;
 import frc.robot.oi.*;
 import frc.robot.autos.*;
 import frc.robot.util.States;
+import edu.wpi.first.wpilibj.Timer;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -58,7 +59,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("TurnAuto", turnAuto);
     m_chooser.addOption("CargoAuto", cargoAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
-
+    Timer.getFPGATimestamp();
     //Subsystem init
     vision = new Vision();
     superStructure = new SuperStructure();
