@@ -16,7 +16,7 @@ public class Instrumentation {
 	private static int loops = 0;
 	private static int timesInMotionMagic = 0;
 
-	public static void Process(TalonSRX tal, StringBuilder sb) {
+	public static void Process(TalonSRX tal) {
 		
 		/* Check if Talon SRX is performing Motion Magic */
 		if (tal.getControlMode() == ControlMode.MotionMagic) {

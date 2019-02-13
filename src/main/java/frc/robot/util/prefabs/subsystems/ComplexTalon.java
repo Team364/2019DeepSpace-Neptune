@@ -285,20 +285,7 @@ public class ComplexTalon extends Subsystem {
 
     /**Run instrumentation */
     public void instrumentation(){
-        
-		/* Get current Talon SRX motor output */
-		double motorOutput = talon.getMotorOutputPercent();
-        /* Prepare line to print */
-        sb.append(this.name);
-		sb.append("\tOut%:");
-		sb.append(motorOutput);
-		sb.append("\tVel:");
-		sb.append(talon.getSelectedSensorVelocity(PIDLoopIdx));
-        sb.append("\terr:");
-        sb.append(talon.getClosedLoopError(PIDLoopIdx));
-        sb.append("\ttrg:");
-        sb.append(getTargetPosition());
-        Instrumentation.Process(talon, sb);
+        Instrumentation.Process(talon);
     }
     public void postSmartDashVars(){
         String name = this.name;
