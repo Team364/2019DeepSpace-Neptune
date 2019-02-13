@@ -56,10 +56,10 @@ public class RobotMap {
     public static final int climbPort3 = 4;
     public static final int climbPort4 = 5;
 
-    public static final int ballLimitSwitch = 3;
+    public static final int ballLimitSwitch = 4;
     public static final int armLimitSwitch = 2;
     public static final int lowerLiftLimitSwitch = 1;
-    public static final int upperLiftLimitSwitch = 4;
+    public static final int upperLiftLimitSwitch = 3;
     
 
 }

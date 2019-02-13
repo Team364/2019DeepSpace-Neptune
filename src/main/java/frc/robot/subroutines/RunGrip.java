@@ -29,7 +29,11 @@ public class RunGrip extends CommandGroup {
           intake = true;
       }
   }
-
+    // Can be overwritten by teams
+    @Override
+    protected void end() {
+      States.actionState = States.ActionStates.PASSIVE;
+    }
   public RunGrip() {
     //Intake Cargo
     if(cargo && intake){
@@ -54,6 +58,8 @@ public class RunGrip extends CommandGroup {
       addSequential(new IntakePassive()); //Set levers to passive mode for state
       States.actionState = States.ActionStates.PASSIVE;
     }
+
+    
 
 }
 }

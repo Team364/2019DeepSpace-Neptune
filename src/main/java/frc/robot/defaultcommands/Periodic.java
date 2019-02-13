@@ -13,8 +13,11 @@ import frc.robot.subroutines.*;
 import frc.robot.util.States;
 /**Controls state logic for variable robot funtionality */
 public class Periodic extends Command {
+
   public int loops = 0;
   private Command Elevate;
+  private boolean[] Limits;
+  
   public Periodic() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -24,11 +27,19 @@ public class Periodic extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Limits = Robot.superStructure.limitArray; 
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+
+      //Update Limit Switches
+      Limits[0] = !Robot.superStructure.iL.get();
+      Limits[1] = false;
+      Limits[2] = false;
+      Limits[3] = false;
+    
     //Loop State assignement
     if(States.loopState == States.LoopStates.CLOSED_LOOP){
       ++loops;
@@ -41,6 +52,7 @@ public class Periodic extends Command {
       }
     }
     }
+
     // if(Robot.superStructure.lever.pistonState.toString() == "OPEN"){
     //   System.out.println("piston is open");
     // }

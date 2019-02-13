@@ -115,6 +115,12 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     oi2.controlLoop();
     superStructure.postSmartDashVars();
+    System.out.println(Robot.superStructure.getYaw());
+  }
+
+  @Override
+  public void disabledPeriodic(){
+
   }
 
   @Override
@@ -126,6 +132,7 @@ public class Robot extends TimedRobot {
    SmartDashboard.putNumber("GetRightContr: ",  -Robot.oi.controller.getRawAxis(1));
    SmartDashboard.putString("Object State: ", States.objState.toString());
    SmartDashboard.putString("Loop State:", States.loopState.toString());
+
 }
 
 }

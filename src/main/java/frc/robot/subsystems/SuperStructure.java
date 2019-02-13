@@ -13,6 +13,7 @@ import frc.robot.defaultcommands.DriveOpenLoop;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DigitalInput;
+import frc.robot.Robot;
 import frc.robot.defaultcommands.*;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -60,11 +61,18 @@ public class SuperStructure extends Subsystem {
   public AHRS navX;
   public PIDCalc pidNavX;
 
-  private DigitalInput iL;
-  private DigitalInput aL;
-  private DigitalInput lLL;
-  private DigitalInput uLL;
+  public DigitalInput iL;
+  public DigitalInput aL;
+  public DigitalInput lLL;
+  public DigitalInput uLL;
 
+  /**Access limit switches as follows
+   * <p>0: Cargo
+   * <p>1: Arm
+   * <p>2: Lower Lift
+   * <p>3: Upper Lift
+   */
+  public boolean[] limitArray = {false, false, false, false};
 
   public SuperStructure(){
     //masters
@@ -162,8 +170,8 @@ public class SuperStructure extends Subsystem {
     // leftDrive.zero();
   }
   //Gyro
-  public void getYaw(){
-    navX.getYaw();
+  public double getYaw(){
+    return navX.getYaw();
   }
   public void zeroYaw(){
     navX.reset();
@@ -175,34 +183,10 @@ public class SuperStructure extends Subsystem {
   }
   public void postImplementation(){
     // lift.instrumentation();
-    arm.instrumentation();
+    // arm.instrumentation();
     // rightDrive.instrumentation();
     // leftDrive.instrumentation();
   }
-  //Limit Switches
-  private boolean getCargoLimitSwitch(){
-    // return iL.get();
-    return false;
-  }
-  private boolean getArmLimitSwitch(){
-    // return aL.get();
-    return false;
-  }
-  private boolean getLowerLiftLimitSwitch(){
-    // return lLL.get();
-    return false;
-  }
-  private boolean getUpperLiftLimitSwitch(){
-    // return uLL.get();
-    return false;
-  }
-  /**Access limit switches as follows
-   * <p>0: Cargo
-   * <p>1: Arm
-   * <p>2: Lower Lift
-   * <p>3: Upper Lift
-   */
-  public boolean[] limitArray = {getCargoLimitSwitch(), getArmLimitSwitch(), getLowerLiftLimitSwitch(), getUpperLiftLimitSwitch()};
 
   public void postSmartDashVars(){
     arm.postSmartDashVars();
@@ -218,6 +202,8 @@ public class SuperStructure extends Subsystem {
     SmartDashboard.putString("Drive Motion State:", States.driveMotionState.toString());
     SmartDashboard.putString("Score State:", States.scoreState.toString());
     SmartDashboard.putString("Climb State:", States.climbState.toString());
+
+    SmartDashboard.putBoolean("Grip Done: ", Robot.oi2.getGripIsDone());
   }
   }
 
