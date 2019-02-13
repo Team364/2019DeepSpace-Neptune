@@ -222,7 +222,7 @@ public class ComplexTalon extends Subsystem {
      * Sets the talon Motor output to 0
      */
     public void stop(){
-        this.talon.set(ControlMode.PercentOutput, 0);
+        openLoop(0);
     }
     /**Sets the encoder value to zero */
     public void zero(){
@@ -269,6 +269,10 @@ public class ComplexTalon extends Subsystem {
      */
     public double getVelocity(){
         return this.talon.getSelectedSensorVelocity(PIDLoopIdx);
+    }
+    /**@return RPM */
+    public double getRPM(){
+        return getVelocity() * 10.0 / 4096.0 * 60.0;
     }
 
     /**
