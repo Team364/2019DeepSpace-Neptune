@@ -80,7 +80,8 @@ public class SuperStructure extends Subsystem {
     lDrive = new TalonSRX(RobotMap.leftTopDrive);
     lt = new TalonSRX(RobotMap.leftLift);
     a = new TalonSRX(RobotMap.arm);
-    in = new TalonSRX(RobotMap.rightClaw);
+    // in = new TalonSRX(RobotMap.rightClaw);
+    in = new TalonSRX(10);
 
     // a = new TalonSRX(10);
 
@@ -104,13 +105,13 @@ public class SuperStructure extends Subsystem {
 
     //Right Drive Train
     // rightDrive = new TalonBase(rDrive, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.4);
-    rightDrive = new BasicTalon(rDrive, 0.5);
+    rightDrive = new BasicTalon(rDrive, 0.5, "Right Drive");
     rRearDriveSlave.follow(rDrive);
     rFrontDriveSlave.follow(rDrive);
 
     //Left Drive Train
     // leftDrive = new TalonBase(lDrive, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.4);
-    leftDrive = new BasicTalon(lDrive, 0.5);
+    leftDrive = new BasicTalon(lDrive, 0.5, "Left Drive");
     lRearDriveSlave.follow(lDrive);
     lFrontDriveSlave.follow(lDrive);
 
@@ -118,7 +119,7 @@ public class SuperStructure extends Subsystem {
     
     //Lift
     // lift = new TalonBase(lt, 0, 0, 0.25, -0.25, 3750, 1500, true, 0, 10000, 0.4);
-    lift = new BasicTalon(lt, 0.5){ 
+    lift = new BasicTalon(lt, 0.5, "Lift"){ 
       public void initDefaultCommand(){
         lift.setDefaultCommand(new BasicOpenLoop(lift, 0, 0.1));
       }
@@ -137,7 +138,7 @@ public class SuperStructure extends Subsystem {
 
     //Intake 
     // intake = new TalonBase(in, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.67);
-    intake = new BasicTalon(in, 0.67);
+    intake = new BasicTalon(in, 0.67, "Intake");
     intakeSlave.follow(in);
     iL = new DigitalInput(RobotMap.ballLimitSwitch);
 
@@ -189,6 +190,7 @@ public class SuperStructure extends Subsystem {
   }
 
   public void postSmartDashVars(){
+    intake.postSmartDashVars();
     arm.postSmartDashVars();
     claw.postSmartDashVars();
     lever.postSmartDashVars();
@@ -203,7 +205,7 @@ public class SuperStructure extends Subsystem {
     SmartDashboard.putString("Score State:", States.scoreState.toString());
     SmartDashboard.putString("Climb State:", States.climbState.toString());
 
-    SmartDashboard.putBoolean("Grip Done: ", Robot.oi2.getGripIsDone());
+    SmartDashboard.putBoolean("Lim: ", limitArray[0]);
   }
   }
 

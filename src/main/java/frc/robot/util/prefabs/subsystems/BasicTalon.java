@@ -8,6 +8,8 @@
 package frc.robot.util.prefabs.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
@@ -18,10 +20,12 @@ public class BasicTalon extends Subsystem {
 
   private TalonSRX talon;
   private double Dampen;
+  private String name;
 
-  public BasicTalon(TalonSRX talon, double Dampen){
+  public BasicTalon(TalonSRX talon, double Dampen, String name){
     this.talon = talon;
     this.Dampen = Dampen;
+    this.name = name;
     talon.configFactoryDefault();
   }
 
@@ -47,6 +51,12 @@ public class BasicTalon extends Subsystem {
         this.talon.set(ControlMode.PercentOutput, 0);
     }
 
+    public void postSmartDashVars(){
+      String mOut = name + " Motor Output: ";
+      String cCome = name + " Current Command: ";
+      SmartDashboard.putNumber(mOut, this.talon.getMotorOutputPercent());
+      SmartDashboard.putString(cCome, this.getCurrentCommandName());
+    }
   @Override
   public void initDefaultCommand() {
   }
