@@ -1,6 +1,7 @@
 package frc.robot.subroutines;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.commands.*;
 import frc.robot.util.States;
@@ -18,6 +19,7 @@ public class RunGrip extends CommandGroup {
 
   @Override
   protected void execute() {
+    System.out.println("executing");
       if(States.objState == States.ObjectStates.CARGO_OBJ){
         cargo = true;
       }else if(States.objState == States.ObjectStates.HATCH_OBJ){
@@ -34,33 +36,22 @@ public class RunGrip extends CommandGroup {
     protected void end() {
       States.actionState = States.ActionStates.PASSIVE;
     }
-  public RunGrip() {
+  public RunGrip(int set) {
+    if(set == 1) //Intake Cargo
     addSequential(new runIntake(0.5, true)); //Intake
-    //Intake Cargo
-    if(cargo && intake){
-      addSequential(new runIntake(0.5, true)); //Intake
-      addSequential(new SetPiston(Robot.superStructure.claw, 1)); //Close Claw
-      States.actionState = States.ActionStates.PASSIVE;
-    }
-    //Get Hatch
-    if(!cargo && intake){
-      addSequential(new SetPiston(Robot.superStructure.lever, 0)); //Open lever
-      States.actionState = States.ActionStates.PASSIVE;
-    }
-    //Score Cargo
-    if(cargo && !intake){
+    addSequential(new SetPiston(Robot.superStructure.claw, 1)); //Close Claw
+    States.actionState = States.ActionStates.PASSIVE;
+    if(set == 2)  //Intake Hatch
+    addSequential(new SetPiston(Robot.superStructure.lever, 0)); //Open lever
+    States.actionState = States.ActionStates.PASSIVE;
+    if(set == 3) //Score Cargo
     addSequential(new runIntake(-0.75, false)); //Outtake
     addSequential(new IntakePassive()); //Set intake to passive mode for current state
     States.actionState = States.ActionStates.PASSIVE;
-    }
     //Score Hatch
-    if(!cargo && !intake){
-      addSequential(new SetPiston(Robot.superStructure.lever, 1)); //Close lever
-      addSequential(new IntakePassive()); //Set levers to passive mode for state
-      States.actionState = States.ActionStates.PASSIVE;
-    }
-
-    
-
+    if(set == 4)
+    addSequential(new SetPiston(Robot.superStructure.lever, 1)); //Close lever
+    addSequential(new IntakePassive()); //Set levers to passive mode for state
+    States.actionState = States.ActionStates.PASSIVE;
 }
 }
