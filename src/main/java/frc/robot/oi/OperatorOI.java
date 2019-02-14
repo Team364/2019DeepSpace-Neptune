@@ -108,8 +108,6 @@ public class OperatorOI{
       }else if(controller2.getRawAxis(3) >= 0.5){
         States.actionState = States.ActionStates.SCORE_ACT;
       }else{
-        /*TODO: Make a gripPassive boolean method in superstructure
-        in place of the following logic*/
         if(((gripSet == 3)||(gripSet == 4)) && Robot.superStructure.gripInactive()){
           States.actionState = States.ActionStates.PASSIVE;  
         }else if(Robot.superStructure.gripInactive()){

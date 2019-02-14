@@ -103,7 +103,10 @@ public class Robot extends TimedRobot {
     oi2.controlLoop();
     superStructure.postSmartDashVars();
   }
+  @Override
+  public void disabledInit(){
 
+  }
   @Override
   public void disabledPeriodic(){
 

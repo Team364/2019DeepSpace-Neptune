@@ -20,7 +20,7 @@ public class SetPiston extends Command {
  * @param mode
  */
     public SetPiston(Piston piston, int mode) {
-        requires(Robot.superStructure.claw);
+        requires(piston);
         setTimeout(0.1);
         this.piston = piston;
         this.mode = mode;
@@ -58,5 +58,6 @@ public class SetPiston extends Command {
     @Override
     protected void interrupted() {
         super.interrupted();
+        end();
     }
 }

@@ -143,7 +143,7 @@ public class SuperStructure extends Subsystem {
     iL = new DigitalInput(RobotMap.ballLimitSwitch);
 
     //Pistons
-    claw = new Piston(cl, "Claw");
+    //claw = new Piston(cl, "Claw");
     lever = new Piston(le, "Lever");
     back = new Piston(ba, "Back");
     front = new Piston(wh, "Front");
@@ -185,7 +185,8 @@ public class SuperStructure extends Subsystem {
    * by any three of the subsystems of the larger apparatus
    */
   public boolean gripInactive(){
-       return (Robot.superStructure.intake.noCommand() && Robot.superStructure.lever.noCommand() && Robot.superStructure.claw.noCommand());
+      //  return (Robot.superStructure.intake.noCommand() && Robot.superStructure.lever.noCommand() && Robot.superStructure.claw.noCommand());
+      return (Robot.superStructure.intake.noCommand() && Robot.superStructure.lever.noCommand());
   }
   /**Posts MotionMagic Trajectory Data to SmartDashboard for each ComplexTalon */
   public void postImplementation(){
@@ -198,7 +199,7 @@ public class SuperStructure extends Subsystem {
   public void postSmartDashVars(){
     intake.postSmartDashVars();
     arm.postSmartDashVars();
-    claw.postSmartDashVars();
+    //claw.postSmartDashVars();
     lever.postSmartDashVars();
     back.postSmartDashVars();
     front.postSmartDashVars();
@@ -211,7 +212,7 @@ public class SuperStructure extends Subsystem {
     SmartDashboard.putString("Score State:", States.scoreState.toString());
     SmartDashboard.putString("Climb State:", States.climbState.toString());
 
-    SmartDashboard.putBoolean("Lim: ", limitArray[0]);
+    SmartDashboard.putBoolean("Intake Limit: ", limitArray[0]);
   }
   }
 

@@ -44,8 +44,8 @@ public class RobotMap {
     public static final int intakePort1 = 3;
     public static final int intakePort2 = 4;
     
-    public static final int leverPort1 = 5;
-    public static final int leverPort2 = 6;
+    public static final int leverPort1 = 0;
+    public static final int leverPort2 = 7;
 
     //PCM 2
     //Back Pistons
