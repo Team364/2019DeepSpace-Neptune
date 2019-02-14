@@ -16,7 +16,6 @@ import frc.robot.util.States;
 public class Robot extends TimedRobot {
   //Declarations
   //Subsystems
-  public static Vision vision;
   public static SuperStructure superStructure;
 
   //Controls
@@ -45,7 +44,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto choices", m_chooser);
 
     //Subsystem init
-    vision = new Vision();
     superStructure = new SuperStructure();
 
     //Controls init
@@ -104,7 +102,6 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     oi2.controlLoop();
     superStructure.postSmartDashVars();
-    System.out.println(Robot.superStructure.getYaw());
   }
 
   @Override

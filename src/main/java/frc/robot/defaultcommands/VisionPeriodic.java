@@ -10,7 +10,7 @@ public class VisionPeriodic extends Command {
      * Prints Vision Target Data to Console
      */
     public VisionPeriodic() {
-        requires(Robot.vision);
+        // requires(Robot.vision);
         setInterruptible(true);
 
     }
