@@ -110,7 +110,7 @@ public class OperatorOI{
       }else{
         /*TODO: Make a gripPassive boolean method in superstructure
         in place of the following logic*/
-        if((gripSet == 3)||(gripSet == 4)
+        if(((gripSet == 3)||(gripSet == 4))
         &&(Robot.superStructure.intake.noCommand()
         &&(Robot.superStructure.lever.noCommand()
         &&(Robot.superStructure.claw.noCommand())))){
