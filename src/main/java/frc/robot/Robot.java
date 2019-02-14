@@ -90,7 +90,6 @@ public class Robot extends TimedRobot {
         Auto3.start();
         break;
     }
-    putSmartDashVars();
     Scheduler.getInstance().run();
   }
   @Override
@@ -116,13 +115,4 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
-
-  private void putSmartDashVars() {
-   SmartDashboard.putNumber("GetLeftContr: ", -Robot.oi.controller.getRawAxis(5));
-   SmartDashboard.putNumber("GetRightContr: ",  -Robot.oi.controller.getRawAxis(1));
-   SmartDashboard.putString("Object State: ", States.objState.toString());
-   SmartDashboard.putString("Loop State:", States.loopState.toString());
-
-}
-
 }
