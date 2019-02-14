@@ -1,13 +1,4 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
-
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -18,17 +9,12 @@ import frc.robot.subsystems.*;
 import frc.robot.oi.*;
 import frc.robot.autos.*;
 import frc.robot.util.States;
-import edu.wpi.first.wpilibj.Timer;
 /**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the TimedRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the build.gradle file in the
- * project.
+ * We are using Timed Robot and Command Robot together.
+ * <p>The Scheduler is invoked during auto and teleop
  */
 public class Robot extends TimedRobot {
   //Declarations
-
   //Subsystems
   public static Vision vision;
   public static SuperStructure superStructure;
@@ -37,12 +23,10 @@ public class Robot extends TimedRobot {
   public static DriverOI oi;
   public static OperatorOI oi2;
 
-  //Commands
   //Auto Commands
   public static Command Auto1;
   public static Command Auto2;
   public static Command Auto3;
- 
   //Auto Selector String
   private String autoSelected;
   //Auto Chooser
@@ -59,13 +43,15 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("TurnAuto", turnAuto);
     m_chooser.addOption("CargoAuto", cargoAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
-    Timer.getFPGATimestamp();
+
     //Subsystem init
     vision = new Vision();
     superStructure = new SuperStructure();
+
     //Controls init
     oi = new DriverOI();
     oi2 = new OperatorOI();
+
     //Auto Command inits Auto CommandGroups are assigned to commands 
     Auto1 = new TurnAuto();
     Auto2 = new CargoAuto();
@@ -76,15 +62,18 @@ public class Robot extends TimedRobot {
 
   }
 
+  /**This runs every 20ms when the robot is enabled */
   @Override
   public void robotPeriodic() {
     Robot.superStructure.postImplementation();
   }
 
+  /**Runs before auto */
   @Override
   public void autonomousInit() {
     autoSelected = m_chooser.getSelected();
     System.out.println("Auto selected: " + autoSelected);
+    //Scheduler is cleared
     Scheduler.getInstance().removeAll();
   }
 
@@ -106,8 +95,8 @@ public class Robot extends TimedRobot {
   }
   @Override
   public void teleopInit() {
+      //This removes all commands from the scheduler
       Scheduler.getInstance().removeAll();
-      System.out.println(States.objState);
       superStructure.resetEncoders();
   }
 

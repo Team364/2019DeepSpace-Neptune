@@ -13,7 +13,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 public class Instrumentation {
 	/* Tracking variables for instrumentation
 	of motion magic trajectories */
-	private static int loops = 0;
 	private static int timesInMotionMagic = 0;
 
 	public static void Process(TalonSRX tal) {

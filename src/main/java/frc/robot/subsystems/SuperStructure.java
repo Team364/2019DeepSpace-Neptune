@@ -178,6 +178,7 @@ public class SuperStructure extends Subsystem {
     navX.reset();
   }
   //Misc
+  /**Sets enocders of arm and lift to zero */
   public void resetEncoders(){
     // lift.zero();
     arm.zero();
@@ -189,6 +190,7 @@ public class SuperStructure extends Subsystem {
   public boolean gripInactive(){
        return (Robot.superStructure.intake.noCommand() && Robot.superStructure.lever.noCommand() && Robot.superStructure.claw.noCommand());
   }
+  /**Posts MotionMagic Trajectory Data to SmartDashboard for each ComplexTalon */
   public void postImplementation(){
     // lift.instrumentation();
     // arm.instrumentation();

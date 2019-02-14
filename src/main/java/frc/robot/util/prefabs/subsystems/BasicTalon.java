@@ -21,12 +21,24 @@ public class BasicTalon extends Subsystem {
   private TalonSRX talon;
   private double Dampen;
   private String name;
-
+  private static BasicTalon instance;
+  
   public BasicTalon(TalonSRX talon, double Dampen, String name){
     this.talon = talon;
     this.Dampen = Dampen;
     this.name = name;
     talon.configFactoryDefault();
+  }
+  /**
+   * Returns the {@link BasicTalon}, creating it if one does not exist.
+   *
+   * @return the {@link BasicTalon}
+   */
+  public synchronized BasicTalon getInstance() {
+    if (instance == null) {
+      instance = new BasicTalon(this.talon, this.Dampen, this.name);
+    }
+    return instance;
   }
 
       /**Open loop is to run in the default command */

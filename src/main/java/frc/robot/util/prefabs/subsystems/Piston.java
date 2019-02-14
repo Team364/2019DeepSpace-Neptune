@@ -11,6 +11,7 @@ public class Piston extends Subsystem {
 
   private DoubleSolenoid piston;
   private String name;
+  private Piston instance;
   /** State tracks what position piston is in */
       public enum PistonStates{
         OPEN,
@@ -21,6 +22,17 @@ public class Piston extends Subsystem {
   public Piston(DoubleSolenoid piston, String name){
     this.piston = piston;
     this.name = name;
+  }
+    /**
+   * Returns the {@link Piston}, creating it if one does not exist.
+   *
+   * @return the {@link Piston}
+   */
+  public synchronized Piston getInstance() {
+    if (instance == null) {
+      instance = new Piston(this.piston, this.name);
+    }
+    return instance;
   }
     /**
      * open piston

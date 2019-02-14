@@ -94,6 +94,8 @@ public class ComplexTalon extends Subsystem {
         CLOSED_LOOP
     }
     public LoopStates loopState = LoopStates.OPEN_LOOP;
+    private static ComplexTalon instance;
+
     public ComplexTalon(
                     TalonSRX talon, 
                     double nominalOutputForward, 
@@ -164,6 +166,29 @@ public class ComplexTalon extends Subsystem {
 		talon.setSelectedSensorPosition(0, PIDLoopIdx, TimeoutMs);
         
     }
+    /**
+   * Returns the {@link ComplexTalon}, creating it if one does not exist.
+   *
+   * @return the {@link ComplexTalon}
+   */
+  public synchronized ComplexTalon getInstance() {
+    if (instance == null) {
+      instance = new ComplexTalon(        
+        this.talon,
+        this.nominalOutputForward,
+        this.nominalOutputReverse,
+        this.peakOutputForward,
+        this.peakOutputReverse,
+        this.cruiseVelocity,
+        this.acceleration,
+        this.bounded,
+        this.upperBound,
+        this.lowerBound,
+        this.Dampen,
+        this.name);
+    }
+    return instance;
+  }
         /**Treat this as abstract */
         @Override
         protected void initDefaultCommand() {
