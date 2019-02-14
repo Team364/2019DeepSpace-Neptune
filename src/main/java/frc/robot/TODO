@@ -1,0 +1,24 @@
+1.)Test how low the motor power has to be to hold the lift up while not being powered by either open or closed loop
+2.)Write Curved drive command for auto
+3.)LEDs change colors on state indicating when the robot is ready to intake, when it is intaking, etc
+4.)Record Positions for:
+        a.)Hatch Level 1
+        b.)Hatch Level 2
+        c.)Hatch Level 3
+        d.)Rocket Level 1
+        e.)Rocket Level 2
+        f.)Rocket Level 3
+        g.)Cargo Ship Level 2
+        h.)Intaking Cargo
+        i.)Retract/Starting
+5.)Test Pistons    
+6.)Set up 2 PCMs
+7.)Tune delays on Scoring Objects
+8.)Test Climb Subroutine:
+        a.)Time back Pistons
+        b.)Time front Pistons
+        c.)Tune hold Position Command
+9.)Align Subroutine
+10.)Set up and test Drive to Vision Command
+11.)Turn 180 button
+12.)Rewrite Turn to Heading Command

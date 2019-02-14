@@ -76,7 +76,6 @@ public class DriveOpenLoop extends Command {
         }
 
         //This is where the driveSystem is actually asked to run motors
-        // Robot.driveSystem.openLoop(throttle, steer);
         leftPower = throttle + steer;
         rightPower = throttle - steer;
         Robot.superStructure.driveOpenLoop(rightPower, leftPower);
