@@ -27,16 +27,21 @@ public class RunGrip extends CommandGroup {
     }
   public RunGrip(int set) {
     this.set = set;
-    if(set == 1) //Intake Cargo
+    if(set == 1){ //Intake Cargo
     addSequential(new runIntake(0.5, true)); //Intake
-    //addSequential(new SetPiston(Robot.superStructure.claw, 1)); //Close Claw
-    if(set == 2)  //Intake Hatch
+    addSequential(new SetPiston(Robot.superStructure.claw, 1)); //Close Claw
+    System.out.println("Set 1");
+    }else if(set == 2){  //Intake Hatch
+    System.out.println("Set 2");
     addSequential(new SetPiston(Robot.superStructure.lever, 0)); //Open lever
-    if(set == 3) //Score Cargo
+    }else if(set == 3){ //Score Cargo
     addSequential(new runIntake(-0.75, false)); //Outtake
-    //addSequential(new SetPiston(Robot.superStructure.claw, 0));
+    addSequential(new SetPiston(Robot.superStructure.claw, 0));
+    System.out.println("Set 3");
     //Score Hatch
-    if(set == 4)
+    }else if(set == 4){
+    System.out.println("Set 4");
     addSequential(new SetPiston(Robot.superStructure.lever, 1)); //Close lever
 }
+  }
 }
