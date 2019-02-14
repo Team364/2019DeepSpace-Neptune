@@ -24,11 +24,6 @@ public class RunGrip extends CommandGroup {
     // Can be overwritten by teams
     @Override
     protected void end() {
-      if((set == 3)||(set ==4)){
-        States.actionState = States.ActionStates.PASSIVE;
-      }else if((set == 1)||(set ==2)){
-        States.actionState = States.ActionStates.FERRY_ACT;
-      }
     }
   public RunGrip(int set) {
     this.set = set;

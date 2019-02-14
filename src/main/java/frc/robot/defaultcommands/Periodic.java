@@ -68,6 +68,7 @@ public class Periodic extends Command {
     then the lift and arm are to assume the intake position
     As of now there is not one, so it is going to be set to 1
     0 will be the integer associated with the intake position*/
+    //Set the arm and lift back to intake config
     if(States.actionState == States.ActionStates.PASSIVE){
       // Elevate = new Elevate(1);
       // Elevate.start();
