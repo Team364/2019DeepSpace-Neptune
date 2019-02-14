@@ -17,7 +17,7 @@ public class StopDriveMotors extends Command {
 
     @Override
     protected void execute() {
-        Robot.superStructure.stopDrive();
+        Robot.superStructure.driveTrain.stop();
     }
 
     @Override

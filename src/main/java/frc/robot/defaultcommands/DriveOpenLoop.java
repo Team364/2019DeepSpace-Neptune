@@ -86,7 +86,7 @@ public class DriveOpenLoop extends Command {
 
     @Override
     protected void end() {
-        Robot.superStructure.stopDrive();
+        Robot.superStructure.driveTrain.stop();
     }
 
     @Override

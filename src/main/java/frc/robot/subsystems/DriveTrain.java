@@ -21,6 +21,10 @@ public class DriveTrain extends Subsystem {
     leftDrive.openLoop(left);
     rightDrive.openLoop(right);
   }
+  public void stop(){
+    leftDrive.stop();
+    rightDrive.stop();
+  }
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new DriveOpenLoop());

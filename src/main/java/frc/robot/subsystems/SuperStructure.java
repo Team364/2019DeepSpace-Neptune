@@ -162,10 +162,7 @@ public class SuperStructure extends Subsystem {
   public void driveOpenLoop(double left, double right){
     driveTrain.openLoop(left, right);
   }
-  public void stopDrive(){
-    rightDrive.stop();
-    leftDrive.stop();
-  }
+
   public void resetDriveEncoders(){
     // rightDrive.zero();
     // leftDrive.zero();

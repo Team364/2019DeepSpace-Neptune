@@ -15,7 +15,7 @@ import frc.robot.util.States;
  */
 public class Robot extends TimedRobot {
   //Declarations
-  //Subsystems
+  //Subsystem
   public static SuperStructure superStructure;
 
   //Controls
