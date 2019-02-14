@@ -55,6 +55,7 @@ public class OpenLoop extends Command {
             talonBase.stop();
             talonBase.outOfBounds = false;
         }
+        //TODO: Add option to  go down if its too high and go up if its too low
         if((talonBase.getPosition() <= lowerBound)||(talonBase.getPosition() > upperBound)){
             System.out.println("The open Loop is out of bounds");
             talonBase.outOfBounds = true;

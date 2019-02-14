@@ -23,3 +23,7 @@
 11.)Turn 180 button
 12.)Rewrite Turn to Heading Command
 13.)Go through simulated match and make sure states and positions act as intended
+14.)Overload Complex Talon for bounded Functionality option
+15.)Allow openloop to move in opposite direction of how it is bounded
+16.)Try Catches
+17.)Diagnostics for all hardware
