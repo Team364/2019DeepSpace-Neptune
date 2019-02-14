@@ -182,6 +182,13 @@ public class SuperStructure extends Subsystem {
     // lift.zero();
     arm.zero();
   }
+  /**Because none of the grip runs default commands,
+   * the grip is inactive when no commands are being run
+   * by any three of the subsystems of the larger apparatus
+   */
+  public boolean gripInactive(){
+       return (Robot.superStructure.intake.noCommand() && Robot.superStructure.lever.noCommand() && Robot.superStructure.claw.noCommand());
+  }
   public void postImplementation(){
     // lift.instrumentation();
     // arm.instrumentation();

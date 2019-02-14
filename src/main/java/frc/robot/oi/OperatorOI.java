@@ -110,14 +110,9 @@ public class OperatorOI{
       }else{
         /*TODO: Make a gripPassive boolean method in superstructure
         in place of the following logic*/
-        if(((gripSet == 3)||(gripSet == 4))
-        &&(Robot.superStructure.intake.noCommand()
-        &&(Robot.superStructure.lever.noCommand()
-        &&(Robot.superStructure.claw.noCommand())))){
+        if(((gripSet == 3)||(gripSet == 4)) && Robot.superStructure.gripInactive()){
           States.actionState = States.ActionStates.PASSIVE;  
-        }else if(Robot.superStructure.intake.noCommand()
-        &&(Robot.superStructure.lever.noCommand()
-        &&(Robot.superStructure.claw.noCommand()))){
+        }else if(Robot.superStructure.gripInactive()){
           States.actionState = States.ActionStates.FERRY_ACT;
         }
  
