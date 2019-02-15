@@ -1,3 +1,8 @@
+Preface:
+Programming has a history of doing stuff that seems cool or useful in the moment but this tends
+to lead to Priorities being neglected and time wasted on side projects. Keeping a list such 
+as this ensure that we may stay on track and complete goals in the proper order.
+
 Priorities:
 --Go through simulated match and make sure states and positions act as intended
 --Test how low the motor power has to be to hold the lift up while not being powered by either open or closed loop
@@ -33,4 +38,5 @@ Later:
 Much Later:
 --Try Catches
 --Diagnostics for all hardware
+--Writing files to flashDrive that tracks all actions during match
 --Tracking feild position x and y with Gyro and encoders(Calculus)
