@@ -3,11 +3,11 @@ package frc.robot.util.prefabs.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.States;
-import frc.robot.util.prefabs.subsystems.ComplexTalon;;
+import frc.robot.util.prefabs.subsystems.TalonBase;;
 
 public class ClosedLoop extends Command {
 
-    private ComplexTalon talon;
+    private TalonBase talon;
     private double Position;
     private int loops;
     /**
@@ -19,7 +19,7 @@ public class ClosedLoop extends Command {
      * @param Position
      * WORKS
      */
-    public ClosedLoop(ComplexTalon talon, int Position) {
+    public ClosedLoop(TalonBase talon, int Position) {
         this.talon = talon;
         this.Position = Position;  
         setTimeout(0.2);

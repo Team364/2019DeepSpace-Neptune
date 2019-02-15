@@ -2,7 +2,7 @@
  * Instrumentation Class that handles how telemetry from the Talon SRX interacts
  * with Driverstation and Smart Dashboard.
  */
-package frc.robot.util.prefabs.subsystems.complextalonutil;
+package frc.robot.util.prefabs.subsystems.talonutil;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.util.prefabs.subsystems.*;
@@ -26,7 +26,7 @@ public class Instrumentation {
 
 		if (timesInMotionMagic > 10) {
 			/* Print the Active Trajectory Point Motion Magic is servoing towards */
-			SmartDashboard.putNumber("ClosedLoopTarget", tal.getClosedLoopTarget(ComplexTalon.PIDLoopIdx));
+			SmartDashboard.putNumber("ClosedLoopTarget", tal.getClosedLoopTarget(TalonBase.PIDLoopIdx));
     		SmartDashboard.putNumber("ActTrajVelocity", tal.getActiveTrajectoryVelocity());
     		SmartDashboard.putNumber("ActTrajPosition", tal.getActiveTrajectoryPosition());
 		}

@@ -3,7 +3,7 @@ package frc.robot.util.prefabs.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.States;
-import frc.robot.util.prefabs.subsystems.ComplexTalon;
+import frc.robot.util.prefabs.subsystems.TalonBase;
     /**
      * Used for operator only
      * @param talonBase //talon Base to run command
@@ -15,7 +15,7 @@ import frc.robot.util.prefabs.subsystems.ComplexTalon;
      */
 public class OpenLoop extends Command {
 
-    private ComplexTalon talonBase;
+    private TalonBase talonBase;
     private int axis;
     private double deadband;
     private boolean bounded;
@@ -23,7 +23,7 @@ public class OpenLoop extends Command {
     private double lowerBound;
 
     public OpenLoop(
-        ComplexTalon talonBase, 
+        TalonBase talonBase, 
         int axis, 
         double deadband) {
         requires(talonBase);
@@ -50,15 +50,15 @@ public class OpenLoop extends Command {
         if(bounded){
         if((Math.abs(power) >= deadband)&&(talonBase.getPosition() >= lowerBound)&&(talonBase.getPosition() < upperBound)){
             talonBase.openLoop(power);
-            talonBase.outOfBounds = false;
+            talonBase.isOutsideBounds(false);
         }else{
             talonBase.stop();
-            talonBase.outOfBounds = false;
+            talonBase.isOutsideBounds(false);
         }
         //TODO: Add option to  go down if its too high and go up if its too low
         if((talonBase.getPosition() <= lowerBound)||(talonBase.getPosition() > upperBound)){
             System.out.println("The open Loop is out of bounds");
-            talonBase.outOfBounds = true;
+            talonBase.isOutsideBounds(true);
         }
     }else{
         if(Math.abs(power) >= deadband){

@@ -11,7 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import frc.robot.util.prefabs.subsystems.complextalonutil.*;
+import frc.robot.util.prefabs.subsystems.talonutil.*;
   /**
    * TalonBase subsystem with getters and setters for all relevant funtionality
    * <p>includes closed loop and open loop funtionality
@@ -30,7 +30,7 @@ import frc.robot.util.prefabs.subsystems.complextalonutil.*;
    * @param dampen Dampening variable to scale down the motor output in open loop 
      * <p>set to one for no effect
    */
-public class ComplexTalon extends Subsystem {
+public class TalonBase extends Subsystem {
     /**
 	 * Which PID slot to pull gains from. Starting 2018, you can choose from
 	 * 0,1,2 or 3. Only the first two (0,1) are visible in web-based
@@ -60,8 +60,8 @@ public class ComplexTalon extends Subsystem {
     public boolean bounded = false;
     /**Power that the talon is set to in Open Loop */
     public double openLoopPower = 0;
-    /**Open loop out of bounds */
-    public boolean outOfBounds;
+    /**Open loop out of bounds. */
+    private boolean outOfBounds = false;
 
     /**Talon */
     private TalonSRX talon;
@@ -94,9 +94,9 @@ public class ComplexTalon extends Subsystem {
         CLOSED_LOOP
     }
     public LoopStates loopState = LoopStates.OPEN_LOOP;
-    private static ComplexTalon instance;
-
-    public ComplexTalon(
+    private static TalonBase instance;
+    /**Talon with Closed Loop functionality and Encoder Bounds */
+    public TalonBase(
                     TalonSRX talon, 
                     double nominalOutputForward, 
                     double nominalOutputReverse,
@@ -166,33 +166,100 @@ public class ComplexTalon extends Subsystem {
 		talon.setSelectedSensorPosition(0, PIDLoopIdx, TimeoutMs);
         
     }
-    /**
-   * Returns the {@link ComplexTalon}, creating it if one does not exist.
-   *
-   * @return the {@link ComplexTalon}
-   */
-  public synchronized ComplexTalon getInstance() {
-    if (instance == null) {
-      instance = new ComplexTalon(        
-        this.talon,
-        this.nominalOutputForward,
-        this.nominalOutputReverse,
-        this.peakOutputForward,
-        this.peakOutputReverse,
-        this.cruiseVelocity,
-        this.acceleration,
-        this.bounded,
-        this.upperBound,
-        this.lowerBound,
-        this.Dampen,
-        this.name);
+    /**Talon with Closed Loop Functionality without Encoder Bounds */
+    public TalonBase(
+                    TalonSRX talon, 
+                    double nominalOutputForward, 
+                    double nominalOutputReverse,
+                    double peakOutputForward,
+                    double peakOutputReverse,
+                    int cruiseVelocity,
+                    int acceleration,
+                    double dampen,
+                    String name
+                    ) {
+        this.talon = talon;
+        this.nominalOutputForward = nominalOutputForward;
+        this.nominalOutputReverse = nominalOutputReverse;
+        this.peakOutputForward = peakOutputForward;
+        this.peakOutputReverse = peakOutputReverse;
+        this.cruiseVelocity = cruiseVelocity;
+        this.acceleration = acceleration;
+        this.Dampen = dampen;
+        this.name = name;
+        /*Sets the name of the subsystem */
+        this.setName(this.name, this.name);
+        /* Factory default hardware to prevent unexpected behavior */
+        talon.configFactoryDefault();
+        //All followers will do the same
+
+		/* Configure Sensor Source for Pirmary PID */
+		talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,
+											PIDLoopIdx, 
+											TimeoutMs);
+
+		/**
+		 * Configure Talon SRX Output and Sesnor direction accordingly
+		 * Invert Motor to have green LEDs when driving Talon Forward / Requesting Postiive Output
+		 * Phase sensor to have positive increment when driving Talon Forward (Green LED)
+		 */
+		talon.setSensorPhase(true);
+		talon.setInverted(false);
+
+		/* Set relevant frame periods to be at least as fast as periodic rate */
+		talon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, TimeoutMs);
+		talon.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, TimeoutMs);
+
+		/* Set the peak and nominal outputs */
+		talon.configNominalOutputForward(this.nominalOutputForward, TimeoutMs);
+        talon.configNominalOutputReverse(this.nominalOutputReverse, TimeoutMs);
+		talon.configPeakOutputForward(this.peakOutputForward, TimeoutMs);
+		talon.configPeakOutputReverse(this.peakOutputReverse, TimeoutMs);
+
+		/* Set Motion Magic gains in slot0 - see documentation */
+		talon.selectProfileSlot(SlotIdx, PIDLoopIdx);
+		talon.config_kF(SlotIdx, Gains.kF, TimeoutMs);
+		talon.config_kP(SlotIdx, Gains.kP, TimeoutMs);
+		talon.config_kI(SlotIdx, Gains.kI, TimeoutMs);
+		talon.config_kD(SlotIdx, Gains.kD, TimeoutMs);
+
+		/* Set acceleration and vcruise velocity - see documentation */
+		talon.configMotionCruiseVelocity(this.cruiseVelocity, TimeoutMs);
+		talon.configMotionAcceleration(this.acceleration, TimeoutMs);
+
+		/* Zero the sensor */
+		talon.setSelectedSensorPosition(0, PIDLoopIdx, TimeoutMs);
+        
     }
-    return instance;
-  }
-        /**Treat this as abstract */
-        @Override
-        protected void initDefaultCommand() {
-        }
+    /**Talon without encoder */
+    public TalonBase(
+                    TalonSRX talon, 
+                    double dampen,
+                    String name
+                    ) {
+        this.talon = talon;
+        this.Dampen = dampen;
+        this.name = name;
+        /*Sets the name of the subsystem */
+        this.setName(this.name, this.name);
+        /* Factory default hardware to prevent unexpected behavior */
+        talon.configFactoryDefault();
+        //All followers will do the same
+
+		/**
+		 * Invert Motor to have green LEDs when driving Talon Forward / Requesting Postiive Output
+		 */
+		talon.setInverted(false);
+
+		/* Set relevant frame periods to be at least as fast as periodic rate */
+		talon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, TimeoutMs);
+		talon.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, TimeoutMs);
+
+    }
+    /**Treat this as abstract */
+    @Override
+    protected void initDefaultCommand() {
+    }
     /**Sets the lowest speed the trajectory can run at in the forward direction */
     public void setNominalOutputForward(double percentOutput){
         talon.configNominalOutputForward(percentOutput);
@@ -248,6 +315,14 @@ public class ComplexTalon extends Subsystem {
      */
     public void stop(){
         openLoop(0);
+    }
+    /**Sets the outsideBounds Boolean to true or false */
+    public void isOutsideBounds(boolean value){
+        outOfBounds = value;
+    }
+    /**Gets the outsideBounds Boolean */
+    public boolean getOutsideBounds(){
+        return outOfBounds;
     }
     /**Sets the encoder value to zero */
     public void zero(){

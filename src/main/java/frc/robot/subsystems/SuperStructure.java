@@ -22,13 +22,13 @@ public class SuperStructure extends Subsystem {
   // public TalonBase rightDrive;
   // public TalonBase leftDrive;
   // public TalonBase lift;
-  public ComplexTalon arm;
+  public TalonBase arm;
   // public TalonBase intake;
 
-  public BasicTalon rightDrive;
-  public BasicTalon leftDrive;
-  public BasicTalon lift;
-  public BasicTalon intake;
+  public TalonBase rightDrive;
+  public TalonBase leftDrive;
+  public TalonBase lift;
+  public TalonBase intake;
   
   private TalonSRX rDrive;
   private TalonSRX lDrive;
@@ -105,13 +105,13 @@ public class SuperStructure extends Subsystem {
 
     //Right Drive Train
     // rightDrive = new TalonBase(rDrive, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.4);
-    rightDrive = new BasicTalon(rDrive, 0.5, "Right Drive");
+    rightDrive = new TalonBase(rDrive, 0.5, "Right Drive");
     rRearDriveSlave.follow(rDrive);
     rFrontDriveSlave.follow(rDrive);
 
     //Left Drive Train
     // leftDrive = new TalonBase(lDrive, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.4);
-    leftDrive = new BasicTalon(lDrive, 0.5, "Left Drive");
+    leftDrive = new TalonBase(lDrive, 0.5, "Left Drive");
     lRearDriveSlave.follow(lDrive);
     lFrontDriveSlave.follow(lDrive);
 
@@ -119,9 +119,9 @@ public class SuperStructure extends Subsystem {
     
     //Lift
     // lift = new TalonBase(lt, 0, 0, 0.25, -0.25, 3750, 1500, true, 0, 10000, 0.4);
-    lift = new BasicTalon(lt, 0.5, "Lift"){ 
+    lift = new TalonBase(lt, 0.5, "Lift"){ 
       public void initDefaultCommand(){
-        lift.setDefaultCommand(new BasicOpenLoop(lift, 0, 0.1));
+        lift.setDefaultCommand(new OpenLoop(lift, 0, 0.1));
       }
     };
     liftSlave.follow(lt);
@@ -129,7 +129,7 @@ public class SuperStructure extends Subsystem {
     uLL = new DigitalInput(RobotMap.upperLiftLimitSwitch);
     
     //Arm
-    arm = new ComplexTalon(a, 0, 0, 1, -1, 20000, 8000, false, 0, 10000, 0.8, "Arm"){
+    arm = new TalonBase(a, 0, 0, 1, -1, 20000, 8000, false, 0, 10000, 0.8, "Arm"){
       public void initDefaultCommand(){
         arm.setDefaultCommand(new OpenLoop(arm, 5, 0.1));
       }
@@ -138,7 +138,7 @@ public class SuperStructure extends Subsystem {
 
     //Intake 
     // intake = new TalonBase(in, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.67);
-    intake = new BasicTalon(in, 0.67, "Intake");
+    intake = new TalonBase(in, 0.67, "Intake");
     intakeSlave.follow(in);
     iL = new DigitalInput(RobotMap.ballLimitSwitch);
 
