@@ -30,11 +30,7 @@ public class RotateToAngle extends Command {
     @Override
     protected void initialize() {
         loops = 0;
-        // Robot.liftSystem.pidLift.setPIDParameters(0.001, 0, 0, 0);
         if(States.objState == States.ObjectStates.HATCH_OBJ){
-            //TODO:
-            //measure out where these values are before this is ran on
-            //the acutual robot
             intakeCargo = 1137 /*100 degrees */;
             perpendicularToGround = 2275/*200 degrees*/;
             scoreOnHigh = 3413 /*300 degrees*/;
@@ -61,9 +57,6 @@ public class RotateToAngle extends Command {
     protected void execute() {
         ++loops;
         Robot.superStructure.arm.MoveToPosition(wantedAngle);
-        System.out.println("The Object State is: " + States.objState);
-        System.out.println("The Angle that has been selected is: " + desiredAngle);
-        System.out.println("The encoder count being fed to the execute method is: " + wantedAngle);
     }
 
     @Override

@@ -60,10 +60,7 @@ public class ElevateToPosition extends Command {
     @Override
     protected void execute() {
         ++loops;
-        System.out.println("The Object State is: " + States.objState);
-        System.out.println("The Height that has been selected is: " + desiredHeight);
-        System.out.println("The encoder count being fed to the execute method is: " + wantedPosition);
-        // Robot.superStructure.lift.MoveToPosition(wantedPosition);
+        Robot.superStructure.lift.MoveToPosition(wantedPosition);
         States.loopState = States.LoopStates.CLOSED_LOOP;
     }
 
