@@ -24,6 +24,7 @@ Priorities:
         b.)Time front Pistons
         c.)Tune hold Position Command
 --Allow openloop to move in opposite direction of how it is bounded
+--When Passive return to intake state
 --Velocity Closed Loop -- use for intake and drive rampDown
 
 Later:

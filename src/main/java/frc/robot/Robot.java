@@ -17,11 +17,9 @@ public class Robot extends TimedRobot {
   //Declarations
   //Subsystem
   public static SuperStructure superStructure;
-
   //Controls
   public static DriverOI oi;
   public static OperatorOI oi2;
-
   //Auto Commands
   public static Command Auto1;
   public static Command Auto2;
@@ -45,11 +43,9 @@ public class Robot extends TimedRobot {
 
     //Subsystem init
     superStructure = new SuperStructure();
-
     //Controls init
     oi = new DriverOI();
     oi2 = new OperatorOI();
-
     //Auto Command inits Auto CommandGroups are assigned to commands 
     Auto1 = new TurnAuto();
     Auto2 = new CargoAuto();
