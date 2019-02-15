@@ -1,6 +1,6 @@
+Priorities:
+--Go through simulated match and make sure states and positions act as intended
 --Test how low the motor power has to be to hold the lift up while not being powered by either open or closed loop
---Write Curved drive command for auto
---LEDs change colors on state indicating when the robot is ready to intake, when it is intaking, etc
 --Record Positions for:
         a.)Hatch Level 1
         b.)Hatch Level 2
@@ -18,13 +18,19 @@
         a.)Time back Pistons
         b.)Time front Pistons
         c.)Tune hold Position Command
+--Allow openloop to move in opposite direction of how it is bounded
+--Velocity Closed Loop -- use for intake and drive rampDown
+
+Later:
 --Align Subroutine
 --Set up and test Drive to Vision Command
 --Turn 180 button
 --Rewrite Turn to Heading Command
---Go through simulated match and make sure states and positions act as intended
---Overload Complex Talon for bounded Functionality option
---Allow openloop to move in opposite direction of how it is bounded
+--Write Autos
+--Write Curved drive command for auto
+--LEDs change colors on state indicating when the robot is ready to intake, when it is intaking, etc
+
+Much Later:
 --Try Catches
 --Diagnostics for all hardware
 --Tracking feild position x and y with Gyro and encoders(Calculus)
