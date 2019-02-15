@@ -33,7 +33,6 @@ public class ElevateToPosition extends Command {
         /*One must keep in mind that a Position of 4096 is only a full rotation of the axle the encoder
         corresponds to. This means that these values may be quite large in practice.
         Writing an equation which converts the inches on the lift to raw sensor units would be beyond useful */
-        // Robot.liftSystem.pidLift.setPIDParameters(0.001, 0, 0, 0);
         if(States.objState == States.ObjectStates.HATCH_OBJ){
             low = 10000;
             med = 20000;
@@ -66,8 +65,7 @@ public class ElevateToPosition extends Command {
 
     @Override
     protected boolean isFinished() {
-        // return Robot.superStructure.lift.reachedPosition()&& (loops > 20);
-        return true;
+        return Robot.superStructure.lift.reachedPosition()&& (loops > 20);
     }
 
     @Override
