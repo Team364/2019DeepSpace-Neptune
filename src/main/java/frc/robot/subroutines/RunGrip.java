@@ -12,19 +12,8 @@ import frc.robot.util.prefabs.commands.*;
  */
 public class RunGrip extends CommandGroup {
 
-    private boolean cargo;
-    private boolean intake;
     private int set;
-// Can be overwritten by teams
-
-
-  @Override
-  protected void execute() {
-  }
-    // Can be overwritten by teams
-    @Override
-    protected void end() {
-    }
+    
   public RunGrip(int set) {
     this.set = set;
     if(set == 1){ //Intake Cargo
