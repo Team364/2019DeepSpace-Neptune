@@ -80,10 +80,7 @@ public class SuperStructure extends Subsystem {
     lDrive = new TalonSRX(RobotMap.leftTopDrive);
     lt = new TalonSRX(RobotMap.leftLift);
     a = new TalonSRX(RobotMap.arm);
-    // in = new TalonSRX(RobotMap.rightClaw);
-    in = new TalonSRX(10);
-
-    // a = new TalonSRX(10);
+    in = new TalonSRX(RobotMap.rightClaw);
 
     //followers
     lRearDriveSlave = new VictorSPX(RobotMap.leftRearDrive);
@@ -95,50 +92,89 @@ public class SuperStructure extends Subsystem {
 
     //Pistons
     //PCM 1
-    cl = new DoubleSolenoid(RobotMap.robotPCM, RobotMap.intakePort1, RobotMap.intakePort2);
-    le = new DoubleSolenoid(RobotMap.robotPCM, RobotMap.leverPort1, RobotMap.leverPort2);
-    sh = new DoubleSolenoid(RobotMap.robotPCM, RobotMap.shifterPort1, RobotMap.shifterPort2);
+    cl = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.intakePort1, RobotMap.intakePort2);
+    le = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.leverPort1, RobotMap.leverPort2);
+    sh = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.shifterPort1, RobotMap.shifterPort2);
     //PCM 2
-    ba = new DoubleSolenoid(RobotMap.climbPCM, RobotMap.climbPort1, RobotMap.climbPort2);
-    wh = new DoubleSolenoid(RobotMap.climbPCM, RobotMap.climbPort3, RobotMap.climbPort4);
+    ba = new DoubleSolenoid(RobotMap.secondaryPCM, RobotMap.climbPort1, RobotMap.climbPort2);
+    wh = new DoubleSolenoid(RobotMap.secondaryPCM, RobotMap.climbPort3, RobotMap.climbPort4);
    
 
     //Right Drive Train
-    // rightDrive = new TalonBase(rDrive, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.4);
-    rightDrive = new TalonBase(rDrive, 0.5, "Right Drive");
+    rightDrive = new TalonBase(        
+        rDrive, 
+        RobotMap.driveNominalOutputForward, 
+        RobotMap.driveNominalOutputReverse, 
+        RobotMap.drivePeakOutputForward, 
+        RobotMap.drivePeakOutputReverse, 
+        RobotMap.driveCruiseVelocity, 
+        RobotMap.driveAcceleration, 
+        RobotMap.driveDampen, 
+        "RightDrive");
     rRearDriveSlave.follow(rDrive);
     rFrontDriveSlave.follow(rDrive);
 
     //Left Drive Train
-    // leftDrive = new TalonBase(lDrive, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.4);
-    leftDrive = new TalonBase(lDrive, 0.5, "Left Drive");
+    leftDrive = new TalonBase(        
+        lDrive, 
+        RobotMap.driveNominalOutputForward, 
+        RobotMap.driveNominalOutputReverse, 
+        RobotMap.drivePeakOutputForward, 
+        RobotMap.drivePeakOutputReverse, 
+        RobotMap.driveCruiseVelocity, 
+        RobotMap.driveAcceleration, 
+        RobotMap.driveDampen, 
+        "LeftDrive");
     lRearDriveSlave.follow(lDrive);
     lFrontDriveSlave.follow(lDrive);
 
     driveTrain = new DriveTrain(leftDrive, rightDrive);
     
     //Lift
-    // lift = new TalonBase(lt, 0, 0, 0.25, -0.25, 3750, 1500, true, 0, 10000, 0.4);
-    lift = new TalonBase(lt, 0.5, "Lift"){ 
-      public void initDefaultCommand(){
-        lift.setDefaultCommand(new OpenLoop(lift, 0, 0.1));
-      }
-    };
+    lift = new TalonBase(        
+        lt, 
+        RobotMap.liftNominalOutputForward, 
+        RobotMap.liftNominalOutputReverse, 
+        RobotMap.liftPeakOutputForward, 
+        RobotMap.liftPeakOutputReverse, 
+        RobotMap.liftCruiseVelocity, 
+        RobotMap.liftAcceleration, 
+        RobotMap.liftBounded, 
+        RobotMap.liftLowerBound, 
+        RobotMap.liftUpperBound, 
+        RobotMap.liftDampen, 
+        "Lift"){
+          public void initDefaultCommand(){
+            lift.setDefaultCommand(new OpenLoop(lift, RobotMap.liftAxis, RobotMap.liftDeadband));
+          }
+        };
     liftSlave.follow(lt);
     lLL = new DigitalInput(RobotMap.lowerLiftLimitSwitch);
     uLL = new DigitalInput(RobotMap.upperLiftLimitSwitch);
     
     //Arm
-    arm = new TalonBase(a, 0, 0, 1, -1, 20000, 8000, false, 0, 10000, 0.8, "Arm"){
+    arm = new TalonBase(
+        a, 
+        RobotMap.armNominalOutputForward, 
+        RobotMap.armNominalOutputReverse, 
+        RobotMap.armPeakOutputForward, 
+        RobotMap.armPeakOutputReverse, 
+        RobotMap.armCruiseVelocity, 
+        RobotMap.armAcceleration, 
+        RobotMap.armBounded, 
+        RobotMap.armLowerBound, 
+        RobotMap.armUpperBound, 
+        RobotMap.armDampen, 
+        "Arm"){
       public void initDefaultCommand(){
-        arm.setDefaultCommand(new OpenLoop(arm, 5, 0.1));
+        arm.setDefaultCommand(new OpenLoop(arm, RobotMap.armAxis, RobotMap.armDeadBand));
       }
     };
     aL = new DigitalInput(RobotMap.armLimitSwitch);
 
     //Intake 
     // intake = new TalonBase(in, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.67);
-    intake = new TalonBase(in, 0.67, "Intake");
+    intake = new TalonBase(in, RobotMap.intakeDampen, "Intake");
     intakeSlave.follow(in);
     iL = new DigitalInput(RobotMap.ballLimitSwitch);
 
@@ -151,7 +187,7 @@ public class SuperStructure extends Subsystem {
 
     //Gyro
     navX = new AHRS(SPI.Port.kMXP);
-    pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
+    pidNavX = new PIDCalc(RobotMap.navXPterm, RobotMap.navXIterm, RobotMap.navXDterm, RobotMap.navXFterm, "NavX");
   }
   @Override
   public void initDefaultCommand() {
@@ -177,7 +213,7 @@ public class SuperStructure extends Subsystem {
   //Misc
   /**Sets enocders of arm and lift to zero */
   public void resetEncoders(){
-    // lift.zero();
+    lift.zero();
     arm.zero();
   }
   /**Because none of the grip runs default commands,
@@ -189,10 +225,10 @@ public class SuperStructure extends Subsystem {
   }
   /**Posts MotionMagic Trajectory Data to SmartDashboard for each ComplexTalon */
   public void postImplementation(){
-    // lift.instrumentation();
-    // arm.instrumentation();
-    // rightDrive.instrumentation();
-    // leftDrive.instrumentation();
+    lift.instrumentation();
+    arm.instrumentation();
+    rightDrive.instrumentation();
+    leftDrive.instrumentation();
   }
 
   public void postSmartDashVars(){

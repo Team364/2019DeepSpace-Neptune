@@ -105,8 +105,8 @@ public class TalonBase extends Subsystem {
                     int cruiseVelocity,
                     int acceleration,
                     boolean bounded,
-                    double upperBound,
                     double lowerBound,
+                    double upperBound,
                     double dampen,
                     String name
                     ) {
@@ -118,8 +118,8 @@ public class TalonBase extends Subsystem {
         this.cruiseVelocity = cruiseVelocity;
         this.acceleration = acceleration;
         this.bounded = bounded;
-        this.upperBound = upperBound;
         this.lowerBound = lowerBound;
+        this.upperBound = upperBound;
         this.Dampen = dampen;
         this.name = name;
         /*Sets the name of the subsystem */
