@@ -26,8 +26,8 @@ public class RobotMap {
     //Grip
     public static final int rightClaw = 4;//Talon SRX
     public static final int leftClaw = 5;//Talon SRX
-    public static final int intakePort1 = 3;//Primary PCM
-    public static final int intakePort2 = 4;//Primary PCM
+    public static final int intakePort1 = 1;//Primary PCM
+    public static final int intakePort2 = 6;//Primary PCM
     public static final int leverPort1 = 0;//Primary PCM
     public static final int leverPort2 = 7;//Primary PCM
     public static final int ballLimitSwitch = 4;//Digital Input
@@ -37,9 +37,9 @@ public class RobotMap {
     //Climb
     public static final int dropWheels = 2;//VictorSPX
     public static final int climbPort1 = 2;//Back
-    public static final int climbPort2 = 3;//Back
-    public static final int climbPort3 = 4;//Front
-    public static final int climbPort4 = 5;//Front
+    public static final int climbPort2 = 5;//Back
+    public static final int climbPort3 = 0;//Front
+    public static final int climbPort4 = 7;//Front
 
     //Software
      //Drive
