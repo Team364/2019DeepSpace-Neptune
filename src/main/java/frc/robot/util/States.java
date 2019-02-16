@@ -17,7 +17,8 @@ public class States{
         INTAKE_ACT,
         FERRY_ACT,
         SCORE_ACT,
-        PASSIVE
+        PASSIVE,
+        SEEK
     }
     /** If the robot is is closed loop then the users cannot directly affect arm or
     elevator movement. This state refers to scoring mechanisms directly(i.e. arm, elevator)

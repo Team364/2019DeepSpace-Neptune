@@ -111,6 +111,8 @@ public class OperatorOI{
         States.actionState = States.ActionStates.INTAKE_ACT;
       }else if(controller2.getRawAxis(3) >= 0.5){
         States.actionState = States.ActionStates.SCORE_ACT;
+      }else if(controller2.getRawButton(5)){
+        States.actionState = States.ActionStates.SEEK;
       }else{
         if(((gripSet == 3)||(gripSet == 4)) && Robot.superStructure.gripInactive()){
           States.actionState = States.ActionStates.PASSIVE;  
