@@ -23,14 +23,14 @@ public class SuperStructure extends Subsystem {
   public TalonBase lift;
   public TalonBase arm;
   public VictorBase intake;
+  public VictorBase dropWheels;
 
   private TalonSRX rDrive;
   private TalonSRX lDrive;
   private TalonSRX lt;
   private TalonSRX a;
-
-  public VictorSPX in;
-
+  private VictorSPX in;
+  private VictorSPX dw;
 
   public DriveTrain driveTrain;
 
@@ -76,6 +76,7 @@ public class SuperStructure extends Subsystem {
     lt = new TalonSRX(RobotMap.rightLift);
     a = new TalonSRX(RobotMap.arm);
     in = new VictorSPX(RobotMap.rightClaw);
+    dw = new VictorSPX(RobotMap.dropWheels);
 
     //followers
     lRearDriveSlave = new VictorSPX(RobotMap.leftRearDrive);
@@ -172,6 +173,9 @@ public class SuperStructure extends Subsystem {
     intakeSlave.follow(in);
     iL = new DigitalInput(RobotMap.ballLimitSwitch);
 
+    //DropWheels
+    dropWheels = new VictorBase(dw, 0.5, "DropWheels");
+    
     //Pistons
     claw = new Piston(cl, "Claw");
     lever = new Piston(le, "Lever");

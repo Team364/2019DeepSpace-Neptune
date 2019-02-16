@@ -35,6 +35,7 @@ public class RobotMap {
     public static final int arm = 6; //Talon SRX
     public static final int armLimitSwitch = 2;//Digital Input
     //Climb
+    public static final int dropWheels = 2;//VictorSPX
     public static final int climbPort1 = 2;//Back
     public static final int climbPort2 = 3;//Back
     public static final int climbPort3 = 4;//Front
