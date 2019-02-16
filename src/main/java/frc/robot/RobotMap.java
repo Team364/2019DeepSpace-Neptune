@@ -10,14 +10,14 @@ public class RobotMap {
      * climb apparatus*/
     public static final int secondaryPCM = 1;
     //DriveTrain
-    public static final int leftFrontDrive = 2;//Victor SPX
-    public static final int leftTopDrive = 3;//Talon SRX
-    public static final int leftRearDrive = 6;//Victor SPX
-    public static final int rightFrontDrive = 4; //Victor SPX
-    public static final int rightTopDrive = 5;//10 //Talon SRX
-    public static final int rightRearDrive = 1;//Victor SPX
-    public static final int shifterPort1 = 1;//Primary PCM
-    public static final int shifterPort2 = 2;//Primary PCM
+    public static final int leftFrontDrive = 15;//Talon SRX//
+    public static final int leftTopDrive = 4;//Victor SPX
+    public static final int leftRearDrive = 5;//Victor SPX
+    public static final int rightFrontDrive = 12; //Talon SPX//
+    public static final int rightTopDrive = 6;//10 //Victor SPX//
+    public static final int rightRearDrive = 3;//Victor SPX
+    public static final int shifterPort1 = 3;//Primary PCM
+    public static final int shifterPort2 = 4;//Primary PCM
     //Lift
     public static final int rightLift = 1;//Talon SRX
     public static final int leftLift = 2;//Talon SRX

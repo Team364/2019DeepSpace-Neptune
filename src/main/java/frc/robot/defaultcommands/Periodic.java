@@ -15,25 +15,22 @@ public class Periodic extends Command {
 
   public int loops = 0;
   private boolean[] Limits;
-  private boolean passiveLatch;
+  private boolean passiveLatch = false;
+
   public Periodic() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     requires(Robot.superStructure);
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     Limits = Robot.superStructure.limitArray; 
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
 
       //Update Limit Switches
-      Limits[0] = !Robot.superStructure.iL.get();
+      Limits[0] = Robot.superStructure.iL.get();//True when pressed
       Limits[1] = false;
       Limits[2] = false;
       Limits[3] = false;
@@ -42,9 +39,9 @@ public class Periodic extends Command {
     if(States.loopState == States.LoopStates.CLOSED_LOOP){
       ++loops;
       if(loops > 20){
-      // if(Robot.superStructure.arm.reachedPosition()||Robot.superStructure.lift.reachedPosition()){
-        // if(Robot.superStructure.lift.reachedPosition()){
-        if(Robot.superStructure.arm.reachedPosition()){
+       if(Robot.superStructure.arm.reachedPosition()||Robot.superStructure.lift.reachedPosition()){
+        // if(Robot.superStructure.lift.reachedPosition()){ -- testing lift alone
+        //if(Robot.superStructure.arm.reachedPosition()){ --testing arm alone 
         States.loopState = States.LoopStates.OPEN_LOOP;
         loops = 0;
       }

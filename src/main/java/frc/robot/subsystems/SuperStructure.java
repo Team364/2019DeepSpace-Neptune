@@ -38,9 +38,9 @@ public class SuperStructure extends Subsystem {
   public DriveTrain driveTrain;
 
   private VictorSPX lRearDriveSlave;
-  private VictorSPX lFrontDriveSlave;
+  private VictorSPX lTopDriveSlave;
   private VictorSPX rRearDriveSlave;
-  private VictorSPX rFrontDriveSlave;
+  private VictorSPX rTopDriveSlave;
   private VictorSPX liftSlave;
   private VictorSPX intakeSlave;
 
@@ -74,17 +74,17 @@ public class SuperStructure extends Subsystem {
 
   public SuperStructure(){
     //masters
-    rDrive = new TalonSRX(RobotMap.rightTopDrive);
-    lDrive = new TalonSRX(RobotMap.leftTopDrive);
+    rDrive = new TalonSRX(RobotMap.rightFrontDrive);
+    lDrive = new TalonSRX(RobotMap.leftFrontDrive);
     lt = new TalonSRX(RobotMap.leftLift);
     a = new TalonSRX(RobotMap.arm);
     in = new TalonSRX(RobotMap.rightClaw);
 
     //followers
     lRearDriveSlave = new VictorSPX(RobotMap.leftRearDrive);
-    lFrontDriveSlave = new VictorSPX(RobotMap.leftFrontDrive);
+    lTopDriveSlave = new VictorSPX(RobotMap.leftTopDrive);
     rRearDriveSlave = new VictorSPX(RobotMap.rightRearDrive);
-    rFrontDriveSlave = new VictorSPX(RobotMap.rightFrontDrive);
+    rTopDriveSlave = new VictorSPX(RobotMap.rightTopDrive);
     liftSlave = new VictorSPX(RobotMap.rightLift);
     intakeSlave = new VictorSPX(RobotMap.leftClaw);
 
@@ -110,7 +110,7 @@ public class SuperStructure extends Subsystem {
         RobotMap.driveDampen, 
         "RightDrive");
     rRearDriveSlave.follow(rDrive);
-    rFrontDriveSlave.follow(rDrive);
+    rTopDriveSlave.follow(rDrive);
 
     //Left Drive Train
     leftDrive = new TalonBase(        
@@ -124,7 +124,7 @@ public class SuperStructure extends Subsystem {
         RobotMap.driveDampen, 
         "LeftDrive");
     lRearDriveSlave.follow(lDrive);
-    lFrontDriveSlave.follow(lDrive);
+    lTopDriveSlave.follow(lDrive);
 
     driveTrain = new DriveTrain(leftDrive, rightDrive);
     
