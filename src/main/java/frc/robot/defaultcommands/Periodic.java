@@ -15,7 +15,7 @@ public class Periodic extends Command {
 
   public int loops = 0;
   private boolean[] Limits;
-  
+  private boolean passiveLatch;
   public Periodic() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -51,25 +51,12 @@ public class Periodic extends Command {
     }
     }
 
-    // if(Robot.superStructure.lever.pistonState.toString() == "OPEN"){
-    //   System.out.println("piston is open");
-    // }
-    // //If a ball is in stow then the action state is ferry
-    // if(((Robot.superStructure.limitArray[0])&&(States.objState == States.ObjectStates.CARGO_OBJ))
-    // ||((Robot.superStructure.lever.pistonState.toString() == "OPEN")&&(States.objState == States.ObjectStates.HATCH_OBJ))
-    // ){
-    //   States.actionState = States.ActionStates.FERRY_ACT;
-    // }else if(!(States.actionState == States.ActionStates.INTAKE_ACT)&&!(States.actionState == States.ActionStates.SCORE_ACT)){
-    //   States.actionState = States.ActionStates.PASSIVE;
-    // }
-    /*If nothing is being scored, the intake is not running, and no game peice is possessed,
-    then the lift and arm are to assume the intake position
-    As of now there is not one, so it is going to be set to 1
-    0 will be the integer associated with the intake position*/
-    //Set the arm and lift back to intake config
-    if(States.actionState == States.ActionStates.PASSIVE){
+    //Set the arm and lift back to start config
+    if(Robot.superStructure.elevatorPassive() && !passiveLatch){
       // Elevate = new Elevate(1);
       // Elevate.start();
+      System.out.println("Would move to neutral position");
+      passiveLatch = Robot.superStructure.elevatorPassive();
     }
     //Drive Train Motion State Assignment
     // double rVel = Robot.superStructure.rightDrive.getVelocity();

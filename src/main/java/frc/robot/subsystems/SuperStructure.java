@@ -221,6 +221,9 @@ public class SuperStructure extends Subsystem {
   public boolean gripInactive(){
       return (Robot.superStructure.intake.noCommand() && Robot.superStructure.lever.noCommand() && Robot.superStructure.claw.noCommand());
   }
+  public boolean elevatorPassive(){
+    return States.actionState == States.ActionStates.PASSIVE;
+  }
   /**Posts MotionMagic Trajectory Data to SmartDashboard for each ComplexTalon */
   public void postImplementation(){
     lift.instrumentation();

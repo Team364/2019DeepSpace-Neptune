@@ -11,10 +11,8 @@ public class States{
     Intake is for intaking objects
     Ferry is when the robot is carrying an object
     Score is when the robot is outtaking an object
-    No is for when the robot is not in possession of an object and is not actively seeking to obtain one
-    The retract arm action will most likely use this. The robot will start in this state
-    I am considering making this the state the robot will be in during teleop if the drivers are not
-    attempting to take positive control of an object to minimize possible damage to the apparatus*/
+    Passive is for when the robot is not in possession of an object and is not actively seeking to obtain one
+    */
     public static enum ActionStates {
         INTAKE_ACT,
         FERRY_ACT,
@@ -60,7 +58,6 @@ public class States{
         FINISHED_CLIMBING,
         NOT_CLIMBING
     }
-    //Object State is declared and set to cargo
     public static ObjectStates objState = ObjectStates.CARGO_OBJ;
     public static ActionStates actionState = ActionStates.PASSIVE;
     public static LoopStates loopState = LoopStates.OPEN_LOOP;
