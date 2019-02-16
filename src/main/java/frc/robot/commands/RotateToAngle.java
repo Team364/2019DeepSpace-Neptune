@@ -2,7 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.util.RobotMap;
+import frc.robot.RobotMap;
 import frc.robot.util.States;
 
 public class RotateToAngle extends Command {

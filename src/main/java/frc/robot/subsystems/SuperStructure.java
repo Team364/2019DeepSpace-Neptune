@@ -5,7 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.defaultcommands.Periodic;
-import frc.robot.util.RobotMap;
+import frc.robot.RobotMap;
 import frc.robot.util.PIDCalc;
 import frc.robot.util.prefabs.subsystems.*;
 import frc.robot.util.prefabs.commands.*;
