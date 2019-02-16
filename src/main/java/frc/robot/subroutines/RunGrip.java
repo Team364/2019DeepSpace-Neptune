@@ -1,21 +1,16 @@
 package frc.robot.subroutines;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.commands.*;
-import frc.robot.util.States;
 import frc.robot.util.prefabs.commands.*;
 
 /**
  * Subroutine to be run in teleop on button press
  */
 public class RunGrip extends CommandGroup {
-
-    private int set;
     
   public RunGrip(int set) {
-    this.set = set;
     if(set == 1){ //Intake Cargo
     addSequential(new runIntake(0.5, true)); //Intake
     addSequential(new SetPiston(Robot.superStructure.claw, 1)); //Close Claw

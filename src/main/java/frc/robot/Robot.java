@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
 import frc.robot.oi.*;
 import frc.robot.autos.*;
-import frc.robot.util.States;
 /**
  * We are using Timed Robot and Command Robot together.
  * <p>The Scheduler is invoked during auto and teleop

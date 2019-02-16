@@ -94,7 +94,6 @@ public class TalonBase extends Subsystem {
         CLOSED_LOOP
     }
     public LoopStates loopState = LoopStates.OPEN_LOOP;
-    private static TalonBase instance;
     /**Talon with Closed Loop functionality and Encoder Bounds */
     public TalonBase(
                     TalonSRX talon, 

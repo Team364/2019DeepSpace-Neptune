@@ -9,13 +9,11 @@ package frc.robot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subroutines.*;
 import frc.robot.util.States;
 /**Controls state logic for variable robot funtionality */
 public class Periodic extends Command {
 
   public int loops = 0;
-  private Command Elevate;
   private boolean[] Limits;
   
   public Periodic() {

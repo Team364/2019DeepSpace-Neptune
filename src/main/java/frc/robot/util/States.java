@@ -2,8 +2,6 @@ package frc.robot.util;
 
 public class States{
 
-    //TODO: Write the logic for the rest of the states in the project
-    //NOT A PRIORITY -- Get robot to run first before testing any of this
     /** State for whether robot is in hatch mode or cargo mode*/
     public static enum ObjectStates {
         CARGO_OBJ,
@@ -63,7 +61,6 @@ public class States{
         NOT_CLIMBING
     }
     //Object State is declared and set to cargo
-    //TODO: Ensure that these mirror what the robots starting configuration is
     public static ObjectStates objState = ObjectStates.CARGO_OBJ;
     public static ActionStates actionState = ActionStates.PASSIVE;
     public static LoopStates loopState = LoopStates.OPEN_LOOP;

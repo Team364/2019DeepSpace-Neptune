@@ -1,7 +1,6 @@
 package frc.robot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 
 public class VisionPeriodic extends Command {
 

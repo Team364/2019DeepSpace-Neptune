@@ -45,8 +45,6 @@ public class OpenLoop extends Command {
     protected void execute() {
         if(States.loopState == States.LoopStates.OPEN_LOOP){
         double power = Robot.oi2.controller2.getRawAxis(axis);
-        //TODO: Test this:
-        // if(talonBase.loopState.toString() == "OPEN_LOOP");
         if(bounded){
         if((Math.abs(power) >= deadband)&&(talonBase.getPosition() >= lowerBound)&&(talonBase.getPosition() < upperBound)){
             talonBase.openLoop(power);
@@ -55,7 +53,6 @@ public class OpenLoop extends Command {
             talonBase.stop();
             talonBase.isOutsideBounds(false);
         }
-        //TODO: Add option to  go down if its too high and go up if its too low
         if((talonBase.getPosition() <= lowerBound)||(talonBase.getPosition() > upperBound)){
             System.out.println("The open Loop is out of bounds");
             talonBase.isOutsideBounds(true);

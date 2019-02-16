@@ -13,7 +13,6 @@ public class CargoAuto extends CommandGroup {
      *<p>Distances must be changed
      */
     public CargoAuto() {
-        //TODO: Use encoders to ensure precision
         //Currently this is running on raw power and time
         // //This is known as dead reckoning. It is not as accuarte as a closed loop
         // addSequential(new DriveStraightForPower(0.6, 1.5)); //1

@@ -8,7 +8,6 @@ import frc.robot.defaultcommands.DriveOpenLoop;
  */
 public class DriveTrain extends Subsystem {
 
-  //TODO: Change to TalonBases
   private TalonBase leftDrive;
   private TalonBase rightDrive;
   

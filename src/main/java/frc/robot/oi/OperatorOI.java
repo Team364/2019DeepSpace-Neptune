@@ -55,7 +55,7 @@ public class OperatorOI{
 
     private boolean cargo;
     private boolean intake;
-
+    private Command runGrip;
     public int gripSet = 1;
 
 
@@ -128,7 +128,7 @@ public class OperatorOI{
 
       
       if((controller2.getRawAxis(3) >= 0.5)||(controller2.getRawAxis(2) >= 0.5)){
-        Command runGrip = new RunGrip(gripSet);
+        runGrip = new RunGrip(gripSet);
         runGrip.start();
       }
       SmartDashboard.putNumber("Grip Set: ", gripSet);
