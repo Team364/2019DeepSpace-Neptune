@@ -83,7 +83,7 @@ public class RobotMap {
     public static final boolean armBounded = true;
     public static final double armLowerBound = 0;
     public static final double armUpperBound = 3000;
-    public static final double armDampen = 0.8;
+    public static final double armDampen = 0.15;
      //Open Loop Config
     public static final int armAxis = 5;
     public static final double armDeadBand = 0.1;
