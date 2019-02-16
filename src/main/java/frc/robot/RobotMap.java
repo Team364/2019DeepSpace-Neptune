@@ -19,8 +19,8 @@ public class RobotMap {
     public static final int shifterPort1 = 3;//Primary PCM
     public static final int shifterPort2 = 4;//Primary PCM
     //Lift
-    public static final int rightLift = 1;//Talon SRX
-    public static final int leftLift = 2;//Talon SRX
+    public static final int rightLift = 7;//Talon SRX -- Master
+    public static final int leftLift = 13;//Talon SRX -- Gyro
     public static final int lowerLiftLimitSwitch = 1;//Digital Input
     public static final int upperLiftLimitSwitch = 3;//Digital Input
     //Grip
