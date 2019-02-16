@@ -13,6 +13,7 @@ public class ElevateToPosition extends Command {
     private double med;
     private double high;
     private double intake;
+    private double startConfig;
     private double desiredHeight;
     private int loops;
     /**
@@ -34,6 +35,7 @@ public class ElevateToPosition extends Command {
         /*One must keep in mind that a Position of 4096 is only a full rotation of the axle the encoder
         corresponds to. This means that these values may be quite large in practice.
         Writing an equation which converts the inches on the lift to raw sensor units would be beyond useful */
+        startConfig = RobotMap.liftStartConfig;
         if(States.objState == States.ObjectStates.HATCH_OBJ){
             low = RobotMap.liftLowH;
             med = RobotMap.liftMedH;
@@ -58,6 +60,8 @@ public class ElevateToPosition extends Command {
             wantedPosition = high;
             }else if(desiredHeight == 4){
             wantedPosition = cargo;    
+            }else if(desiredHeight == 5){
+            wantedPosition = startConfig;
             }
     }
 

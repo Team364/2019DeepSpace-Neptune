@@ -52,6 +52,8 @@ public class RotateToAngle extends Command {
             wantedAngle = scoreOnHigh;
             }else if(desiredAngle == 4){
             wantedAngle = perpendicularToGround;
+            }else if(desiredAngle == 5){
+            wantedAngle = startConfig;
             }
     }
 
