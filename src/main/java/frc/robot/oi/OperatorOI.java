@@ -52,6 +52,7 @@ public class OperatorOI{
     public JoystickButton setLiftPositionMedium;
     public JoystickButton setLiftPositionHigh;
     public JoystickButton setLiftPositionCargo;
+    public JoystickButton setIntakePosition;
 
     private boolean cargo;
     private boolean intake;
@@ -85,6 +86,9 @@ public class OperatorOI{
         //Set Lift Position to level 4 for scoring Cargo in Cargo Ship
         setLiftPositionCargo = new JoystickButton(controller2, 3);
         setLiftPositionCargo.whenPressed(new Elevate(4));
+        //Set Lift Position to level 0 for intaking
+        setIntakePosition = new JoystickButton(controller2, 5);
+        setIntakePosition.whenPressed(new Elevate(0));
     }
     /**
    * Sets objectState

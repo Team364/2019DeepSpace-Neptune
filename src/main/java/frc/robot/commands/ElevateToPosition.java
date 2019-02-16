@@ -12,6 +12,7 @@ public class ElevateToPosition extends Command {
     private double cargo;
     private double med;
     private double high;
+    private double intake;
     private double desiredHeight;
     private int loops;
     /**
@@ -38,14 +39,18 @@ public class ElevateToPosition extends Command {
             med = RobotMap.liftMedH;
             high = RobotMap.liftHighH;
             cargo = low;
+            intake = low;
         }else if(States.objState == States.ObjectStates.CARGO_OBJ){
+            intake = RobotMap.liftIntake;
             low = RobotMap.liftLowC;
             med = RobotMap.liftMedC;
             high = RobotMap.liftHighC;
             cargo = RobotMap.liftCargoC;
         }
         
-        if(desiredHeight == 1){
+        if(desiredHeight == 0){
+            wantedPosition = intake;
+            }else if(desiredHeight == 1){
             wantedPosition = low;
             }else if(desiredHeight == 2){
             wantedPosition = med;

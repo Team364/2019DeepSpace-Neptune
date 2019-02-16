@@ -32,7 +32,6 @@ public class RotateToAngle extends Command {
     protected void initialize() {
         loops = 0;
         if(States.objState == States.ObjectStates.HATCH_OBJ){
-
             perpendicularToGround = RobotMap.armPerpindicularToGround;
             startConfig = RobotMap.armStartConfig;
             scoreOnHigh = perpendicularToGround;
@@ -43,15 +42,16 @@ public class RotateToAngle extends Command {
             scoreOnHigh = RobotMap.armScoreOnHigh;
             startConfig = RobotMap.armStartConfig;
         }
-        
-        if(desiredAngle == 1){
+        if(desiredAngle == 0){
             wantedAngle = intakeCargo;
+            }else if(desiredAngle == 1){
+            wantedAngle = perpendicularToGround;
             }else if(desiredAngle == 2){
             wantedAngle = perpendicularToGround;
             }else if(desiredAngle == 3){
             wantedAngle = scoreOnHigh;
             }else if(desiredAngle == 4){
-            wantedAngle = startConfig;
+            wantedAngle = perpendicularToGround;
             }
     }
 

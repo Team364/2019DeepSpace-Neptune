@@ -72,6 +72,7 @@ public class RobotMap {
     public static final double liftMedC = 12500;//Level 2 Rocket Cargo
     public static final double liftHighC = 17500;//Level 3 Rocket Cargo
     public static final double liftCargoC = 11000;//Scoring Cargo in Cargo Ship
+    public static final double liftIntake = 1000;//Intaking Cargo
     //Arm
      //TalonBase Config
     public static final double armNominalOutputForward = 0;
