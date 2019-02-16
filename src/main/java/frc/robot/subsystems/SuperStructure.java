@@ -17,22 +17,19 @@ import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.util.States;
 public class SuperStructure extends Subsystem {
-  // public TalonBase rightDrive;
-  // public TalonBase leftDrive;
-  // public TalonBase lift;
-  public TalonBase arm;
-  // public TalonBase intake;
 
   public TalonBase rightDrive;
   public TalonBase leftDrive;
   public TalonBase lift;
-  public TalonBase intake;
-  
+  public TalonBase arm;
+  public VictorBase intake;
+
   private TalonSRX rDrive;
   private TalonSRX lDrive;
   private TalonSRX lt;
   private TalonSRX a;
-  private TalonSRX in;
+
+  public VictorSPX in;
 
 
   public DriveTrain driveTrain;
@@ -78,7 +75,7 @@ public class SuperStructure extends Subsystem {
     lDrive = new TalonSRX(RobotMap.leftFrontDrive);
     lt = new TalonSRX(RobotMap.leftLift);
     a = new TalonSRX(RobotMap.arm);
-    in = new TalonSRX(RobotMap.rightClaw);
+    in = new VictorSPX(RobotMap.rightClaw);
 
     //followers
     lRearDriveSlave = new VictorSPX(RobotMap.leftRearDrive);
@@ -171,8 +168,7 @@ public class SuperStructure extends Subsystem {
     aL = new DigitalInput(RobotMap.armLimitSwitch);
 
     //Intake 
-    // intake = new TalonBase(in, 0, 0, 0.25, -0.25, 3750, 1500, false, 0, 0, 0.67);
-    intake = new TalonBase(in, RobotMap.intakeDampen, "Intake");
+    intake = new VictorBase(in, RobotMap.intakeDampen, "Intake");
     intakeSlave.follow(in);
     iL = new DigitalInput(RobotMap.ballLimitSwitch);
 
