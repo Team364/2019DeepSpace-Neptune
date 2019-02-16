@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.util.RobotMap;
 import frc.robot.util.States;
 
 public class ElevateToPosition extends Command {
@@ -24,7 +25,6 @@ public class ElevateToPosition extends Command {
      */
     public ElevateToPosition(int Height) {
         desiredHeight = Height;  
-        setTimeout(0.2);
         requires(Robot.superStructure.lift);
     }
 
@@ -34,15 +34,15 @@ public class ElevateToPosition extends Command {
         corresponds to. This means that these values may be quite large in practice.
         Writing an equation which converts the inches on the lift to raw sensor units would be beyond useful */
         if(States.objState == States.ObjectStates.HATCH_OBJ){
-            low = 10000;
-            med = 20000;
-            high = 30000;
-            cargo = 15000;
+            low = RobotMap.liftLowH;
+            med = RobotMap.liftMedH;
+            high = RobotMap.liftHighH;
+            cargo = low;
         }else if(States.objState == States.ObjectStates.CARGO_OBJ){
-            low = 15000;
-            med = 25000;
-            high = 35000;
-            cargo = 20000;
+            low = RobotMap.liftLowC;
+            med = RobotMap.liftMedC;
+            high = RobotMap.liftHighC;
+            cargo = RobotMap.liftCargoC;
         }
         
         if(desiredHeight == 1){
@@ -76,5 +76,6 @@ public class ElevateToPosition extends Command {
     @Override
     protected void interrupted() {
         super.interrupted();
+        end();
     }
 }

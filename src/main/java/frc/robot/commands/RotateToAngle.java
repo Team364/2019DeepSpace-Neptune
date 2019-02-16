@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.util.RobotMap;
 import frc.robot.util.States;
 
 public class RotateToAngle extends Command {
@@ -31,15 +32,16 @@ public class RotateToAngle extends Command {
     protected void initialize() {
         loops = 0;
         if(States.objState == States.ObjectStates.HATCH_OBJ){
-            intakeCargo = 1137 /*100 degrees */;
-            perpendicularToGround = 2275/*200 degrees*/;
-            scoreOnHigh = 3413 /*300 degrees*/;
-            startConfig = 0 /*0 degrees */;
+
+            perpendicularToGround = RobotMap.armPerpindicularToGround;
+            startConfig = RobotMap.armStartConfig;
+            scoreOnHigh = perpendicularToGround;
+            intakeCargo = perpendicularToGround;
         }else if(States.objState == States.ObjectStates.CARGO_OBJ){
-            intakeCargo = 1706 /*150 degrees*/;
-            perpendicularToGround = 2844 /*250 degrees*/;
-            scoreOnHigh = 3981 /*350 degrees*/;
-            startConfig = 0;
+            intakeCargo = RobotMap.armIntakeCargo;
+            perpendicularToGround = RobotMap.armPerpindicularToGround;
+            scoreOnHigh = RobotMap.armScoreOnHigh;
+            startConfig = RobotMap.armStartConfig;
         }
         
         if(desiredAngle == 1){
@@ -66,11 +68,12 @@ public class RotateToAngle extends Command {
 
     @Override
     protected void end() {
-        //Make sure to stop the arm here
+        Robot.superStructure.arm.stop();
     }
 
     @Override
     protected void interrupted() {
         super.interrupted();
+        end();
     }
 }
