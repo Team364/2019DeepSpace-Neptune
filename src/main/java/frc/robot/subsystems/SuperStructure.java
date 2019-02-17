@@ -238,14 +238,17 @@ public class SuperStructure extends Subsystem {
     lift.postSmartDashVars();
     rightDrive.postSmartDashVars();
     leftDrive.postSmartDashVars();
-    intake.postSmartDashVars();
     arm.postSmartDashVars();
+    //Victors
+    intake.postSmartDashVars();
+    dropWheels.postSmartDashVars();
     //Pistons
     claw.postSmartDashVars();
     lever.postSmartDashVars();
     back.postSmartDashVars();
     front.postSmartDashVars();
     shifter.postSmartDashVars();
+    //States
     SmartDashboard.putString("Object State:", States.objState.toString());
     SmartDashboard.putString("Action State:", States.actionState.toString());
     SmartDashboard.putString("Loop State:", States.loopState.toString());
@@ -253,6 +256,7 @@ public class SuperStructure extends Subsystem {
     SmartDashboard.putString("Drive Motion State:", States.driveMotionState.toString());
     SmartDashboard.putString("Score State:", States.scoreState.toString());
     SmartDashboard.putString("Climb State:", States.climbState.toString());
+    //LimitSwitches
     SmartDashboard.putBoolean("Intake Limit: ", limitArray[0]);
     SmartDashboard.putBoolean("Arm Limit: ", limitArray[1]);
   }
