@@ -30,10 +30,10 @@ public class RobotMap {
     public static final int intakePort2 = 6;//Primary PCM
     public static final int leverPort1 = 0;//Primary PCM
     public static final int leverPort2 = 7;//Primary PCM
-    public static final int ballLimitSwitch = 0;//Digital Input
+    public static final int ballLimitSwitch = 1;//Digital Input
     //Arm
     public static final int arm = 6; //Talon SRX
-    public static final int armLimitSwitch = 1;//Digital Input
+    public static final int armLimitSwitch = 0;//Digital Input
     //Climb
     public static final int dropWheels = 2;//VictorSPX
     public static final int climbPort1 = 2;//Back
@@ -60,41 +60,41 @@ public class RobotMap {
     public static final int liftAcceleration = 4000;
     public static final boolean liftBounded = true;
     public static final double liftLowerBound = 0;
-    public static final double liftUpperBound = 10000;
-    public static final double liftDampen = 1;
+    public static final double liftUpperBound = -128000;
+    public static final double liftDampen = 0.5;
      //Open Loop Config
-    public static final int liftAxis = 0;
+    public static final int liftAxis = 1;
     public static final double liftDeadband = 0.1;
      //Closed Loop Targets
-    public static final double liftLowH = 5000;//Level 1 for Hatch
-    public static final double liftMedH = 10000;//Level 2 Rocket for Hatch
-    public static final double liftHighH = 15000;//Level 3 Rocket for Hatch
-    public static final double liftLowC = 7500;//Level 1 Rocket Cargo
-    public static final double liftMedC = 12500;//Level 2 Rocket Cargo
-    public static final double liftHighC = 17500;//Level 3 Rocket Cargo
-    public static final double liftCargoC = 11000;//Scoring Cargo in Cargo Ship
-    public static final double liftIntake = 1000;//Intaking Cargo
-    public static final double liftStartConfig = 400;//Starting Config for Lift
+    public static final double liftLowH = -17000;//Level 1 for Hatch
+    public static final double liftMedH = -74000;//Level 2 Rocket for Hatch
+    public static final double liftHighH = -110000;//Level 3 Rocket for Hatch
+    public static final double liftLowC = -30000;//Level 1 Rocket Cargo
+    public static final double liftMedC = -70000;//Level 2 Rocket Cargo
+    public static final double liftHighC = -120000;//Level 3 Rocket Cargo
+    public static final double liftCargoC = -80000;//Scoring Cargo in Cargo Ship
+    public static final double liftIntake = -10000;//Intaking Cargo
+    public static final double liftStartConfig = -1000;//Starting Config for Lift
     //Arm
      //TalonBase Config
     public static final double armNominalOutputForward = 0;
     public static final double armNominalOutputReverse = 0;
-    public static final double armPeakOutputForward = 0.2;
-    public static final double armPeakOutputReverse = -0.2;
+    public static final double armPeakOutputForward = 0.1;
+    public static final double armPeakOutputReverse = -0.35;
     public static final int armCruiseVelocity = 2000;
     public static final int armAcceleration = 800;
     public static final boolean armBounded = true;
     public static final double armLowerBound = -3000;
     public static final double armUpperBound = 0;
-    public static final double armDampen = 0.15;
+    public static final double armDampen = 1;
      //Open Loop Config
     public static final int armAxis = 5;
     public static final double armDeadBand = 0.1;
      //Closed Loop Targets
-     public static final double armIntakeCargo = -1137;/*100 degrees*/
-     public static final double armPerpindicularToGround = -2275;/*200 degrees*/
-     public static final double armStartConfig = 200;/*0 degrees*/
-     public static final double armScoreOnHigh = -3413;/*300 degrees*/
+     public static final double armIntakeCargo = -4400;
+     public static final double armPerpindicularToGround = -3500;//-3500;
+     public static final double armStartConfig = -900;/*0 degrees*/
+     public static final double armScoreOnHigh = -1003;/*300 degrees*/
     //1706 /*150 degrees*/;
     //2844 /*250 degrees*/
     //3413/*300 degrees*/;

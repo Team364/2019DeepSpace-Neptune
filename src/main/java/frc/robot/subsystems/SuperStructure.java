@@ -16,6 +16,7 @@ import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.util.States;
+import frc.robot.defaultcommands.*;
 
 public class SuperStructure extends Subsystem {
 
@@ -142,15 +143,16 @@ public class SuperStructure extends Subsystem {
         RobotMap.liftDampen, 
         "Lift"){
           public void initDefaultCommand(){
-            lift.setDefaultCommand(new OpenLoop(lift, RobotMap.liftAxis, RobotMap.liftDeadband));
+            lift.setDefaultCommand(new LiftOpenLoop(lift, RobotMap.liftAxis, RobotMap.liftDeadband));
           }
         };
     liftSlave.follow(lt);
-    liftSlave.setInverted(true);
+    liftSlave.setInverted(false);
     lLL = new DigitalInput(RobotMap.lowerLiftLimitSwitch);
     uLL = new DigitalInput(RobotMap.upperLiftLimitSwitch);
     
     //Arm
+    a.setInverted(true);
     arm = new TalonBase(
         a, 
         RobotMap.armNominalOutputForward, 
@@ -165,7 +167,7 @@ public class SuperStructure extends Subsystem {
         RobotMap.armDampen, 
         "Arm"){
       public void initDefaultCommand(){
-        arm.setDefaultCommand(new OpenLoop(arm, RobotMap.armAxis, RobotMap.armDeadBand));
+        arm.setDefaultCommand(new ArmOpenLoop(arm, RobotMap.armAxis, RobotMap.armDeadBand));
       }
     };
     aL = new DigitalInput(RobotMap.armLimitSwitch);
@@ -228,38 +230,39 @@ public class SuperStructure extends Subsystem {
   }
   /**Posts MotionMagic Trajectory Data to SmartDashboard for each ComplexTalon */
   public void postImplementation(){
-    lift.instrumentation();
+    //lift.instrumentation();
     arm.instrumentation();
-    rightDrive.instrumentation();
-    leftDrive.instrumentation();
+    //rightDrive.instrumentation();
+    //leftDrive.instrumentation();
   }
 
   public void postSmartDashVars(){
     //Talons
-    lift.postSmartDashVars();
-    rightDrive.postSmartDashVars();
-    leftDrive.postSmartDashVars();
+    //lift.postSmartDashVars();
+    //rightDrive.postSmartDashVars();
+    //leftDrive.postSmartDashVars();
     arm.postSmartDashVars();
     //Victors
-    intake.postSmartDashVars();
-    dropWheels.postSmartDashVars();
+    //intake.postSmartDashVars();
+    //dropWheels.postSmartDashVars();
     //Pistons
-    claw.postSmartDashVars();
-    lever.postSmartDashVars();
-    back.postSmartDashVars();
-    front.postSmartDashVars();
-    shifter.postSmartDashVars();
+    //claw.postSmartDashVars();
+    //lever.postSmartDashVars();
+    //back.postSmartDashVars();
+    //front.postSmartDashVars();
+    //shifter.postSmartDashVars();
     //States
     SmartDashboard.putString("Object State:", States.objState.toString());
     SmartDashboard.putString("Action State:", States.actionState.toString());
     SmartDashboard.putString("Loop State:", States.loopState.toString());
-    SmartDashboard.putString("Drive State:", States.driveState.toString());
-    SmartDashboard.putString("Drive Motion State:", States.driveMotionState.toString());
-    SmartDashboard.putString("Score State:", States.scoreState.toString());
-    SmartDashboard.putString("Climb State:", States.climbState.toString());
+    //SmartDashboard.putString("Drive State:", States.driveState.toString());
+    //SmartDashboard.putString("Drive Motion State:", States.driveMotionState.toString());
+    //SmartDashboard.putString("Score State:", States.scoreState.toString());
+    //SmartDashboard.putString("Climb State:", States.climbState.toString());
     //LimitSwitches
-    SmartDashboard.putBoolean("Intake Limit: ", limitArray[0]);
-    SmartDashboard.putBoolean("Arm Limit: ", limitArray[1]);
+    //SmartDashboard.putBoolean("Intake Limit: ", limitArray[0]);
+    //SmartDashboard.putBoolean("Arm Limit: ", limitArray[1]);
+    SmartDashboard.putBoolean("Lift Lower Limit: ", limitArray[2]);
     SmartDashboard.putBoolean("Lift Upper Limit: ", limitArray[3]);
   }
   }
