@@ -260,6 +260,7 @@ public class SuperStructure extends Subsystem {
     //LimitSwitches
     SmartDashboard.putBoolean("Intake Limit: ", limitArray[0]);
     SmartDashboard.putBoolean("Arm Limit: ", limitArray[1]);
+    SmartDashboard.putBoolean("Lift Upper Limit: ", limitArray[3]);
   }
   }
 

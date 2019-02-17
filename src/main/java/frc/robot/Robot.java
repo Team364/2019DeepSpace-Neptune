@@ -99,6 +99,7 @@ public class Robot extends TimedRobot {
     superStructure.postSmartDashVars();
     System.out.println("Ball: " + Robot.superStructure.limitArray[0]);
     System.out.println("Arm: "+ Robot.superStructure.limitArray[1]);
+    System.out.println("Upper Lift: " + Robot.superStructure.limitArray[2]);
   }
   @Override
   public void disabledInit(){

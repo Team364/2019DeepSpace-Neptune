@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.commands.setIntakePos;
 import frc.robot.subroutines.*;
 import frc.robot.util.States;
 //import frc.robot.commands.teleop.TestPGyro;
@@ -88,7 +89,7 @@ public class OperatorOI{
         setLiftPositionCargo.whenPressed(new Elevate(4));
         //Set Lift Position to level 0 for intaking
         setIntakePosition = new JoystickButton(controller2, 5);
-        setIntakePosition.whenPressed(new Elevate(0));
+        setIntakePosition.whenPressed(new setIntakePos());
     }
     /**
    * Sets objectState
