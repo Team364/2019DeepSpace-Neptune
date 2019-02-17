@@ -16,6 +16,7 @@ import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.util.States;
+
 public class SuperStructure extends Subsystem {
 
   public TalonBase rightDrive;
@@ -91,8 +92,8 @@ public class SuperStructure extends Subsystem {
     cl = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.intakePort1, RobotMap.intakePort2);
     le = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.leverPort1, RobotMap.leverPort2);
     sh = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.shifterPort1, RobotMap.shifterPort2);
-    //PCM 2
     ba = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.climbPort1, RobotMap.climbPort2);
+    //PCM 2
     wh = new DoubleSolenoid(RobotMap.secondaryPCM, RobotMap.climbPort3, RobotMap.climbPort4);
    
 
@@ -175,8 +176,8 @@ public class SuperStructure extends Subsystem {
     iL = new DigitalInput(RobotMap.ballLimitSwitch);
 
     //DropWheels
-    dropWheels = new VictorBase(dw, 0.5, "DropWheels");
-
+    dropWheels = new VictorBase(dw, RobotMap.dropWheelsDampen, "DropWheels");
+    
     //Pistons
     claw = new Piston(cl, "Claw");
     lever = new Piston(le, "Lever");
@@ -199,8 +200,8 @@ public class SuperStructure extends Subsystem {
   }
 
   public void resetDriveEncoders(){
-    // rightDrive.zero();
-    // leftDrive.zero();
+    rightDrive.zero();
+    leftDrive.zero();
   }
   //Gyro
   public double getYaw(){
@@ -234,13 +235,21 @@ public class SuperStructure extends Subsystem {
   }
 
   public void postSmartDashVars(){
-    intake.postSmartDashVars();
+    //Talons
+    lift.postSmartDashVars();
+    rightDrive.postSmartDashVars();
+    leftDrive.postSmartDashVars();
     arm.postSmartDashVars();
+    //Victors
+    intake.postSmartDashVars();
+    dropWheels.postSmartDashVars();
+    //Pistons
     claw.postSmartDashVars();
     lever.postSmartDashVars();
     back.postSmartDashVars();
     front.postSmartDashVars();
     shifter.postSmartDashVars();
+    //States
     SmartDashboard.putString("Object State:", States.objState.toString());
     SmartDashboard.putString("Action State:", States.actionState.toString());
     SmartDashboard.putString("Loop State:", States.loopState.toString());
@@ -248,8 +257,9 @@ public class SuperStructure extends Subsystem {
     SmartDashboard.putString("Drive Motion State:", States.driveMotionState.toString());
     SmartDashboard.putString("Score State:", States.scoreState.toString());
     SmartDashboard.putString("Climb State:", States.climbState.toString());
-
+    //LimitSwitches
     SmartDashboard.putBoolean("Intake Limit: ", limitArray[0]);
+    SmartDashboard.putBoolean("Arm Limit: ", limitArray[1]);
   }
   }
 

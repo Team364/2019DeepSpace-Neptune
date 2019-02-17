@@ -54,10 +54,10 @@ public class RobotMap {
      //TalonBase Config
     public static final double liftNominalOutputForward = 0;
     public static final double liftNominalOutputReverse = 0;
-    public static final double liftPeakOutputForward = 1;
-    public static final double liftPeakOutputReverse = -1;
-    public static final int liftCruiseVelocity = 20000;
-    public static final int liftAcceleration = 8000;
+    public static final double liftPeakOutputForward = 0.5;
+    public static final double liftPeakOutputReverse = -0.5;
+    public static final int liftCruiseVelocity = 10000;
+    public static final int liftAcceleration = 4000;
     public static final boolean liftBounded = true;
     public static final double liftLowerBound = 0;
     public static final double liftUpperBound = 10000;
@@ -79,10 +79,10 @@ public class RobotMap {
      //TalonBase Config
     public static final double armNominalOutputForward = 0;
     public static final double armNominalOutputReverse = 0;
-    public static final double armPeakOutputForward = 1;
-    public static final double armPeakOutputReverse = -1;
-    public static final int armCruiseVelocity = 20000;
-    public static final int armAcceleration = 8000;
+    public static final double armPeakOutputForward = 0.2;
+    public static final double armPeakOutputReverse = -0.2;
+    public static final int armCruiseVelocity = 2000;
+    public static final int armAcceleration = 800;
     public static final boolean armBounded = true;
     public static final double armLowerBound = 0;
     public static final double armUpperBound = 3000;
@@ -101,7 +101,8 @@ public class RobotMap {
     //3981 /*350 degrees*/;
     //Intake
     public static final double intakeDampen = 0.67;
-
+    //Drop Wheels
+    public static final double dropWheelsDampen = 0.5;
     //NavX
     public static final double navXPterm = 0.0005;
     public static final double navXIterm = 0.1;

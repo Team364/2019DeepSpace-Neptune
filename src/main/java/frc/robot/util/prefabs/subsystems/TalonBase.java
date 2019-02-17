@@ -381,7 +381,10 @@ public class TalonBase extends Subsystem {
     public double getPosition(){
         return this.talon.getSelectedSensorPosition(PIDLoopIdx);
     }
-
+    /**Returns the name of the talon */
+    public String getTalonName(){
+        return this.name;
+    }
     public boolean noCommand(){
         if(this.getCurrentCommandName() == ""){
           return true;
@@ -397,17 +400,21 @@ public class TalonBase extends Subsystem {
     public void postSmartDashVars(){
         String name = this.name;
         String vel = name + " Velocity: ";
-        String pos = name + " Position: ";
+        String Tpos = name + "Target Position: ";
         String err = name + " Error: ";
         String cCom = name + " Current Command: ";
         String out = name + " Raw Output: ";
-        String cPos = name + "Current Position: ";
-        SmartDashboard.putNumber(pos, getTargetPosition());
+        String pos = name + " Position: ";
+        String nCom = name + " No Command?: ";
+        String oBound = name + " Out of Bounds?: ";
+        SmartDashboard.putNumber(Tpos, getTargetPosition());
         SmartDashboard.putNumber(vel, getVelocity());
         SmartDashboard.putNumber(err, getError());
         SmartDashboard.putString(cCom, getCurrentCommandName());
         SmartDashboard.putNumber(out, getRawOutput());
-        SmartDashboard.putNumber(cPos, getPosition());
+        SmartDashboard.putNumber(pos, getPosition());
+        SmartDashboard.putBoolean(nCom, noCommand());
+        SmartDashboard.putBoolean(oBound, getOutsideBounds());
     }
 
 

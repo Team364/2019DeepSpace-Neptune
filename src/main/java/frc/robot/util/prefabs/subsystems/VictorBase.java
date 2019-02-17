@@ -51,7 +51,10 @@ public class VictorBase extends Subsystem {
   public void stop() {
       openLoop(0);
   }
-
+    /**returns raw motor output */
+    public double getRawOutput(){
+      return this.victor.getMotorOutputPercent();
+  }
 
   public boolean noCommand(){
     if(this.getCurrentCommandName() == ""){
@@ -66,7 +69,12 @@ public class VictorBase extends Subsystem {
   public void initDefaultCommand() {
   }
   public void postSmartDashVars(){
-    String com = this.name + " Current Command";
-    SmartDashboard.putString(com, this.getCurrentCommandName());
+    String name = this.name;
+    String cCom = name + " Current Command: ";
+    String out = name + " Raw Output: ";
+    String nCom = name + " No Command?: ";
+    SmartDashboard.putString(cCom, getCurrentCommandName());
+    SmartDashboard.putNumber(out, getRawOutput());
+    SmartDashboard.putBoolean(nCom, noCommand());
   }
 }
