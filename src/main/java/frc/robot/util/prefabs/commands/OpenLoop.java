@@ -1,6 +1,7 @@
 package frc.robot.util.prefabs.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.util.States;
 import frc.robot.util.prefabs.subsystems.TalonBase;
@@ -14,6 +15,7 @@ public class OpenLoop extends Command {
 
     private TalonBase talonBase;
     private int axis;
+    private double power;
     private double deadband;
     private boolean bounded;
     private double upperBound;
@@ -42,7 +44,7 @@ public class OpenLoop extends Command {
     @Override
     protected void execute() {
     if(States.loopState == States.LoopStates.OPEN_LOOP){
-        double power = Robot.oi2.controller2.getRawAxis(axis);
+        power = Robot.oi2.controller2.getRawAxis(axis);
         if(bounded){
         if((Math.abs(power) >= deadband)&&(position >= lowerBound)&&(position < upperBound)){
             talonBase.openLoop(power);
@@ -63,6 +65,13 @@ public class OpenLoop extends Command {
         }
     }
     }
+    //SmartDashBoard
+    String pow = talonBase.getTalonName() + " Open Loop Power: ";
+    String axis = talonBase.getTalonName() + " Open Loop Axis: ";
+    String pos = talonBase.getTalonName() + " Open Loop Talon Position: ";//SHOULD BE EXACTLY THE SAME AS POSITION THAT TALON GIVES
+    SmartDashboard.putNumber(pow, this.power);
+    SmartDashboard.putNumber(axis, this.axis);
+    SmartDashboard.putNumber(pos, this.position);
 }
 
     @Override
