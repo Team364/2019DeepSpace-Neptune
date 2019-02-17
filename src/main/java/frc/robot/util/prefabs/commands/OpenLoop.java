@@ -41,20 +41,20 @@ public class OpenLoop extends Command {
 
     @Override
     protected void execute() {
-        if(States.loopState == States.LoopStates.OPEN_LOOP){
+    if(States.loopState == States.LoopStates.OPEN_LOOP){
         double power = Robot.oi2.controller2.getRawAxis(axis);
         if(bounded){
         if((Math.abs(power) >= deadband)&&(position >= lowerBound)&&(position < upperBound)){
             talonBase.openLoop(power);
             talonBase.isOutsideBounds(false);
+        }else if((position <= lowerBound)||(position > upperBound)){
+            System.out.println("The " + talonBase.getTalonName() + " open Loop is out of bounds");
+            talonBase.isOutsideBounds(true);
         }else{
             talonBase.stop();
             talonBase.isOutsideBounds(false);
         }
-        if((position <= lowerBound)||(position > upperBound)){
-            System.out.println("The " + talonBase.getTalonName() + " open Loop is out of bounds");
-            talonBase.isOutsideBounds(true);
-        }
+      
     }else{
         if(Math.abs(power) >= deadband){
             talonBase.openLoop(power);
