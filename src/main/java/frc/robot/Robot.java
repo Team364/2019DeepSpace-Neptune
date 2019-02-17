@@ -97,7 +97,8 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     oi2.controlLoop();
     superStructure.postSmartDashVars();
-    System.out.println(Robot.superStructure.limitArray[0]);
+    System.out.println("Ball: " + Robot.superStructure.limitArray[0]);
+    System.out.println("Arm: "+ Robot.superStructure.limitArray[1]);
   }
   @Override
   public void disabledInit(){

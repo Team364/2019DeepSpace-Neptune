@@ -92,7 +92,7 @@ public class SuperStructure extends Subsystem {
     le = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.leverPort1, RobotMap.leverPort2);
     sh = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.shifterPort1, RobotMap.shifterPort2);
     //PCM 2
-    ba = new DoubleSolenoid(RobotMap.secondaryPCM, RobotMap.climbPort1, RobotMap.climbPort2);
+    ba = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.climbPort1, RobotMap.climbPort2);
     wh = new DoubleSolenoid(RobotMap.secondaryPCM, RobotMap.climbPort3, RobotMap.climbPort4);
    
 
@@ -145,6 +145,7 @@ public class SuperStructure extends Subsystem {
           }
         };
     liftSlave.follow(lt);
+    liftSlave.setInverted(true);
     lLL = new DigitalInput(RobotMap.lowerLiftLimitSwitch);
     uLL = new DigitalInput(RobotMap.upperLiftLimitSwitch);
     
@@ -175,7 +176,7 @@ public class SuperStructure extends Subsystem {
 
     //DropWheels
     dropWheels = new VictorBase(dw, 0.5, "DropWheels");
-    
+
     //Pistons
     claw = new Piston(cl, "Claw");
     lever = new Piston(le, "Lever");

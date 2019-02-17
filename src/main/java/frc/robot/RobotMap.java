@@ -21,16 +21,16 @@ public class RobotMap {
     //Lift
     public static final int rightLift = 7;//Talon SRX -- Master
     public static final int leftLift = 13;//Talon SRX -- Gyro
-    public static final int lowerLiftLimitSwitch = 1;//Digital Input
-    public static final int upperLiftLimitSwitch = 3;//Digital Input
+    public static final int lowerLiftLimitSwitch = 3;//Digital Input
+    public static final int upperLiftLimitSwitch = 4;//Digital Input
     //Grip
-    public static final int rightClaw = 4;//Talon SRX
-    public static final int leftClaw = 5;//Talon SRX
+    public static final int rightClaw = 1;//Victor SPX
+    public static final int leftClaw = 7;//Victor SPX
     public static final int intakePort1 = 1;//Primary PCM
     public static final int intakePort2 = 6;//Primary PCM
     public static final int leverPort1 = 0;//Primary PCM
     public static final int leverPort2 = 7;//Primary PCM
-    public static final int ballLimitSwitch = 4;//Digital Input
+    public static final int ballLimitSwitch = 1;//Digital Input
     //Arm
     public static final int arm = 6; //Talon SRX
     public static final int armLimitSwitch = 2;//Digital Input
@@ -61,7 +61,7 @@ public class RobotMap {
     public static final boolean liftBounded = true;
     public static final double liftLowerBound = 0;
     public static final double liftUpperBound = 10000;
-    public static final double liftDampen = 0.5;
+    public static final double liftDampen = 1;
      //Open Loop Config
     public static final int liftAxis = 0;
     public static final double liftDeadband = 0.1;

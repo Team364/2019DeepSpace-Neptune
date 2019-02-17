@@ -401,11 +401,13 @@ public class TalonBase extends Subsystem {
         String err = name + " Error: ";
         String cCom = name + " Current Command: ";
         String out = name + " Raw Output: ";
+        String cPos = name + "Current Position: ";
         SmartDashboard.putNumber(pos, getTargetPosition());
         SmartDashboard.putNumber(vel, getVelocity());
         SmartDashboard.putNumber(err, getError());
         SmartDashboard.putString(cCom, getCurrentCommandName());
         SmartDashboard.putNumber(out, getRawOutput());
+        SmartDashboard.putNumber(cPos, getPosition());
     }
 
 

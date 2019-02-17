@@ -18,7 +18,7 @@ public class DriveTrain extends Subsystem {
 
   public void openLoop(double left, double right){
     leftDrive.openLoop(left);
-    rightDrive.openLoop(right);
+    rightDrive.openLoop(-right);
   }
   public void stop(){
     leftDrive.stop();
