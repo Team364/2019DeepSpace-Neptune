@@ -16,6 +16,7 @@ import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.util.States;
+
 public class SuperStructure extends Subsystem {
 
   public TalonBase rightDrive;
@@ -92,7 +93,7 @@ public class SuperStructure extends Subsystem {
     le = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.leverPort1, RobotMap.leverPort2);
     sh = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.shifterPort1, RobotMap.shifterPort2);
     //PCM 2
-    ba = new DoubleSolenoid(RobotMap.secondaryPCM, RobotMap.climbPort1, RobotMap.climbPort2);
+    ba = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.climbPort1, RobotMap.climbPort2);
     wh = new DoubleSolenoid(RobotMap.secondaryPCM, RobotMap.climbPort3, RobotMap.climbPort4);
    
 
@@ -198,8 +199,8 @@ public class SuperStructure extends Subsystem {
   }
 
   public void resetDriveEncoders(){
-    // rightDrive.zero();
-    // leftDrive.zero();
+    rightDrive.zero();
+    leftDrive.zero();
   }
   //Gyro
   public double getYaw(){
@@ -233,8 +234,13 @@ public class SuperStructure extends Subsystem {
   }
 
   public void postSmartDashVars(){
+    //Talons
+    lift.postSmartDashVars();
+    rightDrive.postSmartDashVars();
+    leftDrive.postSmartDashVars();
     intake.postSmartDashVars();
     arm.postSmartDashVars();
+    //Pistons
     claw.postSmartDashVars();
     lever.postSmartDashVars();
     back.postSmartDashVars();
@@ -247,8 +253,8 @@ public class SuperStructure extends Subsystem {
     SmartDashboard.putString("Drive Motion State:", States.driveMotionState.toString());
     SmartDashboard.putString("Score State:", States.scoreState.toString());
     SmartDashboard.putString("Climb State:", States.climbState.toString());
-
     SmartDashboard.putBoolean("Intake Limit: ", limitArray[0]);
+    SmartDashboard.putBoolean("Arm Limit: ", limitArray[1]);
   }
   }
 

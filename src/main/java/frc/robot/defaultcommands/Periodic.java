@@ -10,12 +10,14 @@ package frc.robot.defaultcommands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.States;
+import frc.robot.util.prefabs.commands.*;
 /**Controls state logic for variable robot funtionality */
 public class Periodic extends Command {
 
   public int loops = 0;
   private boolean[] Limits;
   private boolean passiveLatch = false;
+  private Command stopLift = new Stop(Robot.superStructure.lift);
 
   public Periodic() {
     requires(Robot.superStructure);
@@ -31,10 +33,13 @@ public class Periodic extends Command {
 
       //Update Limit Switches
       Limits[0] = Robot.superStructure.iL.get();//True when pressed
-      Limits[1] = false;
+      Limits[1] = Robot.superStructure.aL.get();//True when pressed
       Limits[2] = false;
       Limits[3] = false;
-    
+    //Turn off lift if limit is hit
+    if(Limits[1]){
+      stopLift.start();
+    }
     //Loop State assignement
     if(States.loopState == States.LoopStates.CLOSED_LOOP){
       ++loops;
