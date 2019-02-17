@@ -175,7 +175,7 @@ public class SuperStructure extends Subsystem {
     iL = new DigitalInput(RobotMap.ballLimitSwitch);
 
     //DropWheels
-    dropWheels = new VictorBase(dw, 0.5, "DropWheels");
+    dropWheels = new VictorBase(dw, RobotMap.dropWheelsDampen, "DropWheels");
     
     //Pistons
     claw = new Piston(cl, "Claw");
