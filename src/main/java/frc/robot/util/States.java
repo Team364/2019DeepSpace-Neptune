@@ -59,6 +59,12 @@ public class States{
         FINISHED_CLIMBING,
         NOT_CLIMBING
     }
+    /**State Tracks Height of the Lift */
+    public static enum LiftZones{
+        UPPER_DANGER,
+        SAFE,
+        LOWER_DANGER
+    }
     public static ObjectStates objState = ObjectStates.CARGO_OBJ;
     public static ActionStates actionState = ActionStates.PASSIVE;
     public static LoopStates loopState = LoopStates.OPEN_LOOP;
@@ -66,6 +72,7 @@ public class States{
     public static DriveMotionStates driveMotionState = DriveMotionStates.NOT_MOVING;
     public static ScoreStates scoreState = ScoreStates.NONE;
     public static ClimbStates climbState = ClimbStates.NOT_CLIMBING;
+    public static LiftZones liftZone = LiftZones.LOWER_DANGER;
 }
 
 

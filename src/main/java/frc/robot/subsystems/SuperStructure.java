@@ -264,6 +264,7 @@ public class SuperStructure extends Subsystem {
     //SmartDashboard.putBoolean("Arm Limit: ", limitArray[1]);
     SmartDashboard.putBoolean("Lift Lower Limit: ", limitArray[2]);
     SmartDashboard.putBoolean("Lift Upper Limit: ", limitArray[3]);
+    SmartDashboard.putString("Lift Zone: ", States.liftZone.toString());
   }
   }
 

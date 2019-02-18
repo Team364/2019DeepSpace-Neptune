@@ -32,12 +32,20 @@ public class Periodic extends Command {
   @Override
   protected void execute() {
 
-      //Update Limit Switches
+    //Update Limit Switches
       Limits[0] = Robot.superStructure.iL.get();//True when pressed
       Limits[1] = Robot.superStructure.aL.get();//True when pressed
       Limits[2] = Robot.superStructure.lLL.get();
       Limits[3] = Robot.superStructure.uLL.get();
-    //Turn off lift if limit is hit
+    //Track Lift Zone
+    if((Robot.superStructure.lift.getPosition() > -10000) &&(Robot.superStructure.lift.getPosition() < RobotMap.liftLowerBound)){
+      States.liftZone = States.LiftZones.LOWER_DANGER;
+    }else if((Robot.superStructure.lift.getPosition() < -100000)&&(Robot.superStructure.lift.getPosition() > RobotMap.liftUpperBound))
+      States.liftZone = States.LiftZones.UPPER_DANGER;
+    else{
+      States.liftZone = States.LiftZones.SAFE;
+    }
+    
     if((Robot.superStructure.lift.getPosition() <= RobotMap.liftUpperBound)){
       stopLift.start();
     }
