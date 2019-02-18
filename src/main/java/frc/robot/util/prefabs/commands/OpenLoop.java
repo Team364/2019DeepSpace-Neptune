@@ -71,7 +71,7 @@ public class OpenLoop extends Command {
     protected boolean isFinished() {
         /* This command will only end when interrupted during teleop mode
         by buttons in the Operator Interface*/
-        return false || Robot.superStructure.limitArray[3] || Robot.superStructure.limitArray[2] || Robot.superStructure.limitArray[1];
+        return false;
     }
 
 }

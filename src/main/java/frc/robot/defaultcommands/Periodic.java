@@ -27,10 +27,7 @@ public class Periodic extends Command {
   protected void execute() {
 
     //Update Limit Switches
-      Limits[0] = Robot.superStructure.iL.get();//True when pressed
-      Limits[1] = Robot.superStructure.aL.get();//True when pressed
-      Limits[2] = Robot.superStructure.lLL.get();
-      Limits[3] = Robot.superStructure.uLL.get();
+      Limits[0] = Robot.superStructure.iL.get();//Ball
 
       //Calculate Angle of the Arm
       // if(Math.abs(Robot.superStructure.arm.getPosition()) < Math.abs(RobotMap.armPerpindicularToGround)){
@@ -58,10 +55,6 @@ public class Periodic extends Command {
     }
     //Loop State assignement
     if(States.loopState == States.LoopStates.CLOSED_LOOP){
-      if(Limits[3]||Limits[2]){
-        stopLift.start();
-        States.loopState = States.LoopStates.OPEN_LOOP;
-      }
       ++loops;
       if(loops > 20){
         //Shouldn't this be an and? Test when you get the chance
