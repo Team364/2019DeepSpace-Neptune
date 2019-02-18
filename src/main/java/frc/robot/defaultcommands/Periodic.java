@@ -31,6 +31,11 @@ public class Periodic extends Command {
       Limits[2] = Robot.superStructure.lLL.get();
       Limits[3] = Robot.superStructure.uLL.get();
 
+      //Calculate Angle of the Arm
+      double angle = Math.cos(Math.abs(RobotMap.armPerpindicularToGround) - Math.abs(Robot.superStructure.arm.getPosition()) / 
+      (Math.abs(RobotMap.armPerpindicularToGround) / 90));
+      double FeedForward = 0.0613848223 * angle;
+      Robot.superStructure.arm.setPID(0.1, 0, 0, FeedForward);
     //Track Lift Zone -- If this works replicate for Arm -- Test to see if config Output updates work with this
     if((Robot.superStructure.lift.getPosition() > -10000) &&(Robot.superStructure.lift.getPosition() < RobotMap.liftLowerBound)){
       States.liftZone = States.LiftZones.LOWER_DANGER;
