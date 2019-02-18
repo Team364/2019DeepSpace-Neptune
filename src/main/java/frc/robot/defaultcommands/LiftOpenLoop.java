@@ -18,7 +18,6 @@ public class LiftOpenLoop extends Command {
     private int axis;
     private double power;
     private double deadband;
-    private boolean bounded;
     private double upperBound;
     private double lowerBound;
     private double lastPosition;
@@ -33,7 +32,6 @@ public class LiftOpenLoop extends Command {
         this.talonBase = talonBase;
         this.axis = axis;
         this.deadband = deadband;
-        this.bounded = talonBase.bounded;
         this.upperBound = talonBase.upperBound;
         this.lowerBound = talonBase.lowerBound;
         keepPosition = new PIDCalc(0, 0, 0, -0.2, "liftKeepPosition");
