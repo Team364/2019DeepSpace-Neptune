@@ -309,6 +309,9 @@ public class TalonBase extends Subsystem {
     public void setDampen(double scaler){
         Dampen = scaler;
     }
+    public double getDampen(){
+        return Dampen;
+    }
     /**
      * Sets the talon Motor output to 0
      */

@@ -1,17 +1,18 @@
-package frc.robot.util.prefabs.commands;
+package frc.robot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.util.States;
 import frc.robot.util.prefabs.subsystems.TalonBase;
+import frc.robot.util.PIDCalc;
     /**
      * Used for operator only
      * @param talonBase //talon Base to run command
      * @param axis  //axis for open loop
      * @param deadband //minimum joystick value for open loop to run
      */
-public class OpenLoop extends Command {
+public class ArmOpenLoop extends Command {
 
     private TalonBase talonBase;
     private int axis;
@@ -21,8 +22,9 @@ public class OpenLoop extends Command {
     private double upperBound;
     private double lowerBound;
     private double lastPosition;
+    private PIDCalc keepPosition;
 
-    public OpenLoop(
+    public ArmOpenLoop(
         TalonBase talonBase, 
         int axis, 
         double deadband) {
@@ -34,24 +36,27 @@ public class OpenLoop extends Command {
         this.bounded = talonBase.bounded;
         this.upperBound = talonBase.upperBound;
         this.lowerBound = talonBase.lowerBound;
+        keepPosition = new PIDCalc(-0.0012, 0, 0, 0, "armKeepPosition");
     }
 
     @Override
     protected void initialize() {
+        
     }
 
     @Override
     protected void execute() {
     if(States.loopState == States.LoopStates.OPEN_LOOP){
         power = Robot.oi2.controller2.getRawAxis(axis);
-
-        if(Math.abs(power) >= deadband){
+        if(Math.abs(power) > deadband){
             talonBase.openLoop(power);
             lastPosition = talonBase.getPosition();
         }else{
-            talonBase.stop();
+            double output = keepPosition.calculateOutput(lastPosition, talonBase.getPosition());
+            talonBase.openLoop(output);
         }
     }
+    
     //SmartDashBoard
     String pow = talonBase.getTalonName() + " Open Loop Power: ";
     String axis = talonBase.getTalonName() + " Open Loop Axis: ";
@@ -73,7 +78,7 @@ public class OpenLoop extends Command {
     protected boolean isFinished() {
         /* This command will only end when interrupted during teleop mode
         by buttons in the Operator Interface*/
-        return false || Robot.superStructure.limitArray[3] || Robot.superStructure.limitArray[2] || Robot.superStructure.limitArray[1];
+        return false;
     }
 
 }
