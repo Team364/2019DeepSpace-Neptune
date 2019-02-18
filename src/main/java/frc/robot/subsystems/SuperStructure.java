@@ -164,6 +164,7 @@ public class SuperStructure extends Subsystem {
         arm.setDefaultCommand(new ArmOpenLoop(arm, RobotMap.armAxis, RobotMap.armDeadBand));
       }
     };
+    arm.setPID(0.1, 0, 0, 0);
     aL = new DigitalInput(RobotMap.armLimitSwitch);
 
     //Intake 
