@@ -41,13 +41,13 @@ public class ArmOpenLoop extends Command {
 
     @Override
     protected void execute() {
-        double armWeight = 10;
-        double armDistance = 18;
-        double motorStallTorque = 300;
-        double gearRatio = 3;
+        // double armWeight = 10;
+        // double armDistance = 18 / 12;//Inches to feet conversion
+        // double motorStallTorque = 0.71 * 0.7375;//Newton Meters to Foot Pounds Conversion
+        // double gearRatio = 466.67;
         double angle = Math.cos(Math.abs(RobotMap.armPerpindicularToGround) - Math.abs(Robot.superStructure.arm.getPosition()) / 
         (Math.abs(RobotMap.armPerpindicularToGround) / 90));
-        double FeedForward = armWeight * armDistance / motorStallTorque * gearRatio * angle;
+        double FeedForward = 0.0613848223 * angle;
         keepPosition.setPIDParameters(-0.0012, 0, 0, FeedForward);
     if(States.loopState == States.LoopStates.OPEN_LOOP){
         power = Robot.oi2.controller2.getRawAxis(axis);
