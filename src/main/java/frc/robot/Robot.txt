@@ -1,0 +1,11 @@
+Never touch Main; Don't worry about it.
+
+Robot is what makes sure everything actually happens.
+It initalizes the superstructure and OI files.
+Then it sets up a chooser that assigns which auto file to run.
+The Scheduler runs commands which all of the robot is, so without that,
+the robot would do nothing.
+
+The control loop from the operator OI runs in the periodic file.
+
+There are methods there for each mode the robot can be in(Disabled, Auto, Teleop, Test)

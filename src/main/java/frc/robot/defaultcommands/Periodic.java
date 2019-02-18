@@ -9,50 +9,66 @@ package frc.robot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.States;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.util.States;
+import frc.robot.util.prefabs.commands.*;
 /**Controls state logic for variable robot funtionality */
 public class Periodic extends Command {
+
   public int loops = 0;
+  private boolean[] Limits;
+  private boolean passiveLatch = false;
+  private Command stopLift = new Stop(Robot.superStructure.lift);
+
   public Periodic() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     requires(Robot.superStructure);
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Limits = Robot.superStructure.limitArray; 
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //System.out.println(Robot.armSystem.getAbsolutePosition());
-      Robot.armSystem.instrumentation();
+
+      //Update Limit Switches
+      Limits[0] = Robot.superStructure.iL.get();//True when pressed
+      Limits[1] = Robot.superStructure.aL.get();//True when pressed
+      Limits[2] = false;
+      Limits[3] = false;
+    //Turn off lift if limit is hit
+    if(Limits[1]){
+      stopLift.start();
+    }
+    //Loop State assignement
     if(States.loopState == States.LoopStates.CLOSED_LOOP){
       ++loops;
       if(loops > 20){
-      if(Robot.armSystem.reachedPosition()){
+       if(Robot.superStructure.arm.reachedPosition()||Robot.superStructure.lift.reachedPosition()){
+        // if(Robot.superStructure.lift.reachedPosition()){ -- testing lift alone
+        //if(Robot.superStructure.arm.reachedPosition()){ --testing arm alone 
         States.loopState = States.LoopStates.OPEN_LOOP;
         loops = 0;
       }
     }
     }
-    // Robot.liftSystem.instrumentation();
-    // // if(Robot.liftSystem.reachedPosition());
-    // if(States.loopState == States.LoopStates.CLOSED_LOOP){
-    //   ++loops;
-    //   if(loops > 20){
-    //   if(Robot.liftSystem.reachedPosition()){
-    //     States.loopState = States.LoopStates.OPEN_LOOP;
-    //     loops = 0;
-    //   }
+
+    //Set the arm and lift back to start config
+    if(Robot.superStructure.elevatorPassive() && !passiveLatch){
+      // Elevate = new Elevate(1);
+      // Elevate.start();
+      System.out.println("Would move to neutral position");
+      passiveLatch = Robot.superStructure.elevatorPassive();
+    }
+    //Drive Train Motion State Assignment
+    // double rVel = Robot.superStructure.rightDrive.getVelocity();
+    // double lVel = Robot.superStructure.leftDrive.getVelocity();
+    // if((Math.abs(rVel) > 0) || (Math.abs(lVel) > 0)){
+    //   States.driveMotionState = States.DriveMotionStates.MOVING;
+    // }else if((rVel == 0)&&(lVel == 0)){
+    //   States.driveMotionState = States.DriveMotionStates.NOT_MOVING;
     // }
-    // }
-  }
-  public double getLoops(){
-    return loops;
+
   }
   // Make this return true when this Command no longer needs to run execute()
   @Override

@@ -1,16 +1,12 @@
 package frc.robot.oi;
 
-import javax.sql.rowset.serial.SerialJavaObject;
-
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.subroutines.pressed.grip.*;
-import frc.robot.commands.misc.*;
-import frc.robot.subroutines.pressed.lift.*;
-import frc.robot.States;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
+import frc.robot.subroutines.*;
+import frc.robot.util.States;
 //import frc.robot.commands.teleop.TestPGyro;
 
 public class OperatorOI{
@@ -56,9 +52,13 @@ public class OperatorOI{
     public JoystickButton setLiftPositionMedium;
     public JoystickButton setLiftPositionHigh;
     public JoystickButton setLiftPositionCargo;
+    public JoystickButton setIntakePosition;
 
-    public static Command IntakeObject;
-    public static Command ScoreObject;
+    private boolean cargo;
+    private boolean intake;
+    private Command runGrip;
+    public int gripSet = 1;
+
 
 
     //Operator Buttons
@@ -86,6 +86,9 @@ public class OperatorOI{
         //Set Lift Position to level 4 for scoring Cargo in Cargo Ship
         setLiftPositionCargo = new JoystickButton(controller2, 3);
         setLiftPositionCargo.whenPressed(new Elevate(4));
+        //Set Lift Position to level 0 for intaking
+        setIntakePosition = new JoystickButton(controller2, 5);
+        setIntakePosition.whenPressed(new Elevate(0));
     }
     /**
    * Sets objectState
@@ -93,40 +96,49 @@ public class OperatorOI{
    * <p>starts scoreObject
    */
     public void controlLoop(){
-  //Control Logic
-    //Setting States
-    //If Up on the D-pad is pressed,
-    //Object state is set to Cargo
-    //If Down on the D-pad is pressed,
-    //Object state is set to Hatch
+
+    /*Setting States
+    If Up on the D-pad is pressed,
+    Object state is set to Cargo
+    If Down on the D-pad is pressed,
+    Object state is set to Hatch*/
     if(controller2.getPOV() == 0){
         States.objState = States.ObjectStates.CARGO_OBJ;
       }else if(controller2.getPOV() == 180){
         States.objState = States.ObjectStates.HATCH_OBJ;
       }
-      //If the right Trigger is pressed,
-      //the robot will outtake
-      //Before this executes,
-      //it is checked whether or not the intake
-      //object command is running because these
-      //directly interfere with one another
-      if(controller2.getRawAxis(3) >= 0.5){
-        if(IntakeObject.isRunning()){
-          IntakeObject.cancel();
+      if(controller2.getRawAxis(2) >= 0.5){
+        States.actionState = States.ActionStates.INTAKE_ACT;
+      }else if(controller2.getRawAxis(3) >= 0.5){
+        States.actionState = States.ActionStates.SCORE_ACT;
+      }else if(controller2.getRawButton(5)){
+        States.actionState = States.ActionStates.SEEK;
+      }else{
+        if(((gripSet == 3)||(gripSet == 4)) && Robot.superStructure.gripInactive()){
+          States.actionState = States.ActionStates.PASSIVE;  
+        }else if(Robot.superStructure.gripInactive()){
+          States.actionState = States.ActionStates.FERRY_ACT;
         }
-        ScoreObject.start();
-      //If the left Trigger is pressed,
-      //the robot will outtake
-      //Before this executes,
-      //it is checked whether or not the score
-      //object command is running because these
-      //directly interfere with one another
-      }else if(controller2.getRawAxis(2) >= 0.5){
-        if(ScoreObject.isRunning()){
-          ScoreObject.cancel();
-        }
-        IntakeObject.start();
+ 
       }
+      /**Sets action state for scoring and then runs the grip subroutine */
+      if(States.objState == States.ObjectStates.CARGO_OBJ) {cargo = true;}
+      else if(States.objState == States.ObjectStates.HATCH_OBJ) {cargo = false;}
+      if(States.actionState == States.ActionStates.SCORE_ACT) {intake = false;}
+      else if(States.actionState == States.ActionStates.INTAKE_ACT) {intake = true;}
+      if(cargo && intake){gripSet = 1;}//Get Cargo
+      else if(!cargo && intake){gripSet = 2;}//Get Hatch
+      else if(cargo && !intake){gripSet = 3;} //Score Cargo
+      else if(!cargo && !intake){gripSet  = 4;} //Score Hatch 
+      else{gripSet = 0;}//Should never happen
+
+      
+      if((controller2.getRawAxis(3) >= 0.5)||(controller2.getRawAxis(2) >= 0.5)){
+        runGrip = new RunGrip(gripSet);
+        runGrip.start();
+      }
+      SmartDashboard.putNumber("Grip Set: ", gripSet);
     }
+
 }
 

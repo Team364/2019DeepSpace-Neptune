@@ -1,0 +1,2 @@
+Instrumentation post to the SmartDashboard the trajectory that the talon's motion magic is generating.\
+Talon Gains sets up the PID for all the Complex Talons. This is simply the default for them. 

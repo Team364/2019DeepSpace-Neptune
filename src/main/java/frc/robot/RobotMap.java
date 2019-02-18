@@ -2,58 +2,114 @@ package frc.robot;
 
 public class RobotMap {
 
-    //Drive Motor Controllers
-    //Victor SPX
-    public static final int leftFrontDrive = 2;
-    //Talon SRX
-    public static final int leftTopDrive = 3;
-    //Victor SPX
-    public static final int leftRearDrive = 6;
-
-    //Victor SPX
-    public static final int rightFrontDrive = 4;
-    //Talon SRX
-    public static final int rightTopDrive = 10;
-    //Victor SPX
-    public static final int rightRearDrive = 1;
-
-    //This talon was used as a host for the pigeon IMU
-    // public static final int extraTalon = 5;
-
-    //Must change depending on what is on the robot
+    //Hardware
+    /**This is for the soleniods corresponding to the
+     * intake, levers, and shifters */
+    public static final int primaryPCM = 0;
+    /**This is for the solenoids corresponding to the
+     * climb apparatus*/
+    public static final int secondaryPCM = 1;
+    //DriveTrain
+    public static final int leftFrontDrive = 15;//Talon SRX//
+    public static final int leftTopDrive = 4;//Victor SPX
+    public static final int leftRearDrive = 5;//Victor SPX
+    public static final int rightFrontDrive = 12; //Talon SPX//
+    public static final int rightTopDrive = 6;//10 //Victor SPX//
+    public static final int rightRearDrive = 3;//Victor SPX
+    public static final int shifterPort1 = 3;//Primary PCM
+    public static final int shifterPort2 = 4;//Primary PCM
     //Lift
-    //Talon SRX
-    public static final int rightLift = 1;
-    //Talon SRX
-    public static final int leftLift = 2;
-    //Claw
-    //Talon SRX
-    public static final int rightClaw = 4;
-    //Talon SRX
-    public static final int leftClaw = 5;
+    public static final int rightLift = 7;//Talon SRX -- Master
+    public static final int leftLift = 13;//Talon SRX -- Gyro
+    public static final int lowerLiftLimitSwitch = 1;//Digital Input
+    public static final int upperLiftLimitSwitch = 3;//Digital Input
+    //Grip
+    public static final int rightClaw = 4;//Talon SRX
+    public static final int leftClaw = 5;//Talon SRX
+    public static final int intakePort1 = 1;//Primary PCM
+    public static final int intakePort2 = 6;//Primary PCM
+    public static final int leverPort1 = 0;//Primary PCM
+    public static final int leverPort2 = 7;//Primary PCM
+    public static final int ballLimitSwitch = 4;//Digital Input
     //Arm
-    //Talon SRX
-    public static final int arm = 6;
+    public static final int arm = 6; //Talon SRX
+    public static final int armLimitSwitch = 2;//Digital Input
+    //Climb
+    public static final int dropWheels = 2;//VictorSPX
+    public static final int climbPort1 = 2;//Back
+    public static final int climbPort2 = 5;//Back
+    public static final int climbPort3 = 0;//Front
+    public static final int climbPort4 = 7;//Front
 
-    //TODO: Set these according to how the robot is wired
-    public static final int shifterPort1 = 0;
-    public static final int shifterPort2 = 7;
-
-    public static final int intakePort1 = 2;
-    public static final int intakePort2 = 3;
+    //Software
+     //Drive
+    public static final double driveNominalOutputForward = 0;
+    public static final double driveNominalOutputReverse = 0;
+    public static final double drivePeakOutputForward = 1;
+    public static final double drivePeakOutputReverse = -1;
+    public static final int driveCruiseVelocity = 20000;
+    public static final int driveAcceleration = 8000;
+    public static final double driveDampen = 0.5;
+    //Lift
+     //TalonBase Config
+    public static final double liftNominalOutputForward = 0;
+    public static final double liftNominalOutputReverse = 0;
+    public static final double liftPeakOutputForward = 0.5;
+    public static final double liftPeakOutputReverse = -0.5;
+    public static final int liftCruiseVelocity = 10000;
+    public static final int liftAcceleration = 4000;
+    public static final boolean liftBounded = true;
+    public static final double liftLowerBound = 0;
+    public static final double liftUpperBound = 10000;
+    public static final double liftDampen = 0.5;
+     //Open Loop Config
+    public static final int liftAxis = 0;
+    public static final double liftDeadband = 0.1;
+     //Closed Loop Targets
+    public static final double liftLowH = 5000;//Level 1 for Hatch
+    public static final double liftMedH = 10000;//Level 2 Rocket for Hatch
+    public static final double liftHighH = 15000;//Level 3 Rocket for Hatch
+    public static final double liftLowC = 7500;//Level 1 Rocket Cargo
+    public static final double liftMedC = 12500;//Level 2 Rocket Cargo
+    public static final double liftHighC = 17500;//Level 3 Rocket Cargo
+    public static final double liftCargoC = 11000;//Scoring Cargo in Cargo Ship
+    public static final double liftIntake = 1000;//Intaking Cargo
+    public static final double liftStartConfig = 400;//Starting Config for Lift
+    //Arm
+     //TalonBase Config
+    public static final double armNominalOutputForward = 0;
+    public static final double armNominalOutputReverse = 0;
+    public static final double armPeakOutputForward = 0.2;
+    public static final double armPeakOutputReverse = -0.2;
+    public static final int armCruiseVelocity = 2000;
+    public static final int armAcceleration = 800;
+    public static final boolean armBounded = true;
+    public static final double armLowerBound = 0;
+    public static final double armUpperBound = 3000;
+    public static final double armDampen = 0.15;
+     //Open Loop Config
+    public static final int armAxis = 5;
+    public static final double armDeadBand = 0.1;
+     //Closed Loop Targets
+     public static final double armIntakeCargo = 1137;/*100 degrees*/
+     public static final double armPerpindicularToGround = 2275;/*200 degrees*/
+     public static final double armStartConfig = 0;/*0 degrees*/
+     public static final double armScoreOnHigh = 3413;/*300 degrees*/
+    //1706 /*150 degrees*/;
+    //2844 /*250 degrees*/
+    //3413/*300 degrees*/;
+    //3981 /*350 degrees*/;
+    //Intake
+    public static final double intakeDampen = 0.67;
+    //Drop Wheels
+    public static final double dropWheelsDampen = 0.5;
+    //NavX
+    public static final double navXPterm = 0.0005;
+    public static final double navXIterm = 0.1;
+    public static final double navXDterm = 50;
+    public static final double navXFterm = 0;
     
-    public static final int leverPort1 = 4;
-    public static final int leverPort2 = 5;
 
-    //these are for cylinders for climbing
-    public static final int climbPort1 = 4;
-    public static final int climbPort2 = 5;
-
-    //TODO: change these to correct values
-    //these are for HabWheels
-    public static final int climbPort3 = 6;
-    public static final int climbPort4 = 7;
-
-    public static final int ballLimitSwitch = 3;
+    
 
 }

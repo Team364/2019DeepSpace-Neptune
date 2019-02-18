@@ -1,0 +1,12 @@
+This is any code that isn't OI, the driveTrain and SuperStructure, 
+Specific Defalut Commands, Specific Commands or Subroutines or Auto files
+
+PIDCalc is a custom class that calculates PID. It may be altered.
+
+RobotMap keeps track of all integers integral to the IDs and assignments of hardware.
+
+States keeps track of enums that are responsible for holding Specific Robot states that 
+modify robot behavior and correspond to multiple subsystems.
+
+Prefabs are commands and subsystems which only need to be initialized with either a talon or piston
+and relevant settings to function.

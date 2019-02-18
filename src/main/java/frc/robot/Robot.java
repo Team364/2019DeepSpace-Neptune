@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -15,42 +8,21 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
 import frc.robot.oi.*;
 import frc.robot.autos.*;
-import frc.robot.subroutines.pressed.drive.*;
 /**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the TimedRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the build.gradle file in the
- * project.
+ * We are using Timed Robot and Command Robot together.
+ * <p>The Scheduler is invoked during auto and teleop
  */
 public class Robot extends TimedRobot {
   //Declarations
-
-  //Subsystems
-  public static DriveSystem driveSystem;
-  public static VisionSystem visionSystem;
-  public static LiftSystem liftSystem;
-  public static ArmSystem armSystem;
-  public static GripSystem gripSystem;
-  public static ClimbSystem climbSystem;
+  //Subsystem
   public static SuperStructure superStructure;
-
   //Controls
   public static DriverOI oi;
   public static OperatorOI oi2;
-
-  //State file
-  public static States states;
-
-  //Commands
   //Auto Commands
   public static Command Auto1;
   public static Command Auto2;
   public static Command Auto3;
-  //Subroutine Commands
-  public static Command Turn180;
- 
-
   //Auto Selector String
   private String autoSelected;
   //Auto Chooser
@@ -69,12 +41,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto choices", m_chooser);
 
     //Subsystem init
-    driveSystem = new DriveSystem();
-    visionSystem = new VisionSystem();
-    liftSystem = new LiftSystem();
-    gripSystem = new GripSystem();
-    armSystem = new ArmSystem();
-    climbSystem = new ClimbSystem();
     superStructure = new SuperStructure();
     //Controls init
     oi = new DriverOI();
@@ -84,23 +50,24 @@ public class Robot extends TimedRobot {
     Auto2 = new CargoAuto();
     Auto3 = new StraightAuto();
     //Teleop Subroutine CommandGroups are assigned to commands
-    Turn180 = new TeleopTurn180();
     //Sensors Reset
-    driveSystem.resetHeading();
     superStructure.resetEncoders();
 
   }
 
+  /**This runs every 20ms when the robot is enabled */
   @Override
   public void robotPeriodic() {
+    Robot.superStructure.postImplementation();
   }
 
+  /**Runs before auto */
   @Override
   public void autonomousInit() {
     autoSelected = m_chooser.getSelected();
     System.out.println("Auto selected: " + autoSelected);
+    //Scheduler is cleared
     Scheduler.getInstance().removeAll();
-    driveSystem.resetHeading();
   }
 
   @Override
@@ -116,40 +83,32 @@ public class Robot extends TimedRobot {
         Auto3.start();
         break;
     }
-    putSmartDashVars();
     Scheduler.getInstance().run();
   }
   @Override
   public void teleopInit() {
+      //This removes all commands from the scheduler
       Scheduler.getInstance().removeAll();
-      System.out.println(States.objState);
       superStructure.resetEncoders();
   }
 
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    putSmartDashVars();
     oi2.controlLoop();
+    superStructure.postSmartDashVars();
+    System.out.println(Robot.superStructure.limitArray[0]);
+  }
+  @Override
+  public void disabledInit(){
+    //Print Telemetry File here
+  }
+  @Override
+  public void disabledPeriodic(){
+    superStructure.postSmartDashVars();
   }
 
   @Override
   public void testPeriodic() {
   }
-
-  private void putSmartDashVars() {
-   SmartDashboard.putNumber("Gyro Angle", driveSystem.getGyroAngle());
-   SmartDashboard.putNumber("GetLeftContr: ", -Robot.oi.controller.getRawAxis(5));
-   SmartDashboard.putNumber("GetRightContr: ",  -Robot.oi.controller.getRawAxis(1));
-   SmartDashboard.putString("Object State: ", States.objState.toString());
-   SmartDashboard.putString("Shift State: ", States.shiftState.toString());
-   SmartDashboard.putString("Loop State:", States.loopState.toString());
-   SmartDashboard.putNumber("Lift Position", Robot.liftSystem.getLiftPosition());
-   SmartDashboard.putNumber("Lift Error", Robot.liftSystem.getLiftError());
-   SmartDashboard.putNumber("Lift Velocity", Robot.liftSystem.getLiftVelocity());
-   SmartDashboard.putBoolean("Lift Open Loop out of bounds", Robot.superStructure.liftOutofBounds);
-   SmartDashboard.putNumber("Lift Open loop Power", Robot.liftSystem.OpenLoopPower);
-   SmartDashboard.putNumber("Arm Position", Robot.armSystem.getPosition());
-}
-
 }

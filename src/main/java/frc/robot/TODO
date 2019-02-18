@@ -1,0 +1,46 @@
+Preface:
+Programming has a history of doing stuff that seems cool or useful in the moment but this tends
+to lead to Priorities being neglected and time wasted on side projects. Keeping a list such 
+as this ensure that we may stay on track and complete goals in the proper order.
+
+Today: 
+--See if the message prints and how many times it does whenever the robot enters passive mode
+
+Priorities:
+--Go through simulated match and make sure states and positions act as intended
+--Test how low the motor power has to be to hold the lift up while not being powered by either open or closed loop
+--Record Positions for:
+        a.)Hatch Level 1
+        b.)Hatch Level 2
+        c.)Hatch Level 3
+        d.)Rocket Level 1
+        e.)Rocket Level 2
+        f.)Rocket Level 3
+        g.)Cargo Ship Level 2
+        h.)Intaking Cargo
+        i.)Retract/Starting
+--Test Pistons    
+--Set up 2 PCMs
+--Tune delays on Scoring Objects
+--Test Climb Subroutine:
+        a.)Time back Pistons
+        b.)Time front Pistons
+        c.)Tune hold Position Command
+--Allow openloop to move in opposite direction of how it is bounded
+--When Passive return to intake state
+--Velocity Closed Loop -- use for intake and drive rampDown
+
+Later:
+--Align Subroutine
+--Set up and test Drive to Vision Command
+--Turn 180 button
+--Rewrite Turn to Heading Command
+--Write Autos
+--Write Curved drive command for auto
+--LEDs change colors on state indicating when the robot is ready to intake, when it is intaking, etc
+
+Much Later:
+--Try Catches
+--Diagnostics for all hardware
+--Writing files to flashDrive that tracks all actions during match
+--Tracking feild position x and y with Gyro and encoders(Calculus)

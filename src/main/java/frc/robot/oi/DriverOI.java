@@ -2,9 +2,9 @@ package frc.robot.oi;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.drive.*;
-import frc.robot.subroutines.pressed.drive.*;
-import frc.robot.subroutines.held.*;
+import frc.robot.Robot;
+import frc.robot.util.prefabs.commands.SetPiston;
+import frc.robot.subroutines.Align;
 //import frc.robot.commands.teleop.TestPGyro;
 
 public class DriverOI {
@@ -70,19 +70,19 @@ public class DriverOI {
         //Button is pressed once
         //Left menu button
         shiftLow = new JoystickButton(controller, 5);
-        shiftLow.whenPressed(new ShiftDown());
+        shiftLow.whenPressed(new SetPiston(Robot.superStructure.shifter, 1));
 
         //Robot shifts gears up
         //Button is pressed once
         //Right menu button
         shiftHigh = new JoystickButton(controller, 6);
-        shiftHigh.whenPressed(new ShiftUp());
+        shiftHigh.whenPressed(new SetPiston(Robot.superStructure.shifter, 0));
 
-        //Robot uses NavX Gyro to turn approximately 180 degrees(yaw)
-        //Button is pressed once
-        //Green A button
-        turn180Button = new JoystickButton(controller, 1);
-        turn180Button.whenPressed(new TeleopTurn180());
+        // //Robot uses NavX Gyro to turn approximately 180 degrees(yaw)
+        // //Button is pressed once
+        // //Green A button
+        // turn180Button = new JoystickButton(controller, 1);
+        // turn180Button.whenPressed(new TeleopTurn180());
 
         //Does nothing
         //Button is held to run command
