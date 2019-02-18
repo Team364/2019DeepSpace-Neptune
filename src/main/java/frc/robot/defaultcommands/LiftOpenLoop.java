@@ -56,11 +56,11 @@ public class LiftOpenLoop extends Command {
        
     }
     //SmartDashBoard
-    String pow = talonBase.getTalonName() + " Open Loop Power: ";
-    String axis = talonBase.getTalonName() + " Open Loop Axis: ";
-    SmartDashboard.putNumber(pow, this.power);
-    SmartDashboard.putNumber(axis, this.axis);
-    SmartDashboard.putNumber(talonBase.getTalonName() + " keeping pos: ", lastPosition);
+    // String pow = talonBase.getTalonName() + " Open Loop Power: ";
+    // String axis = talonBase.getTalonName() + " Open Loop Axis: ";
+    // SmartDashboard.putNumber(pow, this.power);
+    // SmartDashboard.putNumber(axis, this.axis);
+    // SmartDashboard.putNumber(talonBase.getTalonName() + " keeping pos: ", lastPosition);
 }
 
     @Override

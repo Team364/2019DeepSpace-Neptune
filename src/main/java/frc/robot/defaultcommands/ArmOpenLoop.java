@@ -76,14 +76,14 @@ public class ArmOpenLoop extends Command {
     }
     
     //SmartDashBoard
-    String pow = talonBase.getTalonName() + " Open Loop Power: ";
-    String axis = talonBase.getTalonName() + " Open Loop Axis: ";
-    SmartDashboard.putNumber(pow, this.power);
-    SmartDashboard.putNumber(axis, this.axis);
-    SmartDashboard.putNumber(talonBase.getTalonName() + " keeping pos: ", lastPosition);
-    SmartDashboard.putNumber("Encoder Error; ", encoderError);
-    SmartDashboard.putNumber("Conversion: ", conversion);
-    SmartDashboard.putNumber("Arm Angle: ", angle);
+    // String pow = talonBase.getTalonName() + " Open Loop Power: ";
+    // String axis = talonBase.getTalonName() + " Open Loop Axis: ";
+    // SmartDashboard.putNumber(pow, this.power);
+    // SmartDashboard.putNumber(axis, this.axis);
+    // SmartDashboard.putNumber(talonBase.getTalonName() + " keeping pos: ", lastPosition);
+    // SmartDashboard.putNumber("Encoder Error; ", encoderError);
+    // SmartDashboard.putNumber("Conversion: ", conversion);
+    // SmartDashboard.putNumber("Arm Angle: ", angle);
 }
 
     @Override

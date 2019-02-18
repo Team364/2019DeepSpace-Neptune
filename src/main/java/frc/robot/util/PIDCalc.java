@@ -61,12 +61,12 @@ public class PIDCalc {
     }
 
     private void smartDashVars() {
-        SmartDashboard.putNumber(pidName + "Error", error);
-        SmartDashboard.putNumber(pidName + "Prev Error", prev_error);
-        SmartDashboard.putNumber(pidName + "Integral", integral);
-        SmartDashboard.putNumber(pidName + "Derivative", derivative);
-        SmartDashboard.putNumber(pidName + "Result", result);
-        SmartDashboard.putNumber(pidName + "kP", kP);
+        // SmartDashboard.putNumber(pidName + "Error", error);
+        // SmartDashboard.putNumber(pidName + "Prev Error", prev_error);
+        // SmartDashboard.putNumber(pidName + "Integral", integral);
+        // SmartDashboard.putNumber(pidName + "Derivative", derivative);
+        // SmartDashboard.putNumber(pidName + "Result", result);
+        // SmartDashboard.putNumber(pidName + "kP", kP);
     }
 
 }

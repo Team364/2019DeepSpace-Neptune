@@ -245,17 +245,17 @@ public class SuperStructure extends Subsystem {
   /**Posts MotionMagic Trajectory Data to SmartDashboard for each ComplexTalon */
   public void postImplementation(){
     //lift.instrumentation();
-    arm.instrumentation();
+    //arm.instrumentation();
     //rightDrive.instrumentation();
     //leftDrive.instrumentation();
   }
 
   public void postSmartDashVars(){
     //Talons
-    lift.postSmartDashVars();
+    //lift.postSmartDashVars();
     //rightDrive.postSmartDashVars();
     //leftDrive.postSmartDashVars();
-    arm.postSmartDashVars();
+    //arm.postSmartDashVars();
     //Victors
     //intake.postSmartDashVars();
     //dropWheels.postSmartDashVars();
@@ -263,7 +263,7 @@ public class SuperStructure extends Subsystem {
     //claw.postSmartDashVars();
     //lever.postSmartDashVars();
     //back.postSmartDashVars();
-    //front.postSmartDashVars();
+    front.postSmartDashVars();
     //shifter.postSmartDashVars();
     //States
     SmartDashboard.putString("Object State:", States.objState.toString());

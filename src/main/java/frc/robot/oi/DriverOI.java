@@ -57,6 +57,9 @@ public class DriverOI {
     public JoystickButton followCubeButton;
     public JoystickButton alignWithDiskButton;
     public JoystickButton diagnosticButton;
+
+    // public JoystickButton ClimbFrontButton;
+    // public JoystickButton undoClimbFrontButton;
     /**
      * OI()
      * <p>Initializes Joysticks and buttons thereof
@@ -88,8 +91,8 @@ public class DriverOI {
         //Button is held to run command
         //Cancelled when driver lets go of button - Keep in mind that Buttons that stick can cause issue
         //Red B button
-        alignWithTapeButton = new JoystickButton(controller, 2);
-        alignWithTapeButton.whileActive(new Align());
+        // alignWithTapeButton = new JoystickButton(controller, 2);
+        // alignWithTapeButton.whileActive(new Align());
 
 
         //Does nothing
@@ -104,7 +107,9 @@ public class DriverOI {
         // //Left on the D-pad
         // left180 = new JoystickPOV(270);
         // left180.whenActive(new Turn180left());
-
-
+        // ClimbFrontButton = new JoystickButton(controller, 3);
+        // ClimbFrontButton.whenPressed(new SetPiston(Robot.superStructure.front, 1));
+        // undoClimbFrontButton = new JoystickButton(controller, 2);
+        // undoClimbFrontButton.whenPressed(new SetPiston(Robot.superStructure.front, 0));
     }
 }
