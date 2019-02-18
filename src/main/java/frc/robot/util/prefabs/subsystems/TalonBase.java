@@ -126,7 +126,7 @@ public class TalonBase extends Subsystem {
 		 * Invert Motor to have green LEDs when driving Talon Forward / Requesting Postiive Output
 		 * Phase sensor to have positive increment when driving Talon Forward (Green LED)
 		 */
-		talon.setSensorPhase(true);
+		talon.setSensorPhase(false);
 		talon.setInverted(false);
 
 		/* Set relevant frame periods to be at least as fast as periodic rate */

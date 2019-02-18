@@ -148,7 +148,6 @@ public class SuperStructure extends Subsystem {
     uLL = new DigitalInput(RobotMap.upperLiftLimitSwitch);
     
     //Arm
-    a.setInverted(true);
     arm = new TalonBase(
         a, 
         RobotMap.armNominalOutputForward, 
