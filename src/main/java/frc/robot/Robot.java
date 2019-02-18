@@ -23,22 +23,22 @@ public class Robot extends TimedRobot {
   public static Command Auto1;
   public static Command Auto2;
   public static Command Auto3;
-  //Auto Selector String
-  private String autoSelected;
-  //Auto Chooser
-  private final SendableChooser<String> m_chooser = new SendableChooser<>();
-  //Auto Selector String Options
-  private static final String driveStraightAuto = "Default";
-  private static final String turnAuto = "Auto1";
-  private static final String cargoAuto = "Auto2";
+  // //Auto Selector String
+  // private String autoSelected;
+  // //Auto Chooser
+  // private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  // //Auto Selector String Options
+  // private static final String driveStraightAuto = "Default";
+  // private static final String turnAuto = "Auto1";
+  // private static final String cargoAuto = "Auto2";
 
   @Override
   public void robotInit() {
     //Auto Selector init
-    m_chooser.setDefaultOption("Default Auto", driveStraightAuto);
-    m_chooser.addOption("TurnAuto", turnAuto);
-    m_chooser.addOption("CargoAuto", cargoAuto);
-    SmartDashboard.putData("Auto choices", m_chooser);
+    // m_chooser.setDefaultOption("Default Auto", driveStraightAuto);
+    // m_chooser.addOption("TurnAuto", turnAuto);
+    // m_chooser.addOption("CargoAuto", cargoAuto);
+    // SmartDashboard.putData("Auto choices", m_chooser);
 
     //Subsystem init
     superStructure = new SuperStructure();
@@ -46,9 +46,9 @@ public class Robot extends TimedRobot {
     oi = new DriverOI();
     oi2 = new OperatorOI();
     //Auto Command inits Auto CommandGroups are assigned to commands 
-    Auto1 = new TurnAuto();
-    Auto2 = new CargoAuto();
-    Auto3 = new StraightAuto();
+    // Auto1 = new TurnAuto();
+    // Auto2 = new CargoAuto();
+    // Auto3 = new StraightAuto();
     //Teleop Subroutine CommandGroups are assigned to commands
     //Sensors Reset
     superStructure.resetEncoders();
@@ -64,25 +64,25 @@ public class Robot extends TimedRobot {
   /**Runs before auto */
   @Override
   public void autonomousInit() {
-    autoSelected = m_chooser.getSelected();
-    System.out.println("Auto selected: " + autoSelected);
+    // autoSelected = m_chooser.getSelected();
+    // System.out.println("Auto selected: " + autoSelected);
     //Scheduler is cleared
     Scheduler.getInstance().removeAll();
   }
 
   @Override
   public void autonomousPeriodic() {
-    switch (autoSelected) {
-      case turnAuto:
-        Auto1.start();
-        break;
-      case cargoAuto:
-        Auto2.start();
-        break;
-      default:
-        Auto3.start();
-        break;
-    }
+    // switch (autoSelected) {
+    //   case turnAuto:
+    //     Auto1.start();
+    //     break;
+    //   case cargoAuto:
+    //     Auto2.start();
+    //     break;
+    //   default:
+    //     Auto3.start();
+    //     break;
+    // }
     Scheduler.getInstance().run();
   }
   @Override
