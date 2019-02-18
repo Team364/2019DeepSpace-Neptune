@@ -10,13 +10,17 @@ public class runIntake extends Command {
     private boolean intaking;
     public runIntake(double power, boolean intaking) {
         requires(Robot.superStructure.intake);
-        setTimeout(1);
         this.power = power;
         this.intaking = intaking;
     }
 
     @Override
     protected void initialize() {
+        if(intaking){
+            setTimeout(2.5);
+        }else{
+            setTimeout(0.6);
+        }
     }
 
     @Override

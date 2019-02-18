@@ -101,6 +101,8 @@ public class SuperStructure extends Subsystem {
     //Right Drive Train
     rightDrive = new TalonBase(        
         rDrive, 
+        RobotMap.driveReverse,
+        RobotMap.driveReverseEncoder,
         RobotMap.driveNominalOutputForward, 
         RobotMap.driveNominalOutputReverse, 
         RobotMap.drivePeakOutputForward, 
@@ -114,6 +116,8 @@ public class SuperStructure extends Subsystem {
     //Left Drive Train
     leftDrive = new TalonBase(        
         lDrive, 
+        RobotMap.driveReverse,
+        RobotMap.driveReverseEncoder,
         RobotMap.driveNominalOutputForward, 
         RobotMap.driveNominalOutputReverse, 
         RobotMap.drivePeakOutputForward, 
@@ -129,6 +133,8 @@ public class SuperStructure extends Subsystem {
     //Lift
     lift = new TalonBase(        
         lt, 
+        RobotMap.liftReverse,
+        RobotMap.liftReverseEncoder,
         RobotMap.liftNominalOutputForward, 
         RobotMap.liftNominalOutputReverse, 
         RobotMap.liftPeakOutputForward, 
@@ -143,13 +149,15 @@ public class SuperStructure extends Subsystem {
           }
         };
     liftSlave.follow(lt);
-    liftSlave.setInverted(false);
+    liftSlave.setInverted(true);
     lLL = new DigitalInput(RobotMap.lowerLiftLimitSwitch);
     uLL = new DigitalInput(RobotMap.upperLiftLimitSwitch);
     
     //Arm
     arm = new TalonBase(
         a, 
+        RobotMap.armReverse,
+        RobotMap.armReverseEncoder,
         RobotMap.armNominalOutputForward, 
         RobotMap.armNominalOutputReverse, 
         RobotMap.armPeakOutputForward, 
@@ -244,7 +252,7 @@ public class SuperStructure extends Subsystem {
 
   public void postSmartDashVars(){
     //Talons
-    //lift.postSmartDashVars();
+    lift.postSmartDashVars();
     //rightDrive.postSmartDashVars();
     //leftDrive.postSmartDashVars();
     arm.postSmartDashVars();
@@ -266,8 +274,8 @@ public class SuperStructure extends Subsystem {
     //SmartDashboard.putString("Score State:", States.scoreState.toString());
     //SmartDashboard.putString("Climb State:", States.climbState.toString());
     //LimitSwitches
-    //SmartDashboard.putBoolean("Intake Limit: ", limitArray[0]);
-    //SmartDashboard.putBoolean("Arm Limit: ", limitArray[1]);
+    SmartDashboard.putBoolean("Intake Limit: ", limitArray[0]);
+    SmartDashboard.putBoolean("Arm Limit: ", limitArray[1]);
     SmartDashboard.putBoolean("Lift Lower Limit: ", limitArray[2]);
     SmartDashboard.putBoolean("Lift Upper Limit: ", limitArray[3]);
     SmartDashboard.putString("Lift Zone: ", States.liftZone.toString());

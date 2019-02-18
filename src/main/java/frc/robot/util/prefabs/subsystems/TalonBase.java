@@ -79,6 +79,10 @@ public class TalonBase extends Subsystem {
     private double peakOutputForward = 0.25;
     /**highest speed the trajectory can run at in the reverse direction */
     private double peakOutputReverse = -0.25;
+    /**Decides whether or not to invert Talon */
+    private boolean reverse = false;
+    /**Decides whether or not to invert Encoder */
+    private boolean reverseEncoder = false;
     /**Name of Talon */
     private String name = "No Name";
     /**Tracks what loop State the talon is in */
@@ -90,6 +94,8 @@ public class TalonBase extends Subsystem {
     /**Talon with Closed Loop functionality and Encoder Bounds */
     public TalonBase(
                     TalonSRX talon, 
+                    boolean reverse,
+                    boolean reverseEncoder,
                     double nominalOutputForward, 
                     double nominalOutputReverse,
                     double peakOutputForward,
@@ -126,8 +132,8 @@ public class TalonBase extends Subsystem {
 		 * Invert Motor to have green LEDs when driving Talon Forward / Requesting Postiive Output
 		 * Phase sensor to have positive increment when driving Talon Forward (Green LED)
 		 */
-		talon.setSensorPhase(false);
-		talon.setInverted(false);
+		talon.setSensorPhase(reverse);
+		talon.setInverted(reverseEncoder);
 
 		/* Set relevant frame periods to be at least as fast as periodic rate */
 		talon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, TimeoutMs);
@@ -157,6 +163,8 @@ public class TalonBase extends Subsystem {
     /**Talon with Closed Loop Functionality without Encoder Bounds */
     public TalonBase(
                     TalonSRX talon, 
+                    boolean reverse,
+                    boolean reverseEncoder,
                     double nominalOutputForward, 
                     double nominalOutputReverse,
                     double peakOutputForward,
@@ -189,8 +197,8 @@ public class TalonBase extends Subsystem {
 		 * Invert Motor to have green LEDs when driving Talon Forward / Requesting Postiive Output
 		 * Phase sensor to have positive increment when driving Talon Forward (Green LED)
 		 */
-		talon.setSensorPhase(true);
-		talon.setInverted(false);
+		talon.setSensorPhase(reverse);
+		talon.setInverted(reverseEncoder);
 
 		/* Set relevant frame periods to be at least as fast as periodic rate */
 		talon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, TimeoutMs);

@@ -30,7 +30,7 @@ public class LiftOpenLoop extends Command {
         this.talonBase = talonBase;
         this.axis = axis;
         this.deadband = deadband;
-        keepPosition = new PIDCalc(0, 0, 0, -0.2, "liftKeepPosition");
+        keepPosition = new PIDCalc(0, 0, 0, 0.13, "liftKeepPosition");
     }
 
     @Override
@@ -41,7 +41,7 @@ public class LiftOpenLoop extends Command {
     @Override
     protected void execute() {
     if(States.loopState == States.LoopStates.OPEN_LOOP){
-        power = Robot.oi2.controller2.getRawAxis(axis);
+        power = -Robot.oi2.controller2.getRawAxis(axis)*0.5;
 
         if(!Robot.superStructure.limitArray[2] &&(power > deadband)){
             talonBase.openLoop(power);
@@ -50,8 +50,8 @@ public class LiftOpenLoop extends Command {
             talonBase.openLoop(power);
             lastPosition = talonBase.getPosition();
         }else{
-            double output = keepPosition.calculateOutput(lastPosition, talonBase.getPosition());
-            talonBase.openLoop(output);
+           double output = keepPosition.calculateOutput(lastPosition, talonBase.getPosition());
+           talonBase.openLoop(output);
         }
        
     }

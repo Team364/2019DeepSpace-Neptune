@@ -33,27 +33,27 @@ public class Periodic extends Command {
       Limits[3] = Robot.superStructure.uLL.get();
 
       //Calculate Angle of the Arm
-      if(Math.abs(Robot.superStructure.arm.getPosition()) < Math.abs(RobotMap.armPerpindicularToGround)){
-        angle = Math.cos(Math.abs(RobotMap.armPerpindicularToGround) - Math.abs(Robot.superStructure.arm.getPosition()) / 
-        (Math.abs(RobotMap.armPerpindicularToGround) / 90));
-      }else if(Math.abs(Robot.superStructure.arm.getPosition()) >= Math.abs(RobotMap.armPerpindicularToGround)){
-        angle = (Math.abs(Robot.superStructure.arm.getPosition())  / 
-        (Math.abs(RobotMap.armPerpindicularToGround) / 90));
-      }
+      // if(Math.abs(Robot.superStructure.arm.getPosition()) < Math.abs(RobotMap.armPerpindicularToGround)){
+      //   angle = Math.cos(Math.abs(RobotMap.armPerpindicularToGround) - Math.abs(Robot.superStructure.arm.getPosition()) / 
+      //   (Math.abs(RobotMap.armPerpindicularToGround) / 90));
+      // }else if(Math.abs(Robot.superStructure.arm.getPosition()) >= Math.abs(RobotMap.armPerpindicularToGround)){
+      //   angle = (Math.abs(Robot.superStructure.arm.getPosition())  / 
+      //   (Math.abs(RobotMap.armPerpindicularToGround) / 90));
+      // }
   
-      double FeedForward = 0.0613848223 * angle;
-      Robot.superStructure.arm.setPID(0.1, 0, 0, FeedForward);
+      // double FeedForward = 0.0613848223 * angle;
+      // Robot.superStructure.arm.setPID(0.1, 0, 0, FeedForward);
     //Track Lift Zone -- If this works replicate for Arm -- Test to see if config Output updates work with this
-    if((Robot.superStructure.lift.getPosition() > -10000) &&(Robot.superStructure.lift.getPosition() < RobotMap.liftLowerBound)){
+    if((Robot.superStructure.lift.getPosition() < 10000) &&(Robot.superStructure.lift.getPosition() > RobotMap.liftLowerBound)){
       States.liftZone = States.LiftZones.LOWER_DANGER;
-    }else if((Robot.superStructure.lift.getPosition() < -100000)&&(Robot.superStructure.lift.getPosition() > RobotMap.liftUpperBound))
+    }else if((Robot.superStructure.lift.getPosition() > 100000)&&(Robot.superStructure.lift.getPosition() < RobotMap.liftUpperBound))
       States.liftZone = States.LiftZones.UPPER_DANGER;
     else{
       States.liftZone = States.LiftZones.SAFE;
     }
 
     //Encoder Upper Bound for Lift
-    if((Robot.superStructure.lift.getPosition() <= RobotMap.liftUpperBound)){
+    if((Robot.superStructure.lift.getPosition() >= RobotMap.liftUpperBound)){
       stopLift.start();
     }
     //Loop State assignement

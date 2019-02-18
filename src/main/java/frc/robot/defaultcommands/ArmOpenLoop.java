@@ -22,6 +22,8 @@ public class ArmOpenLoop extends Command {
     private double lastPosition;
     private PIDCalc keepPosition;
     private double angle;
+    private double encoderError;
+    private double FeedForward;
 
     public ArmOpenLoop(
         TalonBase talonBase, 
@@ -32,7 +34,7 @@ public class ArmOpenLoop extends Command {
         this.talonBase = talonBase;
         this.axis = axis;
         this.deadband = deadband;
-        keepPosition = new PIDCalc(-0.0012, 0, 0, 0, "armKeepPosition");
+        keepPosition = new PIDCalc(0.0012, 0, 0, 0, "armKeepPosition");//0.0012
     }
 
     @Override
@@ -46,22 +48,30 @@ public class ArmOpenLoop extends Command {
         // double armDistance = 18 / 12;//Inches to feet conversion
         // double motorStallTorque = 0.71 * 0.7375;//Newton Meters to Foot Pounds Conversion
         // double gearRatio = 466.67;
-        if(Math.abs(Robot.superStructure.arm.getPosition()) < Math.abs(RobotMap.armPerpindicularToGround)){
-        angle = Math.cos(Math.abs(RobotMap.armPerpindicularToGround) - Math.abs(Robot.superStructure.arm.getPosition()) / 
-        (Math.abs(RobotMap.armPerpindicularToGround) / 90));
-        }else if(Math.abs(Robot.superStructure.arm.getPosition()) >= Math.abs(RobotMap.armPerpindicularToGround)){
-            angle = (Math.abs(Robot.superStructure.arm.getPosition())  / (Math.abs(RobotMap.armPerpindicularToGround) / 90));
-          }
-          double FeedForward = 0.0613848223 * angle;
+        // if(Math.abs(Robot.superStructure.arm.getPosition()) < Math.abs(RobotMap.armPerpindicularToGround)){
+       
+        // }else if(Math.abs(Robot.superStructure.arm.getPosition()) >= Math.abs(RobotMap.armPerpindicularToGround)){
+        //     angle = (Math.abs(Robot.superStructure.arm.getPosition())  / (Math.abs(RobotMap.armPerpindicularToGround) / 90));
+        //   }
+  
+    
+        
+        encoderError = RobotMap.armPerpindicularToGround - Robot.superStructure.arm.getPosition();
+        double conversion = RobotMap.armPerpindicularToGround / 90;
+          angle = encoderError / conversion;
+          FeedForward = 0.1 * Math.cos(angle);//0.0613848223
+        //   if(Robot.superStructure.arm.getPosition() > RobotMap.armPerpindicularToGround){
+        //     FeedForward -= 1;
+        // }
         keepPosition.setPIDParameters(-0.0012, 0, 0, FeedForward);
     if(States.loopState == States.LoopStates.OPEN_LOOP){
-        power = Robot.oi2.controller2.getRawAxis(axis);
+        power = -Robot.oi2.controller2.getRawAxis(axis);
         if(Math.abs(power) > deadband){
             talonBase.openLoop(power);
             lastPosition = talonBase.getPosition();
         }else{
             double output = keepPosition.calculateOutput(lastPosition, talonBase.getPosition());
-            talonBase.openLoop(output);
+             talonBase.openLoop(output);
         }
     }
     
@@ -71,6 +81,9 @@ public class ArmOpenLoop extends Command {
     SmartDashboard.putNumber(pow, this.power);
     SmartDashboard.putNumber(axis, this.axis);
     SmartDashboard.putNumber(talonBase.getTalonName() + " keeping pos: ", lastPosition);
+    SmartDashboard.putNumber("Encoder Error; ", encoderError);
+    SmartDashboard.putNumber("Conversion: ", conversion);
+    SmartDashboard.putNumber("Arm Angle: ", angle);
 }
 
     @Override

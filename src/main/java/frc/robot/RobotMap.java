@@ -43,6 +43,8 @@ public class RobotMap {
 
     //Software
      //Drive
+    public static final boolean driveReverse = false;
+    public static final boolean driveReverseEncoder = false;
     public static final double driveNominalOutputForward = 0;
     public static final double driveNominalOutputReverse = 0;
     public static final double drivePeakOutputForward = 0.8;
@@ -51,33 +53,37 @@ public class RobotMap {
     public static final int driveAcceleration = 8000;
     //Lift
      //TalonBase Config
+    public static final boolean liftReverse = true;
+    public static final boolean liftReverseEncoder = true;
     public static final double liftNominalOutputForward = 0;
     public static final double liftNominalOutputReverse = 0;
-    public static final double liftPeakOutputForward = 0.5;
-    public static final double liftPeakOutputReverse = -0.5;
-    public static final int liftCruiseVelocity = 10000;
-    public static final int liftAcceleration = 4000;
+    public static final double liftPeakOutputForward = 1;
+    public static final double liftPeakOutputReverse = -.75;
+    public static final int liftCruiseVelocity = 20000;
+    public static final int liftAcceleration = 8000;
     public static final double liftLowerBound = 0;
-    public static final double liftUpperBound = -128000;
+    public static final double liftUpperBound = 135000;
      //Open Loop Config
     public static final int liftAxis = 1;
     public static final double liftDeadband = 0.1;
      //Closed Loop Targets
-    public static final double liftLowH = -17000;//Level 1 for Hatch
-    public static final double liftMedH = -74000;//Level 2 Rocket for Hatch
-    public static final double liftHighH = -110000;//Level 3 Rocket for Hatch
-    public static final double liftLowC = -30000;//Level 1 Rocket Cargo
-    public static final double liftMedC = -70000;//Level 2 Rocket Cargo
-    public static final double liftHighC = -120000;//Level 3 Rocket Cargo
-    public static final double liftCargoC = -80000;//Scoring Cargo in Cargo Ship
-    public static final double liftIntake = -10000;//Intaking Cargo
-    public static final double liftStartConfig = -1000;//Starting Config for Lift
+    public static final double liftLowH = 17000;//Level 1 for Hatch
+    public static final double liftMedH = 74000;//Level 2 Rocket for Hatch
+    public static final double liftHighH = 134000;//Level 3 Rocket for Hatch
+    public static final double liftLowC = 30000;//Level 1 Rocket Cargo
+    public static final double liftMedC = 70000;//Level 2 Rocket Cargo
+    public static final double liftHighC = 120000;//Level 3 Rocket Cargo
+    public static final double liftCargoC = 80000;//Scoring Cargo in Cargo Ship
+    public static final double liftIntake = 10000;//Intaking Cargo
+    public static final double liftStartConfig = 1000;//Starting Config for Lift
     //Arm
      //TalonBase Config
+    public static final boolean armReverse = true;
+    public static final boolean armReverseEncoder = true;
     public static final double armNominalOutputForward = 0;
     public static final double armNominalOutputReverse = 0;
-    public static final double armPeakOutputForward = 0.1;
-    public static final double armPeakOutputReverse = -0.35;
+    public static final double armPeakOutputForward = 0.35;
+    public static final double armPeakOutputReverse = -0.1;
     public static final int armCruiseVelocity = 2000;
     public static final int armAcceleration = 800;
     public static final double armLowerBound = -3000;
@@ -86,10 +92,10 @@ public class RobotMap {
     public static final int armAxis = 5;
     public static final double armDeadBand = 0.1;
      //Closed Loop Targets
-     public static final double armIntakeCargo = -4400;
-     public static final double armPerpindicularToGround = -3500;//-3500;
-     public static final double armStartConfig = -900;/*0 degrees*/
-     public static final double armScoreOnHigh = -1003;/*300 degrees*/
+     public static final double armIntakeCargo = 4400;
+     public static final double armPerpindicularToGround = 3500;//-3500;
+     public static final double armStartConfig = 900;/*0 degrees*/
+     public static final double armScoreOnHigh = 1003;/*300 degrees*/
     //1706 /*150 degrees*/;
     //2844 /*250 degrees*/
     //3413/*300 degrees*/;
