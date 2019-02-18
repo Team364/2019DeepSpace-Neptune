@@ -21,6 +21,7 @@ public class ArmOpenLoop extends Command {
     private double deadband;
     private double lastPosition;
     private PIDCalc keepPosition;
+    private double angle;
 
     public ArmOpenLoop(
         TalonBase talonBase, 
@@ -45,9 +46,13 @@ public class ArmOpenLoop extends Command {
         // double armDistance = 18 / 12;//Inches to feet conversion
         // double motorStallTorque = 0.71 * 0.7375;//Newton Meters to Foot Pounds Conversion
         // double gearRatio = 466.67;
-        double angle = Math.cos(Math.abs(RobotMap.armPerpindicularToGround) - Math.abs(Robot.superStructure.arm.getPosition()) / 
+        if(Math.abs(Robot.superStructure.arm.getPosition()) < Math.abs(RobotMap.armPerpindicularToGround)){
+        angle = Math.cos(Math.abs(RobotMap.armPerpindicularToGround) - Math.abs(Robot.superStructure.arm.getPosition()) / 
         (Math.abs(RobotMap.armPerpindicularToGround) / 90));
-        double FeedForward = 0.0613848223 * angle;
+        }else if(Math.abs(Robot.superStructure.arm.getPosition()) >= Math.abs(RobotMap.armPerpindicularToGround)){
+            angle = (Math.abs(Robot.superStructure.arm.getPosition())  / (Math.abs(RobotMap.armPerpindicularToGround) / 90));
+          }
+          double FeedForward = 0.0613848223 * angle;
         keepPosition.setPIDParameters(-0.0012, 0, 0, FeedForward);
     if(States.loopState == States.LoopStates.OPEN_LOOP){
         power = Robot.oi2.controller2.getRawAxis(axis);
