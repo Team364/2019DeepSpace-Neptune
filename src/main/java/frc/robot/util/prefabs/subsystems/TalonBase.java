@@ -24,7 +24,6 @@ import frc.robot.util.prefabs.subsystems.talonutil.*;
    * <p>Sensor units per 100ms - 4096 sensor units per revolution
    * @param acceleration talon Acceleration for motion magic closed loop control
      * <p>Sensor units per 100ms - 4096 sensor units per revolution
-   * @param bounded if bounds are to be set in open loop
    * @param upperBound highest raw encoder count that the talon can reach
    * @param lowerBound lowest raw encoder count that the talon can reach
      * <p>set to one for no effect
@@ -55,8 +54,6 @@ public class TalonBase extends Subsystem {
     public double upperBound = 30000;
     /**lowest raw encoder count that the talon can reach */
     public double lowerBound = 0;
-    /**If bounds are to be set in open loop */
-    public boolean bounded = false;
     /**Power that the talon is set to in Open Loop */
     public double openLoopPower = 0;
     /**Open loop out of bounds. */
@@ -99,7 +96,6 @@ public class TalonBase extends Subsystem {
                     double peakOutputReverse,
                     int cruiseVelocity,
                     int acceleration,
-                    boolean bounded,
                     double lowerBound,
                     double upperBound,
                     String name
@@ -111,7 +107,6 @@ public class TalonBase extends Subsystem {
         this.peakOutputReverse = peakOutputReverse;
         this.cruiseVelocity = cruiseVelocity;
         this.acceleration = acceleration;
-        this.bounded = bounded;
         this.lowerBound = lowerBound;
         this.upperBound = upperBound;
         this.name = name;
@@ -295,14 +290,6 @@ public class TalonBase extends Subsystem {
     /**Minimum encoder counts that open loop may reach */
     public void setLowerBound(double counts){
         lowerBound = counts;
-    }
-    /**Determines whether or not open loop will be confied to stay within an encoder count range */
-    public void setBounds(boolean verdict){
-        bounded = verdict;
-    }
-    /**Gets whether or not open loop is bounded */
-      public boolean getBounded(){
-        return bounded;
     }
     /**Open loop is to run in the default command */
     public void openLoop(double power){

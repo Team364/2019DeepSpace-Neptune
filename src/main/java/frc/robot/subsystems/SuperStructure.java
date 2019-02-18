@@ -135,7 +135,6 @@ public class SuperStructure extends Subsystem {
         RobotMap.liftPeakOutputReverse, 
         RobotMap.liftCruiseVelocity, 
         RobotMap.liftAcceleration, 
-        RobotMap.liftBounded, 
         RobotMap.liftLowerBound, 
         RobotMap.liftUpperBound, 
         "Lift"){
@@ -158,7 +157,6 @@ public class SuperStructure extends Subsystem {
         RobotMap.armPeakOutputReverse, 
         RobotMap.armCruiseVelocity, 
         RobotMap.armAcceleration, 
-        RobotMap.armBounded, 
         RobotMap.armLowerBound, 
         RobotMap.armUpperBound, 
         "Arm"){
