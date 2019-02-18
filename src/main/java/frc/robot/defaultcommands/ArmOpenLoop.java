@@ -33,7 +33,6 @@ public class ArmOpenLoop extends Command {
         this.talonBase = talonBase;
         this.axis = axis;
         this.deadband = deadband;
-        this.bounded = talonBase.bounded;
         this.upperBound = talonBase.upperBound;
         this.lowerBound = talonBase.lowerBound;
         keepPosition = new PIDCalc(-0.0012, 0, 0, 0, "armKeepPosition");
