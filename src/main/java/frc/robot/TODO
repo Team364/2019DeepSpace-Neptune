@@ -4,21 +4,17 @@ to lead to Priorities being neglected and time wasted on side projects. Keeping 
 as this ensure that we may stay on track and complete goals in the proper order.
 
 Today: 
---See if the message prints and how many times it does whenever the robot enters passive mode
+--write a keep Velocity closed loop command and time the arm to move to positions
 
 Priorities:
 --Go through simulated match and make sure states and positions act as intended
 --Test how low the motor power has to be to hold the lift up while not being powered by either open or closed loop
 --Record Positions for:
-        a.)Hatch Level 1
-        b.)Hatch Level 2
-        c.)Hatch Level 3
-        d.)Rocket Level 1
-        e.)Rocket Level 2
-        f.)Rocket Level 3
-        g.)Cargo Ship Level 2
-        h.)Intaking Cargo
-        i.)Retract/Starting
+        a.)Rocket Level 1
+        b.)Rocket Level 2
+        c.)Rocket Level 3
+        d.)Intaking Cargo
+        e.)Retract/Starting
 --Test Pistons    
 --Set up 2 PCMs
 --Tune delays on Scoring Objects

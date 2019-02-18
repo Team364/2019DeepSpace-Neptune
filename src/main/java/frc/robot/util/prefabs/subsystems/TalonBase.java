@@ -328,6 +328,13 @@ public class TalonBase extends Subsystem {
         this.talon.set(ControlMode.MotionMagic, Position);
         TargetPosition = Position;
     }
+    /**Velocity Closed Loop
+     * @param RPM rotations per minute
+     */
+    public void RetainVelocity(double RPM){
+        double velocity = RPM / 10.0 * 4096.0 / 60.0;
+        this.talon.set(ControlMode.Velocity, velocity);
+    }
 
     /**used for instrumentation */
     private double getTargetPosition(){

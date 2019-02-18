@@ -52,6 +52,7 @@ public class Periodic extends Command {
       }
       ++loops;
       if(loops > 20){
+        //Shouldn't this be an and? Test when you get the chance
        if(Robot.superStructure.arm.reachedPosition()||Robot.superStructure.lift.reachedPosition()){
         // if(Robot.superStructure.lift.reachedPosition()){ -- testing lift alone
         //if(Robot.superStructure.arm.reachedPosition()){ --testing arm alone 
