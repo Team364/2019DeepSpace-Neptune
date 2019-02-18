@@ -6,6 +6,7 @@ import frc.robot.Robot;
 import frc.robot.util.States;
 import frc.robot.util.prefabs.subsystems.TalonBase;
 import frc.robot.util.PIDCalc;
+import frc.robot.RobotMap;
     /**
      * Used for operator only
      * @param talonBase //talon Base to run command
@@ -35,11 +36,19 @@ public class ArmOpenLoop extends Command {
 
     @Override
     protected void initialize() {
-        
+
     }
 
     @Override
     protected void execute() {
+        double armWeight = 10;
+        double armDistance = 18;
+        double motorStallTorque = 300;
+        double gearRatio = 3;
+        double angle = Math.cos(Math.abs(RobotMap.armPerpindicularToGround) - Math.abs(Robot.superStructure.arm.getPosition()) / 
+        (Math.abs(RobotMap.armPerpindicularToGround) / 90));
+        double FeedForward = armWeight * armDistance / motorStallTorque * gearRatio * angle;
+        keepPosition.setPIDParameters(-0.0012, 0, 0, FeedForward);
     if(States.loopState == States.LoopStates.OPEN_LOOP){
         power = Robot.oi2.controller2.getRawAxis(axis);
         if(Math.abs(power) > deadband){
