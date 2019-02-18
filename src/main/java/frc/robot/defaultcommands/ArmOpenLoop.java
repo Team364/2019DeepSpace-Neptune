@@ -18,7 +18,6 @@ public class ArmOpenLoop extends Command {
     private int axis;
     private double power;
     private double deadband;
-    private boolean bounded;
     private double upperBound;
     private double lowerBound;
     private double lastPosition;
