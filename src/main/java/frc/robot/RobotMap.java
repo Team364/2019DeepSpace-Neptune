@@ -97,9 +97,15 @@ public class RobotMap {
     //3413/*300 degrees*/;
     //3981 /*350 degrees*/;
     //Intake
-    public static final double intakeDampen = 0.67;
+    public static final double intakeNominalOutputForward = 0;
+    public static final double intakeNominalOutputReverse = 0;
+    public static final double intakePeakOutputForward = 1;
+    public static final double intakePeakOutputReverse = -1;
     //Drop Wheels
-    public static final double dropWheelsDampen = 0.5;
+    public static final double dropWheelsNominalOutputForward = 0;
+    public static final double dropWheelsNominalOutputReverse = 0;
+    public static final double dropWheelsPeakOutputForward = 0.5;
+    public static final double dropWheelsPeakOutputReverse = -0.5;
     //NavX
     public static final double navXPterm = 0.0005;
     public static final double navXIterm = 0.1;

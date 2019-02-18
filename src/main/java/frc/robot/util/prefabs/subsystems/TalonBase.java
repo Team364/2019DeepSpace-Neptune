@@ -266,6 +266,28 @@ public class TalonBase extends Subsystem {
     public void setPeakOutputReverse(double percentOutput){
         talon.configPeakOutputReverse(percentOutput);
     }
+    /**Sets the Pterm of the PID */
+    private void setPterm(double Pterm){
+        talon.config_kP(SlotIdx, Pterm);
+    }
+    /**Sets the Iterm of the PID */
+    private void setIterm(double Iterm){
+        talon.config_kI(SlotIdx, Iterm);
+    }
+    /**Sets the Dterm of the PID */
+    private void setDterm(double Dterm){
+        talon.config_kD(SlotIdx, Dterm);
+    }
+    /**Sets the Dterm of the PID */
+    private void setFterm(double Fterm){
+        talon.config_kF(SlotIdx, Fterm);
+    }
+    public void setPID(double Pterm, double Iterm, double Dterm, double Fterm){
+        setPterm(Pterm);
+        setIterm(Iterm);
+        setDterm(Dterm);
+        setFterm(Fterm);
+    }
     /**Maximum encoder counts that open loop may reach */
     public void setUpperBound(double counts){
         upperBound = counts;

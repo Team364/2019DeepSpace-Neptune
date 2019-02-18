@@ -169,12 +169,24 @@ public class SuperStructure extends Subsystem {
     aL = new DigitalInput(RobotMap.armLimitSwitch);
 
     //Intake 
-    intake = new VictorBase(in, RobotMap.intakeDampen, "Intake");
+    intake = new VictorBase(
+      in, 
+      RobotMap.intakeNominalOutputForward, 
+      RobotMap.intakeNominalOutputReverse, 
+      RobotMap.intakePeakOutputForward, 
+      RobotMap.intakePeakOutputReverse, 
+      "Intake");
     intakeSlave.follow(in);
     iL = new DigitalInput(RobotMap.ballLimitSwitch);
 
     //DropWheels
-    dropWheels = new VictorBase(dw, RobotMap.dropWheelsDampen, "DropWheels");
+    dropWheels = new VictorBase(
+      dw, 
+      RobotMap.dropWheelsNominalOutputForward, 
+      RobotMap.dropWheelsNominalOutputReverse, 
+      RobotMap.dropWheelsPeakOutputForward, 
+      RobotMap.dropWheelsPeakOutputReverse,  
+      "DropWheels");
     
     //Pistons
     claw = new Piston(cl, "Claw");

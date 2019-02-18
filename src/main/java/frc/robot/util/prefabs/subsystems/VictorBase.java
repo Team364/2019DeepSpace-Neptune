@@ -12,41 +12,38 @@ public class VictorBase extends Subsystem {
 
   private VictorSPX victor;
   private String name;
-  private double Dampen;
+  private Double MaxForward;
+  private Double MaxBackward;
+  private Double MinForward;
+  private Double MinBackward;
   private VictorBase instance;
 
-  public VictorBase(VictorSPX victor, double Dampen, String name){
+  public VictorBase(
+    VictorSPX victor, 
+    double MaxForward, 
+    double MaxBackward, 
+    double MinForward, 
+    double MinBackward, 
+    String name){
     this.victor = victor;
     this.name = name;
-    this.Dampen = Dampen;
-  }
-    /**
-   * Returns the {@link VictorBase}, creating it if one does not exist.
-   *
-   * @return the {@link VictorBase}
-   */
-  public synchronized VictorBase getInstance() {
-    if (instance == null) {
-      instance = new VictorBase(this.victor, this.Dampen, this.name);
-    }
-    return instance;
+    this.MaxForward = MaxForward;
+    this.MaxBackward = MaxBackward;
+    this.MinForward = MinForward;
+    this.MinBackward = MinBackward;
+    victor.configPeakOutputForward(MaxForward);
+    victor.configPeakOutputReverse(MaxBackward);
+    victor.configNominalOutputReverse(MinBackward);
+    victor.configNominalOutputForward(MinForward);
   }
     /**
      * run victor
      */ 
     public void openLoop(double power) {
-      power *= Dampen;
       victor.set(ControlMode.PercentOutput, power);
   }
-    /**Dampens the open loop power
-     * @param scaler decimal to scale the open loop power byu
-     */
-    public void setDampen(double scaler){
-        Dampen = scaler;
-    }
-
   /**
-   * closePiston()
+   * stop Victor()
    */ 
   public void stop() {
       openLoop(0);
@@ -63,7 +60,22 @@ public class VictorBase extends Subsystem {
       return false;
     }
   }
-  
+   /**Sets the lowest speed the trajectory can run at in the forward direction */
+   public void setNominalOutputForward(double percentOutput){
+    victor.configNominalOutputForward(percentOutput);
+    }
+    /**Sets the lowest speed the trajectory can run at in the reverse direction */
+    public void setNominalOutputReverse(double percentOutput){
+        victor.configNominalOutputReverse(percentOutput);
+    }
+    /**Sets the hightest speed the trajectory can run at in the forward direction */
+    public void setPeakOutputForward(double percentOutput){
+        victor.configPeakOutputForward(percentOutput);
+    }
+    /**Sets the hightest speed the trajectory can run at in the reverse direction */
+    public void setPeakOutputReverse(double percentOutput){
+        victor.configPeakOutputReverse(percentOutput);
+    }
   /**Treat as abstract */
   @Override
   public void initDefaultCommand() {
