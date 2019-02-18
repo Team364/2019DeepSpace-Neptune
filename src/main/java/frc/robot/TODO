@@ -4,7 +4,7 @@ to lead to Priorities being neglected and time wasted on side projects. Keeping 
 as this ensure that we may stay on track and complete goals in the proper order.
 
 Today: 
---write a keep Velocity closed loop command and time the arm to move to positions
+--Get Closed Loop arm to work
 
 Priorities:
 --Go through simulated match and make sure states and positions act as intended
