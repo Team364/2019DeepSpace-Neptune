@@ -37,6 +37,7 @@ public class Periodic extends Command {
       Limits[1] = Robot.superStructure.aL.get();//True when pressed
       Limits[2] = Robot.superStructure.lLL.get();
       Limits[3] = Robot.superStructure.uLL.get();
+
     //Track Lift Zone
     if((Robot.superStructure.lift.getPosition() > -10000) &&(Robot.superStructure.lift.getPosition() < RobotMap.liftLowerBound)){
       States.liftZone = States.LiftZones.LOWER_DANGER;
@@ -45,7 +46,8 @@ public class Periodic extends Command {
     else{
       States.liftZone = States.LiftZones.SAFE;
     }
-    
+
+    //Encoder Upper Bound for Lift
     if((Robot.superStructure.lift.getPosition() <= RobotMap.liftUpperBound)){
       stopLift.start();
     }
@@ -53,6 +55,7 @@ public class Periodic extends Command {
     if(States.loopState == States.LoopStates.CLOSED_LOOP){
       if(Limits[3]||Limits[2]){
         stopLift.start();
+        States.loopState = States.LoopStates.OPEN_LOOP;
       }
       ++loops;
       if(loops > 20){
