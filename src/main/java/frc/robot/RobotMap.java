@@ -45,11 +45,10 @@ public class RobotMap {
      //Drive
     public static final double driveNominalOutputForward = 0;
     public static final double driveNominalOutputReverse = 0;
-    public static final double drivePeakOutputForward = 1;
-    public static final double drivePeakOutputReverse = -1;
+    public static final double drivePeakOutputForward = 0.8;
+    public static final double drivePeakOutputReverse = -0.8;
     public static final int driveCruiseVelocity = 20000;
     public static final int driveAcceleration = 8000;
-    public static final double driveDampen = 0.5;
     //Lift
      //TalonBase Config
     public static final double liftNominalOutputForward = 0;
@@ -61,7 +60,6 @@ public class RobotMap {
     public static final boolean liftBounded = true;
     public static final double liftLowerBound = 0;
     public static final double liftUpperBound = -128000;
-    public static final double liftDampen = 0.5;
      //Open Loop Config
     public static final int liftAxis = 1;
     public static final double liftDeadband = 0.1;
@@ -86,7 +84,6 @@ public class RobotMap {
     public static final boolean armBounded = true;
     public static final double armLowerBound = -3000;
     public static final double armUpperBound = 0;
-    public static final double armDampen = 1;
      //Open Loop Config
     public static final int armAxis = 5;
     public static final double armDeadBand = 0.1;

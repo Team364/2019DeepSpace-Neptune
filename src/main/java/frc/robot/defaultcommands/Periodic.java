@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -38,7 +31,7 @@ public class Periodic extends Command {
       Limits[2] = Robot.superStructure.lLL.get();
       Limits[3] = Robot.superStructure.uLL.get();
 
-    //Track Lift Zone
+    //Track Lift Zone -- If this works replicate for Arm -- Test to see if config Output updates work with this
     if((Robot.superStructure.lift.getPosition() > -10000) &&(Robot.superStructure.lift.getPosition() < RobotMap.liftLowerBound)){
       States.liftZone = States.LiftZones.LOWER_DANGER;
     }else if((Robot.superStructure.lift.getPosition() < -100000)&&(Robot.superStructure.lift.getPosition() > RobotMap.liftUpperBound))

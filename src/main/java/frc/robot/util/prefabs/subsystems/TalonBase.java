@@ -27,7 +27,6 @@ import frc.robot.util.prefabs.subsystems.talonutil.*;
    * @param bounded if bounds are to be set in open loop
    * @param upperBound highest raw encoder count that the talon can reach
    * @param lowerBound lowest raw encoder count that the talon can reach
-   * @param dampen Dampening variable to scale down the motor output in open loop 
      * <p>set to one for no effect
    */
 public class TalonBase extends Subsystem {
@@ -69,9 +68,6 @@ public class TalonBase extends Subsystem {
     StringBuilder sb = new StringBuilder();
     /**Tracks the target position for instrumentation */
     private double TargetPosition;
-    /**Dampening variable to scale down the motor output in open loop 
-     * <p>if not set, it will be 1, which leads to no affect*/
-    private double Dampen = 1.0;
     /**Talon Cruise velocity maximum for motion magic closed loop control
      * <p>Sensor units per 100ms - 4096 sensor units per revolution*/
     private int cruiseVelocity = 3750;
@@ -106,7 +102,6 @@ public class TalonBase extends Subsystem {
                     boolean bounded,
                     double lowerBound,
                     double upperBound,
-                    double dampen,
                     String name
                     ) {
         this.talon = talon;
@@ -119,7 +114,6 @@ public class TalonBase extends Subsystem {
         this.bounded = bounded;
         this.lowerBound = lowerBound;
         this.upperBound = upperBound;
-        this.Dampen = dampen;
         this.name = name;
         /*Sets the name of the subsystem */
         this.setName(this.name, this.name);
@@ -174,7 +168,6 @@ public class TalonBase extends Subsystem {
                     double peakOutputReverse,
                     int cruiseVelocity,
                     int acceleration,
-                    double dampen,
                     String name
                     ) {
         this.talon = talon;
@@ -184,7 +177,6 @@ public class TalonBase extends Subsystem {
         this.peakOutputReverse = peakOutputReverse;
         this.cruiseVelocity = cruiseVelocity;
         this.acceleration = acceleration;
-        this.Dampen = dampen;
         this.name = name;
         /*Sets the name of the subsystem */
         this.setName(this.name, this.name);
@@ -233,11 +225,9 @@ public class TalonBase extends Subsystem {
     /**Talon without encoder */
     public TalonBase(
                     TalonSRX talon, 
-                    double dampen,
                     String name
                     ) {
         this.talon = talon;
-        this.Dampen = dampen;
         this.name = name;
         /*Sets the name of the subsystem */
         this.setName(this.name, this.name);
@@ -299,18 +289,8 @@ public class TalonBase extends Subsystem {
         if(Math.abs(power) < 0.1){
             power = 0;
         }
-            power *= Dampen;
             this.talon.set(ControlMode.PercentOutput, power);
             openLoopPower = power;
-    }
-    /**Dampens the open loop power
-     * @param scaler decimal to scale the open loop power byu
-     */
-    public void setDampen(double scaler){
-        Dampen = scaler;
-    }
-    public double getDampen(){
-        return Dampen;
     }
     /**
      * Sets the talon Motor output to 0

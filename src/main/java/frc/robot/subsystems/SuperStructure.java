@@ -107,7 +107,6 @@ public class SuperStructure extends Subsystem {
         RobotMap.drivePeakOutputReverse, 
         RobotMap.driveCruiseVelocity, 
         RobotMap.driveAcceleration, 
-        RobotMap.driveDampen, 
         "RightDrive");
     rRearDriveSlave.follow(rDrive);
     rTopDriveSlave.follow(rDrive);
@@ -121,7 +120,6 @@ public class SuperStructure extends Subsystem {
         RobotMap.drivePeakOutputReverse, 
         RobotMap.driveCruiseVelocity, 
         RobotMap.driveAcceleration, 
-        RobotMap.driveDampen, 
         "LeftDrive");
     lRearDriveSlave.follow(lDrive);
     lTopDriveSlave.follow(lDrive);
@@ -140,7 +138,6 @@ public class SuperStructure extends Subsystem {
         RobotMap.liftBounded, 
         RobotMap.liftLowerBound, 
         RobotMap.liftUpperBound, 
-        RobotMap.liftDampen, 
         "Lift"){
           public void initDefaultCommand(){
             lift.setDefaultCommand(new LiftOpenLoop(lift, RobotMap.liftAxis, RobotMap.liftDeadband));
@@ -164,7 +161,6 @@ public class SuperStructure extends Subsystem {
         RobotMap.armBounded, 
         RobotMap.armLowerBound, 
         RobotMap.armUpperBound, 
-        RobotMap.armDampen, 
         "Arm"){
       public void initDefaultCommand(){
         arm.setDefaultCommand(new ArmOpenLoop(arm, RobotMap.armAxis, RobotMap.armDeadBand));
