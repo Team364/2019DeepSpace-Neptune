@@ -324,7 +324,7 @@ public class TalonBase extends Subsystem {
      */
     public void MoveToPosition(double Position){
         loopState = LoopStates.CLOSED_LOOP;
-        System.out.println("The talon is moving to: " + Position);
+        System.out.println("The " + this.name +" is moving to: " + Position);
         this.talon.set(ControlMode.MotionMagic, Position);
         TargetPosition = Position;
     }
