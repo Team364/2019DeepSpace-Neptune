@@ -5,6 +5,8 @@ as this ensure that we may stay on track and complete goals in the proper order.
 
 Today: 
 --Get Closed Loop arm to work
+--Math.abs(RobotMap.armPerpindicularToGround) - Math.abs(Robot.superStructure.arm.getPosition()) / 90 = degrees for 
+Feed Forward Calculation
 
 Priorities:
 --Go through simulated match and make sure states and positions act as intended
