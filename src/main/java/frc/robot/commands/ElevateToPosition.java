@@ -27,6 +27,8 @@ public class ElevateToPosition extends Command {
     private double lvlone;
     private double lvltwo;
     private double lvlthree;
+    private double liftClimb;
+    private double armClimb;
     /**
      * Heights
      * <p>1: low on rocket, scoring hatches on rocket level 1 and Cargo Ship
@@ -84,7 +86,9 @@ public class ElevateToPosition extends Command {
             lvlone = 3300;
             lvlthree = perpendicularToGround;
         }
-        
+        liftClimb = 80000;
+        armClimb = 1500;
+
         if(desiredHeight == 0){
             wantedPosition = intake;
             wantedAngle = intakeCargo;
@@ -103,6 +107,9 @@ public class ElevateToPosition extends Command {
             }else if(desiredHeight == 5){
             wantedPosition = liftStartConfig;
             wantedAngle = armStartConfig;
+            }else if(desiredHeight == 6){
+            wantedPosition = liftClimb;
+            wantedAngle = armClimb;
             }
          
         Robot.superStructure.elevatorSystem.elevateTo(wantedPosition, wantedAngle);

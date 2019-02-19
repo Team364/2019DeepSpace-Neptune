@@ -10,6 +10,8 @@ import frc.robot.defaultcommands.Periodic;
 import frc.robot.subroutines.*;
 import frc.robot.util.States;
 import frc.robot.commands.*;
+import frc.robot.subroutines.Climb;
+import frc.robot.util.prefabs.commands.*;
 //import frc.robot.commands.teleop.TestPGyro;
 
 public class OperatorOI{
@@ -62,6 +64,7 @@ public class OperatorOI{
     private Command runGrip;
     private Command liftManual = new Manual();
     public int gripSet = 1;
+    private JoystickButton ClimbSet;
 
 
 
@@ -93,6 +96,8 @@ public class OperatorOI{
         //Set Lift Position to level 0 for intaking
         setIntakePosition = new JoystickButton(controller2, 5);
         setIntakePosition.whenPressed(new setIntakePos());
+        ClimbSet = new JoystickButton(controller2, 8);
+        ClimbSet.whenPressed(new Climb());
     }
     /**
    * Sets objectState
@@ -148,6 +153,11 @@ public class OperatorOI{
       if(controller2.getRawButton(6)){
         Command elevate = new ElevateToPosition(5);
         elevate.start();
+        Command setLever = new SetPiston(Robot.superStructure.lever, 0);
+        Command setClaw = new SetPiston(Robot.superStructure.claw, 1);
+        setLever.start();
+        setClaw.start();
+
       }
 
     }

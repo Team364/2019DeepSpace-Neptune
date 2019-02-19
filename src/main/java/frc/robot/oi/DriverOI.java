@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.Robot;
 import frc.robot.util.prefabs.commands.SetPiston;
 import frc.robot.subroutines.Align;
+import frc.robot.subroutines.*;
 //import frc.robot.commands.teleop.TestPGyro;
 
 public class DriverOI {
@@ -58,8 +59,8 @@ public class DriverOI {
     public JoystickButton alignWithDiskButton;
     public JoystickButton diagnosticButton;
 
-    // public JoystickButton ClimbFrontButton;
-    // public JoystickButton undoClimbFrontButton;
+    public JoystickButton Climb;
+    public JoystickButton undoClimbFrontButton;
     /**
      * OI()
      * <p>Initializes Joysticks and buttons thereof
@@ -107,9 +108,9 @@ public class DriverOI {
         // //Left on the D-pad
         // left180 = new JoystickPOV(270);
         // left180.whenActive(new Turn180left());
-        // ClimbFrontButton = new JoystickButton(controller, 3);
-        // ClimbFrontButton.whenPressed(new SetPiston(Robot.superStructure.front, 1));
-        // undoClimbFrontButton = new JoystickButton(controller, 2);
-        // undoClimbFrontButton.whenPressed(new SetPiston(Robot.superStructure.front, 0));
+        Climb = new JoystickButton(controller, 8);
+        Climb.whenPressed(new Climb());
+        undoClimbFrontButton = new JoystickButton(controller, 2);
+        undoClimbFrontButton.whenPressed(new SetPiston(Robot.superStructure.front, 0));
     }
 }
