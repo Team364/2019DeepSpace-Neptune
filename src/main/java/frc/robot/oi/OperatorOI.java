@@ -145,6 +145,10 @@ public class OperatorOI{
       if(Math.abs(controller2.getRawAxis(1)) > 0.2){
         liftManual.start();
       } 
+      if(controller2.getRawButton(6)){
+        Command elevate = new ElevateToPosition(5);
+        elevate.start();
+      }
 
     }
 

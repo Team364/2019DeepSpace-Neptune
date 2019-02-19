@@ -52,6 +52,8 @@ public class setIntakePos extends Command {
         }else if(States.objState == States.ObjectStates.HATCH_OBJ){
            Robot.superStructure.lever.noInput();
         }
+        Command elevate = new ElevateToPosition(0);
+        elevate.start();
     }
 
     @Override

@@ -24,6 +24,9 @@ public class ElevateToPosition extends Command {
     private double armStartConfig;
     private double desiredAngle;
     private double custom;
+    private double lvlone;
+    private double lvltwo;
+    private double lvlthree;
     /**
      * Heights
      * <p>1: low on rocket, scoring hatches on rocket level 1 and Cargo Ship
@@ -60,10 +63,12 @@ public class ElevateToPosition extends Command {
             intake = low;
 
             perpendicularToGround = RobotMap.armPerpindicularToGround;
-            armStartConfig = perpendicularToGround;
+            armStartConfig = RobotMap.armStartConfig;
             scoreOnHigh = perpendicularToGround;
-            intakeCargo = perpendicularToGround;
-            custom = 3500;
+            intakeCargo = 3300;
+
+            lvlone = perpendicularToGround;
+            lvlthree = 1700;
         }else if(States.objState == States.ObjectStates.CARGO_OBJ){
             intake = RobotMap.liftIntake;
             low = RobotMap.liftLowC;
@@ -74,8 +79,10 @@ public class ElevateToPosition extends Command {
             intakeCargo = RobotMap.armIntakeCargo;
             perpendicularToGround = RobotMap.armPerpindicularToGround;
             scoreOnHigh = perpendicularToGround;
-            armStartConfig = perpendicularToGround;
+            armStartConfig = RobotMap.armStartConfig;
             custom = 5000;
+            lvlone = 3300;
+            lvlthree = perpendicularToGround;
         }
         
         if(desiredHeight == 0){
@@ -83,13 +90,13 @@ public class ElevateToPosition extends Command {
             wantedAngle = intakeCargo;
             }else if(desiredHeight == 1){
             wantedPosition = low;
-            wantedAngle = custom;
+            wantedAngle = lvlone;
             }else if(desiredHeight == 2){
             wantedPosition = med;
             wantedAngle = perpendicularToGround;
             }else if(desiredHeight == 3){
             wantedPosition = high;
-            wantedAngle = perpendicularToGround;
+            wantedAngle = lvlthree;
             }else if(desiredHeight == 4){
             wantedPosition = cargo; 
             wantedAngle = perpendicularToGround;   

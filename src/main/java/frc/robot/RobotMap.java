@@ -69,12 +69,12 @@ public class RobotMap {
      //Closed Loop Targets
     public static final double liftLowH = 17000;//Level 1 for Hatch
     public static final double liftMedH = 74000;//Level 2 Rocket for Hatch
-    public static final double liftHighH = 134000;//Level 3 Rocket for Hatch
+    public static final double liftHighH = 130000;//Level 3 Rocket for Hatch
     public static final double liftLowC = 30000;//Level 1 Rocket Cargo
-    public static final double liftMedC = 70000;//Level 2 Rocket Cargo
-    public static final double liftHighC = 120000;//Level 3 Rocket Cargo
+    public static final double liftMedC = 92000;//Level 2 Rocket Cargo
+    public static final double liftHighC = 130000;//Level 3 Rocket Cargo
     public static final double liftCargoC = 80000;//Scoring Cargo in Cargo Ship
-    public static final double liftIntake = 10000;//Intaking Cargo
+    public static final double liftIntake = 14000;//Intaking Cargo
     public static final double liftStartConfig = 1000;//Starting Config for Lift
     //Arm
      //TalonBase Config
@@ -92,10 +92,10 @@ public class RobotMap {
     public static final int armAxis = 5;
     public static final double armDeadBand = 0.1;
      //Closed Loop Targets
-     public static final double armIntakeCargo = 4400;
-     public static final double armPerpindicularToGround = 3500;//-3500;
-     public static final double armStartConfig = 900;/*0 degrees*/
-     public static final double armScoreOnHigh = 1003;/*300 degrees*/
+     public static final double armIntakeCargo = 4200;
+     public static final double armPerpindicularToGround = 3300;
+     public static final double armStartConfig = 100;
+     public static final double armScoreOnHigh = 2000;
     //1706 /*150 degrees*/;
     //2844 /*250 degrees*/
     //3413/*300 degrees*/;
