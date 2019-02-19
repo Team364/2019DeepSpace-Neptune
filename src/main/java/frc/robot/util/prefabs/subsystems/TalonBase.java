@@ -104,6 +104,10 @@ public class TalonBase extends Subsystem {
                     int acceleration,
                     double lowerBound,
                     double upperBound,
+                    double P,
+                    double I,
+                    double D,
+                    double F,
                     String name
                     ) {
         this.talon = talon;
@@ -147,10 +151,10 @@ public class TalonBase extends Subsystem {
 
 		/* Set Motion Magic gains in slot0 - see documentation */
 		talon.selectProfileSlot(SlotIdx, PIDLoopIdx);
-		talon.config_kF(SlotIdx, Gains.kF, TimeoutMs);
-		talon.config_kP(SlotIdx, Gains.kP, TimeoutMs);
-		talon.config_kI(SlotIdx, Gains.kI, TimeoutMs);
-		talon.config_kD(SlotIdx, Gains.kD, TimeoutMs);
+		talon.config_kF(SlotIdx, F, TimeoutMs);
+		talon.config_kP(SlotIdx, P, TimeoutMs);
+		talon.config_kI(SlotIdx, I, TimeoutMs);
+		talon.config_kD(SlotIdx, D, TimeoutMs);
 
 		/* Set acceleration and vcruise velocity - see documentation */
 		talon.configMotionCruiseVelocity(this.cruiseVelocity, TimeoutMs);

@@ -30,11 +30,12 @@ public class runIntake extends Command {
 
     @Override
     protected boolean isFinished() {
-        if(intaking){
-            return isTimedOut() || Robot.superStructure.limitArray[0];
-        }else{
-            return isTimedOut();
-        }
+        // if(intaking){
+        //     return isTimedOut() || Robot.superStructure.limitArray[0];
+        // }else{
+        //     return isTimedOut();
+        // }
+        return isTimedOut();
     }
 
     @Override

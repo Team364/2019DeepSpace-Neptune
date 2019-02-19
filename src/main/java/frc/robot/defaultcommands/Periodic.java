@@ -1,5 +1,7 @@
 package frc.robot.defaultcommands;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -49,7 +51,7 @@ public class Periodic extends Command {
     else{
       States.liftZone = States.LiftZones.SAFE;
     }
-
+   ;
     //Encoder Upper Bound for Lift
     if((Robot.superStructure.lift.getPosition() >= RobotMap.liftUpperBound)){
       stopLift.start();

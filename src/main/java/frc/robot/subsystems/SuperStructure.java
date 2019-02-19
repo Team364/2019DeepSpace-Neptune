@@ -30,7 +30,7 @@ public class SuperStructure extends Subsystem {
   private TalonSRX rDrive;
   private TalonSRX lDrive;
   private TalonSRX lt;
-  private TalonSRX a;
+  public TalonSRX a;
   private VictorSPX in;
   private VictorSPX dw;
 
@@ -144,6 +144,7 @@ public class SuperStructure extends Subsystem {
         RobotMap.liftAcceleration, 
         RobotMap.liftLowerBound, 
         RobotMap.liftUpperBound, 
+        0.2, 0, 0, 0.2,
         "Lift")//{
           // public void initDefaultCommand(){
           //   lift.setDefaultCommand(new LiftDefault());
@@ -168,14 +169,9 @@ public class SuperStructure extends Subsystem {
         RobotMap.armAcceleration, 
         RobotMap.armLowerBound, 
         RobotMap.armUpperBound, 
-        "Arm")
-    //     {
-    //   public void initDefaultCommand(){
-    //     arm.setDefaultCommand(new ArmDefault(arm, RobotMap.armAxis, RobotMap.armDeadBand));
-    //   }
-    // }
-    ;
-    arm.setPID(1.2, 0.00005, 0, 0);
+        0.8, 0, 0, 0,
+        "Arm");
+    // arm.setPID(1.2, 0.00005, 0, 0);
     aL = new DigitalInput(RobotMap.armLimitSwitch);
 
     elevatorSystem = new ElevatorSystem(lift, arm);

@@ -82,8 +82,8 @@ public class RobotMap {
     public static final boolean armReverseEncoder = false;
     public static final double armNominalOutputForward = 0;
     public static final double armNominalOutputReverse = 0;
-    public static final double armPeakOutputForward = 0.35;
-    public static final double armPeakOutputReverse = -0.1;
+    public static final double armPeakOutputForward = 1;
+    public static final double armPeakOutputReverse = -1;
     public static final int armCruiseVelocity = 2000;
     public static final int armAcceleration = 800;
     public static final double armLowerBound = -3000;

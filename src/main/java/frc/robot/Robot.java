@@ -51,8 +51,6 @@ public class Robot extends TimedRobot {
     // Auto3 = new StraightAuto();
     //Teleop Subroutine CommandGroups are assigned to commands
     //Sensors Reset
-    superStructure.resetEncoders();
-    superStructure.resetEncoders();
 
   }
 

@@ -23,6 +23,7 @@ public class ElevateToPosition extends Command {
     private double scoreOnHigh;
     private double armStartConfig;
     private double desiredAngle;
+    private double custom;
     /**
      * Heights
      * <p>1: low on rocket, scoring hatches on rocket level 1 and Cargo Ship
@@ -44,7 +45,13 @@ public class ElevateToPosition extends Command {
         /*One must keep in mind that a Position of 4096 is only a full rotation of the axle the encoder
         corresponds to. This means that these values may be quite large in practice.
         Writing an equation which converts the inches on the lift to raw sensor units would be beyond useful */
+ 
+    }
+
+    @Override
+    protected void execute() {
         liftStartConfig = RobotMap.liftStartConfig;
+ 
         if(States.objState == States.ObjectStates.HATCH_OBJ){
             low = RobotMap.liftLowH;
             med = RobotMap.liftMedH;
@@ -53,9 +60,10 @@ public class ElevateToPosition extends Command {
             intake = low;
 
             perpendicularToGround = RobotMap.armPerpindicularToGround;
-            armStartConfig = RobotMap.armStartConfig;
+            armStartConfig = perpendicularToGround;
             scoreOnHigh = perpendicularToGround;
             intakeCargo = perpendicularToGround;
+            custom = 3500;
         }else if(States.objState == States.ObjectStates.CARGO_OBJ){
             intake = RobotMap.liftIntake;
             low = RobotMap.liftLowC;
@@ -65,8 +73,9 @@ public class ElevateToPosition extends Command {
 
             intakeCargo = RobotMap.armIntakeCargo;
             perpendicularToGround = RobotMap.armPerpindicularToGround;
-            scoreOnHigh = RobotMap.armScoreOnHigh;
-            armStartConfig = RobotMap.armStartConfig;
+            scoreOnHigh = perpendicularToGround;
+            armStartConfig = perpendicularToGround;
+            custom = 5000;
         }
         
         if(desiredHeight == 0){
@@ -74,13 +83,13 @@ public class ElevateToPosition extends Command {
             wantedAngle = intakeCargo;
             }else if(desiredHeight == 1){
             wantedPosition = low;
-            wantedAngle = perpendicularToGround;
+            wantedAngle = custom;
             }else if(desiredHeight == 2){
             wantedPosition = med;
             wantedAngle = perpendicularToGround;
             }else if(desiredHeight == 3){
             wantedPosition = high;
-            wantedAngle = scoreOnHigh;
+            wantedAngle = perpendicularToGround;
             }else if(desiredHeight == 4){
             wantedPosition = cargo; 
             wantedAngle = perpendicularToGround;   
@@ -88,10 +97,7 @@ public class ElevateToPosition extends Command {
             wantedPosition = liftStartConfig;
             wantedAngle = armStartConfig;
             }
-    }
-
-    @Override
-    protected void execute() {
+         
         Robot.superStructure.elevatorSystem.elevateTo(wantedPosition, wantedAngle);
     }
 
