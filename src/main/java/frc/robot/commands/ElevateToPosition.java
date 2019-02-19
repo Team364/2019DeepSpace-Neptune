@@ -3,6 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.defaultcommands.Periodic;
 import frc.robot.util.States;
 
 public class ElevateToPosition extends Command {
@@ -13,9 +14,15 @@ public class ElevateToPosition extends Command {
     private double med;
     private double high;
     private double intake;
-    private double startConfig;
+    private double liftStartConfig;
     private double desiredHeight;
-    private int loops;
+    
+    private double wantedAngle;
+    private double intakeCargo;
+    private double perpendicularToGround;
+    private double scoreOnHigh;
+    private double armStartConfig;
+    private double desiredAngle;
     /**
      * Heights
      * <p>1: low on rocket, scoring hatches on rocket level 1 and Cargo Ship
@@ -27,59 +34,74 @@ public class ElevateToPosition extends Command {
      */
     public ElevateToPosition(int Height) {
         desiredHeight = Height;  
-        requires(Robot.superStructure.lift);
+        requires(Robot.superStructure.elevatorSystem);
+        setInterruptible(true);
     }
 
     @Override
     protected void initialize() {
+        Periodic.manualControl = false;
         /*One must keep in mind that a Position of 4096 is only a full rotation of the axle the encoder
         corresponds to. This means that these values may be quite large in practice.
         Writing an equation which converts the inches on the lift to raw sensor units would be beyond useful */
-        startConfig = RobotMap.liftStartConfig;
+        liftStartConfig = RobotMap.liftStartConfig;
         if(States.objState == States.ObjectStates.HATCH_OBJ){
             low = RobotMap.liftLowH;
             med = RobotMap.liftMedH;
             high = RobotMap.liftHighH;
             cargo = low;
             intake = low;
+
+            perpendicularToGround = RobotMap.armPerpindicularToGround;
+            armStartConfig = RobotMap.armStartConfig;
+            scoreOnHigh = perpendicularToGround;
+            intakeCargo = perpendicularToGround;
         }else if(States.objState == States.ObjectStates.CARGO_OBJ){
             intake = RobotMap.liftIntake;
             low = RobotMap.liftLowC;
             med = RobotMap.liftMedC;
             high = RobotMap.liftHighC;
             cargo = RobotMap.liftCargoC;
+
+            intakeCargo = RobotMap.armIntakeCargo;
+            perpendicularToGround = RobotMap.armPerpindicularToGround;
+            scoreOnHigh = RobotMap.armScoreOnHigh;
+            armStartConfig = RobotMap.armStartConfig;
         }
         
         if(desiredHeight == 0){
             wantedPosition = intake;
+            wantedAngle = intakeCargo;
             }else if(desiredHeight == 1){
             wantedPosition = low;
+            wantedAngle = perpendicularToGround;
             }else if(desiredHeight == 2){
             wantedPosition = med;
+            wantedAngle = perpendicularToGround;
             }else if(desiredHeight == 3){
             wantedPosition = high;
+            wantedAngle = scoreOnHigh;
             }else if(desiredHeight == 4){
-            wantedPosition = cargo;    
+            wantedPosition = cargo; 
+            wantedAngle = perpendicularToGround;   
             }else if(desiredHeight == 5){
-            wantedPosition = startConfig;
+            wantedPosition = liftStartConfig;
+            wantedAngle = armStartConfig;
             }
     }
 
     @Override
     protected void execute() {
-        ++loops;
-        Robot.superStructure.lift.MoveToPosition(wantedPosition);
-        States.loopState = States.LoopStates.CLOSED_LOOP;
+        Robot.superStructure.elevatorSystem.elevateTo(wantedPosition, wantedAngle);
     }
 
     @Override
     protected boolean isFinished() {
-        return Robot.superStructure.lift.reachedPosition()&& (loops > 20);
+        return false;
     }
 
     @Override
     protected void end() {
-        Robot.superStructure.lift.stop();
     }
 
     @Override

@@ -52,6 +52,7 @@ public class Robot extends TimedRobot {
     //Teleop Subroutine CommandGroups are assigned to commands
     //Sensors Reset
     superStructure.resetEncoders();
+    superStructure.resetEncoders();
 
   }
 
@@ -89,7 +90,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
       //This removes all commands from the scheduler
       Scheduler.getInstance().removeAll();
-      superStructure.resetEncoders();
+      Robot.superStructure.arm.MoveToPosition(3500);
   }
 
   @Override

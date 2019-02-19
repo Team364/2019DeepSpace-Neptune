@@ -13,7 +13,7 @@ import frc.robot.RobotMap;
      * @param axis  //axis for open loop
      * @param deadband //minimum joystick value for open loop to run
      */
-public class ArmOpenLoop extends Command {
+public class ArmDefault extends Command {
 
     private TalonBase talonBase;
     private int axis;
@@ -25,7 +25,7 @@ public class ArmOpenLoop extends Command {
     private double encoderError;
     private double FeedForward;
 
-    public ArmOpenLoop(
+    public ArmDefault(
         TalonBase talonBase, 
         int axis, 
         double deadband) {

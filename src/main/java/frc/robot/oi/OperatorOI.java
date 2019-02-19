@@ -5,9 +5,11 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.commands.setIntakePos;
+import frc.robot.defaultcommands.Manual;
+import frc.robot.defaultcommands.Periodic;
 import frc.robot.subroutines.*;
 import frc.robot.util.States;
+import frc.robot.commands.*;
 //import frc.robot.commands.teleop.TestPGyro;
 
 public class OperatorOI{
@@ -58,6 +60,7 @@ public class OperatorOI{
     private boolean cargo;
     private boolean intake;
     private Command runGrip;
+    private Command liftManual = new Manual();
     public int gripSet = 1;
 
 
@@ -77,16 +80,16 @@ public class OperatorOI{
         // setObjectStateCargo.whenActive(new SetObjectStateCargo());
         //Set Lift Position to level 1 for scoring in rocket and hatches on cargo ship
         setLiftPositionLow = new JoystickButton(controller2, 1);
-        setLiftPositionLow.whenPressed(new Elevate(1));
+        setLiftPositionLow.whenPressed(new ElevateToPosition(1));
         //Set Lift Position to level 2 for scoring in rocket
         setLiftPositionMedium = new JoystickButton(controller2, 2);
-        setLiftPositionMedium.whenPressed(new Elevate(2));
+        setLiftPositionMedium.whenPressed(new ElevateToPosition(2));
         //Set Lift Position to level 3 for scoring in rocket
         setLiftPositionHigh = new JoystickButton(controller2, 4);
-        setLiftPositionHigh.whenPressed(new Elevate(3));
+        setLiftPositionHigh.whenPressed(new ElevateToPosition(3));
         //Set Lift Position to level 4 for scoring Cargo in Cargo Ship
         setLiftPositionCargo = new JoystickButton(controller2, 3);
-        setLiftPositionCargo.whenPressed(new Elevate(4));
+        setLiftPositionCargo.whenPressed(new ElevateToPosition(4));
         //Set Lift Position to level 0 for intaking
         setIntakePosition = new JoystickButton(controller2, 5);
         setIntakePosition.whenPressed(new setIntakePos());
@@ -139,6 +142,10 @@ public class OperatorOI{
         runGrip.start();
       }
       SmartDashboard.putNumber("Grip Set: ", gripSet);
+      if(Math.abs(controller2.getRawAxis(1)) > 0.2){
+        liftManual.start();
+      } 
+
     }
 
 }

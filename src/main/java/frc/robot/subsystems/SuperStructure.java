@@ -35,6 +35,7 @@ public class SuperStructure extends Subsystem {
   private VictorSPX dw;
 
   public DriveTrain driveTrain;
+  public ElevatorSystem elevatorSystem;
 
   private VictorSPX lRearDriveSlave;
   private VictorSPX lTopDriveSlave;
@@ -143,11 +144,12 @@ public class SuperStructure extends Subsystem {
         RobotMap.liftAcceleration, 
         RobotMap.liftLowerBound, 
         RobotMap.liftUpperBound, 
-        "Lift"){
-          public void initDefaultCommand(){
-            lift.setDefaultCommand(new LiftOpenLoop(lift, RobotMap.liftAxis, RobotMap.liftDeadband));
-          }
-        };
+        "Lift")//{
+          // public void initDefaultCommand(){
+          //   lift.setDefaultCommand(new LiftDefault());
+          // }
+        //}
+        ;
     liftSlave.follow(lt);
     liftSlave.setInverted(true);
     lLL = new DigitalInput(RobotMap.lowerLiftLimitSwitch);
@@ -166,13 +168,17 @@ public class SuperStructure extends Subsystem {
         RobotMap.armAcceleration, 
         RobotMap.armLowerBound, 
         RobotMap.armUpperBound, 
-        "Arm"){
-      public void initDefaultCommand(){
-        arm.setDefaultCommand(new ArmOpenLoop(arm, RobotMap.armAxis, RobotMap.armDeadBand));
-      }
-    };
-    arm.setPID(0.1, 0, 0, 0);
+        "Arm")
+    //     {
+    //   public void initDefaultCommand(){
+    //     arm.setDefaultCommand(new ArmDefault(arm, RobotMap.armAxis, RobotMap.armDeadBand));
+    //   }
+    // }
+    ;
+    arm.setPID(1.2, 0.00005, 0, 0);
     aL = new DigitalInput(RobotMap.armLimitSwitch);
+
+    elevatorSystem = new ElevatorSystem(lift, arm);
 
     //Intake 
     intake = new VictorBase(
@@ -252,10 +258,10 @@ public class SuperStructure extends Subsystem {
 
   public void postSmartDashVars(){
     //Talons
-    //lift.postSmartDashVars();
+    lift.postSmartDashVars();
     //rightDrive.postSmartDashVars();
     //leftDrive.postSmartDashVars();
-    //arm.postSmartDashVars();
+    arm.postSmartDashVars();
     //Victors
     //intake.postSmartDashVars();
     //dropWheels.postSmartDashVars();
@@ -279,6 +285,7 @@ public class SuperStructure extends Subsystem {
     SmartDashboard.putBoolean("Lift Lower Limit: ", limitArray[2]);
     SmartDashboard.putBoolean("Lift Upper Limit: ", limitArray[3]);
     SmartDashboard.putString("Lift Zone: ", States.liftZone.toString());
+    SmartDashboard.putString("Elevator Command: ", elevatorSystem.getCurrentCommandName());
   }
   }
 

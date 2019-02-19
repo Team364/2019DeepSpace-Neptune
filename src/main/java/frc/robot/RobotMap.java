@@ -78,8 +78,8 @@ public class RobotMap {
     public static final double liftStartConfig = 1000;//Starting Config for Lift
     //Arm
      //TalonBase Config
-    public static final boolean armReverse = true;
-    public static final boolean armReverseEncoder = true;
+    public static final boolean armReverse = false;
+    public static final boolean armReverseEncoder = false;
     public static final double armNominalOutputForward = 0;
     public static final double armNominalOutputReverse = 0;
     public static final double armPeakOutputForward = 0.35;

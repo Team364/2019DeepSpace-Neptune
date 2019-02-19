@@ -13,6 +13,7 @@ public class Periodic extends Command {
   private boolean passiveLatch = false;
   private Command stopLift = new Stop(Robot.superStructure.lift);
   private double angle;
+  public static boolean manualControl;
 
   public Periodic() {
     requires(Robot.superStructure);
@@ -52,19 +53,6 @@ public class Periodic extends Command {
     //Encoder Upper Bound for Lift
     if((Robot.superStructure.lift.getPosition() >= RobotMap.liftUpperBound)){
       stopLift.start();
-    }
-    //Loop State assignement
-    if(States.loopState == States.LoopStates.CLOSED_LOOP){
-      ++loops;
-      if(loops > 20){
-        //Shouldn't this be an and? Test when you get the chance
-       if(Robot.superStructure.arm.reachedPosition()||Robot.superStructure.lift.reachedPosition()){
-        // if(Robot.superStructure.lift.reachedPosition()){ -- testing lift alone
-        //if(Robot.superStructure.arm.reachedPosition()){ --testing arm alone 
-        States.loopState = States.LoopStates.OPEN_LOOP;
-        loops = 0;
-      }
-    }
     }
 
     //Set the arm and lift back to start config
