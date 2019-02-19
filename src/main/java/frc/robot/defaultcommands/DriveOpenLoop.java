@@ -12,49 +12,36 @@ public class DriveOpenLoop extends Command {
     }
 
     public DriveStates driveState;
-    //X axis of Left Joystick of Driver Controller
-    private double steer;
-    //Difference of Right and Left Trigger Values
-    private double throttle;
-    //Right Trigger of Driver Controller
-    private double frontThrottle;
-    //Left Trigger of Driver Controller
-    private double backThrottle;
+    private double steer;//X axis of Left Joystick of Driver Controller
+    private double throttle;//Difference of Right and Left Trigger Values
+    private double frontThrottle;//Right Trigger of Driver Controller
+    private double backThrottle;//Left Trigger of Driver Controller
     private double leftPower;
     private double rightPower;
-    //Deadbands
-    /**Moves drive train */
-    private double Deadband1 = 0.25;
-    /**Stops drive train */
-    private double DeadBand2 = 0.2;
+    private double Deadband1 = 0.25;//Moves drive train 
+    private double DeadBand2 = 0.2;//Stops drive train
 
     /**
-     * Command used for teleop control specific to the drive system
-     * <p>Driver control
+     * Driver control
      */
     public DriveOpenLoop() {
-        requires(Robot.superStructure.driveTrain);
-        //Other commands can interrupt this command
-        setInterruptible(true);
+        requires(Robot.superStructure.driveTrain);  
+        setInterruptible(true);//Other commands can interrupt this command
     }
 
     @Override
     protected void initialize() {
-        //Robot is waiting for driver input
-        driveState = DriveStates.STATE_NOT_MOVING;
+        driveState = DriveStates.STATE_NOT_MOVING;//Robot is waiting for driver input
     }
 
     @Override
     protected void execute() {
-        //Right Trigger
-        frontThrottle = Robot.oi.controller.getRawAxis(2);
-        //Left Trigger
-        backThrottle = Robot.oi.controller.getRawAxis(3);
-        //X-axis of left Joystick
-        steer = -Robot.oi.controller.getRawAxis(0);
-        //normal Drive Control
-        //If the robot isn't moving and then either Trigger is activated and pressed beyond 0.25, the robot will
-        //change state into Direct Drive
+        frontThrottle = Robot.oi.controller.getRawAxis(2);//Right Trigger
+        backThrottle = Robot.oi.controller.getRawAxis(3);//Left Trigger
+        steer = -Robot.oi.controller.getRawAxis(0);//X-axis of left Joystick
+        /*normal Drive Control
+        If the robot isn't moving and then either Trigger is activated and pressed beyond 0.25, the robot will
+        change state into Direct Drive*/
         if (driveState == DriveStates.STATE_NOT_MOVING) {
             throttle = 0;
             if ((Math.abs(frontThrottle) >= Deadband1) || (Math.abs(backThrottle) >= Deadband1) || (Math.abs(steer) >= Deadband1)) {
@@ -71,10 +58,8 @@ public class DriveOpenLoop extends Command {
         } else if (driveState == DriveStates.STATE_RAMP_DOWN) {
             driveState = DriveStates.STATE_NOT_MOVING;
         } else {
-            // This condition should never happen!
-            driveState = DriveStates.STATE_NOT_MOVING;
+            driveState = DriveStates.STATE_NOT_MOVING;//This condition should never happen!
         }
-
         //This is where the driveSystem is actually asked to run motors
         leftPower = throttle + steer;
         rightPower = throttle - steer;

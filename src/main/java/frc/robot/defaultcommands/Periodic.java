@@ -1,7 +1,5 @@
 package frc.robot.defaultcommands;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -14,7 +12,6 @@ public class Periodic extends Command {
   private boolean[] Limits;
   private boolean passiveLatch = false;
   private Command stopLift = new Stop(Robot.superStructure.lift);
-  private double angle;
   public static boolean manualControl;
 
   public Periodic() {
@@ -32,18 +29,6 @@ public class Periodic extends Command {
     //Update Limit Switches
       Limits[0] = Robot.superStructure.iL.get();//Ball
 
-      //Calculate Angle of the Arm
-      // if(Math.abs(Robot.superStructure.arm.getPosition()) < Math.abs(RobotMap.armPerpindicularToGround)){
-      //   angle = Math.cos(Math.abs(RobotMap.armPerpindicularToGround) - Math.abs(Robot.superStructure.arm.getPosition()) / 
-      //   (Math.abs(RobotMap.armPerpindicularToGround) / 90));
-      // }else if(Math.abs(Robot.superStructure.arm.getPosition()) >= Math.abs(RobotMap.armPerpindicularToGround)){
-      //   angle = (Math.abs(Robot.superStructure.arm.getPosition())  / 
-      //   (Math.abs(RobotMap.armPerpindicularToGround) / 90));
-      // }
-  
-      // double FeedForward = 0.0613848223 * angle;
-      // Robot.superStructure.arm.setPID(0.1, 0, 0, FeedForward);
-    //Track Lift Zone -- If this works replicate for Arm -- Test to see if config Output updates work with this
     if((Robot.superStructure.lift.getPosition() < 10000) &&(Robot.superStructure.lift.getPosition() > RobotMap.liftLowerBound)){
       States.liftZone = States.LiftZones.LOWER_DANGER;
     }else if((Robot.superStructure.lift.getPosition() > 100000)&&(Robot.superStructure.lift.getPosition() < RobotMap.liftUpperBound))
@@ -51,7 +36,6 @@ public class Periodic extends Command {
     else{
       States.liftZone = States.LiftZones.SAFE;
     }
-   ;
     //Encoder Upper Bound for Lift
     if((Robot.superStructure.lift.getPosition() >= RobotMap.liftUpperBound)){
       stopLift.start();
@@ -59,20 +43,9 @@ public class Periodic extends Command {
 
     //Set the arm and lift back to start config
     if(Robot.superStructure.elevatorPassive() && !passiveLatch){
-      // Elevate = new Elevate(1);
-      // Elevate.start();
       System.out.println("Would move to neutral position");
       passiveLatch = Robot.superStructure.elevatorPassive();
     }
-    //Drive Train Motion State Assignment
-    // double rVel = Robot.superStructure.rightDrive.getVelocity();
-    // double lVel = Robot.superStructure.leftDrive.getVelocity();
-    // if((Math.abs(rVel) > 0) || (Math.abs(lVel) > 0)){
-    //   States.driveMotionState = States.DriveMotionStates.MOVING;
-    // }else if((rVel == 0)&&(lVel == 0)){
-    //   States.driveMotionState = States.DriveMotionStates.NOT_MOVING;
-    // }
-
   }
   // Make this return true when this Command no longer needs to run execute()
   @Override

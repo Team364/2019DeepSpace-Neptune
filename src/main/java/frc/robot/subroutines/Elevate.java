@@ -2,7 +2,6 @@ package frc.robot.subroutines;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.*;
-import frc.robot.defaultcommands.Periodic;
 
 /**
  * Subroutine to be run in teleop on button press

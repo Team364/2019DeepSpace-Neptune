@@ -79,10 +79,6 @@ public class TalonBase extends Subsystem {
     private double peakOutputForward = 0.25;
     /**highest speed the trajectory can run at in the reverse direction */
     private double peakOutputReverse = -0.25;
-    /**Decides whether or not to invert Talon */
-    private boolean reverse = false;
-    /**Decides whether or not to invert Encoder */
-    private boolean reverseEncoder = false;
     /**Name of Talon */
     private String name = "No Name";
     /**Tracks what loop State the talon is in */
@@ -161,7 +157,7 @@ public class TalonBase extends Subsystem {
 		talon.configMotionAcceleration(this.acceleration, TimeoutMs);
 
 		/* Zero the sensor */
-		talon.setSelectedSensorPosition(0, PIDLoopIdx, TimeoutMs);
+		talon.setSelectedSensorPosition(0);
         
     }
     /**Talon with Closed Loop Functionality without Encoder Bounds */

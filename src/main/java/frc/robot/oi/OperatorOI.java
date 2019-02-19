@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.defaultcommands.Manual;
-import frc.robot.defaultcommands.Periodic;
 import frc.robot.subroutines.*;
 import frc.robot.util.States;
 import frc.robot.commands.*;
@@ -58,14 +57,19 @@ public class OperatorOI{
     public JoystickButton setLiftPositionHigh;
     public JoystickButton setLiftPositionCargo;
     public JoystickButton setIntakePosition;
-
+    private JoystickButton ClimbSet;
+    
     private boolean cargo;
     private boolean intake;
+
+    public int gripSet = 1;
+
+
     private Command runGrip;
     private Command liftManual = new Manual();
-    public int gripSet = 1;
-    private JoystickButton ClimbSet;
-
+    private Command elevate;
+    private Command setLever;
+    private Command setClaw;
 
 
     //Operator Buttons
@@ -150,11 +154,12 @@ public class OperatorOI{
       if(Math.abs(controller2.getRawAxis(1)) > 0.2){
         liftManual.start();
       } 
+      //If RB is hit then the elevator goes to start config
       if(controller2.getRawButton(6)){
-        Command elevate = new ElevateToPosition(5);
+        elevate = new ElevateToPosition(5);
         elevate.start();
-        Command setLever = new SetPiston(Robot.superStructure.lever, 0);
-        Command setClaw = new SetPiston(Robot.superStructure.claw, 1);
+        setLever = new SetPiston(Robot.superStructure.lever, 0);
+        setClaw = new SetPiston(Robot.superStructure.claw, 1);
         setLever.start();
         setClaw.start();
 

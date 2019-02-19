@@ -8,7 +8,6 @@ import frc.robot.defaultcommands.Periodic;
 import frc.robot.RobotMap;
 import frc.robot.util.PIDCalc;
 import frc.robot.util.prefabs.subsystems.*;
-import frc.robot.util.prefabs.commands.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -16,7 +15,6 @@ import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.util.States;
-import frc.robot.defaultcommands.*;
 
 public class SuperStructure extends Subsystem {
 
@@ -145,12 +143,7 @@ public class SuperStructure extends Subsystem {
         RobotMap.liftLowerBound, 
         RobotMap.liftUpperBound, 
         0.2, 0, 0, 0.2,
-        "Lift")//{
-          // public void initDefaultCommand(){
-          //   lift.setDefaultCommand(new LiftDefault());
-          // }
-        //}
-        ;
+        "Lift");
     liftSlave.follow(lt);
     liftSlave.setInverted(true);
     lLL = new DigitalInput(RobotMap.lowerLiftLimitSwitch);

@@ -3,19 +3,10 @@ package frc.robot.defaultcommands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.util.States;
-import frc.robot.util.prefabs.subsystems.TalonBase;
-import frc.robot.util.PIDCalc;
-    /**
-     * Used for operator only
-     * @param talonBase //talon Base to run command
-     * @param axis  //axis for open loop
-     * @param deadband //minimum joystick value for open loop to run
-     */
+
 public class Manual extends Command {
 
     private double power;
-    private double currentPosition;
     private double adjustedPosition;
 
     public Manual() {
@@ -25,7 +16,6 @@ public class Manual extends Command {
 
     @Override
     protected void initialize() {
-        currentPosition  = Robot.superStructure.lift.getPosition();
     }
 
     @Override

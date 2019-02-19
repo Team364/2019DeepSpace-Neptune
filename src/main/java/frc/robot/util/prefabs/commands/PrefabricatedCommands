@@ -1,8 +1,0 @@
-Basic Open loop is for Basic Talons
-
-Closed Loop is for Complex Talons and uses encoder postion
-
-Open Loop is for Complex Talons. It is a modified Basic Open Loop that allows bounds based off of
-encoder postion to minimize damage to the robot.
-
-Set Piston either opens or closes a Double Soleniod.

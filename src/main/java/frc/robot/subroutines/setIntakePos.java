@@ -1,17 +1,17 @@
-package frc.robot.commands;
+package frc.robot.subroutines;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.States;
 import frc.robot.util.prefabs.commands.SetPiston;
+import frc.robot.commands.*;
 
 
 public class setIntakePos extends Command {
     
-    private double power;
-    private boolean intaking;
     private Command setClaw;
     private Command setLever;
+    private Command elevate;
     public setIntakePos() {
         if(States.objState == States.ObjectStates.CARGO_OBJ){
             requires(Robot.superStructure.claw);
@@ -52,7 +52,7 @@ public class setIntakePos extends Command {
         }else if(States.objState == States.ObjectStates.HATCH_OBJ){
            Robot.superStructure.lever.noInput();
         }
-        Command elevate = new ElevateToPosition(0);
+        elevate = new ElevateToPosition(0);
         elevate.start();
     }
 
