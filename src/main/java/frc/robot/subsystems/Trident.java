@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.util.prefabs.subsystems.*;
+import frc.robot.util.subsystems.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class Trident extends Subsystem {

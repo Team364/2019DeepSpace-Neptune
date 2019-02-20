@@ -1,4 +1,4 @@
-package frc.robot.util.prefabs.subsystems;
+package frc.robot.util.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -11,7 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import frc.robot.util.prefabs.subsystems.talonutil.*;
+import frc.robot.util.subsystems.talonutil.*;
   /**
    * TalonBase subsystem with getters and setters for all relevant funtionality
    * <p>includes closed loop and open loop funtionality

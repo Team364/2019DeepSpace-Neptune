@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.util.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 

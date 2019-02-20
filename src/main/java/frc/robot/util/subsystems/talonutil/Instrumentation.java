@@ -2,10 +2,10 @@
  * Instrumentation Class that handles how telemetry from the Talon SRX interacts
  * with Driverstation and Smart Dashboard.
  */
-package frc.robot.util.prefabs.subsystems.talonutil;
+package frc.robot.util.subsystems.talonutil;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.util.prefabs.subsystems.*;
+import frc.robot.util.subsystems.*;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;

@@ -1,7 +1,7 @@
-package frc.robot.util.prefabs.commands;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.util.prefabs.subsystems.*;
+import frc.robot.util.subsystems.*;
 
 /**Modes:
  * <p>0: Open

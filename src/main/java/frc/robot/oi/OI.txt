@@ -1,6 +1,0 @@
-OI are in charge of initializing and interpreting user input.
-
-It is partitioned according to driver and operator. The operator will
-be in charge of much of the lift, arm, and grip open loop and closed loop commmands.
-
-The driver will be in complete control of the commands pertaining to the driveTrain.
