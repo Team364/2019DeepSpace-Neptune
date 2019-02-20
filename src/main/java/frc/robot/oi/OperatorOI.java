@@ -133,9 +133,9 @@ public class OperatorOI{
       }else if(controller2.getRawButton(5)){
         States.actionState = States.ActionStates.SEEK;
       }else{
-        if(((gripSet == 3)||(gripSet == 4)) && Robot.superStructure.gripInactive()){
+        if(((gripSet == 3)||(gripSet == 4)) && Robot.trident.tridentInactive()){
           States.actionState = States.ActionStates.PASSIVE;  
-        }else if(Robot.superStructure.gripInactive()){
+        }else if(Robot.trident.tridentInactive()){
           States.actionState = States.ActionStates.FERRY_ACT;
         }
  
@@ -164,8 +164,8 @@ public class OperatorOI{
       if(controller2.getRawButton(6)){
         elevate = new ElevateToPosition(5);
         elevate.start();
-        setLever = new SetPiston(Robot.superStructure.lever, 0);
-        setClaw = new SetPiston(Robot.superStructure.claw, 0);
+        setLever = new SetPiston(Robot.trident.lever, 0);
+        setClaw = new SetPiston(Robot.trident.claw, 0);
         setLever.start();
         setClaw.start();
 

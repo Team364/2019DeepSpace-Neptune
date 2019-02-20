@@ -89,6 +89,7 @@ public class Elevator extends Subsystem {
 
         arm.setSelectedSensorPosition(0);
   } 
+  
   public void elevateTo(double liftHeight, double armAngle){
     System.out.println("The lift is moving to: " + liftHeight);
     System.out.println("The arm is moving to: " + armAngle);
@@ -96,6 +97,17 @@ public class Elevator extends Subsystem {
     arm.set(ControlMode.MotionMagic, armAngle);
     TargetHeight = liftHeight;
     TargetAngle = armAngle;
+  }
+
+  public double getLiftPosition(){
+    return lift.getSelectedSensorPosition(RobotMap.PIDLoopIdx);
+  }
+  public double getArmAngle(){
+    return arm.getSelectedSensorPosition(RobotMap.PIDLoopIdx);
+  }
+  public void resetEncoders(){
+    lift.setSelectedSensorPosition(0);
+    arm.setSelectedSensorPosition(0);
   }
 
   @Override

@@ -40,7 +40,7 @@ public class ElevateToPosition extends Command {
      */
     public ElevateToPosition(int Height) {
         desiredHeight = Height;  
-        requires(Robot.superStructure.elevatorSystem);
+        requires(Robot.elevatorSystem);
         setInterruptible(true);
     }
 
@@ -112,7 +112,7 @@ public class ElevateToPosition extends Command {
             wantedAngle = armClimb;
             }
          
-        Robot.superStructure.elevatorSystem.elevateTo(wantedPosition, wantedAngle);
+        Robot.elevatorSystem.elevateTo(wantedPosition, wantedAngle);
     }
 
     @Override

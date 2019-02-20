@@ -10,7 +10,7 @@ public class Manual extends Command {
     private double adjustedPosition;
 
     public Manual() {
-        requires(Robot.superStructure.elevatorSystem);
+        requires(Robot.elevatorSystem);
         setInterruptible(true);
     }
 

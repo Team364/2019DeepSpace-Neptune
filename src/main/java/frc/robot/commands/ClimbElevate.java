@@ -7,7 +7,7 @@ import frc.robot.defaultcommands.Periodic;
 public class ClimbElevate extends Command {
 
     public ClimbElevate() {  
-        requires(Robot.superStructure.elevatorSystem);
+        requires(Robot.elevatorSystem);
         setInterruptible(true);
         setTimeout(1);
     }
@@ -20,7 +20,7 @@ public class ClimbElevate extends Command {
 
     @Override
     protected void execute() {
-        Robot.superStructure.elevatorSystem.elevateTo(80000, 1500);
+        Robot.elevatorSystem.elevateTo(80000, 1500);
     }
 
     @Override
