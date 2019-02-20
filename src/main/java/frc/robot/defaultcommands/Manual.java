@@ -2,7 +2,7 @@ package frc.robot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
+import frc.robot.Neptune;
 
 public class Manual extends Command {
 
@@ -10,7 +10,7 @@ public class Manual extends Command {
     private double adjustedPosition;
 
     public Manual() {
-        requires(Robot.elevator);
+        requires(Neptune.elevator);
         setInterruptible(true);
     }
 
@@ -21,17 +21,17 @@ public class Manual extends Command {
     @Override
     protected void execute() {
         
-        power = -Robot.oi2.controller2.getRawAxis(1)*0.5;
+        power = -Neptune.oi2.controller2.getRawAxis(1)*0.5;
         if(power > 0.1){
-            if(!Robot.manualControl){
-                adjustedPosition = Robot.elevator.getLiftPosition();
-                Robot.manualControl = true;
+            if(!Neptune.manualControl){
+                adjustedPosition = Neptune.elevator.getLiftPosition();
+                Neptune.manualControl = true;
             }
             adjustedPosition += 700;
         }else if(power < -0.1){
             adjustedPosition -= 700;
         }
-        Robot.elevator.setLiftPosition(adjustedPosition);
+        Neptune.elevator.setLiftPosition(adjustedPosition);
        
     SmartDashboard.putNumber("Adjusted Position", adjustedPosition);
     }

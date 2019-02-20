@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
+import frc.robot.Neptune;
 import frc.robot.defaultcommands.Manual;
 import frc.robot.subroutines.*;
 import frc.robot.util.States;
@@ -122,9 +122,9 @@ public class OperatorOI{
       }else if(controller2.getRawButton(5)){
         States.actionState = States.ActionStates.SEEK;
       }else{
-        if(((gripSet == 3)||(gripSet == 4)) && Robot.trident.tridentInactive()){
+        if(((gripSet == 3)||(gripSet == 4)) && Neptune.trident.tridentInactive()){
           States.actionState = States.ActionStates.PASSIVE;  
-        }else if(Robot.trident.tridentInactive()){
+        }else if(Neptune.trident.tridentInactive()){
           States.actionState = States.ActionStates.FERRY_ACT;
         }
  
@@ -153,8 +153,8 @@ public class OperatorOI{
       if(controller2.getRawButton(6)){
         elevate = new ElevateToPosition(5);
         elevate.start();
-        setLever = new SetPiston(Robot.trident.lever, 0);
-        setClaw = new SetPiston(Robot.trident.claw, 0);
+        setLever = new SetPiston(Neptune.trident.lever, 0);
+        setClaw = new SetPiston(Neptune.trident.claw, 0);
         setLever.start();
         setClaw.start();
 

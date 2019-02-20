@@ -1,7 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import frc.robot.Neptune;
 
 
 public class runIntake extends Command {
@@ -9,7 +9,7 @@ public class runIntake extends Command {
     private double power;
     private boolean intaking;
     public runIntake(double power, boolean intaking) {
-        requires(Robot.trident);
+        requires(Neptune.trident);
         this.power = power;
         this.intaking = intaking;
     }
@@ -25,7 +25,7 @@ public class runIntake extends Command {
 
     @Override
     protected void execute() {
-        Robot.trident.runIntake(power);
+        Neptune.trident.runIntake(power);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class runIntake extends Command {
 
     @Override
     protected void end() {
-        Robot.trident.stopIntake();
+        Neptune.trident.stopIntake();
     }
 
     @Override

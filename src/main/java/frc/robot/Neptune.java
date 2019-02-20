@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * We are using Timed Robot and Command Robot together.
  * <p>The Scheduler is invoked during auto and teleop
  */
-public class Robot extends TimedRobot {
+public class Neptune extends TimedRobot {
   //Declarations
   //Subsystem
   public static Elevator elevator;
@@ -106,10 +106,10 @@ public class Robot extends TimedRobot {
       States.liftZone = States.LiftZones.SAFE;
     }
     //Encoder Upper Bound for Lift
-    if((Robot.elevator.getLiftPosition() >= RobotMap.liftUpperBound)){
+    if((Neptune.elevator.getLiftPosition() >= RobotMap.liftUpperBound)){
       elevator.stopLift();
     }
-    if((Robot.elevator.getLiftPosition() <= RobotMap.liftLowerBound)){
+    if((Neptune.elevator.getLiftPosition() <= RobotMap.liftLowerBound)){
       elevator.stopLift();
     }
   }

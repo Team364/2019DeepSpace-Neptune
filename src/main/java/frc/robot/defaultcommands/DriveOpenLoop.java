@@ -1,7 +1,7 @@
 package frc.robot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import frc.robot.Neptune;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class DriveOpenLoop extends Command {
@@ -26,7 +26,7 @@ public class DriveOpenLoop extends Command {
      * Driver control
      */
     public DriveOpenLoop() {
-        requires(Robot.driveTrain);  
+        requires(Neptune.driveTrain);  
         setInterruptible(true);//Other commands can interrupt this command
     }
 
@@ -37,9 +37,9 @@ public class DriveOpenLoop extends Command {
 
     @Override
     protected void execute() {
-        frontThrottle = Robot.oi.controller.getRawAxis(2);//Right Trigger
-        backThrottle = Robot.oi.controller.getRawAxis(3);//Left Trigger
-        steer = -Robot.oi.controller.getRawAxis(0);//X-axis of left Joystick
+        frontThrottle = Neptune.oi.controller.getRawAxis(2);//Right Trigger
+        backThrottle = Neptune.oi.controller.getRawAxis(3);//Left Trigger
+        steer = -Neptune.oi.controller.getRawAxis(0);//X-axis of left Joystick
         /*normal Drive Control
         If the robot isn't moving and then either Trigger is activated and pressed beyond 0.25, the robot will
         change state into Direct Drive*/
@@ -64,14 +64,14 @@ public class DriveOpenLoop extends Command {
         //This is where the driveSystem is actually asked to run motors
         leftPower = throttle + steer;
         rightPower = throttle - steer;
-        Robot.driveTrain.openLoop(rightPower, leftPower);
+        Neptune.driveTrain.openLoop(rightPower, leftPower);
     
 
     }
 
     @Override
     protected void end() {
-        Robot.driveTrain.stop();
+        Neptune.driveTrain.stop();
     }
 
     @Override

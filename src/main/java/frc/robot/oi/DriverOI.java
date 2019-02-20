@@ -2,7 +2,7 @@ package frc.robot.oi;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.Robot;
+import frc.robot.Neptune;
 import frc.robot.commands.SetPiston;
 
 public class DriverOI {
@@ -71,13 +71,13 @@ public class DriverOI {
         //Button is pressed once
         //Left menu button
         shiftLow = new JoystickButton(controller, 5);
-        shiftLow.whenPressed(new SetPiston(Robot.driveTrain.shifter, 1));
+        shiftLow.whenPressed(new SetPiston(Neptune.driveTrain.shifter, 1));
 
         //Robot shifts gears up
         //Button is pressed once
         //Right menu button
         shiftHigh = new JoystickButton(controller, 6);
-        shiftHigh.whenPressed(new SetPiston(Robot.driveTrain.shifter, 0));
+        shiftHigh.whenPressed(new SetPiston(Neptune.driveTrain.shifter, 0));
 
         // //Robot uses NavX Gyro to turn approximately 180 degrees(yaw)
         // //Button is pressed once

@@ -2,7 +2,7 @@ package frc.robot.util.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
+import frc.robot.Neptune;
 import frc.robot.util.subsystems.TalonBase;
     /**
      * Used for operator only
@@ -35,7 +35,7 @@ public class OpenLoop extends Command {
 
     @Override
     protected void execute() {
-        power = Robot.oi2.controller2.getRawAxis(axis);
+        power = Neptune.oi2.controller2.getRawAxis(axis);
 
         if(Math.abs(power) >= deadband){
             talonBase.openLoop(power);

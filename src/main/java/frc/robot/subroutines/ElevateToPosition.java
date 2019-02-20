@@ -1,7 +1,7 @@
 package frc.robot.subroutines;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import frc.robot.Neptune;
 import frc.robot.RobotMap;
 import frc.robot.util.States;
 
@@ -39,13 +39,13 @@ public class ElevateToPosition extends Command {
      */
     public ElevateToPosition(int Height) {
         desiredHeight = Height;  
-        requires(Robot.elevator);
+        requires(Neptune.elevator);
         setInterruptible(true);
     }
 
     @Override
     protected void initialize() {
-        Robot.manualControl = false;
+        Neptune.manualControl = false;
         /*One must keep in mind that a Position of 4096 is only a full rotation of the axle the encoder
         corresponds to. This means that these values may be quite large in practice.
         Writing an equation which converts the inches on the lift to raw sensor units would be beyond useful */
@@ -111,7 +111,7 @@ public class ElevateToPosition extends Command {
             wantedAngle = armClimb;
             }
          
-        Robot.elevator.elevateTo(wantedPosition, wantedAngle);
+        Neptune.elevator.elevateTo(wantedPosition, wantedAngle);
     }
 
     @Override
