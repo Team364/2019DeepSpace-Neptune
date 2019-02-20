@@ -20,12 +20,12 @@ public class RunGrip extends CommandGroup {
     System.out.println("Grabbing Hatch");
     }else if(set == 3){ //Score Cargo
     addSequential(new runIntake(0.75, false)); //Outtake
-    addSequential(new SetPiston(Robot.superStructure.claw, 0)); //Open Claw
+    addSequential(new SetPiston(Robot.superStructure.claw, 1)); //Open Claw
     System.out.println("Scoring Cargo");
     }else if(set == 4){  //Score Hatch
     addSequential(new SetPiston(Robot.superStructure.lever, 0)); //Close lever
     addSequential(new WaitCommand(0.2));
-    addSequential(new SetPiston(Robot.superStructure.claw, 0));
+    addSequential(new SetPiston(Robot.superStructure.claw, 1));
     System.out.println("Scoring Hatch");
 }
   }

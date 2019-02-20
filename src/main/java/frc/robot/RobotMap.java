@@ -26,10 +26,10 @@ public class RobotMap {
     //Grip
     public static final int rightClaw = 1;//Victor SPX
     public static final int leftClaw = 7;//Victor SPX
-    public static final int intakePort1 = 1;//Primary PCM
-    public static final int intakePort2 = 6;//Primary PCM
-    public static final int leverPort1 = 0;//Primary PCM
-    public static final int leverPort2 = 7;//Primary PCM
+    public static final int intakePort1 = 0;//Primary PCM//1
+    public static final int intakePort2 = 7;//Primary PCM//6
+    public static final int leverPort1 = 1;//Primary PCM//0
+    public static final int leverPort2 = 6;//Primary PCM//7
     public static final int ballLimitSwitch = 1;//Digital Input
     //Arm
     public static final int arm = 6; //Talon SRX
@@ -53,8 +53,8 @@ public class RobotMap {
     public static final int driveAcceleration = 8000;
     //Lift
      //TalonBase Config
-    public static final boolean liftReverse = true;
-    public static final boolean liftReverseEncoder = true;
+    public static final boolean liftReverse = false;
+    public static final boolean liftReverseEncoder = false;
     public static final double liftNominalOutputForward = 0;
     public static final double liftNominalOutputReverse = 0;
     public static final double liftPeakOutputForward = 1;
@@ -64,7 +64,7 @@ public class RobotMap {
     public static final double liftLowerBound = -20;
     public static final double liftUpperBound = 135000;
      //Closed Loop Targets
-    public static final double liftLowH = 17000;//Level 1 for Hatch
+    public static final double liftLowH = 15000;//Level 1 for Hatch
     public static final double liftMedH = 74000;//Level 2 Rocket for Hatch
     public static final double liftHighH = 130000;//Level 3 Rocket for Hatch
     public static final double liftLowC = 30000;//Level 1 Rocket Cargo
@@ -75,8 +75,8 @@ public class RobotMap {
     public static final double liftStartConfig = 1000;//Starting Config for Lift
     //Arm
      //TalonBase Config
-    public static final boolean armReverse = false;
-    public static final boolean armReverseEncoder = false;
+    public static final boolean armReverse = true;
+    public static final boolean armReverseEncoder = true;
     public static final double armNominalOutputForward = 0;
     public static final double armNominalOutputReverse = 0;
     public static final double armPeakOutputForward = 1;
@@ -90,7 +90,7 @@ public class RobotMap {
     public static final double armDeadBand = 0.1;
      //Closed Loop Targets
      public static final double armIntakeCargo = 4200;
-     public static final double armPerpindicularToGround = 3300;
+     public static final double armPerpindicularToGround = 3500;
      public static final double armStartConfig = 100;
      public static final double armScoreOnHigh = 2000;
     //1706 /*150 degrees*/;

@@ -145,7 +145,7 @@ public class SuperStructure extends Subsystem {
         0.3, 0, 0, 0.2,
         "Lift");
     liftSlave.follow(lt);
-    liftSlave.setInverted(true);
+    liftSlave.setInverted(false);
     lLL = new DigitalInput(RobotMap.lowerLiftLimitSwitch);
     uLL = new DigitalInput(RobotMap.upperLiftLimitSwitch);
     

@@ -165,7 +165,7 @@ public class OperatorOI{
         elevate = new ElevateToPosition(5);
         elevate.start();
         setLever = new SetPiston(Robot.superStructure.lever, 0);
-        setClaw = new SetPiston(Robot.superStructure.claw, 1);
+        setClaw = new SetPiston(Robot.superStructure.claw, 0);
         setLever.start();
         setClaw.start();
 

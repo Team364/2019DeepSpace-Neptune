@@ -28,13 +28,13 @@ public class setIntakePos extends Command {
     @Override
     protected void execute() {
         if(States.objState == States.ObjectStates.CARGO_OBJ){
-            setClaw = new SetPiston(Robot.superStructure.claw, 0);
+            setClaw = new SetPiston(Robot.superStructure.claw, 1);
             setLever = new SetPiston(Robot.superStructure.lever, 1);
             setClaw.start();
             setLever.start();
         }else if(States.objState == States.ObjectStates.HATCH_OBJ){
             setLever = new SetPiston(Robot.superStructure.lever, 0);
-            setClaw = new SetPiston(Robot.superStructure.claw, 1);
+            setClaw = new SetPiston(Robot.superStructure.claw, 0);
             setLever.start();
             setClaw.start();
         }
