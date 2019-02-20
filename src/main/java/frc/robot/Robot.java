@@ -13,7 +13,8 @@ public class Robot extends TimedRobot {
   //Declarations
   //Subsystem
   public static SuperStructure superStructure;
-  public static ElevatorSystem elevatorSystem;
+  public static Elevator elevatorSystem;
+  public static DriveTrain driveTrain;
   //Controls
   public static DriverOI oi;
   public static OperatorOI oi2;
@@ -40,7 +41,8 @@ public class Robot extends TimedRobot {
 
     //Subsystem init
     superStructure = new SuperStructure();
-    elevatorSystem = new ElevatorSystem();
+    elevatorSystem = new Elevator();
+    driveTrain = new DriveTrain();
     //Controls init
     oi = new DriverOI();
     oi2 = new OperatorOI();

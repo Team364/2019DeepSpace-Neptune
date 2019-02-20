@@ -43,14 +43,21 @@ public class RobotMap {
 
     //Software
      //Drive
-    public static final boolean driveReverse = false;
-    public static final boolean driveReverseEncoder = false;
+    public static final boolean rightDriveReverse = false;
+    public static final boolean rightDriveReverseEncoder = false;
+    public static final boolean leftDriveReverse = false;
+    public static final boolean leftDriveReverseEncoder = false;
     public static final double driveNominalOutputForward = 0;
     public static final double driveNominalOutputReverse = 0;
     public static final double drivePeakOutputForward = 0.8;
     public static final double drivePeakOutputReverse = -0.8;
     public static final int driveCruiseVelocity = 20000;
     public static final int driveAcceleration = 8000;
+    //Drive PID
+    public static final double drivePgain = 0.2;
+    public static final double driveIgain = 0.0;
+    public static final double driveDgain = 0.0;
+    public static final double driveFgain = 0.2;
     //Lift
      //TalonBase Config
     public static final boolean liftReverse = false;
@@ -119,8 +126,10 @@ public class RobotMap {
     public static final double navXIterm = 0.1;
     public static final double navXDterm = 50;
     public static final double navXFterm = 0;
-    
-
+    //PID constants
+    public static final int SlotIdx = 0;
+    public static final int PIDLoopIdx = 0;
+    public static final int TimeoutMs = 30;
     
 
 }
