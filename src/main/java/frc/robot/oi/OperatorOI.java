@@ -170,8 +170,6 @@ public class OperatorOI{
         setClaw.start();
 
       }
-
     }
-
 }
 

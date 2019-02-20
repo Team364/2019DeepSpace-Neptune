@@ -63,6 +63,11 @@ public class RobotMap {
     public static final int liftAcceleration = 8000;
     public static final double liftLowerBound = -20;
     public static final double liftUpperBound = 135000;
+    //Lift PID
+    public static final double liftPgain = 0.3;
+    public static final double liftIgain = 0.0;
+    public static final double liftDgain = 0.0;
+    public static final double liftFgain = 0.2;
      //Closed Loop Targets
     public static final double liftLowH = 15000;//Level 1 for Hatch
     public static final double liftMedH = 74000;//Level 2 Rocket for Hatch
@@ -85,9 +90,11 @@ public class RobotMap {
     public static final int armAcceleration = 800;
     public static final double armLowerBound = 5000;
     public static final double armUpperBound = 0;
-     //Open Loop Config
-    public static final int armAxis = 5;
-    public static final double armDeadBand = 0.1;
+     //Arm PID
+    public static final double armPgain = 0.3;
+    public static final double armIgain = 0.0;
+    public static final double armDgain = 0.0;
+    public static final double armFgain = 0.2;
      //Closed Loop Targets
      public static final double armIntakeCargo = 4200;
      public static final double armPerpindicularToGround = 3500;
