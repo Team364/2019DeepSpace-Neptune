@@ -69,7 +69,7 @@ public class ElevateToPosition extends Command {
             intakeCargo = 3300;
 
             lvlone = perpendicularToGround;
-            lvlthree = 1700;
+            lvlthree = 2800;
         }else if(States.objState == States.ObjectStates.CARGO_OBJ){
             intake = RobotMap.liftIntake;
             low = RobotMap.liftLowC;
@@ -83,7 +83,8 @@ public class ElevateToPosition extends Command {
             armStartConfig = RobotMap.armStartConfig;
             custom = 5000;
             lvlone = 3300;
-            lvlthree = perpendicularToGround;
+            lvlthree = 1700;
+
         }
         liftClimb = 80000;
         armClimb = 1500;

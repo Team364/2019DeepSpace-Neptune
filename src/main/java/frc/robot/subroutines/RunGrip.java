@@ -24,7 +24,7 @@ public class RunGrip extends CommandGroup {
     System.out.println("Scoring Cargo");
     }else if(set == 4){  //Score Hatch
     addSequential(new SetPiston(Neptune.trident.lever, 0)); //Close lever
-    addSequential(new WaitCommand(0.2));
+    addSequential(new WaitCommand(0.1));
     addSequential(new SetPiston(Neptune.trident.claw, 1));
     System.out.println("Scoring Hatch");
 }
