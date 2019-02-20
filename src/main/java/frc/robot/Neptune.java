@@ -12,16 +12,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * <p>The Scheduler is invoked during auto and teleop
  */
 public class Neptune extends TimedRobot {
-  //Declarations
-  //Subsystem
+
   public static Elevator elevator;
   public static DriveTrain driveTrain;
   public static Trident trident;
 
-  //Controls
   public static DriverOI oi;
   public static OperatorOI oi2;
-  //Auto Commands
+
   public static Command Auto1;
   public static Command Auto2;
   public static Command Auto3;
@@ -43,29 +41,25 @@ public class Neptune extends TimedRobot {
     // m_chooser.addOption("CargoAuto", cargoAuto);
     // SmartDashboard.putData("Auto choices", m_chooser);
 
-    //Subsystem init
     elevator = new Elevator();
     driveTrain = new DriveTrain();
     trident = new Trident();
-    //Controls init
+
     oi = new DriverOI();
     oi2 = new OperatorOI();
-    //Auto Command inits Auto CommandGroups are assigned to commands 
+
     // Auto1 = new TurnAuto();
     // Auto2 = new CargoAuto();
     // Auto3 = new StraightAuto();
-    //Teleop Subroutine CommandGroups are assigned to commands
-    //Sensors Reset
+
 
   }
 
-  /**This runs every 20ms when the robot is enabled */
   @Override
   public void robotPeriodic() {
     Scheduler.getInstance().run();
   }
 
-  /**Runs before auto */
   @Override
   public void autonomousInit() {
     // autoSelected = m_chooser.getSelected();
@@ -90,14 +84,13 @@ public class Neptune extends TimedRobot {
   }
   @Override
   public void teleopInit() {
-      //This removes all commands from the scheduler
       Scheduler.getInstance().removeAll();
   }
 
   @Override
   public void teleopPeriodic() {
     oi2.controlLoop();
-  
+    postSmartDashVars();
     if((elevator.getLiftPosition() < 10000) &&(elevator.getLiftPosition() > RobotMap.liftLowerBound)){
       States.liftZone = States.LiftZones.LOWER_DANGER;
     }else if((elevator.getLiftPosition() > 100000)&&(elevator.getLiftPosition() < RobotMap.liftUpperBound))
@@ -105,7 +98,7 @@ public class Neptune extends TimedRobot {
     else{
       States.liftZone = States.LiftZones.SAFE;
     }
-    //Encoder Upper Bound for Lift
+
     if((Neptune.elevator.getLiftPosition() >= RobotMap.liftUpperBound)){
       elevator.stopLift();
     }
@@ -115,22 +108,25 @@ public class Neptune extends TimedRobot {
   }
   @Override
   public void disabledInit(){
-    //Print Telemetry File here
   }
   @Override
   public void disabledPeriodic(){
+    postSmartDashVars();
   }
 
   @Override
   public void testPeriodic() {
   }
   public void postSmartDashVars(){
-
-    //States
     SmartDashboard.putString("Object State:", States.objState.toString());
     SmartDashboard.putString("Action State:", States.actionState.toString());
-    //LimitSwitches
     SmartDashboard.putString("Lift Zone: ", States.liftZone.toString());
     SmartDashboard.putString("Elevator Command: ", elevator.getCurrentCommandName());
+    SmartDashboard.putNumber("Elevator Target Height: ", elevator.TargetHeight);
+    SmartDashboard.putNumber("Elevator Actaul Height: ", elevator.getLiftPosition());
+    SmartDashboard.putNumber("Elevator Velocity: ", elevator.getLiftVelocity());
+    SmartDashboard.putNumber("Arm Target Angle: ", elevator.TargetAngle);
+    SmartDashboard.putNumber("Arm Actual Angle", elevator.getArmAngle());
+    SmartDashboard.putNumber("Arm Velocity: ", elevator.getArmVelocity());
   }
 }
