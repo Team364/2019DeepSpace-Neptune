@@ -21,7 +21,6 @@ public class Stop extends Command {
     @Override
     protected void execute() {
         talon.stop();
-        States.loopState = States.LoopStates.OPEN_LOOP;
     }
 
     @Override

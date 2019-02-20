@@ -2,25 +2,24 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.defaultcommands.Periodic;
 
 public class ClimbElevate extends Command {
 
     public ClimbElevate() {  
-        requires(Robot.elevatorSystem);
+        requires(Robot.elevator);
         setInterruptible(true);
         setTimeout(1);
     }
 
     @Override
     protected void initialize() {
-        Periodic.manualControl = false;
+        Robot.manualControl = false;
  
     }
 
     @Override
     protected void execute() {
-        Robot.elevatorSystem.elevateTo(80000, 1500);
+        Robot.elevator.elevateTo(80000, 1500);
     }
 
     @Override

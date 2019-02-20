@@ -26,7 +26,7 @@ public class DriveOpenLoop extends Command {
      * Driver control
      */
     public DriveOpenLoop() {
-        requires(Robot.superStructure.driveTrain);  
+        requires(Robot.driveTrain);  
         setInterruptible(true);//Other commands can interrupt this command
     }
 
@@ -64,15 +64,14 @@ public class DriveOpenLoop extends Command {
         //This is where the driveSystem is actually asked to run motors
         leftPower = throttle + steer;
         rightPower = throttle - steer;
-        Robot.superStructure.driveOpenLoop(rightPower, leftPower);
-        Robot.superStructure.dw.set(ControlMode.PercentOutput, throttle);
+        Robot.driveTrain.openLoop(rightPower, leftPower);
     
 
     }
 
     @Override
     protected void end() {
-        Robot.superStructure.driveTrain.stop();
+        Robot.driveTrain.stop();
     }
 
     @Override

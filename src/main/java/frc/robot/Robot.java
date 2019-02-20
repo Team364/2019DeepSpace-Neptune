@@ -5,6 +5,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
 import frc.robot.oi.*;
+import frc.robot.util.States;
+import frc.robot.util.prefabs.commands.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * We are using Timed Robot and Command Robot together.
  * <p>The Scheduler is invoked during auto and teleop
@@ -12,10 +15,10 @@ import frc.robot.oi.*;
 public class Robot extends TimedRobot {
   //Declarations
   //Subsystem
-  public static SuperStructure superStructure;
-  public static Elevator elevatorSystem;
+  public static Elevator elevator;
   public static DriveTrain driveTrain;
   public static Trident trident;
+
   //Controls
   public static DriverOI oi;
   public static OperatorOI oi2;
@@ -31,6 +34,7 @@ public class Robot extends TimedRobot {
   // private static final String driveStraightAuto = "Default";
   // private static final String turnAuto = "Auto1";
   // private static final String cargoAuto = "Auto2";
+  public static boolean manualControl;
 
   @Override
   public void robotInit() {
@@ -41,8 +45,7 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putData("Auto choices", m_chooser);
 
     //Subsystem init
-    superStructure = new SuperStructure();
-    elevatorSystem = new Elevator();
+    elevator = new Elevator();
     driveTrain = new DriveTrain();
     trident = new Trident();
     //Controls init
@@ -61,7 +64,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     Scheduler.getInstance().run();
-    Robot.superStructure.postImplementation();
   }
 
   /**Runs before auto */
@@ -96,7 +98,21 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     oi2.controlLoop();
-    superStructure.postSmartDashVars();
+  
+    if((elevator.getLiftPosition() < 10000) &&(elevator.getLiftPosition() > RobotMap.liftLowerBound)){
+      States.liftZone = States.LiftZones.LOWER_DANGER;
+    }else if((elevator.getLiftPosition() > 100000)&&(elevator.getLiftPosition() < RobotMap.liftUpperBound))
+      States.liftZone = States.LiftZones.UPPER_DANGER;
+    else{
+      States.liftZone = States.LiftZones.SAFE;
+    }
+    //Encoder Upper Bound for Lift
+    if((Robot.elevator.getLiftPosition() >= RobotMap.liftUpperBound)){
+      elevator.stopLift();
+    }
+    if((Robot.elevator.getLiftPosition() <= RobotMap.liftLowerBound)){
+      elevator.stopLift();
+    }
   }
   @Override
   public void disabledInit(){
@@ -104,10 +120,18 @@ public class Robot extends TimedRobot {
   }
   @Override
   public void disabledPeriodic(){
-    superStructure.postSmartDashVars();
   }
 
   @Override
   public void testPeriodic() {
+  }
+  public void postSmartDashVars(){
+
+    //States
+    SmartDashboard.putString("Object State:", States.objState.toString());
+    SmartDashboard.putString("Action State:", States.actionState.toString());
+    //LimitSwitches
+    SmartDashboard.putString("Lift Zone: ", States.liftZone.toString());
+    SmartDashboard.putString("Elevator Command: ", elevator.getCurrentCommandName());
   }
 }

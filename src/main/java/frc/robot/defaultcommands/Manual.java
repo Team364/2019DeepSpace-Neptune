@@ -10,7 +10,7 @@ public class Manual extends Command {
     private double adjustedPosition;
 
     public Manual() {
-        requires(Robot.elevatorSystem);
+        requires(Robot.elevator);
         setInterruptible(true);
     }
 
@@ -23,15 +23,15 @@ public class Manual extends Command {
         
         power = -Robot.oi2.controller2.getRawAxis(1)*0.5;
         if(power > 0.1){
-            if(!Periodic.manualControl){
-                adjustedPosition = Robot.superStructure.lift.getPosition();
-                Periodic.manualControl = true;
+            if(!Robot.manualControl){
+                adjustedPosition = Robot.elevator.getLiftPosition();
+                Robot.manualControl = true;
             }
             adjustedPosition += 700;
         }else if(power < -0.1){
             adjustedPosition -= 700;
         }
-        Robot.superStructure.lift.MoveToPosition(adjustedPosition);
+        Robot.elevator.setLiftPosition(adjustedPosition);
        
     SmartDashboard.putNumber("Adjusted Position", adjustedPosition);
     }

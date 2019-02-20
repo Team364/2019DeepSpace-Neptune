@@ -9,7 +9,7 @@ public class runIntake extends Command {
     private double power;
     private boolean intaking;
     public runIntake(double power, boolean intaking) {
-        requires(Robot.superStructure.intake);
+        requires(Robot.trident);
         this.power = power;
         this.intaking = intaking;
     }
@@ -25,7 +25,7 @@ public class runIntake extends Command {
 
     @Override
     protected void execute() {
-        Robot.superStructure.intake.openLoop(power);
+        Robot.trident.runIntake(power);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class runIntake extends Command {
 
     @Override
     protected void end() {
-        Robot.superStructure.intake.stop();
+        Robot.trident.stopIntake();
     }
 
     @Override

@@ -36,7 +36,6 @@ public class OpenLoop extends Command {
 
     @Override
     protected void execute() {
-    if(States.loopState == States.LoopStates.OPEN_LOOP){
         power = Robot.oi2.controller2.getRawAxis(axis);
 
         if(Math.abs(power) >= deadband){
@@ -45,7 +44,7 @@ public class OpenLoop extends Command {
         }else{
             talonBase.stop();
         }
-    }
+    
     //SmartDashBoard
     String pow = talonBase.getTalonName() + " Open Loop Power: ";
     String axis = talonBase.getTalonName() + " Open Loop Axis: ";

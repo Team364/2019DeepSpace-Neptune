@@ -33,7 +33,6 @@ public class ClosedLoop extends Command {
     protected void execute() {
         ++loops;
         talon.MoveToPosition(Position);
-        States.loopState = States.LoopStates.CLOSED_LOOP;
     }
 
     @Override

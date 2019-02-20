@@ -37,7 +37,7 @@ public class Trident extends Subsystem {
     intake.set(ControlMode.PercentOutput, power);
   }
 
-  public void stop() {
+  public void stopIntake() {
     runIntake(0);
   }
   public double getRawOutput(){

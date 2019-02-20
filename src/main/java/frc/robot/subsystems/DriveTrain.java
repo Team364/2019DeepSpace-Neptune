@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.defaultcommands.DriveOpenLoop;
+import frc.robot.util.prefabs.subsystems.Piston;
 import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -22,7 +23,8 @@ public class DriveTrain extends Subsystem {
   private VictorSPX rightRearDriveSlave;
   private VictorSPX rightTopDriveSlave;
 
-  private DoubleSolenoid shifter;
+  private DoubleSolenoid sh;
+  public Piston shifter;
   
   public DriveTrain(){
 
@@ -39,7 +41,8 @@ public class DriveTrain extends Subsystem {
         leftRearDriveSlave.follow(leftDrive);
         leftTopDriveSlave.follow(leftDrive);
         
-        shifter = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.shifterPort1, RobotMap.shifterPort2);
+        sh = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.shifterPort1, RobotMap.shifterPort2);
+        shifter = new Piston(sh, "Shifter");
         /* Factory default hardware to prevent unexpected behavior */
         rightDrive.configFactoryDefault();
 

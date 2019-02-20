@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
+import frc.robot.util.States;
 /**
  * Add your docs here.
  */
@@ -89,7 +90,7 @@ public class Elevator extends Subsystem {
 
         arm.setSelectedSensorPosition(0);
   } 
-  
+
   public void elevateTo(double liftHeight, double armAngle){
     System.out.println("The lift is moving to: " + liftHeight);
     System.out.println("The arm is moving to: " + armAngle);
@@ -97,6 +98,10 @@ public class Elevator extends Subsystem {
     arm.set(ControlMode.MotionMagic, armAngle);
     TargetHeight = liftHeight;
     TargetAngle = armAngle;
+  }
+  public void setLiftPosition(double liftHeight){
+    lift.set(ControlMode.MotionMagic, liftHeight);
+    System.out.println("The lift is moving to: " + liftHeight);
   }
 
   public double getLiftPosition(){
@@ -108,6 +113,13 @@ public class Elevator extends Subsystem {
   public void resetEncoders(){
     lift.setSelectedSensorPosition(0);
     arm.setSelectedSensorPosition(0);
+  }
+  public void stopLift(){
+    lift.set(ControlMode.PercentOutput, 0);
+  }
+  
+  public boolean elevatorPassive(){
+    return States.actionState == States.ActionStates.PASSIVE;
   }
 
   @Override

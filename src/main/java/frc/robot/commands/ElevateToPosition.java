@@ -3,7 +3,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.defaultcommands.Periodic;
 import frc.robot.util.States;
 
 public class ElevateToPosition extends Command {
@@ -40,13 +39,13 @@ public class ElevateToPosition extends Command {
      */
     public ElevateToPosition(int Height) {
         desiredHeight = Height;  
-        requires(Robot.elevatorSystem);
+        requires(Robot.elevator);
         setInterruptible(true);
     }
 
     @Override
     protected void initialize() {
-        Periodic.manualControl = false;
+        Robot.manualControl = false;
         /*One must keep in mind that a Position of 4096 is only a full rotation of the axle the encoder
         corresponds to. This means that these values may be quite large in practice.
         Writing an equation which converts the inches on the lift to raw sensor units would be beyond useful */
@@ -112,7 +111,7 @@ public class ElevateToPosition extends Command {
             wantedAngle = armClimb;
             }
          
-        Robot.elevatorSystem.elevateTo(wantedPosition, wantedAngle);
+        Robot.elevator.elevateTo(wantedPosition, wantedAngle);
     }
 
     @Override

@@ -73,13 +73,13 @@ public class DriverOI {
         //Button is pressed once
         //Left menu button
         shiftLow = new JoystickButton(controller, 5);
-        shiftLow.whenPressed(new SetPiston(Robot.superStructure.shifter, 1));
+        shiftLow.whenPressed(new SetPiston(Robot.driveTrain.shifter, 1));
 
         //Robot shifts gears up
         //Button is pressed once
         //Right menu button
         shiftHigh = new JoystickButton(controller, 6);
-        shiftHigh.whenPressed(new SetPiston(Robot.superStructure.shifter, 0));
+        shiftHigh.whenPressed(new SetPiston(Robot.driveTrain.shifter, 0));
 
         // //Robot uses NavX Gyro to turn approximately 180 degrees(yaw)
         // //Button is pressed once
@@ -107,9 +107,6 @@ public class DriverOI {
         // //Left on the D-pad
         // left180 = new JoystickPOV(270);
         // left180.whenActive(new Turn180left());
-        Climb = new JoystickButton(controller, 8);
-        Climb.whenPressed(new Climb());
-        undoClimbFrontButton = new JoystickButton(controller, 2);
-        undoClimbFrontButton.whenPressed(new SetPiston(Robot.superStructure.front, 0));
+
     }
 }
