@@ -1,34 +1,9 @@
-Preface:
-Programming has a history of doing stuff that seems cool or useful in the moment but this tends
-to lead to Priorities being neglected and time wasted on side projects. Keeping a list such 
-as this ensure that we may stay on track and complete goals in the proper order.
+Next: 
+Pigeon
+Turn to Heading Command
+PID tuning for driveTrain
+Lift Tuning
 
-Today: 
---Test SetSensorPhase
---Get Closed Loop arm to work
---Feed Forward Calculation
-
-Priorities:
---Go through simulated match and make sure states and positions act as intended
---Test how low the motor power has to be to hold the lift up while not being powered by either open or closed loop
---Record Positions for:
-        a.)Rocket Level 1
-        b.)Rocket Level 2
-        c.)Rocket Level 3
-        d.)Intaking Cargo
-        e.)Retract/Starting
---Test Pistons    
---Set up 2 PCMs
---Tune delays on Scoring Objects
---Test Climb Subroutine:
-        a.)Time back Pistons
-        b.)Time front Pistons
-        c.)Tune hold Position Command
---Allow openloop to move in opposite direction of how it is bounded
---When Passive return to intake state
---Velocity Closed Loop -- use for intake and drive rampDown
-
-Later:
 --Align Subroutine
 --Set up and test Drive to Vision Command
 --Turn 180 button
