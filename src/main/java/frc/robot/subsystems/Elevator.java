@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import frc.robot.States;
+import frc.robot.defaultcommands.ElevatorManual;
 /**
  * Add your docs here.
  */
@@ -124,5 +125,6 @@ public class Elevator extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new ElevatorManual());
   }
 }

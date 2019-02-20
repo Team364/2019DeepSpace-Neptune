@@ -4,12 +4,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 
-public class Manual extends Command {
+public class ElevatorManual extends Command {
 
     private double power;
     private double adjustedPosition;
 
-    public Manual() {
+    public ElevatorManual() {
         requires(Neptune.elevator);
         setInterruptible(true);
     }

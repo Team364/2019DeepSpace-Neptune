@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
-import frc.robot.defaultcommands.Manual;
+import frc.robot.defaultcommands.ElevatorManual;
 import frc.robot.subroutines.*;
 import frc.robot.States;
 import frc.robot.commands.*;
@@ -63,7 +63,7 @@ public class OperatorOI{
 
 
     private Command runGrip;
-    private Command liftManual = new Manual();
+    private Command liftManual = new ElevatorManual();
     private Command elevate;
     private Command setLever;
     private Command setClaw;
