@@ -3,7 +3,7 @@ package frc.robot.subroutines;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
 import frc.robot.RobotMap;
-import frc.robot.util.States;
+import frc.robot.States;
 
 public class ElevateToPosition extends Command {
 

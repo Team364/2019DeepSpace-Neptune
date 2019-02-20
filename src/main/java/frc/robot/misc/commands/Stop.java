@@ -1,8 +1,8 @@
-package frc.robot.util.commands;
+package frc.robot.misc.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.util.States;
-import frc.robot.util.subsystems.TalonBase;;
+import frc.robot.States;
+import frc.robot.misc.subsystems.TalonBase;;
 
 public class Stop extends Command {
 

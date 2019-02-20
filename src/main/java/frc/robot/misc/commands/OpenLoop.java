@@ -1,9 +1,9 @@
-package frc.robot.util.commands;
+package frc.robot.misc.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
-import frc.robot.util.subsystems.TalonBase;
+import frc.robot.misc.subsystems.TalonBase;
     /**
      * Used for operator only
      * @param talonBase //talon Base to run command

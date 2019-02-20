@@ -1,7 +1,7 @@
-package frc.robot.util.commands;
+package frc.robot.misc.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.util.subsystems.TalonBase;;
+import frc.robot.misc.subsystems.TalonBase;;
 
 public class ClosedLoop extends Command {
 

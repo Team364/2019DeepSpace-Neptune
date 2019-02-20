@@ -5,7 +5,7 @@
  * calculateOutput().
  */
 
-package frc.robot.util;
+package frc.robot.misc;
 
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 

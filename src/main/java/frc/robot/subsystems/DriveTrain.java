@@ -6,7 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.defaultcommands.DriveOpenLoop;
-import frc.robot.util.subsystems.Piston;
+import frc.robot.misc.subsystems.Piston;
 import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
