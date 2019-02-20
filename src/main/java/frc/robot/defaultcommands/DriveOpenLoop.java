@@ -2,6 +2,7 @@ package frc.robot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class DriveOpenLoop extends Command {
 
@@ -64,6 +65,7 @@ public class DriveOpenLoop extends Command {
         leftPower = throttle + steer;
         rightPower = throttle - steer;
         Robot.superStructure.driveOpenLoop(rightPower, leftPower);
+        Robot.superStructure.dw.set(ControlMode.PercentOutput, throttle);
     
 
     }

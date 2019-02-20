@@ -40,7 +40,9 @@ public class Periodic extends Command {
     if((Robot.superStructure.lift.getPosition() >= RobotMap.liftUpperBound)){
       stopLift.start();
     }
-
+    if((Robot.superStructure.lift.getPosition() <= RobotMap.liftLowerBound)){
+      stopLift.start();
+    }
     //Set the arm and lift back to start config
     if(Robot.superStructure.elevatorPassive() && !passiveLatch){
       System.out.println("Would move to neutral position");

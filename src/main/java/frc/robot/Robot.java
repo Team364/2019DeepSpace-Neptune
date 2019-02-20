@@ -54,6 +54,7 @@ public class Robot extends TimedRobot {
   /**This runs every 20ms when the robot is enabled */
   @Override
   public void robotPeriodic() {
+    Scheduler.getInstance().run();
     Robot.superStructure.postImplementation();
   }
 
@@ -79,18 +80,15 @@ public class Robot extends TimedRobot {
     //     Auto3.start();
     //     break;
     // }
-    Scheduler.getInstance().run();
   }
   @Override
   public void teleopInit() {
       //This removes all commands from the scheduler
       Scheduler.getInstance().removeAll();
-      Robot.superStructure.arm.MoveToPosition(3500);
   }
 
   @Override
   public void teleopPeriodic() {
-    Scheduler.getInstance().run();
     oi2.controlLoop();
     superStructure.postSmartDashVars();
   }

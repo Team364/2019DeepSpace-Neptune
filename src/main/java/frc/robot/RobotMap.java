@@ -58,14 +58,11 @@ public class RobotMap {
     public static final double liftNominalOutputForward = 0;
     public static final double liftNominalOutputReverse = 0;
     public static final double liftPeakOutputForward = 1;
-    public static final double liftPeakOutputReverse = -.75;
+    public static final double liftPeakOutputReverse = -0.75;
     public static final int liftCruiseVelocity = 20000;
     public static final int liftAcceleration = 8000;
-    public static final double liftLowerBound = 0;
+    public static final double liftLowerBound = -20;
     public static final double liftUpperBound = 135000;
-     //Open Loop Config
-    public static final int liftAxis = 1;
-    public static final double liftDeadband = 0.1;
      //Closed Loop Targets
     public static final double liftLowH = 17000;//Level 1 for Hatch
     public static final double liftMedH = 74000;//Level 2 Rocket for Hatch
@@ -86,7 +83,7 @@ public class RobotMap {
     public static final double armPeakOutputReverse = -1;
     public static final int armCruiseVelocity = 2000;
     public static final int armAcceleration = 800;
-    public static final double armLowerBound = -3000;
+    public static final double armLowerBound = 5000;
     public static final double armUpperBound = 0;
      //Open Loop Config
     public static final int armAxis = 5;

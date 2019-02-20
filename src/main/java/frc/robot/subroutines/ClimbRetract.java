@@ -6,11 +6,11 @@ import frc.robot.Robot;
 /**
  * 
  */
-public class Climb extends CommandGroup {
+public class ClimbRetract extends CommandGroup {
     /**
      * 
      */
-    public Climb() {
-        addSequential(new SetPiston(Robot.superStructure.back, 1));
+    public ClimbRetract() {
+        addSequential(new SetPiston(Robot.superStructure.back, 0));
     }
 }

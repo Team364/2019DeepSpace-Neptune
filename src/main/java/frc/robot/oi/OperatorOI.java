@@ -58,6 +58,8 @@ public class OperatorOI{
     public JoystickButton setLiftPositionCargo;
     public JoystickButton setIntakePosition;
     private JoystickButton ClimbSet;
+    private JoystickButton Climb;
+    private JoystickButton ClimbRetract;
     
     private boolean cargo;
     private boolean intake;
@@ -100,8 +102,12 @@ public class OperatorOI{
         //Set Lift Position to level 0 for intaking
         setIntakePosition = new JoystickButton(controller2, 5);
         setIntakePosition.whenPressed(new setIntakePos());
-        ClimbSet = new JoystickButton(controller2, 8);
-        ClimbSet.whenPressed(new Climb());
+        ClimbSet = new JoystickButton(controller2, 10);
+        ClimbSet.whenPressed(new ClimbSet());
+        Climb = new JoystickButton(controller2, 8);
+        Climb.whenPressed(new Climb());
+        ClimbRetract = new JoystickButton(controller2, 7);
+        ClimbRetract.whenPressed(new ClimbRetract());
     }
     /**
    * Sets objectState

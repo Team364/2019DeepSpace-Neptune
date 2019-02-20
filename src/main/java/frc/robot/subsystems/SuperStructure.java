@@ -30,7 +30,7 @@ public class SuperStructure extends Subsystem {
   private TalonSRX lt;
   public TalonSRX a;
   private VictorSPX in;
-  private VictorSPX dw;
+  public VictorSPX dw;
 
   public DriveTrain driveTrain;
   public ElevatorSystem elevatorSystem;
@@ -142,7 +142,7 @@ public class SuperStructure extends Subsystem {
         RobotMap.liftAcceleration, 
         RobotMap.liftLowerBound, 
         RobotMap.liftUpperBound, 
-        0.2, 0, 0, 0.2,
+        0.3, 0, 0, 0.2,
         "Lift");
     liftSlave.follow(lt);
     liftSlave.setInverted(true);
