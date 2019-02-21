@@ -13,19 +13,19 @@ public class RunGrip extends CommandGroup {
   public RunGrip(int set) {
     if(set == 1){ //Intake Cargo
     addSequential(new runIntake(-0.6, true)); //Intake
-    addSequential(new SetPiston(Neptune.trident.claw, 1)); //Close Claw
+    addSequential(new CloseClaw()); //Close Claw
     System.out.println("Intaking Cargo");
     }else if(set == 2){  //Intake Hatch
-    addSequential(new SetPiston(Neptune.trident.lever, 1)); //Open lever
+    addSequential(new OpenLever()); //Open lever
     System.out.println("Grabbing Hatch");
     }else if(set == 3){ //Score Cargo
     addSequential(new runIntake(0.75, false)); //Outtake
-    addSequential(new SetPiston(Neptune.trident.claw, 1)); //Open Claw
+    addSequential(new OpenClaw()); //Open Claw
     System.out.println("Scoring Cargo");
     }else if(set == 4){  //Score Hatch
-    addSequential(new SetPiston(Neptune.trident.lever, 0)); //Close lever
+    addSequential(new CloseLever()); //Close lever
     addSequential(new WaitCommand(0.1));
-    addSequential(new SetPiston(Neptune.trident.claw, 1));
+    addSequential(new OpenClaw());
     System.out.println("Scoring Hatch");
 }
   }
