@@ -12,8 +12,8 @@ public class RunGrip extends CommandGroup {
     
   public RunGrip(int set) {
     if(set == 1){ //Intake Cargo
-    addSequential(new runIntake(-0.4, true)); //Intake
-    //addSequential(new SetPiston(Robot.trident.claw, 1)); //Close Claw
+    addSequential(new runIntake(-0.6, true)); //Intake
+    addSequential(new SetPiston(Neptune.trident.claw, 1)); //Close Claw
     System.out.println("Intaking Cargo");
     }else if(set == 2){  //Intake Hatch
     addSequential(new SetPiston(Neptune.trident.lever, 1)); //Open lever

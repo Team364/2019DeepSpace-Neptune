@@ -6,8 +6,10 @@ import frc.robot.Neptune;
 
 public class ElevatorManual extends Command {
 
-    private double power;
-    private double adjustedPosition;
+    private double liftPower;
+    private double armPower;
+    private double adjustedLiftPosition;
+    private double adjustedArmAngle;
 
     public ElevatorManual() {
         requires(Neptune.elevator);
@@ -21,19 +23,22 @@ public class ElevatorManual extends Command {
     @Override
     protected void execute() {
         
-        power = -Neptune.oi2.controller2.getRawAxis(1)*0.5;
-        if(power > 0.1){
+        liftPower = -Neptune.oi2.controller2.getRawAxis(1);
+        armPower = Neptune.oi2.controller2.getRawAxis(5);
+        if(liftPower > 0.1){
             if(!Neptune.manualControl){
-                adjustedPosition = Neptune.elevator.getLiftPosition();
+                adjustedLiftPosition = Neptune.elevator.getLiftPosition();
                 Neptune.manualControl = true;
             }
-            adjustedPosition += 700;
-        }else if(power < -0.1){
-            adjustedPosition -= 700;
+            adjustedLiftPosition += 700;
+        }else if(liftPower < -0.1){
+            adjustedLiftPosition -= 700;
         }
-        Neptune.elevator.setLiftPosition(adjustedPosition);
+        
+        Neptune.elevator.setLiftPosition(adjustedLiftPosition);
+
        
-    SmartDashboard.putNumber("Adjusted Position", adjustedPosition);
+    SmartDashboard.putNumber("Adjusted Position", adjustedLiftPosition);
     }
     @Override
     protected void interrupted() {

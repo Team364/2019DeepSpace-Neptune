@@ -79,7 +79,7 @@ public class RobotMap {
     public static final double liftLowH = 15000;//Level 1 for Hatch
     public static final double liftMedH = 77000;//Level 2 Rocket for Hatch
     public static final double liftHighH = 132000;//Level 3 Rocket for Hatch
-    public static final double liftLowC = 30000;//Level 1 Rocket Cargo
+    public static final double liftLowC = 33000;//Level 1 Rocket Cargo
     public static final double liftMedC = 92000;//Level 2 Rocket Cargo
     public static final double liftHighC = 130000;//Level 3 Rocket Cargo
     public static final double liftCargoC = 80000;//Scoring Cargo in Cargo Ship
@@ -95,10 +95,10 @@ public class RobotMap {
     public static final double armPeakOutputReverse = -1;
     public static final int armCruiseVelocity = 2000;
     public static final int armAcceleration = 800;
-    public static final double armLowerBound = 5000;
-    public static final double armUpperBound = 0;
+    public static final double armLowerBound = -25;
+    public static final double armUpperBound = 4300;
      //Arm PID
-    public static final double armPgain = 0.3;
+    public static final double armPgain = 0.8;
     public static final double armIgain = 0.0;
     public static final double armDgain = 0.0;
     public static final double armFgain = 0.0;

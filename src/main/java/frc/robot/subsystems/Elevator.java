@@ -83,6 +83,10 @@ public class Elevator extends Subsystem {
     lift.set(ControlMode.MotionMagic, liftHeight);
     System.out.println("The lift is moving to: " + liftHeight);
   }
+  public void setArmAngle(double armAngle){
+    arm.set(ControlMode.MotionMagic, armAngle);
+    System.out.println("The arm is moving to: " + armAngle);
+  }
 
   public double getLiftPosition(){
     return lift.getSelectedSensorPosition(RobotMap.PIDLoopIdx);
@@ -103,7 +107,9 @@ public class Elevator extends Subsystem {
   public void stopLift(){
     lift.set(ControlMode.PercentOutput, 0);
   }
-  
+  public void stopArm(){
+    arm.set(ControlMode.PercentOutput, 0);
+  }
   public boolean elevatorPassive(){
     return States.actionState == States.ActionStates.PASSIVE;
   }

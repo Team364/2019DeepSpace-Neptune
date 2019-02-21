@@ -146,15 +146,21 @@ public class OperatorOI{
         runGrip.start();
       }
       SmartDashboard.putNumber("Grip Set: ", gripSet);
-      if(Math.abs(controller2.getRawAxis(1)) > 0.2){
+      if((Math.abs(controller2.getRawAxis(1)) > 0.2)){
         liftManual.start();
       } 
       //If RB is hit then the elevator goes to start config
       if(controller2.getRawButton(6)){
         elevate = new ElevateToPosition(5);
         elevate.start();
-        setLever = new SetPiston(Neptune.trident.lever, 0);
-        setClaw = new SetPiston(Neptune.trident.claw, 0);
+        if(States.objState == States.ObjectStates.HATCH_OBJ){
+          setLever = new SetPiston(Neptune.trident.lever, 0);
+          setClaw = new SetPiston(Neptune.trident.claw, 0);
+        }else if(States.objState == States.ObjectStates.CARGO_OBJ){
+          setLever = new SetPiston(Neptune.trident.lever, 1);
+          setClaw = new SetPiston(Neptune.trident.claw, 1);
+        }
+
         setLever.start();
         setClaw.start();
 

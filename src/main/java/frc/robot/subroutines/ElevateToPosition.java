@@ -83,7 +83,7 @@ public class ElevateToPosition extends Command {
             armStartConfig = RobotMap.armStartConfig;
             custom = 5000;
             lvlone = 3300;
-            lvlthree = 1700;
+            lvlthree = 2100;
 
         }
         liftClimb = 80000;
