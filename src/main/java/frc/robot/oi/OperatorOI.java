@@ -98,73 +98,7 @@ public class OperatorOI{
         setIntakePosition = new JoystickButton(controller2, 5);
         setIntakePosition.whenPressed(new setIntakePos());
     }
-    /**
-   * Sets objectState
-   * <p>starts intakeObject
-   * <p>starts scoreObject
-   */
-    public void controlLoop(){
 
-    /*Setting States
-    If Up on the D-pad is pressed,
-    Object state is set to Cargo
-    If Down on the D-pad is pressed,
-    Object state is set to Hatch*/
-    if(controller2.getPOV() == 0){
-        States.objState = States.ObjectStates.CARGO_OBJ;
-      }else if(controller2.getPOV() == 180){
-        States.objState = States.ObjectStates.HATCH_OBJ;
-      }
-      if(controller2.getRawAxis(2) >= 0.5){
-        States.actionState = States.ActionStates.INTAKE_ACT;
-      }else if(controller2.getRawAxis(3) >= 0.5){
-        States.actionState = States.ActionStates.SCORE_ACT;
-      }else if(controller2.getRawButton(5)){
-        States.actionState = States.ActionStates.SEEK;
-      }else{
-        if(((gripSet == 3)||(gripSet == 4)) && Neptune.trident.tridentInactive()){
-          States.actionState = States.ActionStates.PASSIVE;  
-        }else if(Neptune.trident.tridentInactive()){
-          States.actionState = States.ActionStates.FERRY_ACT;
-        }
- 
-      }
-      /**Sets action state for scoring and then runs the grip subroutine */
-      if(States.objState == States.ObjectStates.CARGO_OBJ) {cargo = true;}
-      else if(States.objState == States.ObjectStates.HATCH_OBJ) {cargo = false;}
-      if(States.actionState == States.ActionStates.SCORE_ACT) {intake = false;}
-      else if(States.actionState == States.ActionStates.INTAKE_ACT) {intake = true;}
-      if(cargo && intake){gripSet = 1;}//Get Cargo
-      else if(!cargo && intake){gripSet = 2;}//Get Hatch
-      else if(cargo && !intake){gripSet = 3;} //Score Cargo
-      else if(!cargo && !intake){gripSet  = 4;} //Score Hatch 
-      else{gripSet = 0;}//Should never happen
-
-      
-      if((controller2.getRawAxis(3) >= 0.5)||(controller2.getRawAxis(2) >= 0.5)){
-        runGrip = new RunGrip(gripSet);
-        runGrip.start();
-      }
-      SmartDashboard.putNumber("Grip Set: ", gripSet);
-      if((Math.abs(controller2.getRawAxis(1)) > 0.2)){
-        liftManual.start();
-      } 
-      //If RB is hit then the elevator goes to start config
-      if(controller2.getRawButton(6)){
-        elevate = new ElevateToPosition(5);
-        elevate.start();
-        if(States.objState == States.ObjectStates.HATCH_OBJ){
-          setLever = new SetPiston(Neptune.trident.lever, 0);
-          setClaw = new SetPiston(Neptune.trident.claw, 0);
-        }else if(States.objState == States.ObjectStates.CARGO_OBJ){
-          setLever = new SetPiston(Neptune.trident.lever, 1);
-          setClaw = new SetPiston(Neptune.trident.claw, 1);
-        }
-
-        setLever.start();
-        setClaw.start();
-
-      }
-    }
+    
 }
 
