@@ -10,7 +10,7 @@ import frc.robot.States;
 import frc.robot.defaultcommands.ElevatorManual;
 
 public class Elevator extends Subsystem {
-  
+
   private static Elevator Instance = null;
   private TalonSRX arm;
   private TalonSRX lift;

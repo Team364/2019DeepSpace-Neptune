@@ -38,6 +38,26 @@ public class Neptune extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
+    if((elevator.getLiftPosition() >= RobotMap.liftUpperBound)){
+      elevator.stopLift();
+    }
+    if((elevator.getLiftPosition() <= RobotMap.liftLowerBound)){
+      elevator.stopLift();
+    }
+    
+    if((elevator.getArmAngle() >= RobotMap.armUpperBound)){
+      elevator.stopArm();
+    }
+    if((elevator.getArmAngle() <= RobotMap.armLowerBound)){
+      elevator.stopArm();
+    }
+    if((elevator.getLiftPosition() < 10000) &&(elevator.getLiftPosition() > RobotMap.liftLowerBound)){
+      States.liftZone = States.LiftZones.LOWER_DANGER;
+    }else if((elevator.getLiftPosition() > 100000)&&(elevator.getLiftPosition() < RobotMap.liftUpperBound))
+      States.liftZone = States.LiftZones.UPPER_DANGER;
+    else{
+      States.liftZone = States.LiftZones.SAFE;
+    }
   }
 
   @Override
