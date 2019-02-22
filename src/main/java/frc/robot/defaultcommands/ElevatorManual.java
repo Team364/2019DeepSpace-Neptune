@@ -3,8 +3,6 @@ package frc.robot.defaultcommands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
-import frc.robot.RobotMap;
-import frc.robot.States;
 
 public class ElevatorManual extends Command {
 
@@ -38,26 +36,6 @@ public class ElevatorManual extends Command {
         }
         
         Neptune.elevator.setLiftPosition(adjustedLiftPosition);
-        if((Neptune.elevator.getLiftPosition() >= RobotMap.liftUpperBound)){
-            Neptune.elevator.stopLift();
-          }
-          if((Neptune.elevator.getLiftPosition() <= RobotMap.liftLowerBound)){
-            Neptune.elevator.stopLift();
-          }
-          
-          if((Neptune.elevator.getArmAngle() >= RobotMap.armUpperBound)){
-            Neptune.elevator.stopArm();
-          }
-          if((Neptune.elevator.getArmAngle() <= RobotMap.armLowerBound)){
-            Neptune.elevator.stopArm();
-          }
-          if((Neptune.elevator.getLiftPosition() < 10000) &&(Neptune.elevator.getLiftPosition() > RobotMap.liftLowerBound)){
-            States.liftZone = States.LiftZones.LOWER_DANGER;
-          }else if((Neptune.elevator.getLiftPosition() > 100000)&&(Neptune.elevator.getLiftPosition() < RobotMap.liftUpperBound))
-            States.liftZone = States.LiftZones.UPPER_DANGER;
-          else{
-            States.liftZone = States.LiftZones.SAFE;
-          }
 
        
     SmartDashboard.putNumber("Adjusted Position", adjustedLiftPosition);
