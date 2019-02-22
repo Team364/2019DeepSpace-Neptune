@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import frc.robot.States;
@@ -22,6 +23,7 @@ public class Elevator extends Subsystem {
         liftSlave = new TalonSRX(RobotMap.leftLift);
         liftSlave.follow(lift);
         liftSlave.setInverted(false);
+        liftSlave.setNeutralMode(NeutralMode.Brake);
 
         arm = new TalonSRX(RobotMap.arm);
 
@@ -35,6 +37,9 @@ public class Elevator extends Subsystem {
         lift.setInverted(RobotMap.liftReverseEncoder);
         arm.setSensorPhase(RobotMap.armReverse);
         arm.setInverted(RobotMap.armReverseEncoder);
+
+        lift.setNeutralMode(NeutralMode.Brake);
+        arm.setNeutralMode(NeutralMode.Brake);
 
         lift.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.TimeoutMs);
         lift.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.TimeoutMs);

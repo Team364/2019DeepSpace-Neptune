@@ -7,6 +7,8 @@ import frc.robot.subsystems.*;
 import frc.robot.oi.*;
 import frc.robot.States;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 /**
  * We are using Timed Robot and Command Robot together.
  * <p>The Scheduler is invoked during auto and teleop
@@ -20,9 +22,10 @@ public class Neptune extends TimedRobot {
   public static DriverOI oi;
   public static OperatorOI oi2;
 
-  public static Command Auto1;
-  public static Command Auto2;
-  public static Command Auto3;
+  public UsbCamera camera;
+  // public static Command Auto1;
+  // public static Command Auto2;
+  // public static Command Auto3;
   // //Auto Selector String
   // private String autoSelected;
   // //Auto Chooser
@@ -48,6 +51,9 @@ public class Neptune extends TimedRobot {
     oi = new DriverOI();
     oi2 = new OperatorOI();
 
+    camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
+    camera.setResolution(320, 240);
+    
     // Auto1 = new TurnAuto();
     // Auto2 = new CargoAuto();
     // Auto3 = new StraightAuto();

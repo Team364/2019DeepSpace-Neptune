@@ -10,6 +10,7 @@ import frc.robot.misc.subsystems.Piston;
 import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class DriveTrain extends Subsystem {
@@ -38,6 +39,13 @@ public class DriveTrain extends Subsystem {
         rightTopDriveSlave.follow(rightDrive);
         leftRearDriveSlave.follow(leftDrive);
         leftTopDriveSlave.follow(leftDrive);
+
+        rightDrive.setNeutralMode(NeutralMode.Brake);
+        leftDrive.setNeutralMode(NeutralMode.Brake);
+        leftRearDriveSlave.setNeutralMode(NeutralMode.Brake);
+        leftTopDriveSlave.setNeutralMode(NeutralMode.Brake);
+        rightRearDriveSlave.setNeutralMode(NeutralMode.Brake);
+        rightTopDriveSlave.setNeutralMode(NeutralMode.Brake);
         
         sh = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.shifterPort1, RobotMap.shifterPort2);
         shifter = new Piston(sh, "Shifter");

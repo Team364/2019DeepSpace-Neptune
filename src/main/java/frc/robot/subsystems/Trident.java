@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.misc.subsystems.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 public class Trident extends Subsystem {
 
@@ -31,6 +32,9 @@ public class Trident extends Subsystem {
     intake.configPeakOutputReverse(RobotMap.intakePeakOutputReverse);
     intake.configNominalOutputReverse(RobotMap.intakeNominalOutputReverse);
     intake.configNominalOutputForward(RobotMap.intakeNominalOutputForward);
+    
+    intake.setNeutralMode(NeutralMode.Coast);
+    intakeSlave.setNeutralMode(NeutralMode.Coast);
   }
 
   public void runIntake(double power) {
