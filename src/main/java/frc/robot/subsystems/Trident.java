@@ -4,8 +4,6 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.defaultcommands.TridentControlLoop;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class Trident extends Subsystem {
@@ -62,22 +60,22 @@ public class Trident extends Subsystem {
     return ((intake.getSelectedSensorVelocity() ==0) && leverInactive() && clawInactive());
   }
     public void openClaw() {
-      claw.set(DoubleSolenoid.Value.kReverse);
+      claw.set(DoubleSolenoid.Value.kForward);
       clawPistonState = ClawPistonStates.OPEN;
     }
   public void closeClaw() {
-      claw.set(DoubleSolenoid.Value.kForward);
+      claw.set(DoubleSolenoid.Value.kReverse);
       clawPistonState = ClawPistonStates.CLOSED;
     }
     public void noInputClaw() {
       claw.set(DoubleSolenoid.Value.kOff);
     }
     public void openLever() {
-      lever.set(DoubleSolenoid.Value.kReverse);
+      lever.set(DoubleSolenoid.Value.kForward);
       clawPistonState = ClawPistonStates.OPEN;
     }
   public void closeLever() {
-      lever.set(DoubleSolenoid.Value.kForward);
+      lever.set(DoubleSolenoid.Value.kReverse);
       clawPistonState = ClawPistonStates.CLOSED;
     }
 
@@ -104,6 +102,5 @@ public class Trident extends Subsystem {
      }
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new TridentControlLoop());
   }
 }

@@ -1,7 +1,5 @@
 package frc.robot;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -25,8 +23,6 @@ public class Neptune extends TimedRobot {
 
   public static boolean manualControl;
 
-  public UsbCamera camera;
-
   // Command activeAutoCommand;
   // SendableChooser<Command> autoChooser = new SendableChooser<>();
 
@@ -35,16 +31,33 @@ public class Neptune extends TimedRobot {
   public void robotInit() {
     oi = new DriverOI();
     oi2 = new OperatorOI();
-    camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
-    camera.setResolution(320, 240);
     //autoChooser.setDefaultOption("Default Auto", new ExampleCommand());
     //chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", autoChooser);
-    Scheduler.getInstance();
   }
 
   @Override
   public void robotPeriodic() {
+    if((elevator.getLiftPosition() >= RobotMap.liftUpperBound)){
+      elevator.stopLift();
+    }
+    if((elevator.getLiftPosition() <= RobotMap.liftLowerBound)){
+      elevator.stopLift();
+    }
+    
+    if((elevator.getArmAngle() >= RobotMap.armUpperBound)){
+      elevator.stopArm();
+    }
+    if((elevator.getArmAngle() <= RobotMap.armLowerBound)){
+      elevator.stopArm();
+    }
+    if((elevator.getLiftPosition() < 10000) &&(elevator.getLiftPosition() > RobotMap.liftLowerBound)){
+      States.liftZone = States.LiftZones.LOWER_DANGER;
+    }else if((elevator.getLiftPosition() > 100000)&&(elevator.getLiftPosition() < RobotMap.liftUpperBound))
+      States.liftZone = States.LiftZones.UPPER_DANGER;
+    else{
+      States.liftZone = States.LiftZones.SAFE;
+    }
   }
 
   @Override
@@ -80,33 +93,13 @@ public class Neptune extends TimedRobot {
   public void teleopPeriodic() {
     postSmartDashVars();
     Scheduler.getInstance().run();
-    // if((elevator.getLiftPosition() >= RobotMap.liftUpperBound)){
-    //   elevator.stopLift();
-    // }
-    // if((elevator.getLiftPosition() <= RobotMap.liftLowerBound)){
-    //   elevator.stopLift();
-    // }
-    
-    // if((elevator.getArmAngle() >= RobotMap.armUpperBound)){
-    //   elevator.stopArm();
-    // }
-    // if((elevator.getArmAngle() <= RobotMap.armLowerBound)){
-    //   elevator.stopArm();
-    // }
-    // if((elevator.getLiftPosition() < 10000) &&(elevator.getLiftPosition() > RobotMap.liftLowerBound)){
-    //   States.liftZone = States.LiftZones.LOWER_DANGER;
-    // }else if((elevator.getLiftPosition() > 100000)&&(elevator.getLiftPosition() < RobotMap.liftUpperBound))
-    //   States.liftZone = States.LiftZones.UPPER_DANGER;
-    // else{
-    //   States.liftZone = States.LiftZones.SAFE;
-    // }
   }
   @Override
   public void disabledInit(){
   }
   @Override
   public void disabledPeriodic(){
-   // postSmartDashVars();
+    postSmartDashVars();
   }
 
   @Override

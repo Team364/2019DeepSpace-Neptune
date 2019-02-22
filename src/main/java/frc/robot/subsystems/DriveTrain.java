@@ -80,7 +80,7 @@ public class DriveTrain extends Subsystem {
         rightDrive.configMotionAcceleration(RobotMap.driveAcceleration, RobotMap.TimeoutMs);
         leftDrive.configMotionCruiseVelocity(RobotMap.driveCruiseVelocity, RobotMap.TimeoutMs);
         leftDrive.configMotionAcceleration(RobotMap.driveAcceleration, RobotMap.TimeoutMs);
-        
+
         rightDrive.setSelectedSensorPosition(0);
         leftDrive.setSelectedSensorPosition(0);
    

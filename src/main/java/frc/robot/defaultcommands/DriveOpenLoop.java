@@ -65,6 +65,7 @@ public class DriveOpenLoop extends Command {
         leftPower = throttle + steer;
         rightPower = throttle - steer;
         Neptune.driveTrain.openLoop(rightPower, leftPower);
+    
 
     }
 
