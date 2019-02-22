@@ -89,10 +89,16 @@ public class TridentControlLoop extends Command {
       elevate = new ElevateToPosition(5);
       elevate.start();
       if(States.objState == States.ObjectStates.HATCH_OBJ){
-        Neptune.trident.open();
+        setLever = new SetPiston(Neptune.trident.lever, 0);
+        setClaw = new SetPiston(Neptune.trident.claw, 0);
       }else if(States.objState == States.ObjectStates.CARGO_OBJ){
-        Neptune.trident.close();
+        setLever = new SetPiston(Neptune.trident.lever, 1);
+        setClaw = new SetPiston(Neptune.trident.claw, 1);
       }
+
+      setLever.start();
+      setClaw.start();
+
   }
 }
 
