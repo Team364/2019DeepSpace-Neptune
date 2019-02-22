@@ -4,11 +4,11 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.misc.subsystems.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class Trident extends Subsystem {
 
-  private static Trident Instance = null;
   private VictorSPX intake;
   private VictorSPX intakeSlave;
   private DoubleSolenoid claw;
@@ -24,7 +24,7 @@ public class Trident extends Subsystem {
   public ClawPistonStates clawPistonState = ClawPistonStates.CLOSED;
   public LeverPistonStates leverPistonState = LeverPistonStates.CLOSED;
 
-  private Trident(){
+  public Trident(){
     intake = new VictorSPX(RobotMap.rightClaw);
     
     intakeSlave = new VictorSPX(RobotMap.leftClaw);
@@ -38,12 +38,6 @@ public class Trident extends Subsystem {
     intake.configNominalOutputReverse(RobotMap.intakeNominalOutputReverse);
     intake.configNominalOutputForward(RobotMap.intakeNominalOutputForward);
   }
-  public synchronized static Trident getInstance() {
-    if (Instance == null) {
-        Instance = new Trident();
-    }
-    return Instance;
-}
 
   public void runIntake(double power) {
     intake.set(ControlMode.PercentOutput, power);

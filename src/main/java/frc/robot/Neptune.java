@@ -14,17 +14,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  */
 public class Neptune extends TimedRobot {
 
-  public static Elevator elevator = Elevator.getInstance();
-  public static DriveTrain driveTrain = DriveTrain.getInstance();
-  public static Trident trident = Trident.getInstance();
+  public static Elevator elevator = new Elevator();
+  public static DriveTrain driveTrain = new DriveTrain();
+  public static Trident trident = new Trident();
 
   public static DriverOI oi;
   public static OperatorOI oi2;
 
   public static boolean manualControl;
 
-  // Command activeAutoCommand;
-  // SendableChooser<Command> autoChooser = new SendableChooser<>();
+  Command activeAutoCommand;
+  SendableChooser<Command> autoChooser = new SendableChooser<>();
 
 
   @Override

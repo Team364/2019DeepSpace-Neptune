@@ -10,16 +10,14 @@ import frc.robot.States;
 import frc.robot.defaultcommands.ElevatorManual;
 
 public class Elevator extends Subsystem {
-  
-  private static Elevator Instance = null;
+
   private TalonSRX arm;
   private TalonSRX lift;
   private TalonSRX liftSlave;  
   public double TargetHeight;
   public double TargetAngle;
 
-
-  private Elevator(){
+  public Elevator(){
         lift = new TalonSRX(RobotMap.rightLift);
         liftSlave = new TalonSRX(RobotMap.leftLift);
         liftSlave.follow(lift);
@@ -38,10 +36,10 @@ public class Elevator extends Subsystem {
         arm.setSensorPhase(RobotMap.armReverse);
         arm.setInverted(RobotMap.armReverseEncoder);
 
-        //lift.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.TimeoutMs);
-        //lift.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.TimeoutMs);
-        //arm.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.TimeoutMs);
-        //arm.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.TimeoutMs);
+        lift.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.TimeoutMs);
+        lift.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.TimeoutMs);
+        arm.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.TimeoutMs);
+        arm.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.TimeoutMs);
   
         lift.configNominalOutputForward(RobotMap.liftNominalOutputForward, RobotMap.TimeoutMs);
         lift.configNominalOutputReverse(RobotMap.liftNominalOutputReverse, RobotMap.TimeoutMs);
@@ -72,12 +70,6 @@ public class Elevator extends Subsystem {
         lift.setSelectedSensorPosition(0);
         arm.setSelectedSensorPosition(0);
   } 
-  public synchronized static Elevator getInstance() {
-    if (Instance == null) {
-        Instance = new Elevator();
-    }
-    return Instance;
-}
 
   public void elevateTo(double liftHeight, double armAngle){
     System.out.println("The lift is moving to: " + liftHeight);

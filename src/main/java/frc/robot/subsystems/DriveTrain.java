@@ -13,7 +13,6 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class DriveTrain extends Subsystem {
 
-  private static DriveTrain Instance = null;
   private TalonSRX leftDrive;
   private TalonSRX rightDrive; 
   private VictorSPX leftRearDriveSlave;
@@ -23,7 +22,7 @@ public class DriveTrain extends Subsystem {
 
   private DoubleSolenoid shifter;
   
-  private DriveTrain(){
+  public DriveTrain(){
 
         rightDrive = new TalonSRX(RobotMap.rightFrontDrive);
         leftDrive = new TalonSRX(RobotMap.leftFrontDrive);
@@ -51,10 +50,10 @@ public class DriveTrain extends Subsystem {
         leftDrive.setSensorPhase(RobotMap.leftDriveReverse);
         leftDrive.setInverted(RobotMap.leftDriveReverseEncoder);
 
-        //rightDrive.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.TimeoutMs);
-        //rightDrive.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.TimeoutMs);
-        //leftDrive.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.TimeoutMs);
-        //leftDrive.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.TimeoutMs);
+        rightDrive.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.TimeoutMs);
+        rightDrive.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.TimeoutMs);
+        leftDrive.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.TimeoutMs);
+        leftDrive.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.TimeoutMs);
 
         rightDrive.configNominalOutputForward(RobotMap.driveNominalOutputForward, RobotMap.TimeoutMs);
         rightDrive.configNominalOutputReverse(RobotMap.driveNominalOutputReverse, RobotMap.TimeoutMs);
@@ -85,12 +84,6 @@ public class DriveTrain extends Subsystem {
         leftDrive.setSelectedSensorPosition(0);
    
   }
-  public synchronized static DriveTrain getInstance() {
-    if (Instance == null) {
-        Instance = new DriveTrain();
-    }
-    return Instance;
-}
 
     public void openLoop(double left, double right){
       leftDrive.set(ControlMode.PercentOutput, left);
