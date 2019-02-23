@@ -21,6 +21,8 @@ public class PIDCalc {
     private double prev_error = 0;
     private double error = 0;
     private double result = 0;
+    private boolean onTarget;
+    private double tolerance;
 
     public PIDCalc(double pTerm, double iTerm, double dTerm, double fTerm, String name) {
         setPIDParameters(pTerm, iTerm, dTerm, fTerm);
@@ -58,6 +60,12 @@ public class PIDCalc {
         kI = iTerm;
         kD = dTerm;
         kF = fTerm;
+    }
+    public void setTolerance(double tolerance){
+        this.tolerance = tolerance;
+    }
+    public boolean onTarget(){
+        return Math.abs(getError()) < tolerance;
     }
 
     private void smartDashVars() {

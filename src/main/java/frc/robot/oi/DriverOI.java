@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.Neptune;
 import frc.robot.commands.SetPiston;
+import frc.robot.commands.*;
 
 public class DriverOI {
     //Driver Controller
@@ -82,8 +83,8 @@ public class DriverOI {
         // //Robot uses NavX Gyro to turn approximately 180 degrees(yaw)
         // //Button is pressed once
         // //Green A button
-        // turn180Button = new JoystickButton(controller, 1);
-        // turn180Button.whenPressed(new TeleopTurn180());
+        turn180Button = new JoystickButton(controller, 1);
+        turn180Button.whenPressed(new TurnToHeading(90));
 
         //Does nothing
         //Button is held to run command

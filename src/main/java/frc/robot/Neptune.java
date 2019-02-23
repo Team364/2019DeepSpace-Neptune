@@ -57,7 +57,7 @@ public class Neptune extends TimedRobot {
     // Auto1 = new TurnAuto();
     // Auto2 = new CargoAuto();
     // Auto3 = new StraightAuto();
-
+    driveTrain.zeroGyro();
 
   }
 
@@ -119,6 +119,7 @@ public class Neptune extends TimedRobot {
   @Override
   public void disabledPeriodic(){
     postSmartDashVars();
+    System.out.println(driveTrain.getGyroAngle());
   }
 
   @Override
