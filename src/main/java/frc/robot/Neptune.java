@@ -112,12 +112,6 @@ public class Neptune extends TimedRobot {
       elevator.stopLift();
     }
     
-    if((Neptune.elevator.getArmAngle() >= RobotMap.armUpperBound)){
-      elevator.stopArm();
-    }
-    if((Neptune.elevator.getArmAngle() <= RobotMap.armLowerBound)){
-      elevator.stopArm();
-    }
   }
   @Override
   public void disabledInit(){

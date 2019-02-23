@@ -41,6 +41,7 @@ public class ElevateToPosition extends Command {
         desiredHeight = Height;  
         requires(Neptune.elevator);
         setInterruptible(true);
+        setTimeout(0.2);
     }
 
     @Override
@@ -117,7 +118,7 @@ public class ElevateToPosition extends Command {
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     @Override

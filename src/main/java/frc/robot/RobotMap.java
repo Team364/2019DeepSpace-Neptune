@@ -99,7 +99,7 @@ public class RobotMap {
     public static final double armUpperBound = 4300;
      //Arm PID
     public static final double armPgain = 0.8;
-    public static final double armIgain = 0.0002;
+    public static final double armIgain = 0.0;
     public static final double armDgain = 0.0;
     public static final double armFgain = 0.0;
      //Closed Loop Targets
