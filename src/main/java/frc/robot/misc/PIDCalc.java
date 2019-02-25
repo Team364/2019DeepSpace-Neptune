@@ -34,9 +34,9 @@ public class PIDCalc {
         integral += (error * 0.02);
         derivative = (error - prev_error) / 0.02;
         result = kF + (kP * error) + (kI * integral) + (kD * derivative);
-        if(result > 1) {
+        if (result > 1) {
             result = 1;
-        } else if(result < -1) {
+        } else if (result < -1) {
             result = -1;
         }
         smartDashVars();
@@ -44,14 +44,14 @@ public class PIDCalc {
         return result;
     }
 
-    
     public void resetPID() {
         derivative = 0;
         integral = 0;
         prev_error = 0;
         error = 0;
     }
-    public double getError(){
+
+    public double getError() {
         return error;
     }
 
@@ -61,10 +61,12 @@ public class PIDCalc {
         kD = dTerm;
         kF = fTerm;
     }
-    public void setTolerance(double tolerance){
+
+    public void setTolerance(double tolerance) {
         this.tolerance = tolerance;
     }
-    public boolean onTarget(){
+
+    public boolean onTarget() {
         return Math.abs(getError()) < tolerance;
     }
 

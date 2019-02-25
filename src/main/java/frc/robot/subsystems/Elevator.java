@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -117,6 +118,11 @@ public class Elevator extends Subsystem {
   }
   public boolean elevatorPassive(){
     return States.actionState == States.ActionStates.PASSIVE;
+  }
+  public void postSmartDashVars(){
+    SmartDashboard.putNumber("Lift Percent Output: ", lift.getMotorOutputPercent());
+    SmartDashboard.putNumber("Other Lift Percent", liftSlave.getMotorOutputPercent());
+    SmartDashboard.putNumber("Arm Percent Output: ", arm.getMotorOutputPercent());
   }
 
   @Override

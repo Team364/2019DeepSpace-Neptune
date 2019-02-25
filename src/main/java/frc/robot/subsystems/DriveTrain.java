@@ -15,6 +15,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain extends Subsystem {
 
@@ -124,6 +125,14 @@ public class DriveTrain extends Subsystem {
 
   public void zeroGyro() {
     navX.reset();
+  }
+  public void postSmartDashVars(){
+    SmartDashboard.putNumber("Right Top", rightTopDriveSlave.getMotorOutputPercent());
+    SmartDashboard.putNumber("Right Front", rightDrive.getMotorOutputPercent());
+    SmartDashboard.putNumber("Right Rear", rightRearDriveSlave.getMotorOutputPercent());
+    SmartDashboard.putNumber("Left Top", leftTopDriveSlave.getMotorOutputPercent());
+    SmartDashboard.putNumber("Left Front", leftDrive.getMotorOutputPercent());
+    SmartDashboard.putNumber("Left Rear", leftRearDriveSlave.getMotorOutputPercent());
   }
 
   @Override

@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
@@ -19,7 +20,7 @@ public class TurnToHeading extends Command {
   
   public TurnToHeading(double heading) {
       requires(Neptune.driveTrain);
-      GyroPID = new PIDCalc(0.05, 0.0, 0.0, 0.0, "NavX");
+      GyroPID = new PIDCalc(0.033, 0.0, 0.0, 0.0, "NavX");
       GyroPID.setTolerance(2);
       this.heading = heading;
   }

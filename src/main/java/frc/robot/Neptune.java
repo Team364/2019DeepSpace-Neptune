@@ -64,6 +64,8 @@ public class Neptune extends TimedRobot {
   @Override
   public void robotPeriodic() {
     Scheduler.getInstance().run();
+    elevator.postSmartDashVars();
+    driveTrain.postSmartDashVars();
   }
 
   @Override
@@ -119,7 +121,7 @@ public class Neptune extends TimedRobot {
   @Override
   public void disabledPeriodic(){
     postSmartDashVars();
-    System.out.println(driveTrain.getGyroAngle());
+
   }
 
   @Override
