@@ -42,6 +42,13 @@ public class Trident extends Subsystem {
     intakeSlave.setNeutralMode(NeutralMode.Coast);
   }
 
+  public synchronized static Trident getInstance() {
+    if (Instance == null) {
+      Instance = new Trident();
+    }
+    return Instance;
+  }
+
   public void runIntake(double power) {
     intake.set(ControlMode.PercentOutput, power);
   }
