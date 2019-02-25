@@ -7,6 +7,7 @@ import frc.robot.RobotMap;
 import frc.robot.misc.subsystems.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Trident extends Subsystem {
 
@@ -16,12 +17,15 @@ public class Trident extends Subsystem {
   private DoubleSolenoid le;
   public Piston claw;
   public Piston lever;
+  public DigitalInput intakeLimit;
 
-  public Trident(){
+  public Trident() {
     intake = new VictorSPX(RobotMap.rightClaw);
-    
+
     intakeSlave = new VictorSPX(RobotMap.leftClaw);
     intakeSlave.follow(intake);
+
+    intakeLimit = new DigitalInput(RobotMap.intakeLimitSwitch);
 
     cl = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.intakePort1, RobotMap.intakePort2);
     le = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.leverPort1, RobotMap.leverPort2);
@@ -32,7 +36,7 @@ public class Trident extends Subsystem {
     intake.configPeakOutputReverse(RobotMap.intakePeakOutputReverse);
     intake.configNominalOutputReverse(RobotMap.intakeNominalOutputReverse);
     intake.configNominalOutputForward(RobotMap.intakeNominalOutputForward);
-    
+
     intake.setNeutralMode(NeutralMode.Coast);
     intakeSlave.setNeutralMode(NeutralMode.Coast);
   }
@@ -44,13 +48,15 @@ public class Trident extends Subsystem {
   public void stopIntake() {
     runIntake(0);
   }
-  public double getRawOutput(){
+
+  public double getRawOutput() {
     return intake.getMotorOutputPercent();
   }
-  
-  public boolean tridentInactive(){
-    return ((intake.getSelectedSensorVelocity() ==0) && lever.noCommand() && claw.noCommand());
-}
+
+  public boolean tridentInactive() {
+    return ((intake.getSelectedSensorVelocity() == 0) && lever.noCommand() && claw.noCommand());
+  }
+
   @Override
   public void initDefaultCommand() {
   }

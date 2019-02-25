@@ -46,14 +46,14 @@ public class DriveOpenLoop extends Command {
         if (driveState == DriveStates.STATE_NOT_MOVING) {
             throttle = 0;
             if ((Math.abs(frontThrottle) >= Deadband1) || (Math.abs(backThrottle) >= Deadband1) || (Math.abs(steer) >= Deadband1)) {
-                System.out.println("STATE_NOT_MOVING->STATE_DIRECT_DRIVE");
+                //System.out.println("STATE_NOT_MOVING->STATE_DIRECT_DRIVE");
                 driveState = DriveStates.STATE_DIRECT_DRIVE;
             }
         //Once Robot is in direct drive, if the triggers values are below 0.2, the robot will enter a ramp down state
         } else if (driveState == DriveStates.STATE_DIRECT_DRIVE) {
             throttle = backThrottle - frontThrottle;
             if ((Math.abs(frontThrottle) < DeadBand2) && (Math.abs(backThrottle) < DeadBand2)) {
-                System.out.println("STATE_DIRECT_DRIVE->STATE_RAMP_DOWN");
+                //System.out.println("STATE_DIRECT_DRIVE->STATE_RAMP_DOWN");
                 driveState = DriveStates.STATE_RAMP_DOWN;
             }
         } else if (driveState == DriveStates.STATE_RAMP_DOWN) {

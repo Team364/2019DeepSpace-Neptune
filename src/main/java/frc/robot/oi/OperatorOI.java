@@ -59,7 +59,7 @@ public class OperatorOI{
     private boolean cargo;
     private boolean intake;
 
-    public int gripSet = 1;
+    public int tridentCase = 1;
 
 
     private Command runGrip;
@@ -122,7 +122,7 @@ public class OperatorOI{
       }else if(controller2.getRawButton(5)){
         States.actionState = States.ActionStates.SEEK;
       }else{
-        if(((gripSet == 3)||(gripSet == 4)) && Neptune.trident.tridentInactive()){
+        if(((tridentCase == 3)||(tridentCase == 4)) && Neptune.trident.tridentInactive()){
           States.actionState = States.ActionStates.PASSIVE;  
         }else if(Neptune.trident.tridentInactive()){
           States.actionState = States.ActionStates.FERRY_ACT;
@@ -134,18 +134,18 @@ public class OperatorOI{
       else if(States.objState == States.ObjectStates.HATCH_OBJ) {cargo = false;}
       if(States.actionState == States.ActionStates.SCORE_ACT) {intake = false;}
       else if(States.actionState == States.ActionStates.INTAKE_ACT) {intake = true;}
-      if(cargo && intake){gripSet = 1;}//Get Cargo
-      else if(!cargo && intake){gripSet = 2;}//Get Hatch
-      else if(cargo && !intake){gripSet = 3;} //Score Cargo
-      else if(!cargo && !intake){gripSet  = 4;} //Score Hatch 
-      else{gripSet = 0;}//Should never happen
+      if(cargo && intake){tridentCase = 1;}//Get Cargo
+      else if(!cargo && intake){tridentCase = 2;}//Get Hatch
+      else if(cargo && !intake){tridentCase = 3;} //Score Cargo
+      else if(!cargo && !intake){tridentCase  = 4;} //Score Hatch 
+      else{tridentCase = 0;}//Should never happen
 
       
       if((controller2.getRawAxis(3) >= 0.5)||(controller2.getRawAxis(2) >= 0.5)){
-        runGrip = new RunGrip(gripSet);
+        runGrip = new activateTrident(tridentCase);
         runGrip.start();
       }
-      SmartDashboard.putNumber("Grip Set: ", gripSet);
+      SmartDashboard.putNumber("Grip Set: ", tridentCase);
       if((Math.abs(controller2.getRawAxis(1)) > 0.2)){
         liftManual.start();
       } 

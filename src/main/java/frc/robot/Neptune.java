@@ -1,7 +1,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
 import frc.robot.oi.*;
@@ -9,10 +8,7 @@ import frc.robot.States;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-/**
- * We are using Timed Robot and Command Robot together.
- * <p>The Scheduler is invoked during auto and teleop
- */
+
 public class Neptune extends TimedRobot {
 
   public static Elevator elevator;
@@ -32,16 +28,14 @@ public class Neptune extends TimedRobot {
   // private final SendableChooser<String> m_chooser = new SendableChooser<>();
   // //Auto Selector String Options
   // private static final String driveStraightAuto = "Default";
-  // private static final String turnAuto = "Auto1";
-  // private static final String cargoAuto = "Auto2";
+  // private static final String autoName = "Auto1";
   public static boolean manualControl;
 
   @Override
   public void robotInit() {
-    //Auto Selector init
+    // Auto Selector init
     // m_chooser.setDefaultOption("Default Auto", driveStraightAuto);
-    // m_chooser.addOption("TurnAuto", turnAuto);
-    // m_chooser.addOption("CargoAuto", cargoAuto);
+    // m_chooser.addOption("AutoName", autoName);
     // SmartDashboard.putData("Auto choices", m_chooser);
 
     elevator = new Elevator();
@@ -53,10 +47,8 @@ public class Neptune extends TimedRobot {
 
     camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
     camera.setResolution(320, 240);
-    
-    // Auto1 = new TurnAuto();
-    // Auto2 = new CargoAuto();
-    // Auto3 = new StraightAuto();
+
+    // Auto1 = new AutoName();
     driveTrain.zeroGyro();
 
   }
@@ -72,54 +64,53 @@ public class Neptune extends TimedRobot {
   public void autonomousInit() {
     // autoSelected = m_chooser.getSelected();
     // System.out.println("Auto selected: " + autoSelected);
-    //Scheduler is cleared
     Scheduler.getInstance().removeAll();
   }
 
   @Override
   public void autonomousPeriodic() {
     // switch (autoSelected) {
-    //   case turnAuto:
-    //     Auto1.start();
-    //     break;
-    //   case cargoAuto:
-    //     Auto2.start();
-    //     break;
-    //   default:
-    //     Auto3.start();
-    //     break;
+    // case autoName:
+    // Auto1.start();
+    // break;
+    // default:
+    // Auto1.start();
+    // break;
     // }
   }
+
   @Override
   public void teleopInit() {
-      Scheduler.getInstance().removeAll();
+    Scheduler.getInstance().removeAll();
   }
 
   @Override
   public void teleopPeriodic() {
     oi2.controlLoop();
     postSmartDashVars();
-    if((elevator.getLiftPosition() < 10000) &&(elevator.getLiftPosition() > RobotMap.liftLowerBound)){
+    if ((elevator.getLiftPosition() < 10000) && (elevator.getLiftPosition() > RobotMap.liftLowerBound)) {
       States.liftZone = States.LiftZones.LOWER_DANGER;
-    }else if((elevator.getLiftPosition() > 100000)&&(elevator.getLiftPosition() < RobotMap.liftUpperBound))
+    } else if ((elevator.getLiftPosition() > 100000) && (elevator.getLiftPosition() < RobotMap.liftUpperBound))
       States.liftZone = States.LiftZones.UPPER_DANGER;
-    else{
+    else {
       States.liftZone = States.LiftZones.SAFE;
     }
 
-    if((Neptune.elevator.getLiftPosition() >= RobotMap.liftUpperBound)){
+    if ((Neptune.elevator.getLiftPosition() >= RobotMap.liftUpperBound)) {
       elevator.stopLift();
     }
-    if((Neptune.elevator.getLiftPosition() <= RobotMap.liftLowerBound)){
+    if ((Neptune.elevator.getLiftPosition() <= RobotMap.liftLowerBound)) {
       elevator.stopLift();
     }
-    
+
   }
+
   @Override
-  public void disabledInit(){
+  public void disabledInit() {
   }
+
   @Override
-  public void disabledPeriodic(){
+  public void disabledPeriodic() {
     postSmartDashVars();
 
   }
@@ -127,7 +118,8 @@ public class Neptune extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
-  public void postSmartDashVars(){
+
+  public void postSmartDashVars() {
     SmartDashboard.putString("Object State:", States.objState.toString());
     SmartDashboard.putString("Action State:", States.actionState.toString());
     SmartDashboard.putString("Lift Zone: ", States.liftZone.toString());

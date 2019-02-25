@@ -17,7 +17,7 @@ public class runIntake extends Command {
     @Override
     protected void initialize() {
         if(intaking){
-            setTimeout(1);
+            setTimeout(2.5);
         }else{
             setTimeout(0.6);
         }
@@ -30,12 +30,12 @@ public class runIntake extends Command {
 
     @Override
     protected boolean isFinished() {
-        // if(intaking){
-        //     return isTimedOut() || Robot.superStructure.limitArray[0];
-        // }else{
-        //     return isTimedOut();
-        // }
-        return isTimedOut();
+        if(intaking){
+            return isTimedOut() || Neptune.trident.intakeLimit.get();
+        }else{
+            return isTimedOut();
+        }
+        // return isTimedOut();
     }
 
     @Override
@@ -46,5 +46,6 @@ public class runIntake extends Command {
     @Override
     protected void interrupted() {
         super.interrupted();
+        end();
     }
 }

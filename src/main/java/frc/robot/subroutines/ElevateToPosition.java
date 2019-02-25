@@ -15,7 +15,7 @@ public class ElevateToPosition extends Command {
     private double intake;
     private double liftStartConfig;
     private double desiredHeight;
-    
+
     private double wantedAngle;
     private double intakeCargo;
     private double perpendicularToGround;
@@ -28,17 +28,22 @@ public class ElevateToPosition extends Command {
     private double lvlthree;
     private double liftClimb;
     private double armClimb;
+
     /**
      * Heights
-     * <p>1: low on rocket, scoring hatches on rocket level 1 and Cargo Ship
-     * <p>2: middle on rocket
-     * <p>3: high on rocket
-     * <p>4: cargo height for scoring on Cargo Ship
+     * <p>
+     * 1: low on rocket, scoring hatches on rocket level 1 and Cargo Ship
+     * <p>
+     * 2: middle on rocket
+     * <p>
+     * 3: high on rocket
+     * <p>
+     * 4: cargo height for scoring on Cargo Ship
+     * 
      * @param Height
-     * WORKS
      */
     public ElevateToPosition(int Height) {
-        desiredHeight = Height;  
+        desiredHeight = Height;
         requires(Neptune.elevator);
         setInterruptible(true);
         setTimeout(0.2);
@@ -47,17 +52,13 @@ public class ElevateToPosition extends Command {
     @Override
     protected void initialize() {
         Neptune.manualControl = false;
-        /*One must keep in mind that a Position of 4096 is only a full rotation of the axle the encoder
-        corresponds to. This means that these values may be quite large in practice.
-        Writing an equation which converts the inches on the lift to raw sensor units would be beyond useful */
- 
     }
 
     @Override
     protected void execute() {
         liftStartConfig = RobotMap.liftStartConfig;
- 
-        if(States.objState == States.ObjectStates.HATCH_OBJ){
+
+        if (States.objState == States.ObjectStates.HATCH_OBJ) {
             low = RobotMap.liftLowH;
             med = RobotMap.liftMedH;
             high = RobotMap.liftHighH;
@@ -71,7 +72,7 @@ public class ElevateToPosition extends Command {
 
             lvlone = perpendicularToGround;
             lvlthree = 2800;
-        }else if(States.objState == States.ObjectStates.CARGO_OBJ){
+        } else if (States.objState == States.ObjectStates.CARGO_OBJ) {
             intake = RobotMap.liftIntake;
             low = RobotMap.liftLowC;
             med = RobotMap.liftMedC;
@@ -90,29 +91,29 @@ public class ElevateToPosition extends Command {
         liftClimb = 80000;
         armClimb = 1500;
 
-        if(desiredHeight == 0){
+        if (desiredHeight == 0) {
             wantedPosition = intake;
             wantedAngle = intakeCargo;
-            }else if(desiredHeight == 1){
+        } else if (desiredHeight == 1) {
             wantedPosition = low;
             wantedAngle = lvlone;
-            }else if(desiredHeight == 2){
+        } else if (desiredHeight == 2) {
             wantedPosition = med;
             wantedAngle = perpendicularToGround;
-            }else if(desiredHeight == 3){
+        } else if (desiredHeight == 3) {
             wantedPosition = high;
             wantedAngle = lvlthree;
-            }else if(desiredHeight == 4){
-            wantedPosition = cargo; 
-            wantedAngle = perpendicularToGround;   
-            }else if(desiredHeight == 5){
+        } else if (desiredHeight == 4) {
+            wantedPosition = cargo;
+            wantedAngle = perpendicularToGround;
+        } else if (desiredHeight == 5) {
             wantedPosition = liftStartConfig;
             wantedAngle = armStartConfig;
-            }else if(desiredHeight == 6){
+        } else if (desiredHeight == 6) {
             wantedPosition = liftClimb;
             wantedAngle = armClimb;
-            }
-         
+        }
+
         Neptune.elevator.elevateTo(wantedPosition, wantedAngle);
     }
 
