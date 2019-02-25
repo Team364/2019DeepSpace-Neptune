@@ -138,6 +138,8 @@ public class DriveTrain extends Subsystem {
     SmartDashboard.putNumber("Fused Heading", navX.getFusedHeading());
     SmartDashboard.putNumber("Raw Yaw", navX.getRawGyroZ());
     SmartDashboard.putNumber("PID get Yaw", navX.pidGet());
+    SmartDashboard.putNumber("X displacement", getDisplacementX());
+    SmartDashboard.putNumber("Y displacement", getDisplacementY());
   }
 
   @Override
