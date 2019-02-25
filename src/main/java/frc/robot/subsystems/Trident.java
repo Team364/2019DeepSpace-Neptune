@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Trident extends Subsystem {
 
+  private static Trident Instance = null;
   private VictorSPX intake;
   private VictorSPX intakeSlave;
   private DoubleSolenoid cl;

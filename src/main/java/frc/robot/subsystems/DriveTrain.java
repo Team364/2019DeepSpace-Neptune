@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain extends Subsystem {
 
+  private static DriveTrain Instance = null;
   private TalonSRX leftDrive;
   private TalonSRX rightDrive;
   private VictorSPX leftRearDriveSlave;
@@ -108,12 +109,12 @@ public class DriveTrain extends Subsystem {
     leftDrive.setSelectedSensorPosition(0);
 
   }
-//   public synchronized static DriveTrain getInstance() {
-//     if (Instance == null) {
-//         Instance = new DriveTrain();
-//     }
-//     return Instance;
-// }
+  public synchronized static DriveTrain getInstance() {
+    if (Instance == null) {
+        Instance = new DriveTrain();
+    }
+    return Instance;
+}
 
   public void openLoop(double left, double right) {
     leftDrive.set(ControlMode.PercentOutput, left);
