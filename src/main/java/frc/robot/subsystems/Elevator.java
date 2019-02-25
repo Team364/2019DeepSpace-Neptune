@@ -76,6 +76,12 @@ public class Elevator extends Subsystem {
     lift.setSelectedSensorPosition(0);
     arm.setSelectedSensorPosition(0);
   }
+  public synchronized static Elevator getInstance() {
+    if (Instance == null) {
+        Instance = new Elevator();
+    }
+    return Instance;
+}
 
   public void elevateTo(double liftHeight, double armAngle) {
     System.out.println("The lift is moving to: " + liftHeight);
