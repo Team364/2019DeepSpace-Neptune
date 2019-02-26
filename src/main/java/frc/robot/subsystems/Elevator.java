@@ -18,6 +18,7 @@ public class Elevator extends Subsystem {
   private TalonSRX liftSlave;
   public double TargetHeight;
   public double TargetAngle;
+  private TalonSRX climber;
 
   public Elevator() {
     lift = new TalonSRX(RobotMap.topLift);
@@ -25,6 +26,8 @@ public class Elevator extends Subsystem {
     liftSlave.follow(lift);
     liftSlave.setInverted(false);
     liftSlave.setNeutralMode(NeutralMode.Brake);
+
+    climber = new TalonSRX(2);
 
     arm = new TalonSRX(RobotMap.arm);
 
@@ -135,7 +138,16 @@ public class Elevator extends Subsystem {
     arm.setSelectedSensorPosition(0);
     System.out.println("The Lift and Arm Encoders have been reset");
   }
-
+  public void climb(){
+    lift.set(ControlMode.PercentOutput, 0.2);//Fix
+    climber.set(ControlMode.PercentOutput, 0.2);//Fix - Check Direction
+  }
+  public void retractClimb(){
+    climber.set(ControlMode.PercentOutput, -0.2);// - Fix. Check Direction
+  }
+  public void stopClimb(){
+    climber.set(ControlMode.PercentOutput, 0);
+  }
   public void stopLift() {
     lift.set(ControlMode.PercentOutput, 0);
     System.out.println("The Lift has been stopped");

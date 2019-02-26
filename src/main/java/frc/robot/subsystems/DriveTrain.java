@@ -27,6 +27,8 @@ public class DriveTrain extends Subsystem {
   private VictorSPX rightRearDriveSlave;
   private VictorSPX rightTopDriveSlave;
 
+  private VictorSPX climbDrive;
+
   private DoubleSolenoid sh;
   public Piston shifter;
   public AHRS navX;
@@ -40,6 +42,8 @@ public class DriveTrain extends Subsystem {
     leftTopDriveSlave = new VictorSPX(RobotMap.leftTopDrive);
     rightRearDriveSlave = new VictorSPX(RobotMap.rightRearDrive);
     rightTopDriveSlave = new VictorSPX(RobotMap.rightTopDrive);
+
+    climbDrive = new VictorSPX(2);
 
     rightRearDriveSlave.follow(rightDrive);
     rightTopDriveSlave.follow(rightDrive);
@@ -119,6 +123,10 @@ public class DriveTrain extends Subsystem {
   public void openLoop(double left, double right) {
     leftDrive.set(ControlMode.PercentOutput, left);
     rightDrive.set(ControlMode.PercentOutput, -right);
+  }
+  
+  public void climb(){
+    climbDrive.set(ControlMode.PercentOutput, 1);
   }
 
   public void stop() {

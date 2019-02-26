@@ -5,7 +5,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.Neptune;
 import frc.robot.commands.SetPiston;
 import frc.robot.commands.*;
-
+import frc.robot.subroutines.climb;
+import frc.robot.subroutines.climbDrive;
+import frc.robot.subroutines.retractClimb;
 public class DriverOI {
     //Driver Controller
     //Xbox One Wired Controller
@@ -58,6 +60,8 @@ public class DriverOI {
     public JoystickButton diagnosticButton;
 
     public JoystickButton Climb;
+    public JoystickButton ClimbDrive;
+    public JoystickButton retractClimb;
     public JoystickButton undoClimbFrontButton;
     /**
      * OI()
@@ -83,8 +87,8 @@ public class DriverOI {
         // //Robot uses NavX Gyro to turn approximately 180 degrees(yaw)
         // //Button is pressed once
         // //Green A button
-        turn180Button = new JoystickButton(controller, 1);
-        turn180Button.whenPressed(new TurnToHeading(90));
+        // turn180Button = new JoystickButton(controller, 1);
+        // turn180Button.whenPressed(new TurnToHeading(90));
 
         //Does nothing
         //Button is held to run command
@@ -92,8 +96,13 @@ public class DriverOI {
         //Red B button
         // alignWithTapeButton = new JoystickButton(controller, 2);
         // alignWithTapeButton.whileActive(new Align());
-
-
+        Climb = new JoystickButton(controller, 4);
+        Climb.whileHeld(new climb());
+        ClimbDrive = new JoystickButton(controller, 3);
+        ClimbDrive.whileHeld(new climbDrive());
+        retractClimb = new JoystickButton(controller, 2);
+        retractClimb.whileHeld(new retractClimb());
+        
         //Does nothing
         //Use for testing and printing out data
         diagnosticButton = new JoystickButton(controller, 7);
