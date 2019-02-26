@@ -9,6 +9,8 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import frc.robot.States;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import frc.robot.misc.subsystems.Piston;
 
 public class Elevator extends Subsystem {
 
@@ -19,6 +21,8 @@ public class Elevator extends Subsystem {
   public double TargetHeight;
   public double TargetAngle;
   private TalonSRX climber;
+  private DoubleSolenoid fr;
+  public Piston front;
 
   public Elevator() {
     lift = new TalonSRX(RobotMap.topLift);
@@ -30,7 +34,8 @@ public class Elevator extends Subsystem {
     climber = new TalonSRX(2);
 
     arm = new TalonSRX(RobotMap.arm);
-
+    fr = new DoubleSolenoid(1, 0, 7);
+    front = new Piston(fr, "Front");
     lift.configFactoryDefault();
     arm.configFactoryDefault();
     lift.configPeakCurrentLimit(RobotMap.liftCurrentCeiling);
