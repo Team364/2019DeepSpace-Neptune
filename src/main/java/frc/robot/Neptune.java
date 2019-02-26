@@ -11,9 +11,9 @@ import edu.wpi.first.cameraserver.CameraServer;
 
 public class Neptune extends TimedRobot {
 
-  public static Elevator elevator;
-  public static DriveTrain driveTrain;
-  public static Trident trident;
+  public static Elevator elevator = Elevator.getInstance();
+  public static DriveTrain driveTrain = DriveTrain.getInstance();
+  public static Trident trident = Trident.getInstance();
 
   public static DriverOI oi;
   public static OperatorOI oi2;
@@ -37,11 +37,6 @@ public class Neptune extends TimedRobot {
     // m_chooser.setDefaultOption("Default Auto", driveStraightAuto);
     // m_chooser.addOption("AutoName", autoName);
     // SmartDashboard.putData("Auto choices", m_chooser);
-
-    elevator = new Elevator();
-    driveTrain = new DriveTrain();
-    trident = new Trident();
-
     oi = new DriverOI();
     oi2 = new OperatorOI();
 
@@ -82,6 +77,7 @@ public class Neptune extends TimedRobot {
   @Override
   public void teleopInit() {
     Scheduler.getInstance().removeAll();
+
   }
 
   @Override

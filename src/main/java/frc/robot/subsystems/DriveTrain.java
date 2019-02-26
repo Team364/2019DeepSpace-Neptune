@@ -140,13 +140,8 @@ public class DriveTrain extends Subsystem {
     return navX.getDisplacementY();
   }
   public void postSmartDashVars(){
-    SmartDashboard.putNumber("Gyro Angle(what we use): ", getGyroAngle());
-    SmartDashboard.putNumber("Continuous yaw: ", navX.getAngle());
-    SmartDashboard.putNumber("Fused Heading", navX.getFusedHeading());
-    SmartDashboard.putNumber("Raw Yaw", navX.getRawGyroZ());
-    SmartDashboard.putNumber("PID get Yaw", navX.pidGet());
-    SmartDashboard.putNumber("X displacement", getDisplacementX());
-    SmartDashboard.putNumber("Y displacement", getDisplacementY());
+    SmartDashboard.putNumber("Left Drive Cur", leftDrive.getOutputCurrent());
+    SmartDashboard.putNumber("Right Drive Cur: ", rightDrive.getOutputCurrent());
   }
 
   @Override

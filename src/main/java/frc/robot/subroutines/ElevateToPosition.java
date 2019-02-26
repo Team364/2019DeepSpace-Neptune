@@ -71,7 +71,7 @@ public class ElevateToPosition extends Command {
             intakeCargo = 3300;
 
             lvlone = perpendicularToGround;
-            lvlthree = 2800;
+            lvlthree = perpendicularToGround;
         } else if (States.objState == States.ObjectStates.CARGO_OBJ) {
             intake = RobotMap.liftIntake;
             low = RobotMap.liftLowC;
@@ -88,8 +88,6 @@ public class ElevateToPosition extends Command {
             lvlthree = 2100;
 
         }
-        liftClimb = 80000;
-        armClimb = 1500;
 
         if (desiredHeight == 0) {
             wantedPosition = intake;
@@ -109,9 +107,6 @@ public class ElevateToPosition extends Command {
         } else if (desiredHeight == 5) {
             wantedPosition = liftStartConfig;
             wantedAngle = armStartConfig;
-        } else if (desiredHeight == 6) {
-            wantedPosition = liftClimb;
-            wantedAngle = armClimb;
         }
 
         Neptune.elevator.elevateTo(wantedPosition, wantedAngle);

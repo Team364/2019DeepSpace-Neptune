@@ -38,7 +38,7 @@ public class States {
         UPPER_DANGER, SAFE, LOWER_DANGER
     }
 
-    public static ObjectStates objState = ObjectStates.CARGO_OBJ;
+    public static ObjectStates objState = ObjectStates.HATCH_OBJ;
     public static ActionStates actionState = ActionStates.PASSIVE;
     public static DriveStates driveState = DriveStates.OPEN_LOOP;
     public static ScoreStates scoreState = ScoreStates.NONE;

@@ -14,8 +14,8 @@ public class RobotMap {
     public static final int shifterPort1 = 3;// Primary PCM
     public static final int shifterPort2 = 4;// Primary PCM
     // Lift
-    public static final int rightLift = 7;// Talon SRX -- Master
-    public static final int leftLift = 13;// Talon SRX -- Gyro
+    public static final int topLift = 7;// Talon SRX -- Master
+    public static final int bottomLift = 13;// Talon SRX -- Gyro
     public static final int lowerLiftLimitSwitch = 3;// Digital Input
     public static final int upperLiftLimitSwitch = 2;// Digital Input
     // Grip
@@ -57,6 +57,8 @@ public class RobotMap {
     // TalonBase Config
     public static final boolean liftReverse = false;
     public static final boolean liftReverseEncoder = false;
+    public static final int liftCurrentCeiling = 39;
+    public static final int liftCurrentCeilingDuration = 1;
     public static final double liftNominalOutputForward = 0;
     public static final double liftNominalOutputReverse = 0;
     public static final double liftPeakOutputForward = 1;
@@ -74,7 +76,7 @@ public class RobotMap {
     public static final double liftLowH = 15000;// Level 1 for Hatch
     public static final double liftMedH = 77000;// Level 2 Rocket for Hatch
     public static final double liftHighH = 132000;// Level 3 Rocket for Hatch
-    public static final double liftLowC = 33000;// Level 1 Rocket Cargo
+    public static final double liftLowC = 35000;// Level 1 Rocket Cargo
     public static final double liftMedC = 92000;// Level 2 Rocket Cargo
     public static final double liftHighC = 130000;// Level 3 Rocket Cargo
     public static final double liftCargoC = 80000;// Scoring Cargo in Cargo Ship
@@ -102,10 +104,6 @@ public class RobotMap {
     public static final double armPerpindicularToGround = 3100;
     public static final double armStartConfig = 100;
     public static final double armScoreOnHigh = 2000;
-    // 1706 /*150 degrees*/;
-    // 2844 /*250 degrees*/
-    // 3413/*300 degrees*/;
-    // 3981 /*350 degrees*/;
     // Intake
     public static final double intakeNominalOutputForward = 0;
     public static final double intakeNominalOutputReverse = 0;

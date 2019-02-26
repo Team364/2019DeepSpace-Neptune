@@ -20,8 +20,8 @@ public class Elevator extends Subsystem {
   public double TargetAngle;
 
   public Elevator() {
-    lift = new TalonSRX(RobotMap.rightLift);
-    liftSlave = new TalonSRX(RobotMap.leftLift);
+    lift = new TalonSRX(RobotMap.topLift);
+    liftSlave = new TalonSRX(RobotMap.bottomLift);
     liftSlave.follow(lift);
     liftSlave.setInverted(false);
     liftSlave.setNeutralMode(NeutralMode.Brake);
@@ -30,6 +30,10 @@ public class Elevator extends Subsystem {
 
     lift.configFactoryDefault();
     arm.configFactoryDefault();
+    lift.configPeakCurrentLimit(RobotMap.liftCurrentCeiling);
+    lift.configPeakCurrentDuration(RobotMap.liftCurrentCeilingDuration);
+    liftSlave.configPeakCurrentLimit(RobotMap.liftCurrentCeiling);
+    lift.configPeakCurrentLimit(RobotMap.liftCurrentCeilingDuration);
 
     lift.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, RobotMap.PIDLoopIdx, RobotMap.TimeoutMs);
     arm.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, RobotMap.PIDLoopIdx, RobotMap.TimeoutMs);
@@ -152,6 +156,7 @@ public class Elevator extends Subsystem {
     SmartDashboard.putNumber("Arm Percent Output: ", arm.getMotorOutputPercent());
     SmartDashboard.putNumber("Lift Current: ", getLiftCurrentDraw());
     SmartDashboard.putNumber("Arm Current: ", getArmCurrentDraw());
+    SmartDashboard.putNumber("Other Lift Current", liftSlave.getOutputCurrent());
   }
 
   @Override

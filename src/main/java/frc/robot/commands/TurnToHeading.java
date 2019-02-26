@@ -13,9 +13,7 @@ public class TurnToHeading extends Command {
   public TurnToHeading(double heading) {
     requires(Neptune.driveTrain);
     GyroPID = new PIDCalc(0.033, 0.0, 0.0, 0.0, "NavX");
-    // GyroPID = new PIDCalc(0.045, 0.27, 0.0, 0.0, "NavX");
-    // GyroPID = new PIDCalc(0.06, 0.60, 0.0015, 0.0, "NavX");
-    GyroPID.setTolerance(2);
+    GyroPID.setTolerance(1);
     this.heading = heading;
   }
 
@@ -47,6 +45,7 @@ public class TurnToHeading extends Command {
   @Override
   protected void end() {
     Neptune.driveTrain.stop();
+    GyroPID.resetPID();
   }
 
   // Called when another command which requires one or more of the same
