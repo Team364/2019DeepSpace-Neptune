@@ -8,6 +8,7 @@ import frc.robot.commands.*;
 import frc.robot.subroutines.climb;
 import frc.robot.subroutines.climbDrive;
 import frc.robot.subroutines.retractClimb;
+import frc.robot.subroutines.*;
 public class DriverOI {
     //Driver Controller
     //Xbox One Wired Controller
@@ -46,6 +47,7 @@ public class DriverOI {
     public Joystick controller;
 
     /**
+     * 
      * Operator Controller
      */
     public Joystick controller2;
@@ -62,59 +64,31 @@ public class DriverOI {
     public JoystickButton Climb;
     public JoystickButton ClimbDrive;
     public JoystickButton retractClimb;
+    public JoystickButton climbElevate;
     public JoystickButton undoClimbFrontButton;
+
     /**
      * OI()
      * <p>Initializes Joysticks and buttons thereof
      * <p>assigns commands to buttons when pressed or held
      */
     public DriverOI() {
-        //Driver controller
         controller = new Joystick(0);
   
-        //Robot shifts gears down
-        //Button is pressed once
-        //Left menu button
         shiftLow = new JoystickButton(controller, 5);
         shiftLow.whenPressed(new SetPiston(Neptune.driveTrain.shifter, 1));
 
-        //Robot shifts gears up
-        //Button is pressed once
-        //Right menu button
         shiftHigh = new JoystickButton(controller, 6);
         shiftHigh.whenPressed(new SetPiston(Neptune.driveTrain.shifter, 0));
 
-        // //Robot uses NavX Gyro to turn approximately 180 degrees(yaw)
-        // //Button is pressed once
-        // //Green A button
-        // turn180Button = new JoystickButton(controller, 1);
-        // turn180Button.whenPressed(new TurnToHeading(90));
-
-        //Does nothing
-        //Button is held to run command
-        //Cancelled when driver lets go of button - Keep in mind that Buttons that stick can cause issue
-        //Red B button
-        // alignWithTapeButton = new JoystickButton(controller, 2);
-        // alignWithTapeButton.whileActive(new Align());
         Climb = new JoystickButton(controller, 4);
         Climb.whileHeld(new climb());
-        ClimbDrive = new JoystickButton(controller, 3);
+        ClimbDrive = new JoystickButton(controller, 7);
         ClimbDrive.whileHeld(new climbDrive());
         retractClimb = new JoystickButton(controller, 2);
         retractClimb.whileHeld(new retractClimb());
-        
-        //Does nothing
-        //Use for testing and printing out data
-        diagnosticButton = new JoystickButton(controller, 7);
-        //diagnosticButton.whileActive(new TestPGyro());
-
-        // //Right on the D-pad
-        // right180 = new JoystickPOV(90);
-        // right180.whenActive(new Turn180right());
-
-        // //Left on the D-pad
-        // left180 = new JoystickPOV(270);
-        // left180.whenActive(new Turn180left());
+        climbElevate = new JoystickButton(controller, 1);    
+        climbElevate.whenPressed(new climbElevate());
 
     }
 }
