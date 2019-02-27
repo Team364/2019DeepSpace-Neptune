@@ -17,6 +17,7 @@ public class Neptune extends TimedRobot {
   public static Elevator elevator = Elevator.getInstance();
   public static DriveTrain driveTrain = DriveTrain.getInstance();
   public static Trident trident = Trident.getInstance();
+  public static VisionProcessing vision = VisionProcessing.getInstance();
 
   public static DriverOI oi;
   public static OperatorOI oi2;
@@ -56,6 +57,7 @@ public class Neptune extends TimedRobot {
     Scheduler.getInstance().run();
     elevator.postSmartDashVars();
     driveTrain.postSmartDashVars();
+    System.out.println(vision.getCenterXValues()[0]);
    // driveTrain.climbDrive.set(ControlMode.PercentOutput, 1);
   }
 
