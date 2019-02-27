@@ -23,6 +23,7 @@ public class Elevator extends Subsystem {
   private TalonSRX climber;
   private DoubleSolenoid fr;
   public Piston front;
+  
 
   public Elevator() {
     lift = new TalonSRX(RobotMap.topLift);
@@ -144,11 +145,11 @@ public class Elevator extends Subsystem {
     System.out.println("The Lift and Arm Encoders have been reset");
   }
   public void climb(){
-    lift.set(ControlMode.PercentOutput, 0.2);//Fix
-    climber.set(ControlMode.PercentOutput, 0.2);//Fix - Check Direction
+    lift.set(ControlMode.PercentOutput, -0.3);//Fix
+    climber.set(ControlMode.PercentOutput, -0.75);//Fix - Check Direction
   }
   public void retractClimb(){
-    climber.set(ControlMode.PercentOutput, -0.2);// - Fix. Check Direction
+    climber.set(ControlMode.PercentOutput, 0.4);// - Fix. Check Direction
   }
   public void stopClimb(){
     climber.set(ControlMode.PercentOutput, 0);

@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subroutines;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,7 +5,7 @@ import frc.robot.Neptune;
 import frc.robot.commands.SetPiston;
 
 public class climbElevate extends Command {
-  private Command flipem = new SetPiston(Neptune.elevator.front, 0);
+  private Command flipem = new SetPiston(Neptune.elevator.front, 1);
   public climbElevate() {
     requires(Neptune.elevator);
     setTimeout(1);

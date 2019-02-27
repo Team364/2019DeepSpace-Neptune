@@ -81,14 +81,14 @@ public class DriverOI {
         shiftHigh = new JoystickButton(controller, 6);
         shiftHigh.whenPressed(new SetPiston(Neptune.driveTrain.shifter, 0));
 
-        Climb = new JoystickButton(controller, 4);
-        Climb.whileHeld(new climb());
-        ClimbDrive = new JoystickButton(controller, 7);
-        ClimbDrive.whileHeld(new climbDrive());
-        retractClimb = new JoystickButton(controller, 2);
-        retractClimb.whileHeld(new retractClimb());
-        climbElevate = new JoystickButton(controller, 1);    
-        climbElevate.whenPressed(new climbElevate());
+        // Climb = new JoystickButton(controller, 4);
+        // Climb.whileHeld(new climb());
+        // ClimbDrive = new JoystickButton(controller, 7);
+        // ClimbDrive.whileHeld(new climbDrive());
+        // retractClimb = new JoystickButton(controller, 2);
+        // retractClimb.whileHeld(new retractClimb());
+        // climbElevate = new JoystickButton(controller, 1);    
+        // climbElevate.whenPressed(new climbElevate());
 
     }
 }

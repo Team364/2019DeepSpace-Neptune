@@ -6,6 +6,9 @@ import frc.robot.subsystems.*;
 import frc.robot.oi.*;
 import frc.robot.States;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 
@@ -53,6 +56,7 @@ public class Neptune extends TimedRobot {
     Scheduler.getInstance().run();
     elevator.postSmartDashVars();
     driveTrain.postSmartDashVars();
+   // driveTrain.climbDrive.set(ControlMode.PercentOutput, 1);
   }
 
   @Override

@@ -35,6 +35,8 @@ public class climb extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Neptune.elevator.stopClimb();
+    Neptune.elevator.stopLift();
     Neptune.elevator.elevateTo(Neptune.elevator.getLiftPosition(), Neptune.elevator.getArmAngle());
   }
 
@@ -42,5 +44,6 @@ public class climb extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }
