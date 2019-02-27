@@ -56,10 +56,7 @@ public class DriverOI {
     public JoystickButton shiftLow;
     public JoystickButton shiftHigh;
     public JoystickButton turn180Button;
-    public JoystickButton alignWithTapeButton;
-    public JoystickButton followCubeButton;
-    public JoystickButton alignWithDiskButton;
-    public JoystickButton diagnosticButton;
+    public JoystickButton align;
 
     public JoystickButton Climb;
     public JoystickButton ClimbDrive;
@@ -80,6 +77,9 @@ public class DriverOI {
 
         shiftHigh = new JoystickButton(controller, 6);
         shiftHigh.whenPressed(new SetPiston(Neptune.driveTrain.shifter, 0));
+
+        align = new JoystickButton(controller, 2);
+        align.whenPressed(new Align());
 
         // Climb = new JoystickButton(controller, 4);
         // Climb.whileHeld(new climb());
