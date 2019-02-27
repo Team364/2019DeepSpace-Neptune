@@ -32,7 +32,7 @@ public class Align extends Command {
   @Override
   protected void execute() {
     double pidOutputNavX = alignPID.calculateOutput(480, Neptune.vision.getCenterXValues()[0]);
-    Neptune.driveTrain.openLoop(-pidOutputNavX, pidOutputNavX);
+    Neptune.driveTrain.openLoop(pidOutputNavX, -pidOutputNavX);
   }
 
   // Make this return true when this Command no longer needs to run execute()
