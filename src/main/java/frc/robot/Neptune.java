@@ -57,7 +57,7 @@ public class Neptune extends TimedRobot {
     Scheduler.getInstance().run();
     elevator.postSmartDashVars();
     driveTrain.postSmartDashVars();
-    System.out.println(vision.getCenterXValues()[0]);
+    //System.out.println(vision.getCenterXValues()[0] +" "+ vision.getTimeStamp());
    // driveTrain.climbDrive.set(ControlMode.PercentOutput, 1);
   }
 

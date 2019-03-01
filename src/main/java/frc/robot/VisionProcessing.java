@@ -13,7 +13,7 @@ public class VisionProcessing {
     private NetworkTable visionParameters;
     // Network Table Input entries from Raspberry Pi
     private NetworkTableEntry visibleTargets_centerX;
-
+    private NetworkTableEntry visibleTargets_timestamp;
     // private NetworkTableEntry visibleTargets_angle;
     // private NetworkTableEntry visibleTargets_width;
     // private NetworkTableEntry visibleTargets_height;
@@ -26,6 +26,7 @@ public class VisionProcessing {
 
         // Input entries
         visibleTargets_centerX = visionParameters.getEntry("visibleTargets.centerX");
+        visibleTargets_timestamp = visionParameters.getEntry("visibleTargets.timeStamp");
 
         // visibleTargets_angle = visionParameters.getEntry("visibleTargets.angle");
         // visibleTargets_width = visionParameters.getEntry("visibleTargets.width");
@@ -54,5 +55,9 @@ public class VisionProcessing {
             return defaultValue;
         }
     
+    }
+
+    public double getTimeStamp(){
+        return visibleTargets_timestamp.getDouble(0.0);
     }
 }

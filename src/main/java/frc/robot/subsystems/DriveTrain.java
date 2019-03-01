@@ -122,6 +122,7 @@ public class DriveTrain extends Subsystem {
 }
 
   public void openLoop(double left, double right) {
+    System.out.println("openloop: " + left);
     leftDrive.set(ControlMode.PercentOutput, left);
     rightDrive.set(ControlMode.PercentOutput, -right);
     //climbDrive.set(ControlMode.PercentOutput, left);
