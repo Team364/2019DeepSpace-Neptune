@@ -96,7 +96,7 @@ public class OperatorOI{
         setLiftPositionCargo.whenPressed(new ElevateToPosition(4));
         //Set Lift Position to level 0 for intaking
         setIntakePosition = new JoystickButton(controller2, 5);
-        setIntakePosition.whenPressed(new setIntakePos());
+        setIntakePosition.whenPressed(new SetIntakePos());
     }
     /**
    * Sets objectState
@@ -149,6 +149,7 @@ public class OperatorOI{
       if((Math.abs(controller2.getRawAxis(1)) > 0.2)){
         liftManual.start();
       } 
+      
       //If RB is hit then the elevator goes to start config
       if(controller2.getRawButton(6)){
         elevate = new ElevateToPosition(5);

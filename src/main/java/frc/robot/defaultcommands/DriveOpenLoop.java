@@ -39,7 +39,7 @@ public class DriveOpenLoop extends Command {
     protected void execute() {
         frontThrottle = Neptune.oi.controller.getRawAxis(2);//Right Trigger
         backThrottle = Neptune.oi.controller.getRawAxis(3);//Left Trigger
-        steer = -Neptune.oi.controller.getRawAxis(0);//X-axis of left Joystick
+        steer = -0.7*Neptune.oi.controller.getRawAxis(0);//X-axis of left Joystick
         /*normal Drive Control
         If the robot isn't moving and then either Trigger is activated and pressed beyond 0.25, the robot will
         change state into Direct Drive*/
