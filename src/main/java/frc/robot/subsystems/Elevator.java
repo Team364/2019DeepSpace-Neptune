@@ -10,7 +10,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import frc.robot.States;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import frc.robot.misc.subsystems.Piston;
+import frc.robot.misc.Piston;
 
 public class Elevator extends Subsystem {
 

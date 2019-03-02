@@ -142,7 +142,7 @@ public class OperatorOI{
 
       
       if((controller2.getRawAxis(3) >= 0.5)||(controller2.getRawAxis(2) >= 0.5)){
-        runGrip = new activateTrident(tridentCase);
+        runGrip = new ActivateTrident(tridentCase);
         runGrip.start();
       }
       SmartDashboard.putNumber("Grip Set: ", tridentCase);

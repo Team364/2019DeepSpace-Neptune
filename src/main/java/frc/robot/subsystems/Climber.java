@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.misc.PIDCalc;
-import frc.robot.misc.subsystems.*;
+//import frc.robot.misc.subsystems.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -53,7 +53,7 @@ public class Climber extends Subsystem {
 
   public void levitateToWinPosition(){
     // Move motor to pre-specified encoder count\
-    
+
     // Use PID here to keep gyro pitch level-ish
     levitator.set(ControlMode.MotionMagic, winPosition);
   }
