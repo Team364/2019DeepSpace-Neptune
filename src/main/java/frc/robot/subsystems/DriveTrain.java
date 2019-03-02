@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.defaultcommands.DriveOpenLoop;
 import frc.robot.misc.subsystems.Piston;
+import frc.robot.misc.subsystems.Piston.PistonStates;
 import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -162,5 +163,10 @@ public class DriveTrain extends Subsystem {
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new DriveOpenLoop());
+  }
+
+  public boolean isShifterHigh() {
+    // TODO: Verify that CLOSED is when we are in "high" gear
+    return this.shifter.getPistonState() == PistonStates.CLOSED;
   }
 }

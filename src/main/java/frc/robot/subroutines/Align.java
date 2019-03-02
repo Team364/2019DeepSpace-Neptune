@@ -10,9 +10,14 @@ package frc.robot.subroutines;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
 import frc.robot.misc.PIDCalc;
-import frc.robot.misc.subsystems.Piston.PistonStates;
+//import frc.robot.misc.subsystems.Piston.PistonStates;
 
 public class Align extends Command {
+
+  // Number of camera updates to wait for before
+  // taking any action. This prevents robot from acting
+  // on stale information.
+  static int updatesToWait = 1;
 
   PIDCalc alignPID = new PIDCalc(0.1, 0.1, 0.0, 0.0, "Align");
   double lastTimeStamp = 0.0;
@@ -20,9 +25,6 @@ public class Align extends Command {
   boolean desiredHeadingSet = false;
   boolean targetFound = false;
   int numCamUpdates = 0;
-  static int updatesToWait = 1;
-
-  PistonStates originalState = PistonStates.CLOSED;
 
   public Align() {
     this.setTimeout(1.0);
@@ -36,20 +38,20 @@ public class Align extends Command {
   @Override
   protected void initialize() {
     System.out.println("ALIGN INIT");
-    lastTimeStamp = Neptune.vision.getTimeStamp(); //0.0;
+    lastTimeStamp = Neptune.vision.getTimeStamp();
     desiredHeading = 0.0;
     desiredHeadingSet = false;
     targetFound = false;
     numCamUpdates = 0;
 
     // TODO: TUNE PIDs differently for hi/lo gear
-    originalState = Neptune.driveTrain.shifter.getPistonState();
-    if (originalState == PistonStates.CLOSED) {
+    if (Neptune.driveTrain.isShifterHigh()) {
       alignPID.setPIDParameters(0.05, 0.1, 0.0, 0.0);
-    } else alignPID.setPIDParameters(0.05, 0.1, 0.0, 0.0);
-
-
+    } else {
+      alignPID.setPIDParameters(0.05, 0.1, 0.0, 0.0);
+    }
     alignPID.resetPID();
+
     Neptune.driveTrain.zeroGyro();
   }
 
@@ -58,7 +60,7 @@ public class Align extends Command {
   protected void execute() {
     System.out.println("ALIGN EXECUTE");
 
-    // Proposed algorithm
+    // Algorithm
     // 0) capture current robot state
     // 1) wait for an update (two updates?) of camera info
     // 2) calculate how far off our heading is (empirically)
@@ -78,58 +80,36 @@ public class Align extends Command {
     }
 
     // Have we waited long enough? If so...
-    // 2) calculate how far off our heading is
     if (numCamUpdates >= updatesToWait){
 
+      // 2) calculate how far off our heading is, and
       // 3) determine our new heading angle
       if (!desiredHeadingSet) {
         desiredHeading = getDesiredHeading(curHeading);
         desiredHeadingSet = true;
-
-        //Neptune.driveTrain.shifter.setPistonState(PistonStates.OPEN);
       }
 
     }
 
     // 4) move robot towards that angle using PID
-    if (desiredHeadingSet){
-
+    if (desiredHeadingSet) {
       double pidOut = -1.0 * alignPID.calculateOutput(desiredHeading, curHeading);
       Neptune.driveTrain.openLoop(-pidOut, pidOut);
+    } else {
+      Neptune.driveTrain.stop();
+    }
 
-    } else Neptune.driveTrain.stop();
-
-    // // TODO: 5) on target, reset and do again
+    // // TODO: if we want to "hold down" B button...
+    // 5) on target, reset and do again
     // if (this.isFinished()){
     //   this.initialize();
     // }
-
-    // // check current heading
-    // double curHeading = Neptune.driveTrain.getGyroAngle();
-    // System.out.println("curHeading: " + curHeading);
-
-    // if (lastTimeStamp != newTimeStamp) {
-    //   // pidOutputNavX = alignPID.calculateOutput(480, Neptune.vision.getCenterXValues()[0]);
-    //   // System.out.println(Neptune.vision.getCenterXValues()[0] + "hello +++++++++++==");
-    //   // System.out.println("hello+++++++++++++++++++++++++++++++++++++++++++++++++");
-    //   // Neptune.driveTrain.openLoop(-pidOutputNavX, pidOutputNavX);
-    //   // System.out.println(pidOutputNavX);
-
-    //   // determine desired heading
-    //   desiredHeading = getDesiredHeading(curHeading);//curHeading + -0.1*(480 - Neptune.vision.getCenterXValues()[0]); //-ish
-    //   System.out.println("desired heading: " + desiredHeading);
-    // }
-    // // turn to new heading
-    // pidOutputNavX = -1.0*alignPID.calculateOutput(desiredHeading, curHeading);
-    // System.out.println("in ALIGN, pidout: "+pidOutputNavX);
-
-    // Neptune.driveTrain.openLoop(-pidOutputNavX, pidOutputNavX);
-    // lastTimeStamp = newTimeStamp;
 
     System.out.println("curH: "+ curHeading + " desH: " + desiredHeading);
   }
 
   double getDesiredHeading(double curHeading) {
+    // slope of 0.056 found empirically
     return curHeading + 0.056*(Neptune.vision.getCenterXValues()[0] - 480);
   }
 
@@ -139,8 +119,6 @@ public class Align extends Command {
     System.out.println("ALIGN ISFINISHED");
 
     if (alignPID.onTarget()) System.out.println("ALIGN DONE: ON TARGET");
-    // else if (Neptune.vision.getCenterXValues()[0] == 0) System.out.println("ALIGN DONE: LOST TARGET");
-
     return (alignPID.onTarget() && desiredHeadingSet) || !targetFound; //|| (Neptune.vision.getCenterXValues()[0] == 0);
   }
 
@@ -148,14 +126,6 @@ public class Align extends Command {
   @Override
   protected void end() {
     System.out.println("ALIGN END");
-
-    // lastTimeStamp = Neptune.vision.getTimeStamp(); //0.0;
-    // desiredHeading = 0.0;
-    // desiredHeadingSet = false;
-    // numCamUpdates = 0;
-    // targetFound = false;
-
-    //Neptune.driveTrain.shifter.setPistonState(originalState);
     Neptune.driveTrain.stop();
     alignPID.resetPID();
   }
