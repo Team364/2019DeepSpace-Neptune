@@ -64,6 +64,7 @@ public class RobotMap {
     public static final double liftPeakOutputForward = 1;
     public static final double liftPeakOutputReverse = -0.75;
     public static final int liftCruiseVelocity = 30000;
+    public static final int liftCruiseVelocityClimb = 3500;
     public static final int liftAcceleration = 10000;
     public static final double liftLowerBound = -20;
     public static final double liftUpperBound = 135000;

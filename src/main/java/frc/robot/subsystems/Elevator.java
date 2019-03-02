@@ -96,6 +96,14 @@ public class Elevator extends Subsystem {
     return Instance;
 }
 
+
+  public void setClimbCruiseVelocity() {
+    lift.configMotionCruiseVelocity(RobotMap.liftCruiseVelocityClimb, RobotMap.TimeoutMs);
+  }
+
+  public void setPlayCruiseVelocity() {
+    lift.configMotionCruiseVelocity(RobotMap.liftCruiseVelocity, RobotMap.TimeoutMs);
+  }
   public void elevateTo(double liftHeight, double armAngle) {
     System.out.println("The lift is moving to: " + liftHeight);
     System.out.println("The arm is moving to: " + armAngle);

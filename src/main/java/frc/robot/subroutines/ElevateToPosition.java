@@ -90,21 +90,35 @@ public class ElevateToPosition extends Command {
         }
 
         if (desiredHeight == 0) {
+            Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = intake;
             wantedAngle = intakeCargo;
         } else if (desiredHeight == 1) {
+            Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = low;
             wantedAngle = lvlone;
         } else if (desiredHeight == 2) {
+            Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = med;
             wantedAngle = perpendicularToGround;
         } else if (desiredHeight == 3) {
+            Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = high;
             wantedAngle = lvlthree;
         } else if (desiredHeight == 4) {
+            Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = cargo;
             wantedAngle = perpendicularToGround;
         } else if (desiredHeight == 5) {
+            Neptune.elevator.setPlayCruiseVelocity();
+            wantedPosition = liftStartConfig;
+            wantedAngle = armStartConfig;
+        } else if (desiredHeight == 6) {
+            Neptune.elevator.setClimbCruiseVelocity();
+            wantedPosition = RobotMap.liftMedC;
+            wantedAngle = lvlone;
+        } else if (desiredHeight == 7) {
+            Neptune.elevator.setClimbCruiseVelocity();
             wantedPosition = liftStartConfig;
             wantedAngle = armStartConfig;
         }

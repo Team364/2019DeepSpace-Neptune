@@ -7,45 +7,21 @@
 
 package frc.robot.subroutines;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Neptune;
+import frc.robot.commands.*;
 
 public class ClimbToWin extends CommandGroup {
-  public ClimbToWin() {
-    requires(Neptune.driveTrain);
-    requires(Neptune.elevator);
-  }
+  
+	public ClimbToWin() {
+		addSequential(new ElevateToPosition(6));
+		addSequential(new WaitCommand(2));
+		addSequential(new SetPiston(Neptune.elevator.front, 1));
+		addSequential(new WaitCommand(2));
+		addParallel(new ElevateToPosition(7));
+		addSequential(new ClimbWithGyro(0));
+		addSequential(new ClimbWithGyro(-5));
+		addSequential(new DriveClimberForwards());
+	}
 
-  // Called just before this Command runs the first time
-  @Override
-  protected void initialize() {
-  }
-
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-    Neptune.elevator.climb();
-  }
-
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
-
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-    Neptune.elevator.stopClimb();
-    Neptune.elevator.stopLift();
-    Neptune.elevator.elevateTo(Neptune.elevator.getLiftPosition(), Neptune.elevator.getArmAngle());
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-    end();
-  }
 }

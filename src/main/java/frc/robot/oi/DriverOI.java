@@ -59,6 +59,7 @@ public class DriverOI {
     public JoystickButton align;
 
     public JoystickButton climb;
+    public JoystickButton liftClimber;
     //public JoystickButton ClimbDrive;
     //public JoystickButton retractClimb;
     //public JoystickButton climbElevate;
@@ -80,6 +81,12 @@ public class DriverOI {
 
         align = new JoystickButton(controller, 2);
         align.whenPressed(new Align());
+
+        climb = new JoystickButton(controller, 8);
+        climb.whenPressed(new ClimbToWin());
+
+        //liftClimber = new JoystickButton(controller, 7);
+        //liftClimber.whenPressed(new RunClimber());
         //align.whileHeld(new Align());
 
         // Climb = new JoystickButton(controller, 4);
