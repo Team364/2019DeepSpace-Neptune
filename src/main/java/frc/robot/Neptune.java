@@ -57,7 +57,7 @@ public class Neptune extends TimedRobot {
     Scheduler.getInstance().run();
     elevator.postSmartDashVars();
     driveTrain.postSmartDashVars();
-    //System.out.println(vision.getCenterXValues()[0] +" "+ vision.getTimeStamp());
+
    // driveTrain.climbDrive.set(ControlMode.PercentOutput, 1);
   }
 
@@ -104,6 +104,10 @@ public class Neptune extends TimedRobot {
     if ((Neptune.elevator.getLiftPosition() <= RobotMap.liftLowerBound)) {
       elevator.stopLift();
     }
+
+    System.out.println("tgt x: " + vision.getCenterXValues()[0] + 
+                       " hdg: " + driveTrain.getGyroAngle() + 
+                       " dst: " + vision.getDistanceValues()[0]);
 
   }
 

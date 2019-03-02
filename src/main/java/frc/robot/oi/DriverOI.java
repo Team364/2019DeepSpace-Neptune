@@ -80,6 +80,7 @@ public class DriverOI {
 
         align = new JoystickButton(controller, 2);
         align.whenPressed(new Align());
+        //align.whileHeld(new Align());
 
         // Climb = new JoystickButton(controller, 4);
         // Climb.whileHeld(new climb());

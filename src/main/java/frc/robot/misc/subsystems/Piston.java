@@ -12,12 +12,13 @@ public class Piston extends Subsystem {
   private DoubleSolenoid piston;
   private String name;
   private Piston instance;
+
   /** State tracks what position piston is in */
-      public enum PistonStates{
-        OPEN,
-        CLOSED
-    }
-    public PistonStates pistonState = PistonStates.CLOSED;
+  public enum PistonStates{
+    OPEN,
+    CLOSED
+  }
+  private PistonStates pistonState = PistonStates.CLOSED;
 
   public Piston(DoubleSolenoid piston, String name){
     this.piston = piston;
@@ -34,6 +35,16 @@ public class Piston extends Subsystem {
     }
     return instance;
   }
+
+  public void setPistonState(PistonStates state){
+    if (state == PistonStates.OPEN) this.open();
+    else if (state == PistonStates.CLOSED) this.close();
+  }
+
+  public PistonStates getPistonState () {
+    return pistonState;
+  }
+
     /**
      * open piston
      */ 
