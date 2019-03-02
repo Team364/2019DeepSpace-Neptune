@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Neptune;
 import frc.robot.commands.*;
 
-public class activateTrident extends CommandGroup {
+public class ActivateTrident extends CommandGroup {
 
-  public activateTrident(int set) {
+  public ActivateTrident(int set) {
     if (set == 1) { // Intake Cargo
       addSequential(new runIntake(-0.6, true)); // Intake
       addSequential(new SetPiston(Neptune.trident.claw, 0)); // Close Claw
