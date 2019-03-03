@@ -28,7 +28,7 @@ public class Align extends Command {
   public Align() {
     this.setTimeout(1.0);
     requires(Neptune.driveTrain);
-    //alignPID.setTolerance(1);
+    alignPID.setTolerance(1);
     setInterruptible(true);
 
   }

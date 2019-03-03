@@ -9,7 +9,6 @@ import frc.robot.defaultcommands.ElevatorManual;
 import frc.robot.subroutines.*;
 import frc.robot.States;
 import frc.robot.commands.*;
-//import frc.robot.commands.teleop.TestPGyro;
 
 public class OperatorOI{
 
