@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
 import frc.robot.oi.*;
 import frc.robot.States;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.misc.*;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -18,6 +18,7 @@ public class Neptune extends TimedRobot {
   public static DriveTrain driveTrain = DriveTrain.getInstance();
   public static Trident trident = Trident.getInstance();
   public static VisionProcessing vision = VisionProcessing.getInstance();
+  public static Climber climber = Climber.getInstance();
 
   public static DriverOI oi;
   public static OperatorOI oi2;
@@ -90,6 +91,7 @@ public class Neptune extends TimedRobot {
   public void teleopPeriodic() {
     oi2.controlLoop();
     postSmartDashVars();
+    climber.getNavXPitch();
     if ((elevator.getLiftPosition() < 10000) && (elevator.getLiftPosition() > RobotMap.liftLowerBound)) {
       States.liftZone = States.LiftZones.LOWER_DANGER;
     } else if ((elevator.getLiftPosition() > 100000) && (elevator.getLiftPosition() < RobotMap.liftUpperBound))
@@ -113,12 +115,30 @@ public class Neptune extends TimedRobot {
 
   @Override
   public void disabledInit() {
+    // TODO: GOHOME command
+
+    // Command setLever = new SetPiston(Neptune.trident.lever, 0);
+    // Command setClaw = new SetPiston(Neptune.trident.claw, 0);
+    // Command elevate = new ElevateToPosition(5);
+    // elevate.start();
+    // if(States.objState == States.ObjectStates.HATCH_OBJ){
+    //   setLever = new SetPiston(Neptune.trident.lever, 0);
+    //   setClaw = new SetPiston(Neptune.trident.claw, 0);
+    // }else if(States.objState == States.ObjectStates.CARGO_OBJ){
+    //   setLever = new SetPiston(Neptune.trident.lever, 1);
+    //   setClaw = new SetPiston(Neptune.trident.claw, 1);
+    // }
+    // setLever.start();
+    // setClaw.start();
+
+    System.out.println("DISABLED INIT");
+
   }
 
   @Override
   public void disabledPeriodic() {
+    //Scheduler.getInstance().run();
     postSmartDashVars();
-
   }
 
   @Override

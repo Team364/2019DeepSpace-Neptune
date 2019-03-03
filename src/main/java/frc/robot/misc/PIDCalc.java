@@ -1,17 +1,13 @@
-/*
+package frc.robot.misc;
+/** 
  * This is the PID calculation class. It calculates a PIDF output for
  * a motor using a setpoint and actual values.
  * Create an object for each subsystem that needs to use PID and run resetPID() and then
  * calculateOutput().
  */
-
-package frc.robot.misc;
-
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 public class PIDCalc {
 
-    private String pidName;
+    String pidName;
     private double kP = 0;
     private double kI = 0;
     private double kD = 0;
@@ -21,7 +17,6 @@ public class PIDCalc {
     private double prev_error = 0;
     private double error = 0;
     private double result = 0;
-    private boolean onTarget;
     private double tolerance;
 
     public PIDCalc(double pTerm, double iTerm, double dTerm, double fTerm, String name) {

@@ -30,11 +30,11 @@ public class RobotMap {
     public static final int arm = 6; // Talon SRX
     public static final int armLimitSwitch = 1;// Digital Input
     // Climb
-    public static final int dropWheels = 2;// VictorSPX
-    public static final int climbPort1 = 2;// Back
-    public static final int climbPort2 = 5;// Back
-    public static final int climbPort3 = 0;// Front
-    public static final int climbPort4 = 7;// Front
+    public static final int levitator = 2;// VictorSPX
+    public static final int climbDriveMotor = 2;// Back
+    // public static final int climbPort2 = 5;// Back
+    // public static final int climbPort3 = 0;// Front
+    // public static final int climbPort4 = 7;// Front
 
     // Software
     // Drive
@@ -64,6 +64,7 @@ public class RobotMap {
     public static final double liftPeakOutputForward = 1;
     public static final double liftPeakOutputReverse = -0.75;
     public static final int liftCruiseVelocity = 30000;
+    public static final int liftCruiseVelocityClimb = 3500;
     public static final int liftAcceleration = 10000;
     public static final double liftLowerBound = -20;
     public static final double liftUpperBound = 135000;

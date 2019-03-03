@@ -1,17 +1,17 @@
-package frc.robot.subroutines;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
 import frc.robot.States;
 import frc.robot.commands.SetPiston;
 
-public class setIntakePos extends Command {
+public class SetIntakePos extends Command {
 
     private Command setClaw;
     private Command setLever;
     private Command elevate;
 
-    public setIntakePos() {
+    public SetIntakePos() {
         if (States.objState == States.ObjectStates.CARGO_OBJ) {
             requires(Neptune.trident.claw);
         } else if (States.objState == States.ObjectStates.HATCH_OBJ) {

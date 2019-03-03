@@ -2,7 +2,6 @@ package frc.robot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class DriveOpenLoop extends Command {
 
@@ -39,7 +38,7 @@ public class DriveOpenLoop extends Command {
     protected void execute() {
         frontThrottle = Neptune.oi.controller.getRawAxis(2);//Right Trigger
         backThrottle = Neptune.oi.controller.getRawAxis(3);//Left Trigger
-        steer = -Neptune.oi.controller.getRawAxis(0);//X-axis of left Joystick
+        steer = -0.7*Neptune.oi.controller.getRawAxis(0);//X-axis of left Joystick
         /*normal Drive Control
         If the robot isn't moving and then either Trigger is activated and pressed beyond 0.25, the robot will
         change state into Direct Drive*/
@@ -57,6 +56,7 @@ public class DriveOpenLoop extends Command {
                 driveState = DriveStates.STATE_RAMP_DOWN;
             }
         } else if (driveState == DriveStates.STATE_RAMP_DOWN) {
+            // TODO: Implement slow down code
             driveState = DriveStates.STATE_NOT_MOVING;
         } else {
             driveState = DriveStates.STATE_NOT_MOVING;//This condition should never happen!

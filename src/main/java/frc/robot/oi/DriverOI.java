@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.Neptune;
 import frc.robot.commands.SetPiston;
 import frc.robot.commands.*;
-import frc.robot.subroutines.climb;
-import frc.robot.subroutines.climbDrive;
-import frc.robot.subroutines.retractClimb;
+import frc.robot.subroutines.*;
+//import frc.robot.subroutines.climbDrive;
+//import frc.robot.subroutines.retractClimb;
 import frc.robot.subroutines.*;
 public class DriverOI {
     //Driver Controller
@@ -58,11 +58,12 @@ public class DriverOI {
     public JoystickButton turn180Button;
     public JoystickButton align;
 
-    public JoystickButton Climb;
-    public JoystickButton ClimbDrive;
-    public JoystickButton retractClimb;
-    public JoystickButton climbElevate;
-    public JoystickButton undoClimbFrontButton;
+    public JoystickButton climb;
+    public JoystickButton liftClimber;
+    //public JoystickButton ClimbDrive;
+    //public JoystickButton retractClimb;
+    //public JoystickButton climbElevate;
+    //public JoystickButton undoClimbFrontButton;
 
     /**
      * OI()
@@ -79,7 +80,13 @@ public class DriverOI {
         shiftHigh.whenPressed(new SetPiston(Neptune.driveTrain.shifter, 0));
 
         align = new JoystickButton(controller, 2);
-        align.whileHeld(new Align());
+        align.whenPressed(new Align());
+
+        climb = new JoystickButton(controller, 8);
+        climb.whenPressed(new ClimbToWin());
+
+        //liftClimber = new JoystickButton(controller, 7);
+        //liftClimber.whenPressed(new RunClimber());
         //align.whileHeld(new Align());
 
         // Climb = new JoystickButton(controller, 4);

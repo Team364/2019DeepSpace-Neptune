@@ -1,7 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.misc.subsystems.*;
+import frc.robot.misc.*;
 
 /**Modes:
  * <p>0: Open

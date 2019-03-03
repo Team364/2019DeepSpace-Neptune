@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
 
 
-public class runIntake extends Command {
+public class RunIntake extends Command {
     
     private double power;
     private boolean intaking;
-    public runIntake(double power, boolean intaking) {
+    public RunIntake(double power, boolean intaking) {
         requires(Neptune.trident);
         this.power = power;
         this.intaking = intaking;
