@@ -5,14 +5,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
 import frc.robot.oi.*;
 import frc.robot.States;
-
-import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subroutines.*;
-import frc.robot.commands.*;
+import frc.robot.misc.*;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;

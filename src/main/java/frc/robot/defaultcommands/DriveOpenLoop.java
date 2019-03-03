@@ -2,7 +2,6 @@ package frc.robot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class DriveOpenLoop extends Command {
 

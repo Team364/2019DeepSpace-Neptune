@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.misc;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -6,7 +6,6 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class VisionProcessing {
 
-    
     private static VisionProcessing Instance;
     // Network Table
     private NetworkTableInstance roboRioInstance;
@@ -37,7 +36,7 @@ public class VisionProcessing {
         // visibleTargets_height = visionParameters.getEntry("visibleTargets.height");
         // visibleTargets_centerY = visionParameters.getEntry("visibleTargets.centerY");
 
-      //  roboRioInstance.startClientTeam(364);
+        // roboRioInstance.startClientTeam(364);
 
     }
 
