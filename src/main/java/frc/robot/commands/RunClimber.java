@@ -2,13 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
-import frc.robot.misc.*;
 
-/**Modes:
- * <p>0: Open
- * <p>1: Close
- * @param mode
- */
 public class RunClimber extends Command {
 
     public RunClimber() {

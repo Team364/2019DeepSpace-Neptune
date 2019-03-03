@@ -58,8 +58,6 @@ public class Neptune extends TimedRobot {
     Scheduler.getInstance().run();
     elevator.postSmartDashVars();
     driveTrain.postSmartDashVars();
-
-   // driveTrain.climbDrive.set(ControlMode.PercentOutput, 1);
   }
 
   @Override
@@ -115,29 +113,11 @@ public class Neptune extends TimedRobot {
 
   @Override
   public void disabledInit() {
-    // TODO: GOHOME command
-
-    // Command setLever = new SetPiston(Neptune.trident.lever, 0);
-    // Command setClaw = new SetPiston(Neptune.trident.claw, 0);
-    // Command elevate = new ElevateToPosition(5);
-    // elevate.start();
-    // if(States.objState == States.ObjectStates.HATCH_OBJ){
-    //   setLever = new SetPiston(Neptune.trident.lever, 0);
-    //   setClaw = new SetPiston(Neptune.trident.claw, 0);
-    // }else if(States.objState == States.ObjectStates.CARGO_OBJ){
-    //   setLever = new SetPiston(Neptune.trident.lever, 1);
-    //   setClaw = new SetPiston(Neptune.trident.claw, 1);
-    // }
-    // setLever.start();
-    // setClaw.start();
-
     System.out.println("DISABLED INIT");
-
   }
 
   @Override
   public void disabledPeriodic() {
-    //Scheduler.getInstance().run();
     postSmartDashVars();
   }
 

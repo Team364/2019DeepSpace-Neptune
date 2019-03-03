@@ -19,15 +19,15 @@ public class ElevateToPosition extends Command {
     private double wantedAngle;
     private double intakeCargo;
     private double perpendicularToGround;
-    private double scoreOnHigh;
+    double scoreOnHigh;
     private double armStartConfig;
-    private double desiredAngle;
-    private double custom;
+    double desiredAngle;
+    double custom;
     private double lvlone;
-    private double lvltwo;
+    double lvltwo;
     private double lvlthree;
-    private double liftClimb;
-    private double armClimb;
+    double liftClimb;
+    double armClimb;
 
     /**
      * Heights

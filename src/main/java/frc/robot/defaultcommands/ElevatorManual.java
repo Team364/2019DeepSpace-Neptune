@@ -7,9 +7,9 @@ import frc.robot.Neptune;
 public class ElevatorManual extends Command {
 
     private double liftPower;
-    private double armPower;
+    double armPower;
     private double adjustedLiftPosition;
-    private double adjustedArmAngle;
+    double adjustedArmAngle;
 
     public ElevatorManual() {
         requires(Neptune.elevator);
