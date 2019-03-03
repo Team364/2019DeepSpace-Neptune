@@ -16,34 +16,14 @@ public class Climber extends Subsystem {
    private VictorSPX driver;
    private TalonSRX levitator;
    private AHRS navX;
-   private double winPosition = 100.0;
    private double startPosition = 0;
    private double pidOutput = 0;
    PIDCalc pid = new PIDCalc(1.2, 0, 0, 0, "Climber");
-
-//   private VictorSPX intakeSlave;
-//   private DoubleSolenoid cl;
-//   private DoubleSolenoid le;
-//   public Piston claw;
-//   public Piston lever;
-//   public DigitalInput intakeLimit;
 
   public Climber() {
     driver = new VictorSPX(RobotMap.climbDriveMotor);
     levitator = new TalonSRX(RobotMap.levitator);
     navX = new AHRS(SPI.Port.kMXP);
-
-    //levitator.get
-
-    // intake.configPeakOutputForward(RobotMap.intakePeakOutputForward);
-    // intake.configPeakOutputReverse(RobotMap.intakePeakOutputReverse);
-    // intake.configNominalOutputReverse(RobotMap.intakeNominalOutputReverse);
-    // intake.configNominalOutputForward(RobotMap.intakeNominalOutputForward);
-
-    // intake.setNeutralMode(NeutralMode.Coast);
-    // intakeSlave.setNeutralMode(NeutralMode.Coast);
-
-    // Reset encoders...?
   }
 
   public synchronized static Climber getInstance() {

@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
-import frc.robot.misc.*;
 
 /**Modes:
  * <p>0: Open
@@ -13,9 +12,9 @@ public class ClimbWithGyro extends Command {
 
     double angle;
 
-    public ClimbWithGyro(double a) {
+    public ClimbWithGyro(double angle) {
         setTimeout(3);
-        angle = a;
+        this.angle = angle;
     }
 
     @Override

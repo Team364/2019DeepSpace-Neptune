@@ -56,6 +56,7 @@ public class DriveOpenLoop extends Command {
                 driveState = DriveStates.STATE_RAMP_DOWN;
             }
         } else if (driveState == DriveStates.STATE_RAMP_DOWN) {
+            // TODO: Implement slow down code
             driveState = DriveStates.STATE_NOT_MOVING;
         } else {
             driveState = DriveStates.STATE_NOT_MOVING;//This condition should never happen!

@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class WaitCommand extends Command {
 
-    public WaitCommand(double t) {
-        setTimeout(t);
+    public WaitCommand(double seconds) {
+        setTimeout(seconds);
     }
 
     @Override
