@@ -12,8 +12,8 @@ public class ClimbWithGyro extends Command {
 
     double angle;
 
-    public ClimbWithGyro(double angle) {
-        setTimeout(3);
+    public ClimbWithGyro(double angle, double timeout) {
+        setTimeout(timeout);
         this.angle = angle;
     }
 
