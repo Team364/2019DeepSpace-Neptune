@@ -29,7 +29,7 @@ public class Align extends Command {
   public Align() {
     this.setTimeout(1.0);
     requires(Neptune.driveTrain);
-    alignPID.setTolerance(1);
+    //alignPID.setTolerance(1);
     setInterruptible(true);
 
   }
@@ -46,9 +46,11 @@ public class Align extends Command {
 
     // TODO: TUNE PIDs differently for hi/lo gear
     if (Neptune.driveTrain.isShifterHigh()) {
+      //Shift Low
       alignPID.setPIDParameters(0.05, 0.1, 0.0, 0.0);
     } else {
-      alignPID.setPIDParameters(0.05, 0.1, 0.0, 0.0);
+      //Shift High
+      alignPID.setPIDParameters(0.25, 0.0, 0.15, 0);
     }
     alignPID.resetPID();
 
