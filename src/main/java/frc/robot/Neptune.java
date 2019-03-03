@@ -23,6 +23,7 @@ public class Neptune extends TimedRobot {
   public static DriveTrain driveTrain = DriveTrain.getInstance();
   public static Trident trident = Trident.getInstance();
   public static VisionProcessing vision = VisionProcessing.getInstance();
+  public static Climber climber = Climber.getInstance();
 
   public static DriverOI oi;
   public static OperatorOI oi2;
@@ -95,6 +96,7 @@ public class Neptune extends TimedRobot {
   public void teleopPeriodic() {
     oi2.controlLoop();
     postSmartDashVars();
+    climber.getNavXPitch();
     if ((elevator.getLiftPosition() < 10000) && (elevator.getLiftPosition() > RobotMap.liftLowerBound)) {
       States.liftZone = States.LiftZones.LOWER_DANGER;
     } else if ((elevator.getLiftPosition() > 100000) && (elevator.getLiftPosition() < RobotMap.liftUpperBound))
