@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-
+import com.ctre.phoenix.motorcontrol.ControlMode;
 public class Neptune extends TimedRobot {
 
   public static Elevator elevator = Elevator.getInstance();
@@ -86,7 +86,7 @@ public class Neptune extends TimedRobot {
   }
 
   @Override
-  public void teleopPeriodic() {
+  public void teleopPeriodic() { 
     oi2.controlLoop();
     postSmartDashVars();
     climber.getNavXPitch();

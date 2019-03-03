@@ -13,8 +13,9 @@ public class ClimbToWin extends CommandGroup {
 		addSequential(new WaitCommand(2));
 		addParallel(new ElevateToPosition(7));
 		addSequential(new ClimbWithGyro(0, 3));
-		addSequential(new ClimbWithGyro(-2, 1));
+		addSequential(new ClimbWithGyro(-6, 1));
 		addSequential(new DriveClimberForwards());
+		addSequential(new LevitateUp());
 	}
 
 }

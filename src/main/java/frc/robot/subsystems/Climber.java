@@ -13,7 +13,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 public class Climber extends Subsystem {
 
    private static Climber Instance = null;
-   private VictorSPX driver;
+   public VictorSPX driver;
    private TalonSRX levitator;
    private AHRS navX;
    private double startPosition = 0;
@@ -48,7 +48,8 @@ public class Climber extends Subsystem {
 
   public void driveWheelsToWin(){
     // Turn on drive motors.. full steam ahead
-    driver.set(ControlMode.PercentOutput, .4);
+    System.out.println("Driving! +!+!+!+!+!+!+!+!++!+!+!+!++!+!+!+\n");
+    driver.set(ControlMode.Velocity, 300);
   }
 
   public void driveLevitator(double percent) {

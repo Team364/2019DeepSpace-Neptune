@@ -9,7 +9,7 @@ public class DriveClimberForwards extends Command {
 
     public DriveClimberForwards() {
         requires(Neptune.driveTrain);
-        setTimeout(2);
+        setTimeout(1.4);
     }
 
     @Override

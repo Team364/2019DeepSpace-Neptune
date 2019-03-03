@@ -31,7 +31,7 @@ public class RobotMap {
     public static final int armLimitSwitch = 1;// Digital Input
     // Climb
     public static final int levitator = 2;// VictorSPX
-    public static final int climbDriveMotor = 2;// Back
+    public static final int climbDriveMotor = 52;// Back
     // public static final int climbPort2 = 5;// Back
     // public static final int climbPort3 = 0;// Front
     // public static final int climbPort4 = 7;// Front
