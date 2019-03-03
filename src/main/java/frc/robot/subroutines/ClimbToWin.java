@@ -5,7 +5,7 @@ import frc.robot.Neptune;
 import frc.robot.commands.*;
 
 public class ClimbToWin extends CommandGroup {
-  
+
 	public ClimbToWin() {
 		addSequential(new ElevateToPosition(6));
 		addSequential(new WaitCommand(2));

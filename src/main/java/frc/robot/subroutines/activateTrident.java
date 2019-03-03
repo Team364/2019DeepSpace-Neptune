@@ -5,7 +5,6 @@ import frc.robot.Neptune;
 import frc.robot.commands.*;
 
 public class ActivateTrident extends CommandGroup {
-
   public ActivateTrident(int set) {
     if (set == 1) { // Intake Cargo
       addSequential(new RunIntake(-0.6, true)); // Intake
