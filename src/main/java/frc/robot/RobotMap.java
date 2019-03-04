@@ -18,6 +18,7 @@ public class RobotMap {
     public static final int bottomLift = 13;// Talon SRX -- Gyro
     public static final int lowerLiftLimitSwitch = 3;// Digital Input
     public static final int upperLiftLimitSwitch = 2;// Digital Input
+    public static final int servoCamera = 0;//PWM
     // Grip
     public static final int rightClaw = 1;// Victor SPX
     public static final int leftClaw = 7;// Victor SPX
@@ -32,9 +33,7 @@ public class RobotMap {
     // Climb
     public static final int levitator = 2;// VictorSPX
     public static final int climbDriveMotor = 52;// Back
-    // public static final int climbPort2 = 5;// Back
-    // public static final int climbPort3 = 0;// Front
-    // public static final int climbPort4 = 7;// Front
+
 
     // Software
     // Drive
@@ -68,20 +67,28 @@ public class RobotMap {
     public static final int liftAcceleration = 10000;
     public static final double liftLowerBound = -20;
     public static final double liftUpperBound = 135000;
+    public static final double l1Hcam = 0.0;
+    public static final double l1Ccam = 0.1;
+    public static final double l2Hcam = 0.1;
+    public static final double l2Ccam = 0.1;
+    public static final double l3Hcam = 0.1;
+    public static final double l3Ccam = 0.1;
+    public static final double iCcam = 0.1;
+    public static final double fCam = 0.1;
     // Lift PID
     public static final double liftPgain = 0.3;
     public static final double liftIgain = 0.0;
     public static final double liftDgain = 0.0;
     public static final double liftFgain = 0.2;
     // Closed Loop Targets
-    public static final double liftLowH = 16000;// Level 1 for Hatch
+    public static final double liftLowH = 15000;// Level 1 for Hatch
     public static final double liftMedH = 77000;// Level 2 Rocket for Hatch
     public static final double liftHighH = 132000;// Level 3 Rocket for Hatch
     public static final double liftLowC = 35000;// Level 1 Rocket Cargo
     public static final double liftMedC = 92000;// Level 2 Rocket Cargo
     public static final double liftHighC = 130000;// Level 3 Rocket Cargo
-    public static final double liftCargoC = 80000;// Scoring Cargo in Cargo Ship
-    public static final double liftIntake = 14000;// Intaking Cargo
+    public static final double liftCargoC = 75000;// Scoring Cargo in Cargo Ship
+    public static final double liftIntake = 12000;// Intaking Cargo
     public static final double liftStartConfig = 1000;// Starting Config for Lift
     // Arm
     // TalonBase Config
@@ -101,8 +108,8 @@ public class RobotMap {
     public static final double armDgain = 0.0;
     public static final double armFgain = 0.0;
     // Closed Loop Targets
-    public static final double armIntakeCargo = 4300;
-    public static final double armPerpindicularToGround = 3250;
+    public static final double armIntakeCargo = 4400;
+    public static final double armPerpindicularToGround = 3300;
     public static final double armStartConfig = 100;
     public static final double armScoreOnHigh = 2000;
     // Intake

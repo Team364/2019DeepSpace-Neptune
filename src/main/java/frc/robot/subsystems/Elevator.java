@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import frc.robot.States;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.robot.misc.Piston;
+import edu.wpi.first.wpilibj.PWM;
 
 public class Elevator extends Subsystem {
 
@@ -23,6 +24,7 @@ public class Elevator extends Subsystem {
   private TalonSRX climber;
   private DoubleSolenoid fr;
   public Piston front;
+  private PWM servoCamera; 
   
 
   public Elevator() {
@@ -31,6 +33,7 @@ public class Elevator extends Subsystem {
     liftSlave.follow(lift);
     liftSlave.setInverted(false);
     liftSlave.setNeutralMode(NeutralMode.Brake);
+    servoCamera = new PWM(RobotMap.servoCamera);
 
     climber = new TalonSRX(2);
 
@@ -111,6 +114,9 @@ public class Elevator extends Subsystem {
     arm.set(ControlMode.MotionMagic, armAngle);
     TargetHeight = liftHeight;
     TargetAngle = armAngle;
+  }
+  public void setCamera(double position){
+    servoCamera.setPosition(position);
   }
 
   public void setLiftPosition(double liftHeight) {

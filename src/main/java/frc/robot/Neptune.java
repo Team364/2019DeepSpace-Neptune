@@ -90,7 +90,7 @@ public class Neptune extends TimedRobot {
   public void teleopPeriodic() { 
     oi2.controlLoop();
     postSmartDashVars();
-    climber.getNavXPitch();
+    //climber.getNavXPitch();
     if ((elevator.getLiftPosition() < 10000) && (elevator.getLiftPosition() > RobotMap.liftLowerBound)) {
       States.liftZone = States.LiftZones.LOWER_DANGER;
     } else if ((elevator.getLiftPosition() > 100000) && (elevator.getLiftPosition() < RobotMap.liftUpperBound))
