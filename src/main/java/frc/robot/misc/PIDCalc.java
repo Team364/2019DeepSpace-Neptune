@@ -18,6 +18,8 @@ public class PIDCalc {
     private double error = 0;
     private double result = 0;
     private double tolerance;
+    private double maxOutput = 1.0;
+    private double minOutput = 1.0;
 
     public PIDCalc(double pTerm, double iTerm, double dTerm, double fTerm, String name) {
         setPIDParameters(pTerm, iTerm, dTerm, fTerm);
@@ -29,14 +31,19 @@ public class PIDCalc {
         integral += (error * 0.02);
         derivative = (error - prev_error) / 0.02;
         result = kF + (kP * error) + (kI * integral) + (kD * derivative);
-        if (result > 1) {
-            result = 1;
-        } else if (result < -1) {
-            result = -1;
+        if (result > maxOutput) {
+            result = maxOutput;
+        } else if (result < minOutput) {
+            result = minOutput;
         }
         smartDashVars();
         prev_error = error;
         return result;
+    }
+
+    public void setOutputBoundaries(double minOutput, double maxOutput){
+        this.minOutput = minOutput;
+        this.maxOutput = maxOutput;
     }
 
     public void resetPID() {

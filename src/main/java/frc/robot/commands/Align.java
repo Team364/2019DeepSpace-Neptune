@@ -16,9 +16,9 @@ public class Align extends Command {
   // Number of camera updates to wait for before
   // taking any action. This prevents robot from acting
   // on stale information.
-  static int updatesToWait = 1;
+  static int updatesToWait = 2;
 
-  PIDCalc alignPID = new PIDCalc(0.1, 0.1, 0.0, 0.0, "Align");
+  PIDCalc alignPID = new PIDCalc(0,0,0,0, "Align");
   double lastTimeStamp = 0.0;
   double desiredHeading = 0.0;
   boolean desiredHeadingSet = false;
@@ -45,13 +45,14 @@ public class Align extends Command {
 
     // TODO: TUNE PIDs differently for hi/lo gear
     if (Neptune.driveTrain.isShifterHigh()) {
-      //Shift Low
-      alignPID.setPIDParameters(0.05, 0.1, 0.0, 0.0);
-    } else {
       //Shift High
       alignPID.setPIDParameters(0.25, 0.0, 0.15, 0);
+    } else {
+      //Shift Low
+      alignPID.setPIDParameters(0.05, 0.1, 0.0, 0.0);
     }
     alignPID.resetPID();
+    alignPID.setOutputBoundaries(-.3, .3);
 
     Neptune.driveTrain.zeroGyro();
   }

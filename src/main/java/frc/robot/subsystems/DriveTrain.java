@@ -154,7 +154,6 @@ public class DriveTrain extends Subsystem {
   }
 
   public boolean isShifterHigh() {
-    // TODO: Verify that CLOSED is when we are in "high" gear
-    return this.shifter.getPistonState() == PistonStates.CLOSED;
+    return this.shifter.getPistonState() == PistonStates.OPEN;
   }
 }
