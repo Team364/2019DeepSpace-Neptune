@@ -170,7 +170,7 @@ public class Elevator extends Subsystem {
   }
   public void stopLift() {
     lift.set(ControlMode.PercentOutput, 0);
-    System.out.println("The Lift has been stopped");
+    //System.out.println("The Lift has been stopped");
   }
 
   public void stopArm() {
