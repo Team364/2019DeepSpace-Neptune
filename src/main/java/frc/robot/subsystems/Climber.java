@@ -48,7 +48,6 @@ public class Climber extends Subsystem {
 
   public void driveWheelsToWin(){
     // Turn on drive motors.. full steam ahead
-    System.out.println("Driving! +!+!+!+!+!+!+!+!++!+!+!+!++!+!+!+\n");
     driver.set(ControlMode.Velocity, 300);
   }
 
@@ -57,7 +56,7 @@ public class Climber extends Subsystem {
   }
 
   public void getNavXPitch() {
-      System.out.println("NAVX PITCH +++++++++++++++ : " + navX.getPitch() + " +++++++++++++++++++ \n");
+   //   System.out.println("NAVX PITCH +++++++++++++++ : " + navX.getPitch() + " +++++++++++++++++++ \n");
   }
 
   public void stop() {

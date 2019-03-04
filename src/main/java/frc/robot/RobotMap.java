@@ -74,7 +74,7 @@ public class RobotMap {
     public static final double liftDgain = 0.0;
     public static final double liftFgain = 0.2;
     // Closed Loop Targets
-    public static final double liftLowH = 15000;// Level 1 for Hatch
+    public static final double liftLowH = 16000;// Level 1 for Hatch
     public static final double liftMedH = 77000;// Level 2 Rocket for Hatch
     public static final double liftHighH = 132000;// Level 3 Rocket for Hatch
     public static final double liftLowC = 35000;// Level 1 Rocket Cargo
@@ -101,8 +101,8 @@ public class RobotMap {
     public static final double armDgain = 0.0;
     public static final double armFgain = 0.0;
     // Closed Loop Targets
-    public static final double armIntakeCargo = 4200;
-    public static final double armPerpindicularToGround = 3100;
+    public static final double armIntakeCargo = 4300;
+    public static final double armPerpindicularToGround = 3250;
     public static final double armStartConfig = 100;
     public static final double armScoreOnHigh = 2000;
     // Intake

@@ -3,11 +3,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
 
-/**Modes:
- * <p>0: Open
- * <p>1: Close
- * @param mode
- */
 public class ClimbWithGyro extends Command {
 
     double angle;
@@ -15,6 +10,7 @@ public class ClimbWithGyro extends Command {
     public ClimbWithGyro(double angle, double timeout) {
         setTimeout(timeout);
         this.angle = angle;
+        requires(Neptune.climber);
     }
 
     @Override
@@ -23,7 +19,9 @@ public class ClimbWithGyro extends Command {
 
     @Override
     protected void execute() { 
-        Neptune.climber.levitateWithGyro(angle);    
+        Neptune.climber.levitateWithGyro(angle);  
+        Neptune.climber.driveWheelsToWin();   
+        System.out.println("Climb with gyro at " + angle + " is executing");
     }
 
     @Override
@@ -34,5 +32,7 @@ public class ClimbWithGyro extends Command {
     @Override
     protected void end() {
         Neptune.climber.keepCurrentPosition();
+        System.out.println("Climb with Gyro Complete");
     }
+
 }

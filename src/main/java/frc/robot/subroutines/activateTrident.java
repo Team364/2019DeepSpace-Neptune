@@ -12,6 +12,7 @@ public class ActivateTrident extends CommandGroup {
       System.out.println("Intaking Cargo");
     } else if (set == 2) { // Intake Hatch
       addSequential(new SetPiston(Neptune.trident.lever, 1)); // Open lever
+      addSequential(new ElevateToPosition(8));
       System.out.println("Grabbing Hatch");
     } else if (set == 3) { // Score Cargo
       addSequential(new RunIntake(0.75, false)); // Outtake

@@ -8,12 +8,12 @@ public class ClimbToWin extends CommandGroup {
 
 	public ClimbToWin() {
 		addSequential(new ElevateToPosition(6));
-		addSequential(new WaitCommand(2));
+		addSequential(new WaitCommand(1.6));
 		addSequential(new SetPiston(Neptune.elevator.front, 1));
-		addSequential(new WaitCommand(2));
+		addSequential(new WaitCommand(0.5));
 		addParallel(new ElevateToPosition(7));
 		addSequential(new ClimbWithGyro(0, 3));
-		addSequential(new ClimbWithGyro(-6, 1));
+		addSequential(new ClimbWithGyro(-4, 0.8));
 		addSequential(new DriveClimberForwards());
 		addSequential(new LevitateUp());
 	}

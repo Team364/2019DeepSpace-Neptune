@@ -20,7 +20,8 @@ public class DriveClimberForwards extends Command {
     @Override
     protected void execute() {
         Neptune.driveTrain.openLoop(0.4, 0.4);
-        Neptune.climber.driveWheelsToWin();    
+        Neptune.climber.driveWheelsToWin();  
+        System.out.println("Drive Climb Forward is executing");
     }
 
     @Override
@@ -32,5 +33,6 @@ public class DriveClimberForwards extends Command {
     protected void end() {
         Neptune.driveTrain.stop();
         Neptune.climber.stop();
+        System.out.println("Drive Climb  Forward has ended");
     }
 }

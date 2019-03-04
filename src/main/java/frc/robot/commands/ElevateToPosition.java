@@ -121,6 +121,10 @@ public class ElevateToPosition extends Command {
             Neptune.elevator.setClimbCruiseVelocity();
             wantedPosition = liftStartConfig;
             wantedAngle = 1500;
+        } else if (desiredHeight == 8){
+            Neptune.elevator.setPlayCruiseVelocity();
+            wantedPosition = low + 5000;
+            wantedAngle = lvlone;
         }
 
         Neptune.elevator.elevateTo(wantedPosition, wantedAngle);

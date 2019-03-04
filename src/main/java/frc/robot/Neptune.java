@@ -69,6 +69,7 @@ public class Neptune extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
+    oi2.controlLoop();
     // switch (autoSelected) {
     // case autoName:
     // Auto1.start();
@@ -105,9 +106,9 @@ public class Neptune extends TimedRobot {
       elevator.stopLift();
     }
 
-    System.out.println("tgt x: " + vision.getCenterXValues()[0] + 
-                       " hdg: " + driveTrain.getGyroAngle() + 
-                       " dst: " + vision.getDistanceValues()[0]);
+  //   System.out.println("tgt x: " + vision.getCenterXValues()[0] + 
+  //                      " hdg: " + driveTrain.getGyroAngle() + 
+  //                      " dst: " + vision.getDistanceValues()[0]);
 
   }
 

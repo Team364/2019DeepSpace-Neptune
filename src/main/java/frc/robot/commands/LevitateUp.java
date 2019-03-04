@@ -6,7 +6,7 @@ import frc.robot.Neptune;
 public class LevitateUp extends Command {
 
     public LevitateUp() {
-        setTimeout(1.0);
+        setTimeout(1.3);
     }
 
     @Override
@@ -27,5 +27,6 @@ public class LevitateUp extends Command {
     @Override
     protected void end() {
         Neptune.climber.driveLevitator(0);
+        System.out.println("Levitate Up has ended");
     }
 }
