@@ -46,11 +46,6 @@ public class Climber extends Subsystem {
       levitator.set(ControlMode.MotionMagic, pos);
   }
 
-  public void driveWheelsToWin(){
-    // Turn on drive motors.. full steam ahead
-    driver.set(ControlMode.PercentOutput, .4);
-  }
-
   public void driveLevitator(double percent) {
       levitator.set(ControlMode.PercentOutput, percent);
   }

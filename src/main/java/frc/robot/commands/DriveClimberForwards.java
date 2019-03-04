@@ -25,8 +25,8 @@ public class DriveClimberForwards extends Command {
 
     @Override
     protected void execute() {
-        Neptune.driveTrain.openLoop(0.4, 0.4);
-        Neptune.climber.driveWheelsToWin();    
+        Neptune.driveTrain.openLoop(0.5, 0.5);
+        Neptune.climber.driveLevitator(0.6);    
     }
 
     @Override
