@@ -67,12 +67,13 @@ public class RobotMap {
     public static final int liftAcceleration = 10000;
     public static final double liftLowerBound = -20;
     public static final double liftUpperBound = 135000;
+    
     public static final double l1Hcam = 0.0;
     public static final double l1Ccam = 0.1;
-    public static final double l2Hcam = 0.1;
-    public static final double l2Ccam = 0.1;
-    public static final double l3Hcam = 0.1;
-    public static final double l3Ccam = 0.1;
+    public static final double l2Hcam = 0.4;
+    public static final double l2Ccam = 0.5;
+    public static final double l3Hcam = 0.7;
+    public static final double l3Ccam = 0.7;
     public static final double iCcam = 0.1;
     public static final double fCam = 0.1;
     // Lift PID
