@@ -16,7 +16,7 @@ public class Align extends Command {
   // Number of camera updates to wait for before
   // taking any action. This prevents robot from acting
   // on stale information.
-  static int updatesToWait = 2;
+  static int updatesToWait = 3;
 
   PIDCalc alignPID = new PIDCalc(0,0,0,0, "Align");
   double lastTimeStamp = 0.0;
@@ -26,7 +26,7 @@ public class Align extends Command {
   int numCamUpdates = 0;
 
   public Align() {
-    this.setTimeout(1.0);
+    this.setTimeout(2.0);
     requires(Neptune.driveTrain);
     alignPID.setTolerance(1);
     setInterruptible(true);
@@ -36,7 +36,7 @@ public class Align extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    System.out.println("ALIGN INIT");
+    //System.out.println("ALIGN INIT");
     lastTimeStamp = Neptune.vision.getTimeStamp();
     desiredHeading = 0.0;
     desiredHeadingSet = false;
@@ -46,10 +46,14 @@ public class Align extends Command {
     // TODO: TUNE PIDs differently for hi/lo gear
     if (Neptune.driveTrain.isShifterHigh()) {
       //Shift High
-      alignPID.setPIDParameters(0.25, 0.0, 0.15, 0);
+      //alignPID.setPIDParameters(0.25, 0.0, 0.15, 0);
+      alignPID.setPIDParameters(0.75, 0.0, 0.0, 0);
+
     } else {
       //Shift Low
-      alignPID.setPIDParameters(0.05, 0.1, 0.0, 0.0);
+      //alignPID.setPIDParameters(0.05, 0.1, 0.0, 0.0);
+      alignPID.setPIDParameters(0.75, 0.0, 0.0, 0);
+
     }
     alignPID.resetPID();
     alignPID.setOutputBoundaries(-.3, .3);
@@ -60,7 +64,7 @@ public class Align extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    System.out.println("ALIGN EXECUTE");
+    //System.out.println("ALIGN EXECUTE");
 
     // Algorithm
     // 0) capture current robot state
@@ -118,16 +122,16 @@ public class Align extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    System.out.println("ALIGN ISFINISHED");
+    //System.out.println("ALIGN ISFINISHED");
 
     if (alignPID.onTarget()) System.out.println("ALIGN DONE: ON TARGET");
-    return (alignPID.onTarget() && desiredHeadingSet) || !targetFound; //|| (Neptune.vision.getCenterXValues()[0] == 0);
+    return (alignPID.onTarget() && desiredHeadingSet) || !targetFound || isTimedOut(); //|| (Neptune.vision.getCenterXValues()[0] == 0);
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    System.out.println("ALIGN END");
+    //System.out.println("ALIGN END");
     Neptune.driveTrain.stop();
     alignPID.resetPID();
   }
