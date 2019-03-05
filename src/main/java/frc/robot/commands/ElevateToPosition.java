@@ -29,12 +29,12 @@ public class ElevateToPosition extends Command {
     double liftClimb;
     double armClimb;
 
-    double camera;
-    private double l1cam;
-    private double l2cam;
-    private double l3cam;
-    private double frontCam;
-    private double intakeCam;
+    int camera;
+    private int l1cam;
+    private int l2cam;
+    private int l3cam;
+    private int frontCam;
+    private int intakeCam;
 
     /**
      * Heights
@@ -102,7 +102,7 @@ public class ElevateToPosition extends Command {
             l1cam = RobotMap.l1Ccam;
             l2cam = RobotMap.l2Ccam;
             l3cam = RobotMap.l3Ccam;
-            intakeCam = RobotMap.iCcam;
+            intakeCam = RobotMap.l1Ccam;
 
         }
 
@@ -110,7 +110,7 @@ public class ElevateToPosition extends Command {
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = intake;
             wantedAngle = intakeCargo;
-            camera = frontCam;
+            camera = l1cam;
         } else if (desiredHeight == 1) {
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = low;
@@ -130,7 +130,7 @@ public class ElevateToPosition extends Command {
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = cargo;
             wantedAngle = 4200;
-            camera = intakeCam;
+            camera = frontCam;
         } else if (desiredHeight == 5) {
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = liftStartConfig;

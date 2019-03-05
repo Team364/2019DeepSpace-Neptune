@@ -115,8 +115,8 @@ public class Elevator extends Subsystem {
     TargetHeight = liftHeight;
     TargetAngle = armAngle;
   }
-  public void setCamera(double position){
-    servoCamera.setPosition(position);
+  public void setCamera(int position){
+    servoCamera.setRaw(position);
   }
 
   public void setLiftPosition(double liftHeight) {

@@ -67,15 +67,14 @@ public class RobotMap {
     public static final int liftAcceleration = 10000;
     public static final double liftLowerBound = -20;
     public static final double liftUpperBound = 135000;
-    
-    public static final double l1Hcam = 0.0;
-    public static final double l1Ccam = 0.1;
-    public static final double l2Hcam = 0.4;
-    public static final double l2Ccam = 0.5;
-    public static final double l3Hcam = 0.7;
-    public static final double l3Ccam = 0.7;
-    public static final double iCcam = 0.1;
-    public static final double fCam = 0.1;
+
+    public static final int l1Hcam = 300;
+    public static final int l1Ccam = 300;
+    public static final int l2Hcam = 600;
+    public static final int l2Ccam = 800;
+    public static final int l3Hcam = 1200;
+    public static final int l3Ccam = 1200;
+    public static final int fCam = 500;
     // Lift PID
     public static final double liftPgain = 0.3;
     public static final double liftIgain = 0.0;
@@ -112,7 +111,7 @@ public class RobotMap {
     public static final double armIntakeCargo = 4400;
     public static final double armPerpindicularToGround = 3300;
     public static final double armStartConfig = 100;
-    public static final double armScoreOnHigh = 2000;
+    public static final double armScoreOnHigh = 2400;
     // Intake
     public static final double intakeNominalOutputForward = 0;
     public static final double intakeNominalOutputReverse = 0;

@@ -47,6 +47,8 @@ public class Neptune extends TimedRobot {
 
     camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
     camera.setResolution(320, 240);
+    camera.setBrightness(80);
+    camera.setFPS(25);
 
     // Auto1 = new AutoName();
     driveTrain.zeroGyro();
