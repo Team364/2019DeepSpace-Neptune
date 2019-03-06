@@ -31,7 +31,7 @@ public class RunIntake extends Command {
     @Override
     protected boolean isFinished() {
         if(intaking){
-            return isTimedOut() || !Neptune.trident.intakeLimit.get();
+            return isTimedOut() || !Neptune.trident.infrared.get();
         }else{
             return isTimedOut();
         }

@@ -23,8 +23,7 @@ public class ElevatorManual extends Command {
     @Override
     protected void execute() {
         
-        liftPower = -Neptune.oi2.controller2.getRawAxis(1);
-        armPower = Neptune.oi2.controller2.getRawAxis(5);
+        liftPower = -Neptune.oi2.buttoBoxo.getRawAxis(1);
         if(liftPower > 0.1){
             if(!Neptune.manualControl){
                 adjustedLiftPosition = Neptune.elevator.getLiftPosition();

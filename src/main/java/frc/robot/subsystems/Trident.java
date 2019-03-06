@@ -18,7 +18,7 @@ public class Trident extends Subsystem {
   private DoubleSolenoid le;
   public Piston claw;
   public Piston lever;
-  public DigitalInput intakeLimit;
+  public DigitalInput infrared;
 
   public Trident() {
     intake = new VictorSPX(RobotMap.rightClaw);
@@ -26,7 +26,7 @@ public class Trident extends Subsystem {
     intakeSlave = new VictorSPX(RobotMap.leftClaw);
     intakeSlave.follow(intake);
 
-    intakeLimit = new DigitalInput(RobotMap.intakeLimitSwitch);
+    infrared = new DigitalInput(RobotMap.intakeLimitSwitch);
 
     cl = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.intakePort1, RobotMap.intakePort2);
     le = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.leverPort1, RobotMap.leverPort2);

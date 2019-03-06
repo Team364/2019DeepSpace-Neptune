@@ -6,7 +6,6 @@ import frc.robot.subsystems.*;
 import frc.robot.oi.*;
 import frc.robot.subroutines.ActivateTrident;
 import frc.robot.States;
-import frc.robot.commands.ElevateToPosition;
 import frc.robot.misc.*;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
