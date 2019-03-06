@@ -34,7 +34,9 @@ public class ElevatorManual extends Command {
         }else if(liftPower < -0.1){
             adjustedLiftPosition -= 700;
         }
-        
+        if(adjustedLiftPosition > 132000){
+            adjustedLiftPosition = 132000;
+        }
         Neptune.elevator.setLiftPosition(adjustedLiftPosition);
 
        

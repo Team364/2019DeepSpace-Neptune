@@ -4,14 +4,16 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
 import frc.robot.oi.*;
+import frc.robot.subroutines.ActivateTrident;
 import frc.robot.States;
+import frc.robot.commands.ElevateToPosition;
 import frc.robot.misc.*;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import com.ctre.phoenix.motorcontrol.ControlMode;
+import edu.wpi.first.wpilibj.command.Command;
 public class Neptune extends TimedRobot {
 
   public static Elevator elevator = Elevator.getInstance();
@@ -24,33 +26,20 @@ public class Neptune extends TimedRobot {
   public static OperatorOI oi2;
 
   public UsbCamera camera;
-  // public static Command Auto1;
-  // public static Command Auto2;
-  // public static Command Auto3;
-  // //Auto Selector String
-  // private String autoSelected;
-  // //Auto Chooser
-  // private final SendableChooser<String> m_chooser = new SendableChooser<>();
-  // //Auto Selector String Options
-  // private static final String driveStraightAuto = "Default";
-  // private static final String autoName = "Auto1";
   public static boolean manualControl;
+  public static Command sandstorm1 = new ActivateTrident(2);
+  public static Command sandstorm2 = new ElevateToPosition(1);
 
   @Override
   public void robotInit() {
-    // Auto Selector init
-    // m_chooser.setDefaultOption("Default Auto", driveStraightAuto);
-    // m_chooser.addOption("AutoName", autoName);
-    // SmartDashboard.putData("Auto choices", m_chooser);
     oi = new DriverOI();
     oi2 = new OperatorOI();
 
     camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
     camera.setResolution(320, 240);
-    camera.setBrightness(80);
+    camera.setBrightness(70);
     camera.setFPS(25);
 
-    // Auto1 = new AutoName();
     driveTrain.zeroGyro();
 
   }
@@ -64,22 +53,14 @@ public class Neptune extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    // autoSelected = m_chooser.getSelected();
-    // System.out.println("Auto selected: " + autoSelected);
     Scheduler.getInstance().removeAll();
+    sandstorm1.start();
+    sandstorm2.start();
   }
 
   @Override
   public void autonomousPeriodic() {
     oi2.controlLoop();
-    // switch (autoSelected) {
-    // case autoName:
-    // Auto1.start();
-    // break;
-    // default:
-    // Auto1.start();
-    // break;
-    // }
   }
 
   @Override
@@ -92,7 +73,6 @@ public class Neptune extends TimedRobot {
   public void teleopPeriodic() { 
     oi2.controlLoop();
     postSmartDashVars();
-    //climber.getNavXPitch();
     if ((elevator.getLiftPosition() < 10000) && (elevator.getLiftPosition() > RobotMap.liftLowerBound)) {
       States.liftZone = States.LiftZones.LOWER_DANGER;
     } else if ((elevator.getLiftPosition() > 100000) && (elevator.getLiftPosition() < RobotMap.liftUpperBound))

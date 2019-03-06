@@ -152,7 +152,9 @@ public class ElevateToPosition extends Command {
             wantedAngle = lvlone;
             camera = l1cam;
         }
-
+        if(wantedPosition > 132000){
+            wantedPosition = 132000;
+        }
         Neptune.elevator.elevateTo(wantedPosition, wantedAngle);
         Neptune.elevator.setCamera(camera);
     }
