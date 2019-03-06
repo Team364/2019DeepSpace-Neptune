@@ -118,11 +118,8 @@ public class DriveTrain extends Subsystem {
 }
 
   public void openLoop(double left, double right) {
-    //System.out.println("openloop: " + left);
     leftDrive.set(ControlMode.PercentOutput, left);
     rightDrive.set(ControlMode.PercentOutput, -right);
-    //climbDrive.set(ControlMode.PercentOutput, left);
-
   }
 
   public void stop() {
@@ -137,15 +134,17 @@ public class DriveTrain extends Subsystem {
   public void zeroGyro() {
     navX.reset();
   }
-  public double getDisplacementX(){
-    return navX.getDisplacementX();
-  }
-  public double getDisplacementY(){
-    return navX.getDisplacementY();
-  }
+  // /**
+  //  * <p>0: left
+  //  * <p>1: right
+  //  */
+  // public double[] driveVelocities = {
+  //   leftDrive.getSelectedSensorVelocity(RobotMap.PIDLoopIdx),
+  //   rightDrive.getSelectedSensorVelocity(RobotMap.PIDLoopIdx)};
+
   public void postSmartDashVars(){
-    SmartDashboard.putNumber("Left Drive Cur", leftDrive.getOutputCurrent());
-    SmartDashboard.putNumber("Right Drive Cur: ", rightDrive.getOutputCurrent());
+    // SmartDashboard.putNumber("Left Drive Cur", leftDrive.getOutputCurrent());
+    // SmartDashboard.putNumber("Right Drive Cur: ", rightDrive.getOutputCurrent());
   }
 
   @Override

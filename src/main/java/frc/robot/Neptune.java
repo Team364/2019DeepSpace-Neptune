@@ -27,8 +27,7 @@ public class Neptune extends TimedRobot {
 
   public UsbCamera camera;
   public static boolean manualControl;
-  public static Command sandstorm1 = new ActivateTrident(2);
-  public static Command sandstorm2 = new ElevateToPosition(1);
+  public static Command sandstorm = new ActivateTrident(5);
 
   @Override
   public void robotInit() {
@@ -37,7 +36,7 @@ public class Neptune extends TimedRobot {
 
     camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
     camera.setResolution(320, 240);
-    camera.setBrightness(70);
+    camera.setBrightness(50);
     camera.setFPS(25);
 
     driveTrain.zeroGyro();
@@ -46,7 +45,7 @@ public class Neptune extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    Scheduler.getInstance().run();
+
     elevator.postSmartDashVars();
     driveTrain.postSmartDashVars();
   }
@@ -54,12 +53,12 @@ public class Neptune extends TimedRobot {
   @Override
   public void autonomousInit() {
     Scheduler.getInstance().removeAll();
-    sandstorm1.start();
-    sandstorm2.start();
+    sandstorm.start();
   }
 
   @Override
   public void autonomousPeriodic() {
+    Scheduler.getInstance().run();
     oi2.controlLoop();
   }
 
@@ -71,6 +70,7 @@ public class Neptune extends TimedRobot {
 
   @Override
   public void teleopPeriodic() { 
+    Scheduler.getInstance().run();
     oi2.controlLoop();
     postSmartDashVars();
     if ((elevator.getLiftPosition() < 10000) && (elevator.getLiftPosition() > RobotMap.liftLowerBound)) {

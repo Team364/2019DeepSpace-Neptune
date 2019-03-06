@@ -36,6 +36,8 @@ public class ElevateToPosition extends Command {
     private int frontCam;
     private int intakeCam;
 
+    private int loops;
+
     /**
      * Heights
      * <p>
@@ -53,12 +55,14 @@ public class ElevateToPosition extends Command {
         desiredHeight = Height;
         requires(Neptune.elevator);
         setInterruptible(true);
-        setTimeout(0.2);
+        setTimeout(0.05);
     }
 
     @Override
     protected void initialize() {
         Neptune.manualControl = false;
+        States.actionState = States.ActionStates.SCORE_ACT;
+        loops = 0;
     }
 
     @Override
@@ -111,21 +115,33 @@ public class ElevateToPosition extends Command {
             wantedPosition = intake;
             wantedAngle = intakeCargo;
             camera = l1cam;
+            if (loops < 1) {
+                System.out.println("Intake Position " + States.objState.toString());
+            }
         } else if (desiredHeight == 1) {
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = low;
             wantedAngle = lvlone;
             camera = l1cam;
+            if (loops < 1) {
+            System.out.println("Level 1 " + States.objState.toString());
+            }
         } else if (desiredHeight == 2) {
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = med;
             wantedAngle = perpendicularToGround;
             camera = l2cam;
+            if (loops < 1) {
+            System.out.println("Level 2 " + States.objState.toString());
+            }
         } else if (desiredHeight == 3) {
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = high;
             wantedAngle = lvlthree;
             camera = l3cam;
+            if (loops < 1) {
+            System.out.println("Level 3 " + States.objState.toString());
+            }
         } else if (desiredHeight == 4) {
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = cargo;
@@ -146,17 +162,18 @@ public class ElevateToPosition extends Command {
             wantedPosition = liftStartConfig;
             wantedAngle = 1500;
             camera = frontCam;
-        } else if (desiredHeight == 8){
+        } else if (desiredHeight == 8) {
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = low + 5000;
             wantedAngle = lvlone;
             camera = l1cam;
         }
-        if(wantedPosition > 132000){
+        if (wantedPosition > 132000) {
             wantedPosition = 132000;
         }
         Neptune.elevator.elevateTo(wantedPosition, wantedAngle);
         Neptune.elevator.setCamera(camera);
+        loops++;
     }
 
     @Override
@@ -166,6 +183,7 @@ public class ElevateToPosition extends Command {
 
     @Override
     protected void end() {
+        loops = 0;
     }
 
     @Override

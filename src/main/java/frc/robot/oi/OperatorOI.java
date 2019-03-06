@@ -122,9 +122,9 @@ public class OperatorOI{
         States.actionState = States.ActionStates.SEEK;
       }else{
         if(((tridentCase == 3)||(tridentCase == 4)) && Neptune.trident.tridentInactive()){
-          States.actionState = States.ActionStates.PASSIVE;  
+          States.actionState = States.ActionStates.FERRY_ACT;  
         }else if(Neptune.trident.tridentInactive()){
-          States.actionState = States.ActionStates.FERRY_ACT;
+          States.actionState = States.ActionStates.PASSIVE;
         }
  
       }
@@ -153,14 +153,15 @@ public class OperatorOI{
       if(controller2.getRawButton(6)){
         elevate = new ElevateToPosition(5);
         elevate.start();
-        if(States.objState == States.ObjectStates.HATCH_OBJ){
-          setLever = new SetPiston(Neptune.trident.lever, 0);
-          setClaw = new SetPiston(Neptune.trident.claw, 0);
-        }else if(States.objState == States.ObjectStates.CARGO_OBJ){
-          setLever = new SetPiston(Neptune.trident.lever, 1);
-          setClaw = new SetPiston(Neptune.trident.claw, 1);
-        }
-
+        // if(States.objState == States.ObjectStates.HATCH_OBJ){
+        //   setLever = new SetPiston(Neptune.trident.lever, 0);
+        //   setClaw = new SetPiston(Neptune.trident.claw, 0);
+        // }else if(States.objState == States.ObjectStates.CARGO_OBJ){
+        //   setLever = new SetPiston(Neptune.trident.lever, 1);
+        //   setClaw = new SetPiston(Neptune.trident.claw, 1);
+        // }
+        setLever = new SetPiston(Neptune.trident.lever, 0);
+        setClaw = new SetPiston(Neptune.trident.claw, 0);
         setLever.start();
         setClaw.start();
 

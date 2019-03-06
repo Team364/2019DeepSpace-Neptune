@@ -183,12 +183,12 @@ public class Elevator extends Subsystem {
   }
 
   public void postSmartDashVars() {
-    SmartDashboard.putNumber("Lift Percent Output: ", lift.getMotorOutputPercent());
-    SmartDashboard.putNumber("Other Lift Percent", liftSlave.getMotorOutputPercent());
-    SmartDashboard.putNumber("Arm Percent Output: ", arm.getMotorOutputPercent());
-    SmartDashboard.putNumber("Lift Current: ", getLiftCurrentDraw());
-    SmartDashboard.putNumber("Arm Current: ", getArmCurrentDraw());
-    SmartDashboard.putNumber("Other Lift Current", liftSlave.getOutputCurrent());
+    // SmartDashboard.putNumber("Lift Percent Output: ", lift.getMotorOutputPercent());
+    // SmartDashboard.putNumber("Other Lift Percent", liftSlave.getMotorOutputPercent());
+    // SmartDashboard.putNumber("Arm Percent Output: ", arm.getMotorOutputPercent());
+    // SmartDashboard.putNumber("Lift Current: ", getLiftCurrentDraw());
+    // SmartDashboard.putNumber("Arm Current: ", getArmCurrentDraw());
+    // SmartDashboard.putNumber("Other Lift Current", liftSlave.getOutputCurrent());
   }
 
   @Override

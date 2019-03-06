@@ -22,6 +22,7 @@ public class SetIntakePos extends Command {
 
     @Override
     protected void initialize() {
+        States.actionState = States.ActionStates.SEEK;
     }
 
     @Override
