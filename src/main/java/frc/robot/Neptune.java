@@ -44,7 +44,6 @@ public class Neptune extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-
     elevator.postSmartDashVars();
     driveTrain.postSmartDashVars();
   }

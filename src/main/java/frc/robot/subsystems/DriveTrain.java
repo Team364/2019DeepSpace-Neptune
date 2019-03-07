@@ -143,8 +143,8 @@ public class DriveTrain extends Subsystem {
   //   rightDrive.getSelectedSensorVelocity(RobotMap.PIDLoopIdx)};
 
   public void postSmartDashVars(){
-    // SmartDashboard.putNumber("Left Drive Cur", leftDrive.getOutputCurrent());
-    // SmartDashboard.putNumber("Right Drive Cur: ", rightDrive.getOutputCurrent());
+    SmartDashboard.putNumber("Left Drive ", leftDrive.getMotorOutputPercent());
+    SmartDashboard.putNumber("Right Drive ", rightDrive.getMotorOutputPercent());
   }
 
   @Override

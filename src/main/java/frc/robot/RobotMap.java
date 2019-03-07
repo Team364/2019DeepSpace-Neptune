@@ -43,8 +43,8 @@ public class RobotMap {
     public static final boolean leftDriveReverseEncoder = false;
     public static final double driveNominalOutputForward = 0;
     public static final double driveNominalOutputReverse = 0;
-    public static final double drivePeakOutputForward = 0.8;
-    public static final double drivePeakOutputReverse = -0.8;
+    public static final double drivePeakOutputForward = 1;
+    public static final double drivePeakOutputReverse = -1;
     public static final int driveCruiseVelocity = 20000;
     public static final int driveAcceleration = 8000;
     // Drive PID
