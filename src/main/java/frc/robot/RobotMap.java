@@ -8,7 +8,7 @@ public class RobotMap {
     public static final int leftFrontDrive = 15;// Talon SRX//
     public static final int leftTopDrive = 4;// Victor SPX
     public static final int leftRearDrive = 5;// Victor SPX
-    public static final int rightFrontDrive = 12; // Talon SPX//
+    public static final int rightFrontDrive = 4; // Talon SPX//
     public static final int rightTopDrive = 6;// 10 //Victor SPX//
     public static final int rightRearDrive = 3;// Victor SPX
     public static final int shifterPort1 = 3;// Primary PCM
