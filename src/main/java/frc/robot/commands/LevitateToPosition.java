@@ -7,7 +7,7 @@ public class LevitateToPosition extends Command {
 
     private double position;
     public LevitateToPosition(double position) {
-        setTimeout(5);
+        setTimeout(0.1);
         this.position = position;
     }
 

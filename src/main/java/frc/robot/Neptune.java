@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
 import frc.robot.oi.*;
@@ -27,6 +28,9 @@ public class Neptune extends TimedRobot {
   public UsbCamera camera;
   public static boolean manualControl;
   public static Command sandstorm = new ActivateTrident(5);
+  public static double teleopStart;
+  public static double teleopElapsedTime;
+  public static boolean endGame;
 
   @Override
   public void robotInit() {
@@ -39,7 +43,9 @@ public class Neptune extends TimedRobot {
     camera.setFPS(25);
 
     driveTrain.zeroGyro();
-
+    teleopStart = 0;
+    teleopElapsedTime = 0;
+    endGame = false;
   }
 
   @Override
@@ -64,13 +70,20 @@ public class Neptune extends TimedRobot {
   @Override
   public void teleopInit() {
     Scheduler.getInstance().removeAll();
-
+    teleopStart = Timer.getFPGATimestamp();
+    teleopStart = 0;
+    teleopElapsedTime = 0;
+    endGame = false;
   }
 
   @Override
   public void teleopPeriodic() { 
-    SmartDashboard.putNumber("Climb Per ", climber.levitator.getMotorOutputPercent());
-    SmartDashboard.putNumber("Climber Position", climber.levitator.getSelectedSensorPosition());
+    teleopElapsedTime = Timer.getFPGATimestamp() - teleopStart;
+    if(((teleopElapsedTime - 105) <= 30) && ((teleopElapsedTime - 105) > 0)){
+      endGame = true;
+    }else{
+      endGame = false;
+    }
     Scheduler.getInstance().run();
     oi2.controlLoop();
     postSmartDashVars();

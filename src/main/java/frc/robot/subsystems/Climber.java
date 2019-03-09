@@ -31,8 +31,8 @@ public class Climber extends Subsystem {
     levitator.configMotionAcceleration(RobotMap.levitatorAcceleration, RobotMap.TimeoutMs);
     levitator.setSensorPhase(RobotMap.levitatorSensorPhase);
     levitator.setInverted(true);
-    levitator.configPeakOutputForward(0.9);
-    levitator.configPeakOutputReverse(-0.9);
+    levitator.configPeakOutputForward(1);
+    levitator.configPeakOutputReverse(-1);
     levitator.setSelectedSensorPosition(0);
 
     levitator.selectProfileSlot(RobotMap.SlotIdx, RobotMap.PIDLoopIdx);
