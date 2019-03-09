@@ -19,7 +19,7 @@ public class DriveClimberForwards extends Command {
 
     @Override
     protected void execute() {
-        Neptune.driveTrain.openLoop(0.4, 0.4);
+        Neptune.driveTrain.openLoop(0.69, 0.69);
         Neptune.climber.driveWheelsToWin();  
         Neptune.climber.levitateToPos(RobotMap.climbLevitate);
         System.out.println("Drive Climb Forward is executing");

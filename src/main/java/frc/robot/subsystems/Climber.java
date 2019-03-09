@@ -70,7 +70,7 @@ public class Climber extends Subsystem {
     driver.set(ControlMode.Velocity, 300);
   }
   public void driveWheelsSlow(){
-    driver.set(ControlMode.Velocity, 50);
+    driver.set(ControlMode.Velocity, 80);
   }
   public void driveLevitator(double percent) {
       levitator.set(ControlMode.PercentOutput, percent);

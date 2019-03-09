@@ -127,7 +127,7 @@ public class RobotMap {
     //Climber
     public static final boolean levitatorSensorPhase = false;
     public static final int levitatorCruiseVelocity = 20000;
-    public static final int levitatorAcceleration = 5000;
+    public static final int levitatorAcceleration = 10000;
     // Lift PID
     public static final double levitatorPgain = 3;
     public static final double levitatorIgain = 0.0;
