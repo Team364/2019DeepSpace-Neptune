@@ -14,7 +14,8 @@ public class Climber extends Subsystem {
 
    private static Climber Instance = null;
    public VictorSPX driver;
-   private TalonSRX levitator;
+   public TalonSRX levitator;
+   public VictorSPX forearms;
    private AHRS navX;
    private double startPosition = 0;
    private double pidOutput = 0;
@@ -23,7 +24,25 @@ public class Climber extends Subsystem {
   public Climber() {
     driver = new VictorSPX(RobotMap.climbDriveMotor);
     levitator = new TalonSRX(RobotMap.levitator);
+    forearms = new VictorSPX(RobotMap.forearms);
     navX = new AHRS(SPI.Port.kMXP);
+
+    levitator.configMotionCruiseVelocity(RobotMap.levitatorCruiseVelocity, RobotMap.TimeoutMs);
+    levitator.configMotionAcceleration(RobotMap.levitatorAcceleration, RobotMap.TimeoutMs);
+    levitator.setSensorPhase(RobotMap.levitatorSensorPhase);
+    levitator.setInverted(true);
+    levitator.configPeakOutputForward(0.9);
+    levitator.configPeakOutputReverse(-0.9);
+    levitator.setSelectedSensorPosition(0);
+
+    levitator.selectProfileSlot(RobotMap.SlotIdx, RobotMap.PIDLoopIdx);
+    levitator.config_kF(RobotMap.SlotIdx, RobotMap.levitatorFgain, RobotMap.TimeoutMs);
+    levitator.config_kP(RobotMap.SlotIdx, RobotMap.levitatorPgain, RobotMap.TimeoutMs);
+    levitator.config_kI(RobotMap.SlotIdx, RobotMap.levitatorIgain, RobotMap.TimeoutMs);
+    levitator.config_kD(RobotMap.SlotIdx, RobotMap.levitatorDgain, RobotMap.TimeoutMs);
+
+    forearms.setInverted(true);
+    
   }
 
   public synchronized static Climber getInstance() {
@@ -50,10 +69,23 @@ public class Climber extends Subsystem {
     // Turn on drive motors.. full steam ahead
     driver.set(ControlMode.Velocity, 300);
   }
-
+  public void driveWheelsSlow(){
+    driver.set(ControlMode.Velocity, 50);
+  }
   public void driveLevitator(double percent) {
       levitator.set(ControlMode.PercentOutput, percent);
   }
+  public void levitateToPos(double position){
+    levitator.set(ControlMode.MotionMagic, position);
+    System.out.println("Levitator is moving to " + position);
+  }
+  public void engageForarms(double percentOut){
+    forearms.set(ControlMode.PercentOutput, percentOut);
+  }
+  public void stopForarms(){
+    forearms.set(ControlMode.PercentOutput, 0);
+  }
+
 
   public void getNavXPitch() {
    //   System.out.println("NAVX PITCH +++++++++++++++ : " + navX.getPitch() + " +++++++++++++++++++ \n");

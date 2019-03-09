@@ -8,7 +8,7 @@ public class RobotMap {
     public static final int leftFrontDrive = 15;// Talon SRX//
     public static final int leftTopDrive = 4;// Victor SPX
     public static final int leftRearDrive = 5;// Victor SPX
-    public static final int rightFrontDrive = 4; // Talon SPX//
+    public static final int rightFrontDrive = 3; //CURRENTLY A VICTOR; On Comp: Talon SPX//--figgly--12
     public static final int rightTopDrive = 6;// 10 //Victor SPX//
     public static final int rightRearDrive = 3;// Victor SPX
     public static final int shifterPort1 = 3;// Primary PCM
@@ -31,8 +31,9 @@ public class RobotMap {
     public static final int arm = 6; // Talon SRX
     public static final int armLimitSwitch = 1;// Digital Input
     // Climb
-    public static final int levitator = 2;// VictorSPX
-    public static final int climbDriveMotor = 52;// Back
+    public static final int levitator = 2;// TalonSRX
+    public static final int climbDriveMotor = 52;//VictorSPX
+    public static final int forearms = 20;//VictorSPX
 
 
     // Software
@@ -63,8 +64,9 @@ public class RobotMap {
     public static final double liftPeakOutputForward = 1;
     public static final double liftPeakOutputReverse = -0.75;
     public static final int liftCruiseVelocity = 30000;
-    public static final int liftCruiseVelocityClimb = 3500;
+    public static final int liftCruiseVelocityClimb = 2200;
     public static final int liftAcceleration = 10000;
+    public static final int liftAccelerationClimb = 1000;
     public static final double liftLowerBound = -20;
     public static final double liftUpperBound = 135000;
 
@@ -122,6 +124,17 @@ public class RobotMap {
     public static final double dropWheelsNominalOutputReverse = 0;
     public static final double dropWheelsPeakOutputForward = 0.5;
     public static final double dropWheelsPeakOutputReverse = -0.5;
+    //Climber
+    public static final boolean levitatorSensorPhase = false;
+    public static final int levitatorCruiseVelocity = 10000;
+    public static final int levitatorAcceleration = 3000;
+    // Lift PID
+    public static final double levitatorPgain = 3;
+    public static final double levitatorIgain = 0.0;
+    public static final double levitatorDgain = 0.0;
+    public static final double levitatorFgain = 0.0;
+    //Climb Setpoints
+    public static final double climbLevitate = 28000;
     // NavX
     public static final double navXPterm = 0.0005;
     public static final double navXIterm = 0.1;

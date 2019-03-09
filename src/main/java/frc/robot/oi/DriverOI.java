@@ -3,7 +3,6 @@ package frc.robot.oi;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.Neptune;
-import frc.robot.commands.SetPiston;
 import frc.robot.commands.*;
 import frc.robot.subroutines.*;
 public class DriverOI {
@@ -57,6 +56,7 @@ public class DriverOI {
 
     public JoystickButton climb;
     public JoystickButton liftClimber;
+    public JoystickButton climbRetract;
     //public JoystickButton ClimbDrive;
     //public JoystickButton retractClimb;
     //public JoystickButton climbElevate;

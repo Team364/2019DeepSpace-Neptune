@@ -10,7 +10,7 @@ public class ActivateTrident extends CommandGroup {
   public ActivateTrident(int set) {
     this.set = set;
     if (set == 1) { // Intake Cargo
-      addSequential(new RunIntake(-0.6, true)); // Intake
+      addSequential(new RunIntake(-0.8, true)); // Intake
       addSequential(new SetPiston(Neptune.trident.claw, 0)); // Close Claw
       System.out.println("Intaking Cargo");
     } else if (set == 2) { // Intake Hatch

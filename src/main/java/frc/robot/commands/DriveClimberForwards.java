@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
+import frc.robot.RobotMap;
 
 public class DriveClimberForwards extends Command {
 
@@ -9,18 +10,18 @@ public class DriveClimberForwards extends Command {
 
     public DriveClimberForwards() {
         requires(Neptune.driveTrain);
-        setTimeout(1.4);
+        setTimeout(1.6);
     }
 
     @Override
     protected void initialize() {
-        Neptune.climber.keepCurrentPosition();
     }
 
     @Override
     protected void execute() {
         Neptune.driveTrain.openLoop(0.4, 0.4);
         Neptune.climber.driveWheelsToWin();  
+        Neptune.climber.levitateToPos(RobotMap.climbLevitate);
         System.out.println("Drive Climb Forward is executing");
     }
 
@@ -33,6 +34,7 @@ public class DriveClimberForwards extends Command {
     protected void end() {
         Neptune.driveTrain.stop();
         Neptune.climber.stop();
+        Neptune.climber.levitateToPos(100);
         System.out.println("Drive Climb  Forward has ended");
     }
 }

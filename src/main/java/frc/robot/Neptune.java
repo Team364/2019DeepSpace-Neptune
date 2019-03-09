@@ -44,6 +44,7 @@ public class Neptune extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
+   
     elevator.postSmartDashVars();
     driveTrain.postSmartDashVars();
   }
@@ -68,6 +69,8 @@ public class Neptune extends TimedRobot {
 
   @Override
   public void teleopPeriodic() { 
+    SmartDashboard.putNumber("Climb Per ", climber.levitator.getMotorOutputPercent());
+    SmartDashboard.putNumber("Climber Position", climber.levitator.getSelectedSensorPosition());
     Scheduler.getInstance().run();
     oi2.controlLoop();
     postSmartDashVars();
