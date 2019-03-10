@@ -118,13 +118,14 @@ public class ElevateToPosition extends Command {
             if (loops < 1) {
                 System.out.println("Intake Position " + States.objState.toString());
             }
+            States.led = States.LEDstates.INTAKE_MODE;
         } else if (desiredHeight == 1) {
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = low;
             wantedAngle = lvlone;
             camera = l1cam;
             if (loops < 1) {
-            System.out.println("Level 1 " + States.objState.toString());
+                System.out.println("Level 1 " + States.objState.toString());
             }
         } else if (desiredHeight == 2) {
             Neptune.elevator.setPlayCruiseVelocity();
@@ -132,7 +133,7 @@ public class ElevateToPosition extends Command {
             wantedAngle = perpendicularToGround;
             camera = l2cam;
             if (loops < 1) {
-            System.out.println("Level 2 " + States.objState.toString());
+                System.out.println("Level 2 " + States.objState.toString());
             }
         } else if (desiredHeight == 3) {
             Neptune.elevator.setPlayCruiseVelocity();
@@ -140,7 +141,7 @@ public class ElevateToPosition extends Command {
             wantedAngle = lvlthree;
             camera = l3cam;
             if (loops < 1) {
-            System.out.println("Level 3 " + States.objState.toString());
+                System.out.println("Level 3 " + States.objState.toString());
             }
         } else if (desiredHeight == 4) {
             Neptune.elevator.setPlayCruiseVelocity();
@@ -152,6 +153,7 @@ public class ElevateToPosition extends Command {
             wantedPosition = liftStartConfig;
             wantedAngle = 300;
             camera = frontCam;
+            States.led = States.LEDstates.HAS_OBJ;
         } else if (desiredHeight == 6) {
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = 87000;

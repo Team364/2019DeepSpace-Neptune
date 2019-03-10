@@ -1,5 +1,8 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AnalogOutput;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -16,6 +19,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
 public class Neptune extends TimedRobot {
 
+  public static AnalogOutput LEDs = new AnalogOutput(0);
   public static Elevator elevator = Elevator.getInstance();
   public static DriveTrain driveTrain = DriveTrain.getInstance();
   public static Trident trident = Trident.getInstance();
@@ -31,6 +35,11 @@ public class Neptune extends TimedRobot {
   public static double teleopStart;
   public static double teleopElapsedTime;
   public static boolean endGame;
+  public int stopLoops;
+
+  private DriverStation dStation = DriverStation.getInstance();
+  public static RobotController diagnostics;
+ 
 
   @Override
   public void robotInit() {
@@ -40,19 +49,34 @@ public class Neptune extends TimedRobot {
     camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
     camera.setResolution(320, 240);
     camera.setBrightness(50);
-    camera.setFPS(25);
+    camera.setFPS(20);
 
     driveTrain.zeroGyro();
     teleopStart = 0;
     teleopElapsedTime = 0;
     endGame = false;
-  }
+    stopLoops = 0;
+  } 
 
   @Override
   public void robotPeriodic() {
-   
     elevator.postSmartDashVars();
     driveTrain.postSmartDashVars();
+        //LED set
+        if(!dStation.isDSAttached()){
+          LEDs.setVoltage(1);
+        }else if(dStation.isDSAttached()&&(dStation.isDisabled())){
+          LEDs.setVoltage(2);
+        }else if(States.led == States.LEDstates.INTAKE_MODE){
+          LEDs.setVoltage(3);
+        }else if(States.led == States.LEDstates.HAS_OBJ){
+          LEDs.setVoltage(4);
+        }else if(States.led == States.LEDstates.CLIMBING){
+          LEDs.setVoltage(5);
+        }else if(States.led == States.LEDstates.PASSIVE){
+          LEDs.setVoltage(2);
+        }
+      
   }
 
   @Override
@@ -96,15 +120,22 @@ public class Neptune extends TimedRobot {
     }
 
     if ((Neptune.elevator.getLiftPosition() >= RobotMap.liftUpperBound)) {
-      elevator.stopLift();
+      if(stopLoops == 0){
+        elevator.stopLift();
+        stopLoops++;
+      }
+      elevator.setLiftPosition(RobotMap.liftHighH);
+
     }
     if ((Neptune.elevator.getLiftPosition() <= RobotMap.liftLowerBound)) {
-      elevator.stopLift();
+      if(stopLoops == 0){
+        elevator.stopLift();
+        stopLoops++;
+      }
+      elevator.setLiftPosition(0);
+  
     }
 
-  //   System.out.println("tgt x: " + vision.getCenterXValues()[0] + 
-  //                      " hdg: " + driveTrain.getGyroAngle() + 
-  //                      " dst: " + vision.getDistanceValues()[0]);
 
   }
 
@@ -124,7 +155,6 @@ public class Neptune extends TimedRobot {
 
   public void postSmartDashVars() {
     SmartDashboard.putString("Object State:", States.objState.toString());
-    SmartDashboard.putString("Action State:", States.actionState.toString());
     SmartDashboard.putString("Lift Zone: ", States.liftZone.toString());
     SmartDashboard.putString("Elevator Command: ", elevator.getCurrentCommandName());
     SmartDashboard.putNumber("Elevator Target Height: ", elevator.TargetHeight);
@@ -133,5 +163,6 @@ public class Neptune extends TimedRobot {
     SmartDashboard.putNumber("Arm Target Angle: ", elevator.TargetAngle);
     SmartDashboard.putNumber("Arm Actual Angle", elevator.getArmAngle());
     SmartDashboard.putNumber("Arm Velocity: ", elevator.getArmVelocity());
+    SmartDashboard.putString("LED state: ", States.led.toString());
   }
 }

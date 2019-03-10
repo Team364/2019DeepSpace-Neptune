@@ -2,12 +2,14 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
+import frc.robot.States;
 
 
 public class RunIntake extends Command {
     
     private double power;
     private boolean intaking;
+
     public RunIntake(double power, boolean intaking) {
         requires(Neptune.trident);
         this.power = power;
@@ -19,7 +21,7 @@ public class RunIntake extends Command {
         if(intaking){
             setTimeout(2.5);
         }else{
-            setTimeout(0.6);
+            setTimeout(1.3);
         }
     }
 
@@ -33,14 +35,19 @@ public class RunIntake extends Command {
         if(intaking){
             return isTimedOut() || !Neptune.trident.infrared.get();
         }else{
-            return isTimedOut();
+            return isTimedOut() ||Neptune.trident.infrared.get();
         }
-        // return isTimedOut();
     }
 
     @Override
     protected void end() {
         Neptune.trident.stopIntake();
+        if(intaking){
+            States.led = States.LEDstates.HAS_OBJ;
+        }else{
+            States.led = States.LEDstates.PASSIVE;
+        }
+       
     }
 
     @Override

@@ -35,8 +35,9 @@ public class ActivateTrident extends CommandGroup {
     protected void initialize() {
       if((set == 1)||(set == 2)){
         States.actionState = States.ActionStates.INTAKE_ACT;
+
       }else{
-        States.actionState = States.ActionStates.SCORE_ACT;
+        States.led = States.LEDstates.PASSIVE;
       }
       
     }

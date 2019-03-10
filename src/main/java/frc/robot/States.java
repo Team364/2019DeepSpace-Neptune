@@ -16,6 +16,10 @@ public class States {
     public static enum ActionStates {
         INTAKE_ACT, FERRY_ACT, SCORE_ACT, PASSIVE, SEEK
     }
+    
+    public static enum LEDstates{
+        INTAKE_MODE, HAS_OBJ, CLIMBING, PASSIVE
+    }
 
     /**
      * This is essentially intended to be used for tracking whether or not vision is
@@ -43,4 +47,5 @@ public class States {
     public static DriveStates driveState = DriveStates.OPEN_LOOP;
     public static ScoreStates scoreState = ScoreStates.NONE;
     public static LiftZones liftZone = LiftZones.LOWER_DANGER;
+    public static LEDstates led = LEDstates.PASSIVE;
 }
