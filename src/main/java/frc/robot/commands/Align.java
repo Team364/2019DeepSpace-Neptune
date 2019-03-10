@@ -58,7 +58,7 @@ public class Align extends Command {
     alignPID.resetPID();
     alignPID.setOutputBoundaries(-.3, .3);
 
-    Neptune.driveTrain.zeroGyro();
+    // Neptune.driveTrain.zeroGyro();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -74,7 +74,7 @@ public class Align extends Command {
     // 4) move robot towards that angle using PID
 
     // 0) capture current robot state
-    double curHeading = Neptune.driveTrain.getGyroAngle();
+    // double curHeading = Neptune.driveTrain.getGyroAngle();
     double newTimeStamp = Neptune.vision.getTimeStamp();
     targetFound = Neptune.vision.targetsFound();
 
@@ -91,7 +91,7 @@ public class Align extends Command {
       // 2) calculate how far off our heading is, and
       // 3) determine our new heading angle
       if (!desiredHeadingSet) {
-        desiredHeading = getDesiredHeading(curHeading);
+        // desiredHeading = getDesiredHeading(curHeading);
         desiredHeadingSet = true;
       }
 
@@ -99,8 +99,8 @@ public class Align extends Command {
 
     // 4) move robot towards that angle using PID
     if (desiredHeadingSet) {
-      double pidOut = -1.0 * alignPID.calculateOutput(desiredHeading, curHeading);
-      Neptune.driveTrain.openLoop(-pidOut, pidOut);
+      // // double pidOut = -1.0 * alignPID.calculateOutput(desiredHeading, curHeading);
+      // Neptune.driveTrain.openLoop(-pidOut, pidOut);
     } else {
       Neptune.driveTrain.stop();
     }
@@ -111,7 +111,7 @@ public class Align extends Command {
     //   this.initialize();
     // }
 
-    System.out.println("curH: "+ curHeading + " desH: " + desiredHeading);
+    // System.out.println("curH: "+ curHeading + " desH: " + desiredHeading);
   }
 
   double getDesiredHeading(double curHeading) {

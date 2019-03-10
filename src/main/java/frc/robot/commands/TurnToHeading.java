@@ -20,19 +20,19 @@ public class TurnToHeading extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Neptune.driveTrain.zeroGyro();
+    //Neptune.driveTrain.zeroGyro();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
 
-    double pidOutputNavX = GyroPID.calculateOutput(heading, Neptune.driveTrain.getGyroAngle());
-    Neptune.driveTrain.openLoop(pidOutputNavX, -pidOutputNavX);
-    SmartDashboard.putNumber("Output: ", pidOutputNavX);
-    SmartDashboard.putNumber("Gyro Error", GyroPID.getError());
-    SmartDashboard.putBoolean("On Target", GyroPID.onTarget());
-    SmartDashboard.putNumber("GyroAngle: ", Neptune.driveTrain.getGyroAngle());
+    // double pidOutputNavX = GyroPID.calculateOutput(heading, Neptune.driveTrain.getGyroAngle());
+    // Neptune.driveTrain.openLoop(pidOutputNavX, -pidOutputNavX);
+    // SmartDashboard.putNumber("Output: ", pidOutputNavX);
+    // SmartDashboard.putNumber("Gyro Error", GyroPID.getError());
+    // SmartDashboard.putBoolean("On Target", GyroPID.onTarget());
+    // SmartDashboard.putNumber("GyroAngle: ", Neptune.driveTrain.getGyroAngle());
   }
 
   // Make this return true when this Command no longer needs to run execute()

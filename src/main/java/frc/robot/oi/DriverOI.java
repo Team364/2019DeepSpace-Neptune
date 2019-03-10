@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.Neptune;
 import frc.robot.commands.*;
 import frc.robot.subroutines.*;
+import edu.wpi.first.wpilibj.command.Command;
 public class DriverOI {
     //Driver Controller
     //Xbox One Wired Controller
@@ -55,6 +56,8 @@ public class DriverOI {
     public JoystickButton align;
 
     public JoystickButton climb;
+    public JoystickButton cancelClimb;
+    public Command climbSequence = new Climb();
 
     /**
      * OI()
@@ -74,8 +77,9 @@ public class DriverOI {
         align.whenPressed(new Align());
 
         climb = new JoystickButton(controller, 8);
-        climb.whenPressed(new Climb());
-
-
+        climb.whenPressed(climbSequence);
+        
+        cancelClimb = new JoystickButton(controller, 4);
+        cancelClimb.cancelWhenPressed(climbSequence);
     }
 }

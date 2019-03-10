@@ -65,29 +65,26 @@ public class OperatorOI{
 
     }
     /**
-   * Sets objectState
-   * <p>starts intakeObject
-   * <p>starts scoreObject
+   * Loop responsible for handling buttons
+   * seperately depending on cargo or hatch mode
    */
     public void controlLoop(){
 
-    /*Setting States
-    If Up on the D-pad is pressed,
-    Object state is set to Cargo
-    If Down on the D-pad is pressed,
-    Object state is set to Hatch*/
+      //State Buttons
     if(buttoBoxo.getRawButton(1)){
         States.objState = States.ObjectStates.CARGO_OBJ;
       }else if(buttoBoxo.getRawButton(2)){
         States.objState = States.ObjectStates.HATCH_OBJ;
       }
-      if(buttoBoxo.getRawButton(4)){
+      //Action Buttons
+      if(buttoBoxo.getRawButton(4)){//Intake
         States.actionState = States.ActionStates.INTAKE_ACT;
-      }else if(buttoBoxo.getRawButton(5)){
+      }else if(buttoBoxo.getRawButton(5)){//Score
         States.actionState = States.ActionStates.SCORE_ACT;
-      }else if(buttoBoxo.getRawButton(3)){
+      }else if(buttoBoxo.getRawButton(3)){//Intake Position
         States.actionState = States.ActionStates.SEEK;
-      }else{
+      }else{//If the robot is neither intaking, scoring, nor getting ready to intake then the robot
+            //should either have an object or be empty
         if(((tridentCase == 3)||(tridentCase == 4)) && Neptune.trident.tridentInactive()){
           States.actionState = States.ActionStates.FERRY_ACT;  
         }else if(Neptune.trident.tridentInactive()){
@@ -96,15 +93,27 @@ public class OperatorOI{
  
       }
       /**Sets action state for scoring and then runs the grip subroutine */
-      if(States.objState == States.ObjectStates.CARGO_OBJ) {cargo = true;}
-      else if(States.objState == States.ObjectStates.HATCH_OBJ) {cargo = false;}
-      if(States.actionState == States.ActionStates.SCORE_ACT) {intake = false;}
-      else if(States.actionState == States.ActionStates.INTAKE_ACT) {intake = true;}
-      if(cargo && intake){tridentCase = 1;}//Get Cargo
-      else if(!cargo && intake){tridentCase = 2;}//Get Hatch
-      else if(cargo && !intake){tridentCase = 3;} //Score Cargo
-      else if(!cargo && !intake){tridentCase  = 4;} //Score Hatch 
-      else{tridentCase = 0;}//Should never happen
+      if(States.objState == States.ObjectStates.CARGO_OBJ){
+        cargo = true;
+      }else if(States.objState == States.ObjectStates.HATCH_OBJ){
+        cargo = false;
+      }if(States.actionState == States.ActionStates.SCORE_ACT){
+        intake = false;
+      }else if(States.actionState == States.ActionStates.INTAKE_ACT){
+        intake = true;
+      }
+
+      if(cargo && intake){//Get Cargo
+        tridentCase = 1;
+      }else if(!cargo && intake){//Get Hatch
+        tridentCase = 2;
+      }else if(cargo && !intake){//Score Cargo
+        tridentCase = 3;
+      }else if(!cargo && !intake){//Score Hatch 
+        tridentCase  = 4;
+      }else{//Should never happen
+        tridentCase = 0;
+      }
 
       
       if((buttoBoxo.getRawButton(5))||(buttoBoxo.getRawButton(4))){
@@ -116,7 +125,7 @@ public class OperatorOI{
         liftManual.start();
       } 
       
-      //If RB is hit then the elevator goes to start config
+      //Retract Button
       if(buttoBoxo.getRawButton(6)){
         elevate = new ElevateToPosition(5);
         elevate.start();
