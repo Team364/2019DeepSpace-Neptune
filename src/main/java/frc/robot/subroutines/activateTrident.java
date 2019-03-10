@@ -48,6 +48,11 @@ public class ActivateTrident extends CommandGroup {
       }else{
         States.actionState = States.ActionStates.PASSIVE;
       }
+      if(set == 2){
+        States.led = States.LEDstates.HAS_OBJ;
+      }else if(set ==4){
+        States.led = States.LEDstates.PASSIVE;
+      }
     }
 
 

@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -12,7 +11,6 @@ import frc.robot.States;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.robot.misc.Piston;
 import edu.wpi.first.wpilibj.PWM;
-import frc.robot.Neptune;
 
 public class Elevator extends Subsystem {
 
@@ -22,7 +20,6 @@ public class Elevator extends Subsystem {
   private TalonSRX liftSlave;
   public double TargetHeight;
   public double TargetAngle;
-  private TalonSRX climber;
   private DoubleSolenoid fr;
   public Piston front;
   private PWM servoCamera; 
@@ -35,8 +32,6 @@ public class Elevator extends Subsystem {
     liftSlave.setInverted(false);
     liftSlave.setNeutralMode(NeutralMode.Brake);
     servoCamera = new PWM(RobotMap.servoCamera);
-
-    climber = new TalonSRX(2);
 
     arm = new TalonSRX(RobotMap.arm);
     fr = new DoubleSolenoid(1, 0, 7);
@@ -158,16 +153,6 @@ public class Elevator extends Subsystem {
     lift.setSelectedSensorPosition(0);
     arm.setSelectedSensorPosition(0);
     System.out.println("The Lift and Arm Encoders have been reset");
-  }
-  public void climb(){
-    lift.set(ControlMode.PercentOutput, -0.3);//Fix
-    climber.set(ControlMode.PercentOutput, -0.75);//Fix - Check Direction
-  }
-  public void retractClimb(){
-    climber.set(ControlMode.PercentOutput, 0.4);// - Fix. Check Direction
-  }
-  public void stopClimb(){
-    climber.set(ControlMode.PercentOutput, 0);
   }
   public void stopLift() {
     lift.set(ControlMode.PercentOutput, 0);

@@ -153,7 +153,12 @@ public class ElevateToPosition extends Command {
             wantedPosition = liftStartConfig;
             wantedAngle = 300;
             camera = frontCam;
-            States.led = States.LEDstates.HAS_OBJ;
+            if(States.objState == States.ObjectStates.CARGO_OBJ){
+                States.led = States.LEDstates.HAS_OBJ;
+            }else if(States.objState == States.ObjectStates.HATCH_OBJ){
+                States.led = States.LEDstates.PASSIVE;
+            }
+           
         } else if (desiredHeight == 6) {
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = 87000;

@@ -50,8 +50,7 @@ public class Neptune extends TimedRobot {
     camera.setResolution(320, 240);
     camera.setBrightness(50);
     camera.setFPS(20);
-
-    driveTrain.zeroGyro();
+    
     teleopStart = 0;
     teleopElapsedTime = 0;
     endGame = false;

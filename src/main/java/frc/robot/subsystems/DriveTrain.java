@@ -13,9 +13,6 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain extends Subsystem {
@@ -30,7 +27,6 @@ public class DriveTrain extends Subsystem {
 
   private DoubleSolenoid sh;
   public Piston shifter;
-  public AHRS navX;
 
   public DriveTrain() {
 
@@ -56,12 +52,6 @@ public class DriveTrain extends Subsystem {
 
     sh = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.shifterPort1, RobotMap.shifterPort2);
     shifter = new Piston(sh, "Shifter");
-
-    try {
-      navX = new AHRS(SPI.Port.kMXP);
-    } catch (RuntimeException ex) {
-      DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
-    }
 
     rightDrive.configFactoryDefault();
     leftDrive.configFactoryDefault();
@@ -127,13 +117,6 @@ public class DriveTrain extends Subsystem {
     rightDrive.set(ControlMode.PercentOutput, 0);
   }
 
-  public double getGyroAngle() {
-    return navX.getYaw();
-  }
-
-  public void zeroGyro() {
-    navX.reset();
-  }
   // /**
   //  * <p>0: left
   //  * <p>1: right
