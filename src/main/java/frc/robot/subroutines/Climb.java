@@ -9,7 +9,10 @@ import frc.robot.Neptune;
 
 public class Climb extends CommandGroup {
 
-	public Climb() {
+	private int level;
+	public Climb(int level) {
+		this.level = level;
+		if(level == 3){
 			addSequential(new ElevateToPosition(6));
 			addSequential(new WaitCommand(1.6));
 			addSequential(new EngageForeams(0.35));
@@ -17,12 +20,24 @@ public class Climb extends CommandGroup {
 			addParallel(new ElevateToPosition(7));
 			addSequential(new LevitateToPosition(RobotMap.climbLevitate));
 			addSequential(new WaitCommand(4));
-			addSequential(new DriveClimberForwards());
+			addSequential(new FinalSequence(3));
+		}else if(level == 2){
+			addSequential(new ElevateToPosition(9));
+			addSequential(new WaitCommand(1.6));
+			addSequential(new EngageForeams(0.35));
+			addSequential(new WaitCommand(0.5));
+			addParallel(new ElevateToPosition(7));
+			addSequential(new LevitateToPosition(11000));
+			addSequential(new WaitCommand(2));
+			addSequential(new FinalSequence(2));
+		}
+		
 	}
 	@Override
 	protected void execute() {
 		SmartDashboard.putNumber("Climb Per ", Neptune.climber.levitator.getMotorOutputPercent());
 		SmartDashboard.putNumber("Climber Position", Neptune.climber.levitator.getSelectedSensorPosition());
+		SmartDashboard.putNumber("ClimberVelocity", Neptune.climber.levitator.getSelectedSensorVelocity());
 	}
 	@Override
 	protected void initialize() {
@@ -32,10 +47,10 @@ public class Climb extends CommandGroup {
 	@Override
 	protected void end() {
 		System.out.println("Climb Finished");
-		States.led = States.LEDstates.PASSIVE;
 	}
 	@Override
 	protected void interrupted() {
-		end();
+		System.out.println("Climb Stopped");
+		States.led = States.LEDstates.PASSIVE;
 	}
 }

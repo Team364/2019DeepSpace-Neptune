@@ -65,6 +65,9 @@ public class Climber extends Subsystem {
   public void stopForarms(){
     forearms.set(ControlMode.PercentOutput, 0);
   }
+  public double getForearmVelocity(){
+    return forearms.getSelectedSensorVelocity();
+  }
 
   public void stop() {
     // Stop the drive wheels

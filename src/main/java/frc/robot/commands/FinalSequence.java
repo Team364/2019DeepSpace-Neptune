@@ -4,13 +4,19 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
 import frc.robot.RobotMap;
 
-public class DriveClimberForwards extends Command {
+public class FinalSequence extends Command {
 
     double angle;
-
-    public DriveClimberForwards() {
+    double level;
+    /**
+     * <p>This drives the climb wheels and drivetrain forward
+     * <p>while keeping the levitator at the climbPosition
+     * <p>and moving the arm to start config
+     */
+    public FinalSequence(int level) {
         requires(Neptune.driveTrain);
         setTimeout(1.6);
+        this.level = level;
     }
 
     @Override
@@ -21,8 +27,13 @@ public class DriveClimberForwards extends Command {
     protected void execute() {
         Neptune.driveTrain.openLoop(0.6, 0.6);
         Neptune.climber.driveWheelsToWin();  
-        Neptune.climber.levitateToPos(RobotMap.climbLevitate);
-        System.out.println("Drive Climb Forward is executing");
+        Neptune.elevator.setArmAngle(100);
+        System.out.println("Final Sequence of climb is executing");
+        if(level == 3){
+            Neptune.climber.levitateToPos(RobotMap.climbLevitate);
+        }else if(level == 2){
+            Neptune.climber.levitateToPos(11000);
+        }
     }
 
     @Override
@@ -35,6 +46,6 @@ public class DriveClimberForwards extends Command {
         Neptune.driveTrain.stop();
         Neptune.climber.stop();
         Neptune.climber.levitateToPos(100);
-        System.out.println("Drive Climb  Forward has ended");
+        System.out.println("Final climb command has ended");
     }
 }

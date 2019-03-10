@@ -174,6 +174,11 @@ public class ElevateToPosition extends Command {
             wantedPosition = low + 5000;
             wantedAngle = lvlone;
             camera = l1cam;
+        } else if(desiredHeight == 9){
+            Neptune.elevator.setPlayCruiseVelocity();
+            wantedPosition = RobotMap.liftLowC;
+            wantedAngle = lvlone;
+            camera = frontCam;
         }
         if (wantedPosition > 132000) {
             wantedPosition = 132000;

@@ -126,7 +126,7 @@ public class OperatorOI{
       } 
       
       //Retract Button
-      if(buttoBoxo.getRawButton(6)){
+      if(buttoBoxo.getRawButton(6)||Neptune.oi.controller.getRawButton(1)){
         elevate = new ElevateToPosition(5);
         elevate.start();
         setLever = new SetPiston(Neptune.trident.lever, 0);

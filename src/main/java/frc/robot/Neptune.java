@@ -50,7 +50,7 @@ public class Neptune extends TimedRobot {
     camera.setResolution(320, 240);
     camera.setBrightness(50);
     camera.setFPS(20);
-    
+
     teleopStart = 0;
     teleopElapsedTime = 0;
     endGame = false;
@@ -163,5 +163,7 @@ public class Neptune extends TimedRobot {
     SmartDashboard.putNumber("Arm Actual Angle", elevator.getArmAngle());
     SmartDashboard.putNumber("Arm Velocity: ", elevator.getArmVelocity());
     SmartDashboard.putString("LED state: ", States.led.toString());
+    SmartDashboard.putNumber("Battery Voltage", dStation.getBatteryVoltage());
+    SmartDashboard.putNumber("Lev Pos ", climber.levitator.getSelectedSensorPosition());
   }
 }
