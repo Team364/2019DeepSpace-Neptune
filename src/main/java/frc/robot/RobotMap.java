@@ -134,7 +134,8 @@ public class RobotMap {
     public static final double levitatorDgain = 0.0;
     public static final double levitatorFgain = 0.0;
     //Climb Setpoints
-    public static final double climbLevitate = 28000;
+    public static final double lvl3Climb = 28000;
+    public static final double lvl2Climb = 11000;
     // NavX
     public static final double navXPterm = 0.0005;
     public static final double navXIterm = 0.1;

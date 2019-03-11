@@ -30,9 +30,9 @@ public class FinalSequence extends Command {
         Neptune.elevator.setArmAngle(100);
         System.out.println("Final Sequence of climb is executing");
         if(level == 3){
-            Neptune.climber.levitateToPos(RobotMap.climbLevitate);
+            Neptune.climber.levitateToPos(RobotMap.lvl3Climb);
         }else if(level == 2){
-            Neptune.climber.levitateToPos(11000);
+            Neptune.climber.levitateToPos(RobotMap.lvl2Climb);
         }
     }
 

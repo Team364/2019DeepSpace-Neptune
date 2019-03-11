@@ -18,7 +18,7 @@ public class Climb extends CommandGroup {
 			addSequential(new EngageForeams(0.35));
 			addSequential(new WaitCommand(0.5));
 			addParallel(new ElevateToPosition(7));
-			addSequential(new LevitateToPosition(RobotMap.climbLevitate));
+			addSequential(new LevitateToPosition(RobotMap.lvl3Climb));
 			addSequential(new WaitCommand(4));
 			addSequential(new FinalSequence(3));
 		}else if(level == 2){
@@ -27,7 +27,7 @@ public class Climb extends CommandGroup {
 			addSequential(new EngageForeams(0.35));
 			addSequential(new WaitCommand(0.5));
 			addParallel(new ElevateToPosition(7));
-			addSequential(new LevitateToPosition(11000));
+			addSequential(new LevitateToPosition(RobotMap.lvl2Climb));
 			addSequential(new WaitCommand(2));
 			addSequential(new FinalSequence(2));
 		}
@@ -41,7 +41,7 @@ public class Climb extends CommandGroup {
 	}
 	@Override
 	protected void initialize() {
-		System.out.println("Starting Climb");
+		System.out.println("Starting Climb for level: " + level);
 		States.led = States.LEDstates.CLIMBING;
 	}
 	@Override
