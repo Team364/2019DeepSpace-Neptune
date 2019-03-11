@@ -19,7 +19,7 @@ public class RunIntake extends Command {
     @Override
     protected void initialize() {
         if(intaking){
-            setTimeout(2.5);
+            setTimeout(4);
         }else{
             setTimeout(1.3);
         }

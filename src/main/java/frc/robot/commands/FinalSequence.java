@@ -33,6 +33,8 @@ public class FinalSequence extends Command {
             Neptune.climber.levitateToPos(RobotMap.lvl3Climb);
         }else if(level == 2){
             Neptune.climber.levitateToPos(RobotMap.lvl2Climb);
+        }else if(level == 1){
+            Neptune.climber.levitateToPos(RobotMap.intermediateClimb);
         }
     }
 

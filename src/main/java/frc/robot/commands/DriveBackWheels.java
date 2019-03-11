@@ -10,7 +10,7 @@ public class DriveBackWheels extends Command {
 
     public DriveBackWheels() {
         requires(Neptune.driveTrain);
-        setTimeout(1.6);
+        setTimeout(1.4);
     }
 
     @Override

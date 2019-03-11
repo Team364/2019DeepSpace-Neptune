@@ -187,6 +187,10 @@ public class ElevateToPosition extends Command {
             if (loops < 1) {
                 System.out.println("Setting up for level 2 climb");
             }
+        } else if(desiredHeight == 10){
+            Neptune.elevator.setPlayCruiseVelocity();
+            wantedPosition = RobotMap.liftMedH - 3000;
+            wantedAngle = 1000;
         }
         //If the position somehow is greater than what is allowed, then
         //the maximium allowed height is set again

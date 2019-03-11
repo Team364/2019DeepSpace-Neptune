@@ -53,7 +53,7 @@ public class Climber extends Subsystem {
     driver.set(ControlMode.Velocity, 300);
   }
   public void driveWheelsSlow(){
-    driver.set(ControlMode.Velocity, 80);
+    driver.set(ControlMode.Velocity, 1);
   }
   public void levitateToPos(double position){
     levitator.set(ControlMode.MotionMagic, position);
@@ -73,7 +73,9 @@ public class Climber extends Subsystem {
     // Stop the drive wheels
     driver.set(ControlMode.PercentOutput, 0);
   }
-
+  public void driveWheelOpenLoop(double power){
+    driver.set(ControlMode.PercentOutput, power);
+  }
   @Override
   public void initDefaultCommand() {
 

@@ -64,7 +64,7 @@ public class RobotMap {
     public static final double liftPeakOutputForward = 1;
     public static final double liftPeakOutputReverse = -0.75;
     public static final int liftCruiseVelocity = 30000;
-    public static final int liftCruiseVelocityClimb = 2200;
+    public static final int liftCruiseVelocityClimb = 3500;
     public static final int liftAcceleration = 10000;
     public static final int liftAccelerationClimb = 1000;
     public static final double liftLowerBound = -100;
@@ -134,13 +134,9 @@ public class RobotMap {
     public static final double levitatorDgain = 0.0;
     public static final double levitatorFgain = 0.0;
     //Climb Setpoints
-    public static final double lvl3Climb = 28000;
+    public static final double lvl3Climb = 27000;
     public static final double lvl2Climb = 11000;
-    // NavX
-    public static final double navXPterm = 0.0005;
-    public static final double navXIterm = 0.1;
-    public static final double navXDterm = 50;
-    public static final double navXFterm = 0;
+    public static final double intermediateClimb = 18000;
     // PID constants
     public static final int SlotIdx = 0;
     public static final int PIDLoopIdx = 0;

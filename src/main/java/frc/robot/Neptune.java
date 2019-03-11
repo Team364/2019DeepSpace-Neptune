@@ -35,6 +35,7 @@ public class Neptune extends TimedRobot {
   public static double teleopStart;
   public static double teleopElapsedTime;
   public static boolean endGame;
+  public static boolean climbDrive;
   public int stopLoops;
 
   private DriverStation dStation = DriverStation.getInstance();
@@ -55,6 +56,7 @@ public class Neptune extends TimedRobot {
     teleopElapsedTime = 0;
     endGame = false;
     stopLoops = 0;
+    climbDrive = false;
   } 
 
   @Override
@@ -165,5 +167,6 @@ public class Neptune extends TimedRobot {
     SmartDashboard.putString("LED state: ", States.led.toString());
     SmartDashboard.putNumber("Battery Voltage", dStation.getBatteryVoltage());
     SmartDashboard.putNumber("Lev Pos ", climber.levitator.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Back wheel velocity", climber.driver.getMotorOutputPercent());
   }
 }

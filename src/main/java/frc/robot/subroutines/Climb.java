@@ -9,27 +9,32 @@ import frc.robot.Neptune;
 
 public class Climb extends CommandGroup {
 
-	private int level;
-	public Climb(int level) {
-		this.level = level;
-		if(level == 3){
+	private int climbSet;
+	public Climb(int climbSet) {
+		this.climbSet = climbSet;
+		if(climbSet == 3){//Level 3 climb from platform
 			addSequential(new ElevateToPosition(6));
 			addSequential(new WaitCommand(1.6));
 			addSequential(new EngageForeams(0.35));
 			addSequential(new WaitCommand(0.5));
 			addParallel(new ElevateToPosition(7));
 			addSequential(new LevitateToPosition(RobotMap.lvl3Climb));
-			addSequential(new WaitCommand(4));
+			addSequential(new WaitCommand(3.2));
 			addSequential(new FinalSequence(3));
-		}else if(level == 2){
+		}else if(climbSet == 2){//Level 2 climb from platform
 			addSequential(new ElevateToPosition(9));
-			addSequential(new WaitCommand(1.6));
-			addSequential(new EngageForeams(0.35));
-			addSequential(new WaitCommand(0.5));
+			addSequential(new WaitCommand(1.2));
+			addSequential(new EngageForeams(0.3));
+			addSequential(new WaitCommand(0.2));
 			addParallel(new ElevateToPosition(7));
 			addSequential(new LevitateToPosition(RobotMap.lvl2Climb));
-			addSequential(new WaitCommand(2));
+			addSequential(new WaitCommand(1));
 			addSequential(new FinalSequence(2));
+		}else if(climbSet == 1){//Just lift up
+			addSequential(new ElevateToPosition(10));
+		}else if(climbSet == 4){
+			addParallel(new ElevateToPosition(7));
+			addSequential(new LevitateToPosition(RobotMap.intermediateClimb));
 		}
 		
 	}
@@ -38,19 +43,29 @@ public class Climb extends CommandGroup {
 		SmartDashboard.putNumber("Climb Per ", Neptune.climber.levitator.getMotorOutputPercent());
 		SmartDashboard.putNumber("Climber Position", Neptune.climber.levitator.getSelectedSensorPosition());
 		SmartDashboard.putNumber("ClimberVelocity", Neptune.climber.levitator.getSelectedSensorVelocity());
+		if(climbSet == 4){
+			Neptune.climbDrive = true;
+		}
 	}
 	@Override
 	protected void initialize() {
-		System.out.println("Starting Climb for level: " + level);
+		System.out.println("Starting Climb for climbSet: " + climbSet);
 		States.led = States.LEDstates.CLIMBING;
 	}
 	@Override
 	protected void end() {
 		System.out.println("Climb Finished");
 	}
+	// @Override
+	// protected boolean isFinished() {
+	// 	return !Neptune.endGame;
+	// }
 	@Override
 	protected void interrupted() {
 		System.out.println("Climb Stopped");
+		if(!Neptune.endGame){
+			System.out.println("Cannot climb before endgame");
+		}
 		States.led = States.LEDstates.PASSIVE;
 	}
 }
