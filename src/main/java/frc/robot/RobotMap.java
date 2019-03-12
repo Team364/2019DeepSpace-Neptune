@@ -113,7 +113,7 @@ public class RobotMap {
     public static final double armIntakeCargo = 4400;
     public static final double armPerpindicularToGround = 3300;
     public static final double armStartConfig = 100;
-    public static final double armScoreOnHigh = 2100;
+    public static final double armScoreOnHigh = 2400;
     // Intake
     public static final double intakeNominalOutputForward = 0;
     public static final double intakeNominalOutputReverse = 0;

@@ -69,7 +69,6 @@ public class DriveOpenLoop extends Command {
             Neptune.climber.driveWheelsToWin();
         }else{
             Neptune.climber.stop();
-            
         }
     
 
