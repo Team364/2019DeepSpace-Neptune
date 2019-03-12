@@ -165,7 +165,6 @@ public class Neptune extends TimedRobot {
     SmartDashboard.putNumber("Arm Actual Angle", elevator.getArmAngle());
     SmartDashboard.putNumber("Arm Velocity: ", elevator.getArmVelocity());
     SmartDashboard.putString("LED state: ", States.led.toString());
-    SmartDashboard.putNumber("Battery Voltage", dStation.getBatteryVoltage());
     SmartDashboard.putNumber("Lev Pos ", climber.levitator.getSelectedSensorPosition());
     SmartDashboard.putNumber("Back wheel velocity", climber.driver.getMotorOutputPercent());
   }

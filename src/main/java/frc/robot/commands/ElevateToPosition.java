@@ -20,7 +20,7 @@ public class ElevateToPosition extends Command {
     private double intakeCargo;
     private double perpendicularToGround;
     double scoreOnHigh;
-    private double armStartConfig;
+    double armStartConfig;
     double desiredAngle;
     double custom;
     private double lvlone;
@@ -34,7 +34,7 @@ public class ElevateToPosition extends Command {
     private int l2cam;
     private int l3cam;
     private int frontCam;
-    private int intakeCam;
+    int intakeCam;
 
     private int loops;
 
