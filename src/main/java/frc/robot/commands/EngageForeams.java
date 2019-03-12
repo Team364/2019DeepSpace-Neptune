@@ -5,10 +5,10 @@ import frc.robot.Neptune;
 
 public class EngageForeams extends Command {
 
-    private double velocity;
+    private double power;
     public EngageForeams(double velocity) {
         setTimeout(0.5);
-        this.velocity = velocity;
+        this.power = velocity;
     }
 
     @Override
@@ -18,7 +18,7 @@ public class EngageForeams extends Command {
     @Override
     protected void execute() { 
         System.out.println("Engaging Foreams");   
-        Neptune.climber.engageForarms(velocity);
+        Neptune.climber.engageForarms(power);
     }
 
     @Override

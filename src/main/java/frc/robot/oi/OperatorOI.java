@@ -20,6 +20,7 @@ public class OperatorOI{
     public JoystickButton setLiftPositionHigh;
     public JoystickButton setLiftPositionCargo;
     public JoystickButton setIntakePosition;
+    public JoystickButton defense;
     
     private boolean cargo;
     private boolean intake;
@@ -32,8 +33,6 @@ public class OperatorOI{
     private Command elevate;
     private Command setLever;
     private Command setClaw;
-
-
     //Operator Buttons
     /**
      * OperatorOI()
@@ -44,9 +43,6 @@ public class OperatorOI{
 
         //Initialize Operator Controller
         buttoBoxo = new Joystick(1);
-        //Set state to cargo when left trigger is pulled
-        // setObjectStateCargo = new JoystickTrigger(2);
-        // setObjectStateCargo.whenActive(new SetObjectStateCargo());
         //Set Lift Position to level 1 for scoring in rocket and hatches on cargo ship
         setLiftPositionLow = new JoystickButton(buttoBoxo, 8);
         setLiftPositionLow.whenPressed(new ElevateToPosition(1));
@@ -128,6 +124,16 @@ public class OperatorOI{
       //Retract Button
       if(buttoBoxo.getRawButton(6)||Neptune.oi.controller.getRawButton(1)){
         elevate = new ElevateToPosition(5);
+        elevate.start();
+        setLever = new SetPiston(Neptune.trident.lever, 0);
+        setClaw = new SetPiston(Neptune.trident.claw, 0);
+        setLever.start();
+        setClaw.start();
+
+      }
+
+      if(buttoBoxo.getRawButton(11)){
+        elevate = new ElevateToPosition(11);
         elevate.start();
         setLever = new SetPiston(Neptune.trident.lever, 0);
         setClaw = new SetPiston(Neptune.trident.claw, 0);

@@ -179,7 +179,6 @@ public class ElevateToPosition extends Command {
             wantedPosition = RobotMap.liftLowC;
             wantedAngle = lvlone;
             camera = frontCam;
-<<<<<<< HEAD
             if (loops < 1) {
                 System.out.println("Setting up for level 2 climb");
             }
@@ -187,8 +186,11 @@ public class ElevateToPosition extends Command {
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = RobotMap.liftMedH - 3000;
             wantedAngle = 1000;
-=======
->>>>>>> parent of 70628a3... organizes Elevate To Position
+        } else if(desiredHeight == 11){
+            Neptune.elevator.setPlayCruiseVelocity();
+            wantedPosition = liftStartConfig;
+            wantedAngle = 10;
+            camera = frontCam;
         }
         if (wantedPosition > 132000) {
             wantedPosition = 132000;

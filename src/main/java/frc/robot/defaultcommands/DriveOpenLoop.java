@@ -65,11 +65,11 @@ public class DriveOpenLoop extends Command {
         leftPower = throttle + steer;
         rightPower = throttle - steer;
         Neptune.driveTrain.openLoop(rightPower, leftPower);
-        if(Neptune.oi.controller.getPOV() == 0){
-            Neptune.climber.driveWheelsToWin();
-        }else{
-            Neptune.climber.stop();
-        }
+        // if(Neptune.oi.controller.getPOV() == 0){
+        //     Neptune.climber.driveWheelsToWin();
+        // }else{
+        //     Neptune.climber.stop();
+        // }
     
 
     }

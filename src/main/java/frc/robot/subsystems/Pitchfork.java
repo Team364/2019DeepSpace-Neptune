@@ -6,14 +6,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
-public class Climber extends Subsystem {
+public class Pitchfork extends Subsystem {
 
-   private static Climber Instance = null;
+   private static Pitchfork Instance = null;
    public VictorSPX driver;
    public TalonSRX levitator;
    public VictorSPX forearms;
 
-  public Climber() {
+  public Pitchfork() {
     driver = new VictorSPX(RobotMap.climbDriveMotor);
     levitator = new TalonSRX(RobotMap.levitator);
     forearms = new VictorSPX(RobotMap.forearms);
@@ -36,9 +36,9 @@ public class Climber extends Subsystem {
     
   }
 
-  public synchronized static Climber getInstance() {
+  public synchronized static Pitchfork getInstance() {
     if (Instance == null) {
-      Instance = new Climber();
+      Instance = new Pitchfork();
     }
     return Instance;
   }

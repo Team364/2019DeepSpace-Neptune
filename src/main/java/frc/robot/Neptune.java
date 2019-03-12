@@ -24,7 +24,7 @@ public class Neptune extends TimedRobot {
   public static DriveTrain driveTrain = DriveTrain.getInstance();
   public static Trident trident = Trident.getInstance();
   public static VisionProcessing vision = VisionProcessing.getInstance();
-  public static Climber climber = Climber.getInstance();
+  public static Pitchfork climber = Pitchfork.getInstance();
 
   public static DriverOI oi;
   public static OperatorOI oi2;

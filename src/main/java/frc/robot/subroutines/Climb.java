@@ -30,12 +30,13 @@ public class Climb extends CommandGroup {
 			addSequential(new LevitateToPosition(RobotMap.lvl2Climb));
 			addSequential(new WaitCommand(1));
 			addSequential(new FinalSequence(2));
-		}else if(climbSet == 1){//Just lift up
-			addSequential(new ElevateToPosition(10));
-		}else if(climbSet == 4){
-			addParallel(new ElevateToPosition(7));
-			addSequential(new LevitateToPosition(RobotMap.intermediateClimb));
 		}
+		// }else if(climbSet == 1){//Just lift up
+		// 	addSequential(new ElevateToPosition(10));
+		// }else if(climbSet == 4){
+		// 	addParallel(new ElevateToPosition(7));
+		// 	addSequential(new LevitateToPosition(RobotMap.intermediateClimb));
+		// }
 		
 	}
 	@Override
