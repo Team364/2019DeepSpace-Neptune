@@ -5,15 +5,16 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
-public class Pitchfork extends Subsystem {
+public class Climber extends Subsystem {
 
-   private static Pitchfork Instance = null;
+   private static Climber Instance = null;
    public VictorSPX driver;
    public TalonSRX levitator;
    public VictorSPX forearms;
 
-  public Pitchfork() {
+  public Climber() {
     driver = new VictorSPX(RobotMap.climbDriveMotor);
     levitator = new TalonSRX(RobotMap.levitator);
     forearms = new VictorSPX(RobotMap.forearms);
@@ -33,12 +34,14 @@ public class Pitchfork extends Subsystem {
     levitator.config_kD(RobotMap.SlotIdx, RobotMap.levitatorDgain, RobotMap.TimeoutMs);
 
     forearms.setInverted(true);
+    driver.configFactoryDefault(RobotMap.TimeoutMs);
+    driver.setNeutralMode(NeutralMode.Brake);
     
   }
 
-  public synchronized static Pitchfork getInstance() {
+  public synchronized static Climber getInstance() {
     if (Instance == null) {
-      Instance = new Pitchfork();
+      Instance = new Climber();
     }
     return Instance;
   }
@@ -50,7 +53,7 @@ public class Pitchfork extends Subsystem {
 
   public void driveWheelsToWin(){
     // Turn on drive motors.. full steam ahead
-    driver.set(ControlMode.Velocity, 300);
+    driver.set(ControlMode.PercentOutput, -0.5);
   }
   public void driveWheelsSlow(){
     driver.set(ControlMode.Velocity, 1);
@@ -60,7 +63,7 @@ public class Pitchfork extends Subsystem {
     System.out.println("Levitator is moving to " + position);
   }
   public void engageForarms(double percentOut){
-    forearms.set(ControlMode.PercentOutput, percentOut);
+    forearms.set(ControlMode.PercentOutput, -percentOut);
   }
   public void stopForarms(){
     forearms.set(ControlMode.PercentOutput, 0);

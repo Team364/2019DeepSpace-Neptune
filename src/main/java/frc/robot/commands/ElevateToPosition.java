@@ -74,12 +74,12 @@ public class ElevateToPosition extends Command {
             med = RobotMap.liftMedH;
             high = RobotMap.liftHighH;
             cargo = low;
-            intake = low;
+            intake = low - 3000;
 
             perpendicularToGround = RobotMap.armPerpindicularToGround;
             armStartConfig = RobotMap.armStartConfig;
             scoreOnHigh = perpendicularToGround;
-            intakeCargo = 3300;
+            intakeCargo = perpendicularToGround;
 
             lvlone = perpendicularToGround;
             lvlthree = perpendicularToGround;
@@ -101,7 +101,7 @@ public class ElevateToPosition extends Command {
             armStartConfig = RobotMap.armStartConfig;
             custom = 5000;
             lvlone = 3300;
-            lvlthree = 2100;
+            lvlthree = 2200;
 
             l1cam = RobotMap.l1Ccam;
             l2cam = RobotMap.l2Ccam;
@@ -161,12 +161,12 @@ public class ElevateToPosition extends Command {
            
         } else if (desiredHeight == 6) {
             Neptune.elevator.setPlayCruiseVelocity();
-            wantedPosition = 87000;
+            wantedPosition = 89000;
             wantedAngle = lvlone;
             camera = frontCam;
         } else if (desiredHeight == 7) {
             Neptune.elevator.setClimbCruiseVelocity();
-            wantedPosition = liftStartConfig;
+            wantedPosition = 100;
             wantedAngle = 1500;
             camera = frontCam;
         } else if (desiredHeight == 8) {

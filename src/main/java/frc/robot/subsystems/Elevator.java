@@ -29,7 +29,8 @@ public class Elevator extends Subsystem {
     lift = new TalonSRX(RobotMap.topLift);
     liftSlave = new TalonSRX(RobotMap.bottomLift);
     liftSlave.follow(lift);
-    liftSlave.setInverted(false);
+    liftSlave.setInverted(true);
+    lift.setInverted(false);
     liftSlave.setNeutralMode(NeutralMode.Brake);
     servoCamera = new PWM(RobotMap.servoCamera);
 

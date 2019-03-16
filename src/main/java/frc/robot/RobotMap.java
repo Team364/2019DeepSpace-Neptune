@@ -8,7 +8,7 @@ public class RobotMap {
     public static final int leftFrontDrive = 15;// Talon SRX//
     public static final int leftTopDrive = 4;// Victor SPX
     public static final int leftRearDrive = 5;// Victor SPX
-    public static final int rightFrontDrive = 3; //CURRENTLY A VICTOR; On Comp: Talon SPX//--figgly--12
+    public static final int rightFrontDrive = 12; //CURRENTLY A VICTOR; On Comp: Talon SPX//--figgly--12--was 3
     public static final int rightTopDrive = 6;// 10 //Victor SPX//
     public static final int rightRearDrive = 3;// Victor SPX
     public static final int shifterPort1 = 3;// Primary PCM
@@ -22,17 +22,17 @@ public class RobotMap {
     // Grip
     public static final int rightClaw = 1;// Victor SPX
     public static final int leftClaw = 7;// Victor SPX
-    public static final int intakePort1 = 0;// Primary PCM//1
-    public static final int intakePort2 = 7;// Primary PCM//6
-    public static final int leverPort1 = 1;// Primary PCM//0
-    public static final int leverPort2 = 6;// Primary PCM//7
+    public static final int intakePort1 = 1;// Primary PCM//1
+    public static final int intakePort2 = 6;// Primary PCM//6
+    public static final int leverPort1 = 0;// Primary PCM//0
+    public static final int leverPort2 = 7;// Primary PCM//7
     public static final int intakeLimitSwitch = 0;// Digital Input
     // Arm
     public static final int arm = 6; // Talon SRX
     public static final int armLimitSwitch = 1;// Digital Input
     // Climb
     public static final int levitator = 2;// TalonSRX
-    public static final int climbDriveMotor = 52;//VictorSPX
+    public static final int climbDriveMotor = 21;//VictorSPX
     public static final int forearms = 20;//VictorSPX
 
 
@@ -55,7 +55,7 @@ public class RobotMap {
     public static final double driveFgain = 0.2;
     // Lift
     // TalonBase Config
-    public static final boolean liftReverse = false;
+    public static final boolean liftReverse = false;//was false
     public static final boolean liftReverseEncoder = false;
     public static final int liftCurrentCeiling = 39;
     public static final int liftCurrentCeilingDuration = 1;
@@ -83,12 +83,12 @@ public class RobotMap {
     public static final double liftDgain = 0.0;
     public static final double liftFgain = 0.2;
     // Closed Loop Targets
-    public static final double liftLowH = 15000;// Level 1 for Hatch
+    public static final double liftLowH = 15500;// Level 1 for Hatch
     public static final double liftMedH = 77000;// Level 2 Rocket for Hatch
     public static final double liftHighH = 132000;// Level 3 Rocket for Hatch
     public static final double liftLowC = 35000;// Level 1 Rocket Cargo
     public static final double liftMedC = 92000;// Level 2 Rocket Cargo
-    public static final double liftHighC = 130000;// Level 3 Rocket Cargo
+    public static final double liftHighC = 125000;// Level 3 Rocket Cargo
     public static final double liftCargoC = 75000;// Scoring Cargo in Cargo Ship
     public static final double liftIntake = 12000;// Intaking Cargo
     public static final double liftStartConfig = 1000;// Starting Config for Lift
@@ -110,10 +110,10 @@ public class RobotMap {
     public static final double armDgain = 0.0;
     public static final double armFgain = 0.0;
     // Closed Loop Targets
-    public static final double armIntakeCargo = 4400;
-    public static final double armPerpindicularToGround = 3300;
-    public static final double armStartConfig = 100;
-    public static final double armScoreOnHigh = 2400;
+    public static final double armIntakeCargo = 4450; //4400
+    public static final double armPerpindicularToGround = 3450;//3300
+    public static final double armStartConfig = 100;//100
+    public static final double armScoreOnHigh = 2550;//2400
     // Intake
     public static final double intakeNominalOutputForward = 0;
     public static final double intakeNominalOutputReverse = 0;
@@ -126,7 +126,7 @@ public class RobotMap {
     public static final double dropWheelsPeakOutputReverse = -0.5;
     //Climber
     public static final boolean levitatorSensorPhase = false;
-    public static final int levitatorCruiseVelocity = 1000;
+    public static final int levitatorCruiseVelocity = 950;
     public static final int levitatorAcceleration = 1800;
     // Lift PID
     public static final double levitatorPgain = 3;
@@ -134,7 +134,7 @@ public class RobotMap {
     public static final double levitatorDgain = 0.0;
     public static final double levitatorFgain = 0.0;
     //Climb Setpoints
-    public static final double lvl3Climb = 27000;
+    public static final double lvl3Climb = 26000;//27000
     public static final double lvl2Climb = 11000;
     public static final double intermediateClimb = 18000;
     // PID constants

@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.RobotMap;
 import frc.robot.States;
 import frc.robot.commands.*;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 
 public class Climb extends CommandGroup {
@@ -41,12 +41,12 @@ public class Climb extends CommandGroup {
 	}
 	@Override
 	protected void execute() {
-		SmartDashboard.putNumber("Climb Per ", Neptune.climber.levitator.getMotorOutputPercent());
-		SmartDashboard.putNumber("Climber Position", Neptune.climber.levitator.getSelectedSensorPosition());
-		SmartDashboard.putNumber("ClimberVelocity", Neptune.climber.levitator.getSelectedSensorVelocity());
-		if(climbSet == 4){
-			Neptune.climbDrive = true;
-		}
+		// SmartDashboard.putNumber("Climb Per ", Neptune.climber.levitator.getMotorOutputPercent());
+		// SmartDashboard.putNumber("Climber Position", Neptune.climber.levitator.getSelectedSensorPosition());
+		// SmartDashboard.putNumber("ClimberVelocity", Neptune.climber.levitator.getSelectedSensorVelocity());
+		// if(climbSet == 4){
+		// 	Neptune.climbDrive = true;
+		// }
 	}
 	@Override
 	protected void initialize() {

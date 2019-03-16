@@ -46,6 +46,7 @@ public class FinalSequence extends Command {
     @Override
     protected void end() {
         Neptune.driveTrain.stop();
+        Neptune.elevator.stopLift();
         Neptune.climber.stop();
         Neptune.climber.levitateToPos(100);
         System.out.println("Final climb command has ended");
