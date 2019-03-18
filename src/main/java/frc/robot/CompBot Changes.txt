@@ -1,0 +1,54 @@
+Comp Bot Code changes:
+
+Neptune: 
+All end game tracking is removed;
+LED signals are commented out;
+SmartDash Variables are no longer posted.
+RobotMap:
+RightFrontDrive: 3 -> 12;
+intake and lever ports were swapped as follows:
+intakePort1: 0 -> 1;
+intakePort2: 7 -> 6;
+leverPort1: 1 -> 0;
+leverPort2: 6 -> 7;
+climbDriveMotor: 52 -> 21;
+
+liftLowH: 15000 -> 15500;
+liftHighC: 130000 .> 125000;
+
+armIntakeCargo: 4400 -> 4450;
+armPerpindicularToGround: 3300 -> 3450;
+armScoreOnHigh: 2400 -> 2550;
+
+levitatorCruiseVelocity: 1000 -> 950;
+lvl3Climb: 27000 -> 26000;
+
+ElevateToPosition:
+low - 3000;
+intakeCargo: 3300 -> perpindicularToGround;
+lvlthree: 2100 -> 2200; 
+
+(desiredHeight == 6):
+wantedPosition: 87000 -> 89000;
+
+(desiredHeight == 7):
+wantedPosition: 100;
+
+FinalSequence:
+stopLift added to end
+
+Climb:
+smartdashboard dashboard variables not posted
+
+Climber:
+driver is configured to factory default and set to break for neutral
+
+driver is set to percent output: -0.5
+forearms were negated in the set method 
+
+liftSlave setInverted was true
+lift setinverted false
+
+
+
+
