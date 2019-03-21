@@ -70,31 +70,32 @@ public class ElevateToPosition extends Command {
         liftStartConfig = RobotMap.liftStartConfig;
         frontCam = RobotMap.fCam;
         if (States.objState == States.ObjectStates.HATCH_OBJ) {
+            //Lift Hatch
             low = RobotMap.liftLowH;
             med = RobotMap.liftMedH;
             high = RobotMap.liftHighH;
             cargo = low;
-            intake = low - 3000;
-
+            intake = low - 1000;
+            //Arm Hatch
             perpendicularToGround = RobotMap.armPerpindicularToGround;
             armStartConfig = RobotMap.armStartConfig;
             scoreOnHigh = perpendicularToGround;
             intakeCargo = perpendicularToGround;
-
             lvlone = perpendicularToGround;
             lvlthree = perpendicularToGround;
-
+            //Camera Hatch
             l1cam = RobotMap.l1Hcam;
             l2cam = RobotMap.l2Hcam;
             l3cam = RobotMap.l3Hcam;
             intakeCam = RobotMap.l1Ccam;
         } else if (States.objState == States.ObjectStates.CARGO_OBJ) {
+            //Lift Cargo
             intake = RobotMap.liftIntake;
             low = RobotMap.liftLowC;
             med = RobotMap.liftMedC;
             high = RobotMap.liftHighC;
             cargo = RobotMap.liftCargoC;
-
+            //Arm Cargo
             intakeCargo = RobotMap.armIntakeCargo;
             perpendicularToGround = RobotMap.armPerpindicularToGround;
             scoreOnHigh = perpendicularToGround;
@@ -102,12 +103,11 @@ public class ElevateToPosition extends Command {
             custom = 5000;
             lvlone = 3300;
             lvlthree = 2200;
-
+            //Camera Cargo
             l1cam = RobotMap.l1Ccam;
             l2cam = RobotMap.l2Ccam;
             l3cam = RobotMap.l3Ccam;
             intakeCam = RobotMap.l1Ccam;
-
         }
 
         if (desiredHeight == 0) {
@@ -161,7 +161,7 @@ public class ElevateToPosition extends Command {
            
         } else if (desiredHeight == 6) {
             Neptune.elevator.setPlayCruiseVelocity();
-            wantedPosition = 89000;
+            wantedPosition = 91000;
             wantedAngle = lvlone;
             camera = frontCam;
         } else if (desiredHeight == 7) {

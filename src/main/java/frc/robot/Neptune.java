@@ -1,7 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.AnalogOutput;
-//import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 //import edu.wpi.first.wpilibj.Timer;
@@ -39,7 +39,7 @@ public class Neptune extends TimedRobot {
   public static boolean climbDrive;
   public int stopLoops;
 
-  // private DriverStation dStation = DriverStation.getInstance();
+  private DriverStation dStation = DriverStation.getInstance();
   public static RobotController diagnostics;
  
 
@@ -63,24 +63,22 @@ public class Neptune extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    // System.out.println(camera.getConfigJson());
     // elevator.postSmartDashVars();
     // driveTrain.postSmartDashVars();
         //LED set
-        // if(!dStation.isDSAttached()){
-        //   LEDs.setVoltage(1);
-        // }else if(dStation.isDSAttached()&&(dStation.isDisabled())){
-        //   LEDs.setVoltage(2);
-        // }else if(States.led == States.LEDstates.INTAKE_MODE){
-        //   LEDs.setVoltage(3);
-        // }else if(States.led == States.LEDstates.HAS_OBJ){
-        //   LEDs.setVoltage(4);
-        // }else if(States.led == States.LEDstates.CLIMBING){
-        //   LEDs.setVoltage(5);
-        // }else if(States.led == States.LEDstates.PASSIVE){
-        //   LEDs.setVoltage(2);
-        // }
-      
+        if(!dStation.isDSAttached()){
+          LEDs.setVoltage(1);
+        }else if(dStation.isDSAttached()&&(dStation.isDisabled())){
+          LEDs.setVoltage(2);
+        }else if(States.led == States.LEDstates.INTAKE_MODE){
+          LEDs.setVoltage(3);
+        }else if(States.led == States.LEDstates.HAS_OBJ){
+          LEDs.setVoltage(4);
+        }else if(States.led == States.LEDstates.CLIMBING){
+          LEDs.setVoltage(5);
+        }else if(States.led == States.LEDstates.PASSIVE){
+          LEDs.setVoltage(2);
+        }
   }
 
   @Override

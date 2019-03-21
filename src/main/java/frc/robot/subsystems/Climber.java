@@ -53,7 +53,7 @@ public class Climber extends Subsystem {
 
   public void driveWheelsToWin(){
     // Turn on drive motors.. full steam ahead
-    driver.set(ControlMode.PercentOutput, -0.5);
+    driver.set(ControlMode.PercentOutput, -1);
   }
   public void driveWheelsSlow(){
     driver.set(ControlMode.Velocity, 1);
