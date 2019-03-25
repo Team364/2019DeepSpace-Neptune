@@ -76,7 +76,7 @@ public class RobotMap {
     public static final int l2Ccam = 800;
     public static final int l3Hcam = 900;
     public static final int l3Ccam = 900;
-    public static final int fCam = 500;
+    public static final int fCam = 400;
     // Lift PID
     public static final double liftPgain = 0.3;
     public static final double liftIgain = 0.0;

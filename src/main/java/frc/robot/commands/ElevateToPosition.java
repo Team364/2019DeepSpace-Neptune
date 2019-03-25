@@ -38,19 +38,6 @@ public class ElevateToPosition extends Command {
 
     private int loops;
 
-    /**
-     * Heights
-     * <p>
-     * 1: low on rocket, scoring hatches on rocket level 1 and Cargo Ship
-     * <p>
-     * 2: middle on rocket
-     * <p>
-     * 3: high on rocket
-     * <p>
-     * 4: cargo height for scoring on Cargo Ship
-     * 
-     * @param Height
-     */
     public ElevateToPosition(int Height) {
         desiredHeight = Height;
         requires(Neptune.elevator);
