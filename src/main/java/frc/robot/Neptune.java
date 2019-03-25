@@ -40,6 +40,13 @@ public class Neptune extends TimedRobot {
 
   private DriverStation dStation = DriverStation.getInstance();
   public static RobotController diagnostics;
+
+  //Vision Information
+  public static double targetValid; //Whether the limelight has any valid targets (0 or 1)
+  public static double targetX; //Horizontal Offset From Crosshair To Target (-27 degrees to 27 degrees)
+  public static double targetY; //Vertical Offset From Crosshair To Target (-20.5 degrees to 20.5 degrees)
+  public static double targetArea; //Target Area (0% of image to 100% of image)
+  public static double targetSkew; //Skew or rotation (-90 degrees to 0 degrees)
  
 
   @Override

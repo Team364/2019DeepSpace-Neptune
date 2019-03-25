@@ -43,18 +43,11 @@ public class DriverOI {
      */
     public Joystick controller;
 
-    /**
-     * 
-     * Operator Controller
-     */
-    public Joystick controller2;
 
     //Driver Buttons
     public JoystickButton shiftLow;
     public JoystickButton shiftHigh;
-    public JoystickButton turn180Button;
-    public JoystickButton setUpIntermediateClimb;
-    public JoystickButton intermediateClimb;
+    public JoystickButton aim;
 
     public JoystickButton climb;
     public JoystickButton climb2;
@@ -76,12 +69,8 @@ public class DriverOI {
         shiftHigh = new JoystickButton(controller, 6);
         shiftHigh.whenPressed(new SetPiston(Neptune.driveTrain.shifter, 0));
 
-        // setUpIntermediateClimb = new JoystickButton(controller, 2);
-        // setUpIntermediateClimb.whenPressed(new Climb(1));
-
-        // intermediateClimb = new JoystickButton(controller, 1);
-        // intermediateClimb.whenPressed(new Climb(4));
-
+        aim = new JoystickButton(controller, 1);
+        aim.whileActive(new Limelight());
 
         climb = new JoystickButton(controller, 8);
         climb.whenPressed(lvl3ClimbSequence);
@@ -92,6 +81,8 @@ public class DriverOI {
         cancelClimb = new JoystickButton(controller, 4);
         cancelClimb.cancelWhenPressed(lvl3ClimbSequence);
         cancelClimb.cancelWhenPressed(lvl2ClimbSequence);
+
+        
     }
 
 }

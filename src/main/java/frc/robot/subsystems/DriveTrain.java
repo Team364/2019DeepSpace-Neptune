@@ -4,16 +4,19 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.defaultcommands.DriveOpenLoop;
 import frc.robot.misc.Piston;
 import frc.robot.misc.Piston.PistonStates;
+import frc.robot.Neptune;
 import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class DriveTrain extends Subsystem {
 
@@ -137,5 +140,30 @@ public class DriveTrain extends Subsystem {
 
   public boolean isShifterHigh() {
     return this.shifter.getPistonState() == PistonStates.OPEN;
+  }
+  public void setTrackingMode() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3); //Turns LED on
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0); //Begin Processing Vision
+  }
+
+  public void setDriverCamMode() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); //Turns LED off
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1); //Disable Vision Processing and Doubles Exposure
+  }
+
+  public void aim(Joystick controller) {
+
+    double kP = -0.14;
+    double errorX = -Neptune.targetX;
+    double y = controller.getRawAxis(0)*-.9;
+    double rot = 0;
+
+    if(Neptune.targetValid == 1) {
+      rot = kP*errorX; //If LL2 sees a target, use a P Controller to turn to it
+    }
+    else if(Neptune.targetValid == 0) {
+      rot = controller.getRawAxis(0); //If LL2 does not see a target, spin in place
+    }
+    openLoop(y + rot, rot -y);
   }
 }
