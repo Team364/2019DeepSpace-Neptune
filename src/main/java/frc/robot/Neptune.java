@@ -17,6 +17,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
+
+import edu.wpi.first.networktables.NetworkTableInstance;
+
 public class Neptune extends TimedRobot {
 
   public static AnalogOutput LEDs = new AnalogOutput(0);
@@ -32,21 +35,10 @@ public class Neptune extends TimedRobot {
   public UsbCamera camera;
   public static boolean manualControl;
   public static Command sandstorm = new ActivateTrident(5);
-  public static double teleopStart;
-  public static double teleopElapsedTime;
-  public static boolean endGame;
-  public static boolean climbDrive;
   public int stopLoops;
 
   private DriverStation dStation = DriverStation.getInstance();
   public static RobotController diagnostics;
-
-  //Vision Information
-  public static double targetValid; //Whether the limelight has any valid targets (0 or 1)
-  public static double targetX; //Horizontal Offset From Crosshair To Target (-27 degrees to 27 degrees)
-  public static double targetY; //Vertical Offset From Crosshair To Target (-20.5 degrees to 20.5 degrees)
-  public static double targetArea; //Target Area (0% of image to 100% of image)
-  public static double targetSkew; //Skew or rotation (-90 degrees to 0 degrees)
  
 
   @Override
@@ -59,11 +51,7 @@ public class Neptune extends TimedRobot {
     camera.setBrightness(50);
     camera.setFPS(20);
 
-    teleopStart = 0;
-    teleopElapsedTime = 0;
-    endGame = false;
-    stopLoops = 0;
-    climbDrive = false;
+     driveTrain.setDriverCamMode();
   } 
 
   @Override
@@ -102,20 +90,10 @@ public class Neptune extends TimedRobot {
   @Override
   public void teleopInit() {
     Scheduler.getInstance().removeAll();
-    teleopStart = Timer.getFPGATimestamp();
-    teleopStart = 0;
-    teleopElapsedTime = 0;
-    endGame = false;
   }
 
   @Override
   public void teleopPeriodic() { 
-    teleopElapsedTime = Timer.getFPGATimestamp() - teleopStart;
-    if(((teleopElapsedTime - 105) <= 30) && ((teleopElapsedTime - 105) > 0)){
-      endGame = true;
-    }else{
-      endGame = false;
-    }
     Scheduler.getInstance().run();
     oi2.controlLoop();
     postSmartDashVars();
@@ -174,5 +152,7 @@ public class Neptune extends TimedRobot {
     SmartDashboard.putString("LED state: ", States.led.toString());
     SmartDashboard.putNumber("Lev Pos ", climber.levitator.getSelectedSensorPosition());
     SmartDashboard.putNumber("Back wheel velocity", climber.driver.getMotorOutputPercent());
+    SmartDashboard.putBoolean("Shift State", driveTrain.isShifterHigh());
   }
+
 }

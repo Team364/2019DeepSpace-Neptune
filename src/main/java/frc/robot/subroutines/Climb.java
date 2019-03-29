@@ -44,9 +44,6 @@ public class Climb extends CommandGroup {
 		SmartDashboard.putNumber("Climb Per ", Neptune.climber.levitator.getMotorOutputPercent());
 		SmartDashboard.putNumber("Climber Position", Neptune.climber.levitator.getSelectedSensorPosition());
 		SmartDashboard.putNumber("ClimberVelocity", Neptune.climber.levitator.getSelectedSensorVelocity());
-		if(climbSet == 4){
-			Neptune.climbDrive = true;
-		}
 	}
 	@Override
 	protected void initialize() {
@@ -64,9 +61,6 @@ public class Climb extends CommandGroup {
 	@Override
 	protected void interrupted() {
 		System.out.println("Climb Stopped");
-		if(!Neptune.endGame){
-			System.out.println("Cannot climb before endgame");
-		}
 		States.led = States.LEDstates.PASSIVE;
 	}
 }
