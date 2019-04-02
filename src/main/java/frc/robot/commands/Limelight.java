@@ -30,17 +30,17 @@ public class Limelight extends Command {
     loops = 0;
     Neptune.driveTrain.setTrackingMode();
     if(Neptune.driveTrain.isShifterHigh()){
-      minAim = 0.05;
-      KpAim = -0.028;
-      KpDistance = -0.08;
-      distanceAdjustMax = 0.42;
-      steerAdjustMax = 0.2;
+      minAim = 0.03;
+      KpAim = -0.023;
+      KpDistance = -0.065;
+      distanceAdjustMax = 0.38;
+      steerAdjustMax = 0.45;
     }else{
       minAim = 0.05;
       KpAim = -0.028;
       KpDistance = -0.08;
       distanceAdjustMax = 0.42;
-      steerAdjustMax = 0.2;
+      steerAdjustMax = 0.6;
     }
   }
 
@@ -87,7 +87,6 @@ public class Limelight extends Command {
         }
         left = steerAdjust + distanceAdjust;
         right = -steerAdjust + distanceAdjust;
-
         Neptune.driveTrain.openLoop(left, right);
 
         SmartDashboard.putNumber("Limelight Heading Error", tx);

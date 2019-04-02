@@ -18,7 +18,7 @@ public class ActivateTrident extends CommandGroup {
       addSequential(new ElevateToPosition(8));
       System.out.println("Grabbing Hatch");
     } else if (set == 3) { // Score Cargo
-      addSequential(new RunIntake(0.75, false)); // Outtake
+      addSequential(new RunIntake(0.65, false)); // Outtake
       addSequential(new SetPiston(Neptune.trident.claw, 1)); // Open Claw
       System.out.println("Scoring Cargo");
     } else if (set == 4) { // Score Hatch
