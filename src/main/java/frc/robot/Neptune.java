@@ -17,9 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
-
-import edu.wpi.first.networktables.NetworkTableInstance;
-
+import frc.robot.auto.*;
 public class Neptune extends TimedRobot {
 
   public static AnalogOutput LEDs = new AnalogOutput(0);
@@ -35,6 +33,7 @@ public class Neptune extends TimedRobot {
   public UsbCamera camera;
   public static boolean manualControl;
   public static Command sandstorm = new ActivateTrident(5);
+  public static Command rocket = new TwoRocket();
   public int stopLoops;
 
   private DriverStation dStation = DriverStation.getInstance();
@@ -78,7 +77,8 @@ public class Neptune extends TimedRobot {
   @Override
   public void autonomousInit() {
     Scheduler.getInstance().removeAll();
-    sandstorm.start();
+    //sandstorm.start()
+    rocket.start();
   }
 
   @Override
