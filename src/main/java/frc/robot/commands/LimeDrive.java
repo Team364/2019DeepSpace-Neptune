@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-public class Limelight extends Command {
+public class LimeDrive extends Command {
 
   double minAim;
   double KpAim;
@@ -21,7 +21,7 @@ public class Limelight extends Command {
   double tv;
 
 
-  public Limelight() {
+  public LimeDrive() {
     requires(Neptune.driveTrain);
   }
 
@@ -31,8 +31,8 @@ public class Limelight extends Command {
     Neptune.driveTrain.setTrackingMode();
     if(Neptune.driveTrain.isShifterHigh()){
       minAim = 0.03;
-      KpAim = -0.023;
-      KpDistance = -0.065;
+      KpAim = -0.03;
+      KpDistance = -0.07;
       distanceAdjustMax = 0.38;
       steerAdjustMax = 0.45;
     }else{
@@ -87,7 +87,7 @@ public class Limelight extends Command {
         }
         left = steerAdjust + distanceAdjust;
         right = -steerAdjust + distanceAdjust;
-        Neptune.driveTrain.openLoop(left, right);
+        Neptune.driveTrain.openLoop(left, right*0.85);
 
         SmartDashboard.putNumber("Limelight Heading Error", tx);
         SmartDashboard.putNumber("Limelight Distance Error", ty);

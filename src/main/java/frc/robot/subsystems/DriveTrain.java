@@ -51,7 +51,7 @@ public class DriveTrain extends Subsystem {
     rightRearDriveSlave.setNeutralMode(NeutralMode.Brake);
     rightTopDriveSlave.setNeutralMode(NeutralMode.Brake);
 
-    sh = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.shifterPort1, RobotMap.shifterPort2);
+    sh = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
     shifter = new Piston(sh, "Shifter");
 
     rightDrive.configFactoryDefault();

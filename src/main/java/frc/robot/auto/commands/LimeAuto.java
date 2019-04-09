@@ -91,7 +91,7 @@ public class LimeAuto extends Command {
         }
         left = steerAdjust + distanceAdjust;
         right = -steerAdjust + distanceAdjust;
-        Neptune.driveTrain.openLoop(left, right);
+        Neptune.driveTrain.openLoop(left, right*0.85);
 
         SmartDashboard.putNumber("Limelight Heading Error", tx);
         SmartDashboard.putNumber("Limelight Distance Error", ty);

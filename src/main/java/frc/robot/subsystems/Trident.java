@@ -28,8 +28,8 @@ public class Trident extends Subsystem {
 
     infrared = new DigitalInput(RobotMap.intakeLimitSwitch);
 
-    cl = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.intakePort1, RobotMap.intakePort2);
-    le = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.leverPort1, RobotMap.leverPort2);
+    cl = new DoubleSolenoid(RobotMap.intakePort1, RobotMap.intakePort2);
+    le = new DoubleSolenoid(RobotMap.leverPort1, RobotMap.leverPort2);
     claw = new Piston(cl, "Claw");
     lever = new Piston(le, "Lever");
 

@@ -2,6 +2,7 @@ package frc.robot.misc;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -68,6 +69,9 @@ public class Piston extends Subsystem {
   public void noInput() {
       piston.set(DoubleSolenoid.Value.kOff);
   }
+  public String pistonGet(){
+    return piston.get().toString();
+  }
 
   public boolean noCommand(){
     if(this.getCurrentCommandName() == ""){
@@ -75,6 +79,12 @@ public class Piston extends Subsystem {
     }else{
       return false;
     }
+    //Test to see what the pistonget gives
+    // if(piston.get().toString == "kOff"){
+    //   return true;
+    // }else{
+    //   return false;
+    // }
   }
   
   /**Treat as abstract */
