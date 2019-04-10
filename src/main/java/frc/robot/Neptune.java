@@ -33,8 +33,6 @@ public class Neptune extends TimedRobot {
   public UsbCamera camera;
   public static boolean manualControl;
   public static Command sandstorm = new Auto(0);
-  public static Command cargo = new Auto(1);
-  public static Command rocket = new Auto(2);
   public int stopLoops;
 
   private DriverStation dStation = DriverStation.getInstance();
