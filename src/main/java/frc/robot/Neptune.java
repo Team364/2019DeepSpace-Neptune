@@ -32,8 +32,9 @@ public class Neptune extends TimedRobot {
 
   public UsbCamera camera;
   public static boolean manualControl;
-  public static Command sandstorm = new ActivateTrident(5);
-  public static Command rocket = new OneCargoShip();
+  public static Command sandstorm = new Auto(0);
+  public static Command cargo = new Auto(1);
+  public static Command rocket = new Auto(2);
   public int stopLoops;
 
   private DriverStation dStation = DriverStation.getInstance();
@@ -78,7 +79,7 @@ public class Neptune extends TimedRobot {
   public void autonomousInit() {
     Scheduler.getInstance().removeAll();
     sandstorm.start();
-   // rocket.start();
+    //rocket.start();
   }
 
   @Override
@@ -154,6 +155,10 @@ public class Neptune extends TimedRobot {
     SmartDashboard.putNumber("Back wheel velocity", climber.driver.getMotorOutputPercent());
     SmartDashboard.putBoolean("Shift State", driveTrain.isShifterHigh());
     SmartDashboard.putString("Piston Get", trident.lever.pistonGet());
+    SmartDashboard.putNumber("Right enc", driveTrain.getRightCounts());
+    SmartDashboard.putNumber("Left enc", driveTrain.getLeftCounts());
+    SmartDashboard.putNumber("Sin 90",  Math.sin(90) * 1.11857);
+    //(Math.sin(90) / 180)*Math.PI);
   }
 
 }

@@ -15,7 +15,7 @@ public class Climb extends CommandGroup {
 		if(climbSet == 3){//Level 3 climb from platform
 			addSequential(new ElevateToPosition(6));
 			addSequential(new WaitCommand(1.6));
-			addSequential(new EngageForeams(0.35));
+			addSequential(new EngageForeams(0.45));
 			addSequential(new WaitCommand(0.5));
 			addParallel(new ElevateToPosition(7));
 			addSequential(new LevitateToPosition(RobotMap.lvl3Climb));

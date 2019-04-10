@@ -88,7 +88,7 @@ public class RobotMap {
     public static final double liftHighH = 132000;// Level 3 Rocket for Hatch
     public static final double liftLowC = 35000;// Level 1 Rocket Cargo
     public static final double liftMedC = 92000;// Level 2 Rocket Cargo
-    public static final double liftHighC = 124000;// Level 3 Rocket Cargo
+    public static final double liftHighC = 127000;// Level 3 Rocket Cargo
     public static final double liftCargoC = 75000;// Scoring Cargo in Cargo Ship
     public static final double liftIntake = 14000;// Intaking Cargo
     public static final double liftStartConfig = 1000;// Starting Config for Lift

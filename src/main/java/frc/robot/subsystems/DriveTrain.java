@@ -86,6 +86,7 @@ public class DriveTrain extends Subsystem {
     rightDrive.config_kP(RobotMap.SlotIdx, RobotMap.drivePgain, RobotMap.TimeoutMs);
     rightDrive.config_kI(RobotMap.SlotIdx, RobotMap.driveIgain, RobotMap.TimeoutMs);
     rightDrive.config_kD(RobotMap.SlotIdx, RobotMap.driveDgain, RobotMap.TimeoutMs);
+    
     leftDrive.selectProfileSlot(RobotMap.SlotIdx, RobotMap.PIDLoopIdx);
     leftDrive.config_kF(RobotMap.SlotIdx, RobotMap.driveFgain, RobotMap.TimeoutMs);
     leftDrive.config_kP(RobotMap.SlotIdx, RobotMap.drivePgain, RobotMap.TimeoutMs);
@@ -130,6 +131,12 @@ public class DriveTrain extends Subsystem {
 
   public boolean isShifterHigh() {
     return this.shifter.getPistonState() == PistonStates.OPEN;
+  }
+  public double getRightCounts(){
+    return rightDrive.getSelectedSensorPosition(RobotMap.PIDLoopIdx);
+  }
+  public double getLeftCounts(){
+    return leftDrive.getSelectedSensorPosition(RobotMap.PIDLoopIdx);
   }
   public void setTrackingMode() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3); //Turns LED on

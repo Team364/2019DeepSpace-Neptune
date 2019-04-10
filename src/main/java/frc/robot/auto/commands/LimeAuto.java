@@ -101,12 +101,13 @@ public class LimeAuto extends Command {
         SmartDashboard.putNumber("Limelight right", right);
         SmartDashboard.putNumber("Limelight v", tv);
         SmartDashboard.putBoolean("Target Processed", targetPresent);
+        SmartDashboard.putNumber("Target Area", ta);
         
   }
 
   @Override
   protected boolean isFinished() {
-    return (ta > 7.0) && (timeLoops > 50);
+    return (ta > 6.0) && (timeLoops > 50);
   }
 
   @Override

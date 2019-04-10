@@ -1,6 +1,7 @@
 package frc.robot.auto.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 
 public class RampDrive extends Command {
@@ -11,6 +12,7 @@ public class RampDrive extends Command {
   double maxSpeedL;
   double timeOut;
   double timeEl = 0;
+  boolean backwards;
 
   public RampDrive(double maxSpeedL, double maxSpeedR, double timeOut){
     requires(Neptune.driveTrain);
@@ -18,7 +20,6 @@ public class RampDrive extends Command {
     this.maxSpeedR = maxSpeedR;
     this.maxSpeedL = maxSpeedL;
     this.timeOut = timeOut;
-    
   }
 
   @Override
@@ -31,9 +32,10 @@ public class RampDrive extends Command {
   @Override
   protected void execute() {
     timeEl = timeSinceInitialized();
-    currentSpeedL = (maxSpeedL / 2) * Math.sin(((360*timeEl)/timeOut)-90) + (maxSpeedL / 2);
-    currentSpeedR = (maxSpeedR / 2) * Math.sin(((360*timeEl)/timeOut)-90) + (maxSpeedR / 2);
-    Neptune.driveTrain.openLoop(currentSpeedL, currentSpeedR);
+    currentSpeedL = (maxSpeedL / 2) * Math.sin((((360*timeEl)/timeOut)-90)*Math.PI/180) + (maxSpeedL / 2);
+    currentSpeedR = (maxSpeedR / 2) * Math.sin((((360*timeEl)/timeOut)-90)*Math.PI/180) + (maxSpeedR / 2);
+    Neptune.driveTrain.openLoop(currentSpeedL, currentSpeedR*0.85);
+    SmartDashboard.putNumber("ramDR", currentSpeedR);
   }
 
   @Override
