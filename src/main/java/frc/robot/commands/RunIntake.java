@@ -21,7 +21,7 @@ public class RunIntake extends Command {
         if(intaking){
             setTimeout(4);
         }else{
-            setTimeout(1.3);
+            setTimeout(0.5);
         }
     }
 
@@ -35,7 +35,8 @@ public class RunIntake extends Command {
         if(intaking){
             return isTimedOut() || !Neptune.trident.infrared.get();
         }else{
-            return isTimedOut() ||Neptune.trident.infrared.get();
+            return isTimedOut();
+            //||Neptune.trident.infrared.get();
         }
     }
 

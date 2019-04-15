@@ -56,6 +56,8 @@ public class Neptune extends TimedRobot {
   public void robotPeriodic() {
     elevator.postSmartDashVars();
     driveTrain.postSmartDashVars();
+    double time = dStation.getMatchTime();
+    SmartDashboard.putNumber("Match Time", time);
         //LED set
         if(!dStation.isDSAttached()){
           LEDs.setVoltage(1);
