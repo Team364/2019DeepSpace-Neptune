@@ -24,7 +24,6 @@ public class Neptune extends TimedRobot {
   public static Elevator elevator = Elevator.getInstance();
   public static DriveTrain driveTrain = DriveTrain.getInstance();
   public static Trident trident = Trident.getInstance();
-  public static VisionProcessing vision = VisionProcessing.getInstance();
   public static Climber climber = Climber.getInstance();
 
   public static DriverOI oi;
@@ -50,21 +49,11 @@ public class Neptune extends TimedRobot {
 
     camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
     camera.setResolution(320, 240);
-    // camera.setBrightness(50);
     camera.setFPS(18);
-    // camera.setExposureManual(10);
-
-    // teleopStart = 0;
-    // teleopElapsedTime = 0;
-    // endGame = false;
-    // stopLoops = 0;
-    // climbDrive = false;
   } 
 
   @Override
   public void robotPeriodic() {
-    // elevator.postSmartDashVars();
-    // driveTrain.postSmartDashVars();
         //LED set
         if(!dStation.isDSAttached()){
           LEDs.setVoltage(1);
@@ -96,22 +85,10 @@ public class Neptune extends TimedRobot {
   @Override
   public void teleopInit() {
     Scheduler.getInstance().removeAll();
-    // teleopStart = Timer.getFPGATimestamp();
-    // teleopStart = 0;
-    // teleopElapsedTime = 0;
-    // endGame = false;
   }
 
   @Override
   public void teleopPeriodic() { 
-    // System.out.println(Neptune.climber.levitator.getSelectedSensorPosition());
-    // System.out.println(Neptune.climber.levitator.getMotorOutputPercent());
-    // teleopElapsedTime = Timer.getFPGATimestamp() - teleopStart;
-    // if(((teleopElapsedTime - 105) <= 30) && ((teleopElapsedTime - 105) > 0)){
-    //   endGame = true;
-    // }else{
-    //   endGame = false;
-    // }
     Scheduler.getInstance().run();
     oi2.controlLoop();
     postSmartDashVars();
@@ -158,17 +135,5 @@ public class Neptune extends TimedRobot {
   }
 
   public void postSmartDashVars() {
-    // SmartDashboard.putString("Object State:", States.objState.toString());
-    // SmartDashboard.putString("Lift Zone: ", States.liftZone.toString());
-    // SmartDashboard.putString("Elevator Command: ", elevator.getCurrentCommandName());
-    // SmartDashboard.putNumber("Elevator Target Height: ", elevator.TargetHeight);
-    // SmartDashboard.putNumber("Elevator Actaul Height: ", elevator.getLiftPosition());
-    // SmartDashboard.putNumber("Elevator Velocity: ", elevator.getLiftVelocity());
-    // SmartDashboard.putNumber("Arm Target Angle: ", elevator.TargetAngle);
-    // SmartDashboard.putNumber("Arm Actual Angle", elevator.getArmAngle());
-    // SmartDashboard.putNumber("Arm Velocity: ", elevator.getArmVelocity());
-    // SmartDashboard.putString("LED state: ", States.led.toString());
-    // SmartDashboard.putNumber("Lev Pos ", climber.levitator.getSelectedSensorPosition());
-    // SmartDashboard.putNumber("Back wheel velocity", climber.driver.getMotorOutputPercent());
   }
 }
