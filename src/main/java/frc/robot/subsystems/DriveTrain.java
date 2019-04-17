@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class DriveTrain extends Subsystem {
 
@@ -117,14 +118,6 @@ public class DriveTrain extends Subsystem {
     rightDrive.set(ControlMode.PercentOutput, 0);
   }
 
-  // /**
-  //  * <p>0: left
-  //  * <p>1: right
-  //  */
-  // public double[] driveVelocities = {
-  //   leftDrive.getSelectedSensorVelocity(RobotMap.PIDLoopIdx),
-  //   rightDrive.getSelectedSensorVelocity(RobotMap.PIDLoopIdx)};
-
   public void postSmartDashVars(){
     SmartDashboard.putNumber("Left Drive ", leftDrive.getMotorOutputPercent());
     SmartDashboard.putNumber("Right Drive ", rightDrive.getMotorOutputPercent());
@@ -137,5 +130,15 @@ public class DriveTrain extends Subsystem {
 
   public boolean isShifterHigh() {
     return this.shifter.getPistonState() == PistonStates.OPEN;
+  }
+
+  public void setTrackingMode() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3); //Turns LED on
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0); //Begin Processing Vision
+  }
+
+  public void setDriverCamMode() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); //Turns LED off
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1); //Disable Vision Processing and Doubles Exposure
   }
 }
