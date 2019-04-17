@@ -4,16 +4,11 @@ import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
-//import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
 import frc.robot.oi.*;
 import frc.robot.subroutines.ActivateTrident;
 import frc.robot.States;
-import frc.robot.misc.*;
-//import com.ctre.phoenix.motorcontrol.ControlMode;
-
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -127,7 +122,6 @@ public class Neptune extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    // postSmartDashVars();
   }
 
   @Override
