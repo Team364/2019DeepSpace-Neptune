@@ -19,6 +19,7 @@ public class LimeDrive extends Command {
   double tx;
   double ty;
   double tv;
+  String shiftstate;
 
 
   public LimeDrive() {
@@ -35,13 +36,16 @@ public class LimeDrive extends Command {
       KpDistance = -0.06;
       distanceAdjustMax = 0.38;
       steerAdjustMax = 0.45;
+      shiftstate = "high";
     }else{
       minAim = 0.05;
       KpAim = -0.028;
       KpDistance = -0.07;
       distanceAdjustMax = 0.42;
       steerAdjustMax = 0.6;
+      shiftstate = "low";
     }
+    System.out.println("Entering Limedrive " + shiftstate);
   }
 
   @Override
@@ -108,6 +112,7 @@ public class LimeDrive extends Command {
   protected void end() {
     Neptune.driveTrain.stop();
     Neptune.driveTrain.setDriverCamMode();
+    System.out.println("Exiting Limedrive " + shiftstate);
   }
 
   @Override

@@ -135,6 +135,9 @@ public class ElevateToPosition extends Command {
             wantedPosition = cargo;
             wantedAngle = 4200;
             camera = frontCam;
+            if (loops < 1) {
+                System.out.println("Cargo Ship " + States.objState.toString());
+            }
         } else if (desiredHeight == 5) {
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = liftStartConfig;
@@ -145,22 +148,34 @@ public class ElevateToPosition extends Command {
             }else if(States.objState == States.ObjectStates.HATCH_OBJ){
                 States.led = States.LEDstates.PASSIVE;
             }
+            if (loops < 1) {
+                System.out.println("Collapse");
+            }
            
         } else if (desiredHeight == 6) {
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = 91000;
             wantedAngle = lvlone;
             camera = frontCam;
+            if (loops < 1) {
+                System.out.println("Climb Position for level 3 HAB");
+            }
         } else if (desiredHeight == 7) {
             Neptune.elevator.setClimbCruiseVelocity();
             wantedPosition = 100;
             wantedAngle = 1500;
             camera = frontCam;
+            if (loops < 1){
+                System.out.println("Lift is climbing to level 3 HAB");
+            }
         } else if (desiredHeight == 8) {
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = low + 5000;
             wantedAngle = lvlone;
             camera = l1cam;
+            if (loops < 1){
+                System.out.println("Lift is moving up after intaking");
+            }
         } else if(desiredHeight == 9){
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = RobotMap.liftLowC;
@@ -169,7 +184,7 @@ public class ElevateToPosition extends Command {
             if (loops < 1) {
                 System.out.println("Setting up for level 2 climb");
             }
-        } else if(desiredHeight == 10){
+        } else if(desiredHeight == 10){//Not used it seems
             Neptune.elevator.setPlayCruiseVelocity();
             wantedPosition = RobotMap.liftMedH - 3000;
             wantedAngle = 1000;
@@ -178,6 +193,9 @@ public class ElevateToPosition extends Command {
             wantedPosition = liftStartConfig;
             wantedAngle = 10;
             camera = frontCam;
+            if (loops < 1) {
+                System.out.println("Defense");
+            }
         }
         if (wantedPosition > 132000) {
             wantedPosition = 132000;

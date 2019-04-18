@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
-import frc.robot.defaultcommands.ElevatorManual;
 import frc.robot.subroutines.*;
 import frc.robot.States;
 import frc.robot.commands.*;
@@ -29,7 +28,6 @@ public class OperatorOI{
 
 
     private Command runGrip;
-    private Command liftManual = new ElevatorManual();
     private Command elevate;
     private Command setLever;
     private Command setClaw;
@@ -117,9 +115,6 @@ public class OperatorOI{
         runGrip.start();
       }
       SmartDashboard.putNumber("Grip Set: ", tridentCase);
-      if((Math.abs(buttoBoxo.getRawAxis(1)) > 0.2)){
-        liftManual.start();
-      } 
       
       //Retract Button
       if(buttoBoxo.getRawButton(6)){
