@@ -34,20 +34,12 @@ public class Climb extends CommandGroup {
 
 	@Override
 	protected void initialize() {
-		System.out.println("Starting Climb for climbSet: " + climbSet);
 		States.led = States.LEDstates.CLIMBING;
 	}
-	@Override
-	protected void end() {
-		System.out.println("Climb Finished");
-	}
+
 
 	@Override
 	protected void interrupted() {
-		System.out.println("Climb Stopped");
-		if(!Neptune.endGame){
-			System.out.println("Cannot climb before endgame");
-		}
 		States.led = States.LEDstates.PASSIVE;
 	}
 }

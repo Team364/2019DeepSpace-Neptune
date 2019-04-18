@@ -36,16 +36,13 @@ public class LimeDrive extends Command {
       KpDistance = -0.06;
       distanceAdjustMax = 0.38;
       steerAdjustMax = 0.45;
-      shiftstate = "high";
     }else{
       minAim = 0.05;
       KpAim = -0.028;
       KpDistance = -0.07;
       distanceAdjustMax = 0.42;
       steerAdjustMax = 0.6;
-      shiftstate = "low";
     }
-    System.out.println("Entering Limedrive " + shiftstate);
   }
 
   @Override
@@ -67,10 +64,8 @@ public class LimeDrive extends Command {
 
         if(tv != 1){
           targetPresent = false;
-          System.out.println("No target in sight");
         }else if(tv == 1){
           targetPresent = true;
-          System.out.println("Target is in sight");
         }
 
         if (tx > 1.0){
@@ -93,13 +88,13 @@ public class LimeDrive extends Command {
         right = -steerAdjust + distanceAdjust;
         Neptune.driveTrain.openLoop(left, right*1);
 
-        SmartDashboard.putNumber("Limelight Heading Error", tx);
-        SmartDashboard.putNumber("Limelight Distance Error", ty);
-        SmartDashboard.putNumber("Linelight Steering Adjust", steerAdjust);
-        SmartDashboard.putNumber("Limelight Left", left);
-        SmartDashboard.putNumber("Limelight right", right);
-        SmartDashboard.putNumber("Limelight v", tv);
-        SmartDashboard.putBoolean("Target Processed", targetPresent);
+        // SmartDashboard.putNumber("Limelight Heading Error", tx);
+        // SmartDashboard.putNumber("Limelight Distance Error", ty);
+        // SmartDashboard.putNumber("Linelight Steering Adjust", steerAdjust);
+        // SmartDashboard.putNumber("Limelight Left", left);
+        // SmartDashboard.putNumber("Limelight right", right);
+        // SmartDashboard.putNumber("Limelight v", tv);
+        // SmartDashboard.putBoolean("Target Processed", targetPresent);
         
   }
 
@@ -112,7 +107,6 @@ public class LimeDrive extends Command {
   protected void end() {
     Neptune.driveTrain.stop();
     Neptune.driveTrain.setDriverCamMode();
-    System.out.println("Exiting Limedrive " + shiftstate);
   }
 
   @Override

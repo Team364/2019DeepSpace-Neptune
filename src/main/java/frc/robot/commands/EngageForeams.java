@@ -16,8 +16,7 @@ public class EngageForeams extends Command {
     }
 
     @Override
-    protected void execute() { 
-        System.out.println("Engaging Foreams");   
+    protected void execute() {  
         Neptune.climber.engageForarms(power);
     }
 
@@ -29,6 +28,5 @@ public class EngageForeams extends Command {
     @Override
     protected void end() {
         Neptune.climber.stopForarms();
-        System.out.println("Foreams no longer engaged");
     }
 }

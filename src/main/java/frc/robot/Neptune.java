@@ -9,7 +9,6 @@ import frc.robot.subsystems.*;
 import frc.robot.oi.*;
 import frc.robot.subroutines.ActivateTrident;
 import frc.robot.States;
-
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -41,7 +40,6 @@ public class Neptune extends TimedRobot {
   public void robotInit() {
     oi = new DriverOI();
     oi2 = new OperatorOI();
-
     camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
     camera.setResolution(320, 240);
     camera.setFPS(18);
@@ -86,7 +84,6 @@ public class Neptune extends TimedRobot {
   public void teleopPeriodic() { 
     Scheduler.getInstance().run();
     oi2.controlLoop();
-    postSmartDashVars();
     if ((elevator.getLiftPosition() < 10000) && (elevator.getLiftPosition() > RobotMap.liftLowerBound)) {
       States.liftZone = States.LiftZones.LOWER_DANGER;
     } else if ((elevator.getLiftPosition() > 100000) && (elevator.getLiftPosition() < RobotMap.liftUpperBound))
@@ -115,19 +112,4 @@ public class Neptune extends TimedRobot {
     
   }
 
-  @Override
-  public void disabledInit() {
-    System.out.println("DISABLED INIT");
-  }
-
-  @Override
-  public void disabledPeriodic() {
-  }
-
-  @Override
-  public void testPeriodic() {
-  }
-
-  public void postSmartDashVars() {
-  }
 }

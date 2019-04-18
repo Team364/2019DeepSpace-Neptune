@@ -59,7 +59,6 @@ public class Climber extends Subsystem {
   }
   public void levitateToPos(double position){
     levitator.set(ControlMode.MotionMagic, position);
-    System.out.println("Levitator is moving to " + position);
   }
   public void engageForarms(double percentOut){
     forearms.set(ControlMode.PercentOutput, -percentOut);

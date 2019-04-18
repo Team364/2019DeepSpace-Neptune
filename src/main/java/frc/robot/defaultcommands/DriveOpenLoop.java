@@ -56,7 +56,6 @@ public class DriveOpenLoop extends Command {
                 driveState = DriveStates.STATE_RAMP_DOWN;
             }
         } else if (driveState == DriveStates.STATE_RAMP_DOWN) {
-            // TODO: Implement slow down code
             driveState = DriveStates.STATE_NOT_MOVING;
         } else {
             driveState = DriveStates.STATE_NOT_MOVING;//This condition should never happen!
@@ -65,11 +64,6 @@ public class DriveOpenLoop extends Command {
         leftPower = throttle + steer;
         rightPower = throttle - steer;
         Neptune.driveTrain.openLoop(rightPower, leftPower);
-        // if(Neptune.oi.controller.getPOV() == 0){
-        //     Neptune.climber.driveWheelsToWin();
-        // }else{
-        //     Neptune.climber.stop();
-        // }
     
 
     }
@@ -86,8 +80,6 @@ public class DriveOpenLoop extends Command {
 
     @Override
     protected boolean isFinished() {
-        // This command will only end when interrupted during teleop mode
-        //by buttons in the Operator Interface
         return false;
     }
 

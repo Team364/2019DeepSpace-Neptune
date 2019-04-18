@@ -40,8 +40,7 @@ public class SetPiston extends Command {
             piston.open();
         }else{
             piston.close();
-        }
-         
+        }       
     }
 
     @Override

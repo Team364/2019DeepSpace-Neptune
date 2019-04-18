@@ -105,8 +105,6 @@ public class Elevator extends Subsystem {
     lift.configMotionCruiseVelocity(RobotMap.liftCruiseVelocity, RobotMap.TimeoutMs);
   }
   public void elevateTo(double liftHeight, double armAngle) {
-    System.out.println("The lift is moving to: " + liftHeight);
-    System.out.println("The arm is moving to: " + armAngle);
     lift.set(ControlMode.MotionMagic, liftHeight);
     arm.set(ControlMode.MotionMagic, armAngle);
     TargetHeight = liftHeight;
@@ -118,12 +116,10 @@ public class Elevator extends Subsystem {
 
   public void setLiftPosition(double liftHeight) {
     lift.set(ControlMode.MotionMagic, liftHeight);
-    System.out.println("The lift is moving to: " + liftHeight);
   }
 
   public void setArmAngle(double armAngle) {
     arm.set(ControlMode.MotionMagic, armAngle);
-    System.out.println("The arm is moving to: " + armAngle);
   }
 
   public double getLiftPosition() {
@@ -153,16 +149,13 @@ public class Elevator extends Subsystem {
   public void resetEncoders() {
     lift.setSelectedSensorPosition(0);
     arm.setSelectedSensorPosition(0);
-    System.out.println("The Lift and Arm Encoders have been reset");
   }
   public void stopLift() {
     lift.set(ControlMode.PercentOutput, 0);
-    //System.out.println("The Lift has been stopped");
   }
 
   public void stopArm() {
     arm.set(ControlMode.PercentOutput, 0);
-    System.out.println("The arm has been stopped");
   }
 
   public boolean elevatorPassive() {

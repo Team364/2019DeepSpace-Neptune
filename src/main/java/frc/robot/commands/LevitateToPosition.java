@@ -12,23 +12,13 @@ public class LevitateToPosition extends Command {
     }
 
     @Override
-    protected void initialize() {
-    }
-
-    @Override
-    protected void execute() { 
-        System.out.println("Levitating Up");   
+    protected void execute() {    
         Neptune.climber.levitateToPos(position);
     }
 
     @Override
     protected boolean isFinished() {
-        return isTimedOut();
-        
+        return isTimedOut();   
     }
 
-    @Override
-    protected void end() {
-        System.out.println("Levitate Up has ended");
-    }
 }
