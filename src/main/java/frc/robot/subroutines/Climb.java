@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.RobotMap;
 import frc.robot.States;
 import frc.robot.commands.*;
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 
 public class Climb extends CommandGroup {
@@ -30,24 +29,9 @@ public class Climb extends CommandGroup {
 			addSequential(new LevitateToPosition(RobotMap.lvl2Climb));
 			addSequential(new WaitCommand(1));
 			addSequential(new FinalSequence(2));
-		}
-		// }else if(climbSet == 1){//Just lift up
-		// 	addSequential(new ElevateToPosition(10));
-		// }else if(climbSet == 4){
-		// 	addParallel(new ElevateToPosition(7));
-		// 	addSequential(new LevitateToPosition(RobotMap.intermediateClimb));
-		// }
-		
+		}		
 	}
-	@Override
-	protected void execute() {
-		// SmartDashboard.putNumber("Climb Per ", Neptune.climber.levitator.getMotorOutputPercent());
-		// SmartDashboard.putNumber("Climber Position", Neptune.climber.levitator.getSelectedSensorPosition());
-		// SmartDashboard.putNumber("ClimberVelocity", Neptune.climber.levitator.getSelectedSensorVelocity());
-		// if(climbSet == 4){
-		// 	Neptune.climbDrive = true;
-		// }
-	}
+
 	@Override
 	protected void initialize() {
 		System.out.println("Starting Climb for climbSet: " + climbSet);
@@ -57,10 +41,7 @@ public class Climb extends CommandGroup {
 	protected void end() {
 		System.out.println("Climb Finished");
 	}
-	// @Override
-	// protected boolean isFinished() {
-	// 	return !Neptune.endGame;
-	// }
+
 	@Override
 	protected void interrupted() {
 		System.out.println("Climb Stopped");

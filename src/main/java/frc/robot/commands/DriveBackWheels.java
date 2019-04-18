@@ -5,8 +5,6 @@ import frc.robot.Neptune;
 
 public class DriveBackWheels extends Command {
 
-    double angle;
-
     public DriveBackWheels() {
         requires(Neptune.driveTrain);
         setTimeout(1.4);

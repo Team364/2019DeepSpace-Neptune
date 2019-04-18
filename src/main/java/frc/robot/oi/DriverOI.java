@@ -10,12 +10,6 @@ public class DriverOI {
     //Driver Controller
     public Joystick controller;
 
-    /**
-     * 
-     * Operator Controller
-     */ 
-    public Joystick controller2;
-
     //Driver Buttons
     public JoystickButton shiftLow;
     public JoystickButton shiftHigh;
@@ -29,11 +23,7 @@ public class DriverOI {
     public Command lvl3ClimbSequence = new Climb(3);
     public Command lvl2ClimbSequence = new Climb(2);
     public JoystickButton lime;
-    /**
-     * OI()
-     * <p>Initializes Joysticks and buttons thereof
-     * <p>assigns commands to buttons when pressed or held
-     */
+
     public DriverOI() {
         controller = new Joystick(0);
   

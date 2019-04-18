@@ -31,16 +31,16 @@ public class ActivateTrident extends CommandGroup {
       System.out.println("Start Config Hatch");
     }
   }
+  
     @Override
     protected void initialize() {
       if((set == 1)||(set == 2)){
         States.actionState = States.ActionStates.INTAKE_ACT;
-
       }else{
         States.led = States.LEDstates.PASSIVE;
       }
-      
     }
+
     @Override
     protected void end() {
       if((set == 1)||(set == 2)){

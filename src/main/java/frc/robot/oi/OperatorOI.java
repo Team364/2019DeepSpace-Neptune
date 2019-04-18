@@ -26,17 +26,12 @@ public class OperatorOI{
 
     public int tridentCase = 1;
 
-
     private Command runGrip;
     private Command elevate;
     private Command setLever;
     private Command setClaw;
+    
     //Operator Buttons
-    /**
-     * OperatorOI()
-     * <p>Initializes Joysticks and buttons thereof
-     * <p>assigns commands to buttons when pressed or held
-     */
     public OperatorOI() {
 
         //Initialize Operator Controller
@@ -59,7 +54,7 @@ public class OperatorOI{
 
     }
     /**
-   * Loop responsible for handling buttons
+   * Loop responsible for handling intake, outtake, defense, and retract
    * seperately depending on cargo or hatch mode
    */
     public void controlLoop(){
@@ -109,7 +104,7 @@ public class OperatorOI{
         tridentCase = 0;
       }
 
-      
+      //Intake and Outtake Buttons
       if((buttoBoxo.getRawButton(5))||(buttoBoxo.getRawButton(4))){
         runGrip = new ActivateTrident(tridentCase);
         runGrip.start();
@@ -126,7 +121,7 @@ public class OperatorOI{
         setClaw.start();
 
       }
-
+      //Defense Button
       if(buttoBoxo.getRawButton(11)){
         elevate = new ElevateToPosition(11);
         elevate.start();
