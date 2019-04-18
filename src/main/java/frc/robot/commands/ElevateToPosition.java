@@ -140,9 +140,9 @@ public class ElevateToPosition extends Command {
             wantedPosition = 100;
             wantedAngle = 1500;
             camera = frontCam;
-        } else if (desiredHeight == 8) {
+        } else if (desiredHeight == 8) {//lift after intaking
             Neptune.elevator.setPlayCruiseVelocity();
-            wantedPosition = low + 5000;
+            wantedPosition = low + 9000;
             wantedAngle = lvlone;
             camera = l1cam;
         } else if(desiredHeight == 9){

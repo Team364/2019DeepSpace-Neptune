@@ -16,7 +16,7 @@ public class ActivateTrident extends CommandGroup {
       addSequential(new SetPiston(Neptune.trident.lever, 1)); // Open lever
       addSequential(new ElevateToPosition(8));
     } else if (set == 3) { // Score Cargo
-      addSequential(new RunIntake(0.75, false)); // Outtake
+      addSequential(new RunIntake(0.6, false)); // Outtake
       addSequential(new SetPiston(Neptune.trident.claw, 1)); // Open Claw
     } else if (set == 4) { // Score Hatch
       addParallel(new SetPiston(Neptune.trident.lever, 0)); // Close lever
