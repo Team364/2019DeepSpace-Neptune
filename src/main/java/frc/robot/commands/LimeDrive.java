@@ -20,7 +20,6 @@ public class LimeDrive extends Command {
   double tv;
   String shiftstate;
 
-
   public LimeDrive() {
     requires(Neptune.driveTrain);
   }
@@ -85,16 +84,7 @@ public class LimeDrive extends Command {
         }
         left = steerAdjust + distanceAdjust;
         right = -steerAdjust + distanceAdjust;
-        Neptune.driveTrain.openLoop(left, right*1);
-
-        // SmartDashboard.putNumber("Limelight Heading Error", tx);
-        // SmartDashboard.putNumber("Limelight Distance Error", ty);
-        // SmartDashboard.putNumber("Linelight Steering Adjust", steerAdjust);
-        // SmartDashboard.putNumber("Limelight Left", left);
-        // SmartDashboard.putNumber("Limelight right", right);
-        // SmartDashboard.putNumber("Limelight v", tv);
-        // SmartDashboard.putBoolean("Target Processed", targetPresent);
-        
+        Neptune.driveTrain.openLoop(left, right*1);        
   }
 
   @Override

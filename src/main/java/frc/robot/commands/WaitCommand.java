@@ -11,6 +11,5 @@ public class WaitCommand extends Command {
     @Override
     protected boolean isFinished() {
         return isTimedOut();
-    }
-    
+    }  
 }

@@ -2,11 +2,8 @@ package frc.robot.misc;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * Piston opens, closes, and has no input
- */
+/** Piston opens, closes, and has no input*/
 public class Piston extends Subsystem {
 
   private DoubleSolenoid piston;
@@ -45,26 +42,19 @@ public class Piston extends Subsystem {
     return pistonState;
   }
 
-    /**
-     * open piston
-     */ 
-    public void open() {
+  /** open piston*/ 
+  public void open() {
       piston.set(DoubleSolenoid.Value.kForward);
       pistonState = PistonStates.OPEN;
   }
 
-  /**
-   * closePiston()
-   */ 
+  /** closePiston*/ 
   public void close() {
       piston.set(DoubleSolenoid.Value.kReverse);
       pistonState = PistonStates.CLOSED;
   }
 
-  /**
-   * noInput()
-   * Leaves the piston where it is
-   */ 
+  /** Leaves the piston where it is*/ 
   public void noInput() {
       piston.set(DoubleSolenoid.Value.kOff);
   }
@@ -81,10 +71,5 @@ public class Piston extends Subsystem {
   @Override
   public void initDefaultCommand() {
   }
-  public void postSmartDashVars(){
-    String string = this.name + " Piston State";
-    String com = this.name + " Current Command";
-    SmartDashboard.putString(string, pistonState.toString());
-    SmartDashboard.putString(com, this.getCurrentCommandName());
-  }
+
 }

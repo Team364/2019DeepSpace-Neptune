@@ -3,21 +3,16 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.misc.*;
 
-/**Modes:
- * <p>0: Open
- * <p>1: Close
- * @param mode
- */
 public class SetPiston extends Command {
 
     private Piston piston;
     private int mode;
     private boolean open;
     /**Modes:
- * <p>0: Open
- * <p>1: Close
- * @param mode
- */
+    * <p>0: Open
+    * <p>1: Close
+    * @param mode
+    */
     public SetPiston(Piston piston, int mode) {
         requires(piston);
         setTimeout(0.1);

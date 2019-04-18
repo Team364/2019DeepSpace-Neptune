@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.RobotMap;
 import frc.robot.States;
 import frc.robot.commands.*;
-import frc.robot.Neptune;
 
 public class Climb extends CommandGroup {
 
@@ -36,7 +35,6 @@ public class Climb extends CommandGroup {
 	protected void initialize() {
 		States.led = States.LEDstates.CLIMBING;
 	}
-
 
 	@Override
 	protected void interrupted() {

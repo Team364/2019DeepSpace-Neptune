@@ -3,7 +3,6 @@ package frc.robot.oi;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 import frc.robot.subroutines.*;
 import frc.robot.States;
@@ -109,7 +108,6 @@ public class OperatorOI{
         runGrip = new ActivateTrident(tridentCase);
         runGrip.start();
       }
-      SmartDashboard.putNumber("Grip Set: ", tridentCase);
       
       //Retract Button
       if(buttoBoxo.getRawButton(6)){

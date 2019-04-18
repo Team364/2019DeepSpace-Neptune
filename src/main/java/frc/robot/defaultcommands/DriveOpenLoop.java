@@ -26,12 +26,12 @@ public class DriveOpenLoop extends Command {
      */
     public DriveOpenLoop() {
         requires(Neptune.driveTrain);  
-        setInterruptible(true);//Other commands can interrupt this command
+        setInterruptible(true);
     }
 
     @Override
     protected void initialize() {
-        driveState = DriveStates.STATE_NOT_MOVING;//Robot is waiting for driver input
+        driveState = DriveStates.STATE_NOT_MOVING;
     }
 
     @Override
@@ -39,28 +39,21 @@ public class DriveOpenLoop extends Command {
         frontThrottle = Neptune.oi.controller.getRawAxis(2);//Right Trigger
         backThrottle = Neptune.oi.controller.getRawAxis(3);//Left Trigger
         steer = -0.7*Neptune.oi.controller.getRawAxis(0);//X-axis of left Joystick
-        /*normal Drive Control
-        If the robot isn't moving and then either Trigger is activated and pressed beyond 0.25, the robot will
-        change state into Direct Drive*/
         if (driveState == DriveStates.STATE_NOT_MOVING) {
             throttle = 0;
             if ((Math.abs(frontThrottle) >= Deadband1) || (Math.abs(backThrottle) >= Deadband1) || (Math.abs(steer) >= Deadband1)) {
-                //System.out.println("STATE_NOT_MOVING->STATE_DIRECT_DRIVE");
                 driveState = DriveStates.STATE_DIRECT_DRIVE;
             }
-        //Once Robot is in direct drive, if the triggers values are below 0.2, the robot will enter a ramp down state
         } else if (driveState == DriveStates.STATE_DIRECT_DRIVE) {
             throttle = backThrottle - frontThrottle;
             if ((Math.abs(frontThrottle) < DeadBand2) && (Math.abs(backThrottle) < DeadBand2)) {
-                //System.out.println("STATE_DIRECT_DRIVE->STATE_RAMP_DOWN");
                 driveState = DriveStates.STATE_RAMP_DOWN;
             }
         } else if (driveState == DriveStates.STATE_RAMP_DOWN) {
             driveState = DriveStates.STATE_NOT_MOVING;
         } else {
-            driveState = DriveStates.STATE_NOT_MOVING;//This condition should never happen!
+            driveState = DriveStates.STATE_NOT_MOVING;
         }
-        //This is where the driveSystem is actually asked to run motors
         leftPower = throttle + steer;
         rightPower = throttle - steer;
         Neptune.driveTrain.openLoop(rightPower, leftPower);

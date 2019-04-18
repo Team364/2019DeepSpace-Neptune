@@ -13,7 +13,6 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class DriveTrain extends Subsystem {
@@ -118,11 +117,6 @@ public class DriveTrain extends Subsystem {
     rightDrive.set(ControlMode.PercentOutput, 0);
   }
 
-  public void postSmartDashVars(){
-    SmartDashboard.putNumber("Left Drive ", leftDrive.getMotorOutputPercent());
-    SmartDashboard.putNumber("Right Drive ", rightDrive.getMotorOutputPercent());
-  }
-
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new DriveOpenLoop());
@@ -139,6 +133,6 @@ public class DriveTrain extends Subsystem {
 
   public void setDriverCamMode() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); //Turns LED off
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1); //Disable Vision Processing and Doubles Exposure
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1); //Disable Vision Processing
   }
 }

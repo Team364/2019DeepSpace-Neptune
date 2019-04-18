@@ -71,7 +71,6 @@ public class Climber extends Subsystem {
   }
 
   public void stop() {
-    // Stop the drive wheels
     driver.set(ControlMode.PercentOutput, 0);
   }
   public void driveWheelOpenLoop(double power){
