@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
@@ -18,7 +19,7 @@ public class LimeDrive extends Command {
   double tx;
   double ty;
   double tv;
-  String shiftstate;
+  double txShift = 1;
 
   public LimeDrive() {
     requires(Neptune.driveTrain);
@@ -30,8 +31,8 @@ public class LimeDrive extends Command {
     Neptune.driveTrain.setTrackingMode();
     if(Neptune.driveTrain.isShifterHigh()){
       minAim = 0.03;
-      KpAim = -0.03;
-      KpDistance = -0.06;
+      KpAim = -0.02;
+      KpDistance = -0.04;
       distanceAdjustMax = 0.38;
       steerAdjustMax = 0.45;
     }else{
@@ -49,7 +50,7 @@ public class LimeDrive extends Command {
     loops++;
     if(loops > 4){
       loops = 0;
-      tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+      tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0) + txShift;
       ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
       tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
     }
@@ -59,6 +60,8 @@ public class LimeDrive extends Command {
         double steerAdjust = 0.0;
         double distanceAdjust = KpDistance * distanceError;
       
+        System.out.println("KpAim: " + KpAim);
+        System.out.println("KpDistance: " + KpDistance);
 
         if(tv != 1){
           targetPresent = false;
@@ -66,12 +69,14 @@ public class LimeDrive extends Command {
           targetPresent = true;
         }
 
-        if (tx > 1.0){
-            steerAdjust = KpAim*headingError - minAim;
-        }else if (tx < 1.0){
-            steerAdjust = KpAim*headingError + minAim;
-        }
-        
+        // if (tx > 1.0){
+        //     steerAdjust = KpAim*headingError - minAim;
+        // }else if (tx < 1.0){
+        //     steerAdjust = KpAim*headingError + minAim;
+        // }
+
+        steerAdjust = KpAim*headingError;
+
         if(distanceAdjust > distanceAdjustMax && distanceAdjust > 0){
           distanceAdjust = distanceAdjustMax;
         }else if(distanceAdjust < -distanceAdjustMax && distanceAdjust < 0){

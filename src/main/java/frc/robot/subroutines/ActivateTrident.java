@@ -23,7 +23,7 @@ public class ActivateTrident extends CommandGroup {
       addSequential(new SetPiston(Neptune.trident.claw, 1));//Open Claw
     }else if( set == 5){// Start of Sandstorm
       addSequential(new SetPiston(Neptune.trident.lever, 1)); // Open lever
-      addSequential(new ElevateToPosition(1));
+      addSequential(new ElevateToPosition(1)); //Move arm and lifts
     }
   }
   
