@@ -1,7 +1,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
@@ -14,7 +13,6 @@ public class LimeDrive extends Command {
   double right;
   double distanceAdjustMax ;
   double steerAdjustMax;
-  boolean targetPresent = false;
   int loops;
   double tx;
   double ty;
@@ -59,21 +57,6 @@ public class LimeDrive extends Command {
         double distanceError = -ty;
         double steerAdjust = 0.0;
         double distanceAdjust = KpDistance * distanceError;
-      
-        System.out.println("KpAim: " + KpAim);
-        System.out.println("KpDistance: " + KpDistance);
-
-        if(tv != 1){
-          targetPresent = false;
-        }else if(tv == 1){
-          targetPresent = true;
-        }
-
-        // if (tx > 1.0){
-        //     steerAdjust = KpAim*headingError - minAim;
-        // }else if (tx < 1.0){
-        //     steerAdjust = KpAim*headingError + minAim;
-        // }
 
         steerAdjust = KpAim*headingError;
 
@@ -87,8 +70,10 @@ public class LimeDrive extends Command {
         }else if(steerAdjust < -steerAdjustMax && steerAdjust <0){
           steerAdjust = -steerAdjustMax;
         }
+        
         left = steerAdjust + distanceAdjust;
         right = -steerAdjust + distanceAdjust;
+
         Neptune.driveTrain.openLoop(left, right*1);        
   }
 
