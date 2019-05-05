@@ -40,8 +40,8 @@ public class PathDrive extends Command {
       m_right_follower = new EncoderFollower(right_trajectory);
       m_left_follower.configureEncoder(Neptune.driveTrain.getLeftCounts(), 1365, 0.5);
       m_right_follower.configureEncoder(Neptune.driveTrain.getRightCounts(), 1365, 0.5);
-      m_left_follower.configurePIDVA(0.01, 0, 0, 0.01, 0.001);
-      m_right_follower.configurePIDVA(0.01, 0, 0, 0.01, 0.001);
+      m_left_follower.configurePIDVA(0.05, 0, 0, 0.000115, 0);
+      m_right_follower.configurePIDVA(0.05, 0, 0, 0.000115, 0);
       m_follower_notifier = new Notifier(this::followPath);
       m_follower_notifier.startPeriodic(left_trajectory.get(0).dt);
   }

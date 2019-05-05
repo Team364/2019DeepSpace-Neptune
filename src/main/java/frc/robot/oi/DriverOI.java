@@ -17,13 +17,14 @@ public class DriverOI {
     public JoystickButton shiftHigh;
     public JoystickButton aim;
 
+    public JoystickButton startPath;
+    public Command pathDrive = new PathDrive();
+
     public JoystickButton climb;
     public JoystickButton climb2;
     public JoystickButton cancelClimb;
-    public JoystickButton startPath;
     public Command lvl3ClimbSequence = new Climb(3);
     public Command lvl2ClimbSequence = new Climb(2);
-    public Command pathDrive = new PathDrive();
 
     /**
      * OI()
