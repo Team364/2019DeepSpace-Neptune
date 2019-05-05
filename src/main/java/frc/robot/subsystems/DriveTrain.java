@@ -126,6 +126,19 @@ public class DriveTrain extends Subsystem {
     return this.shifter.getPistonState() == PistonStates.OPEN;
   }
 
+  public int getRightCounts(){
+    return rightDrive.getSelectedSensorPosition(RobotMap.PIDLoopIdx);
+  }
+  
+  public int getLeftCounts(){
+    return leftDrive.getSelectedSensorPosition(RobotMap.PIDLoopIdx);
+  }
+
+  public void resetEncoders() {
+    leftDrive.setSelectedSensorPosition(0);
+    rightDrive.setSelectedSensorPosition(0);
+  }
+
   public void setTrackingMode() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3); //Turns LED on
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0); //Begin Processing Vision

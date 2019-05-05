@@ -7,24 +7,29 @@ import frc.robot.commands.*;
 import frc.robot.subroutines.*;
 import edu.wpi.first.wpilibj.command.Command;
 public class DriverOI {
-    
     //Driver Controller
+    //Xbox One Wired Controller
     public Joystick controller;
+
 
     //Driver Buttons
     public JoystickButton shiftLow;
     public JoystickButton shiftHigh;
-    public JoystickButton turn180Button;
-    public JoystickButton setUpIntermediateClimb;
-    public JoystickButton intermediateClimb;
+    public JoystickButton aim;
 
     public JoystickButton climb;
     public JoystickButton climb2;
     public JoystickButton cancelClimb;
+    public JoystickButton startPath;
     public Command lvl3ClimbSequence = new Climb(3);
     public Command lvl2ClimbSequence = new Climb(2);
-    public JoystickButton lime;
+    public Command pathDrive = new PathDrive();
 
+    /**
+     * OI()
+     * <p>Initializes Joysticks and buttons thereof
+     * <p>assigns commands to buttons when pressed or held
+     */
     public DriverOI() {
         controller = new Joystick(0);
   
@@ -34,8 +39,8 @@ public class DriverOI {
         shiftHigh = new JoystickButton(controller, 6);
         shiftHigh.whenPressed(new SetPiston(Neptune.driveTrain.shifter, 0));
 
-        lime = new JoystickButton(controller, 1);
-        lime.whileActive(new LimeDrive());
+        aim = new JoystickButton(controller, 1);
+        aim.whileActive(new LimeDrive());
 
         climb = new JoystickButton(controller, 8);
         climb.whenPressed(lvl3ClimbSequence);
@@ -46,6 +51,11 @@ public class DriverOI {
         cancelClimb = new JoystickButton(controller, 4);
         cancelClimb.cancelWhenPressed(lvl3ClimbSequence);
         cancelClimb.cancelWhenPressed(lvl2ClimbSequence);
+
+        startPath = new JoystickButton(controller, 2);
+        startPath.whenPressed(pathDrive);
+
+        
     }
 
 }

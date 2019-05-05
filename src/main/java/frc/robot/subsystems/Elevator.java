@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.sensors.PigeonIMU;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -23,6 +24,9 @@ public class Elevator extends Subsystem {
   private DoubleSolenoid fr;
   public Piston front;
   private PWM servoCamera; 
+  private PigeonIMU pigeon;
+  private PigeonIMU.GeneralStatus gen_status;
+  double[] yaw = new double[3]; 
   
 
   public Elevator() {
@@ -33,6 +37,9 @@ public class Elevator extends Subsystem {
     lift.setInverted(false);
     liftSlave.setNeutralMode(NeutralMode.Brake);
     servoCamera = new PWM(RobotMap.servoCamera);
+    pigeon = new PigeonIMU(liftSlave);
+    gen_status = new PigeonIMU.GeneralStatus();
+    pigeon.getGeneralStatus(gen_status);
 
     arm = new TalonSRX(RobotMap.arm);
     fr = new DoubleSolenoid(1, 0, 7);
@@ -96,6 +103,15 @@ public class Elevator extends Subsystem {
     return Instance;
 }
 
+
+  public double getYaw() {
+    pigeon.getYawPitchRoll(yaw);
+    return yaw[0];
+  }
+
+  public void resetYaw() {
+    pigeon.setYaw(0);
+  }
 
   public void setClimbCruiseVelocity() {
     lift.configMotionCruiseVelocity(RobotMap.liftCruiseVelocityClimb, RobotMap.TimeoutMs);
