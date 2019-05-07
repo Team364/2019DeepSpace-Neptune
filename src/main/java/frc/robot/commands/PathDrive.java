@@ -2,8 +2,6 @@ package frc.robot.commands;
 
 import java.io.IOException;
 
-import com.ctre.phoenix.sensors.PigeonIMU;
-
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
@@ -36,12 +34,19 @@ public class PathDrive extends Command {
       } catch (IOException e) {
           e.printStackTrace();
       }
+      // Create new EncoderFollower objects with correct trajectories
       m_left_follower = new EncoderFollower(left_trajectory);
       m_right_follower = new EncoderFollower(right_trajectory);
+
+      // Configure EncoderFollower for 1365 counts/rev encoder and 6 inch wheels
       m_left_follower.configureEncoder(Neptune.driveTrain.getLeftCounts(), 1365, 0.5);
       m_right_follower.configureEncoder(Neptune.driveTrain.getRightCounts(), 1365, 0.5);
-      m_left_follower.configurePIDVA(0.05, 0, 0, 0.000115, 0);
-      m_right_follower.configurePIDVA(0.05, 0, 0, 0.000115, 0);
+
+      // Config kP (pos FB) and kV (vel FF)
+      m_left_follower.configurePIDVA(0.8, 0, 0, 1 / 14.2, 0); // 0.003, 0, 0, 0.0875, 0
+      m_right_follower.configurePIDVA(0.8, 0, 0, 1 / 14.2, 0); // Set the kV to 1 / MAX_VEL
+
+      // Start notifier to make sure that the path is run at 20ms
       m_follower_notifier = new Notifier(this::followPath);
       m_follower_notifier.startPeriodic(left_trajectory.get(0).dt);
   }
@@ -51,13 +56,20 @@ public class PathDrive extends Command {
         m_follower_notifier.stop();
         finished = true;
     } else {
+        // Get Left and Right (current) velocities
         double left_speed = m_left_follower.calculate(Neptune.driveTrain.getLeftCounts());
         double right_speed = m_right_follower.calculate(Neptune.driveTrain.getRightCounts());
+
+        // Get heading and determine heading correction
         double heading = Neptune.elevator.getYaw();
         double desired_heading = -Pathfinder.r2d(m_left_follower.getHeading());
         double heading_difference = Pathfinder.boundHalfDegrees(desired_heading - heading);
         double turn =  0.8 * (-1.0/80.0) * heading_difference;
+
+        // Apply motor power
         Neptune.driveTrain.openLoop(left_speed + turn, right_speed - turn);
+
+        // Print "velocity" from calculation
         System.out.println("Left Speed: " + left_speed);
         System.out.println("Right Speed: " + right_speed);
     }
