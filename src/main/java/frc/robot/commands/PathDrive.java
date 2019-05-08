@@ -19,18 +19,18 @@ public class PathDrive extends Command {
     private EncoderFollower m_left_follower;
     private EncoderFollower m_right_follower;
     private boolean finished = false;
+    private String file_name;
 
-    public PathDrive() {
+    public PathDrive(String f) {
         requires(Neptune.driveTrain);
+        this.file_name = f;
     }
 
     @Override
     protected void initialize() {
-      Neptune.elevator.resetYaw(0);
-      Neptune.driveTrain.resetEncoders();
       try {
-          left_trajectory = PathfinderFRC.getTrajectory("front_cargo.right");
-          right_trajectory = PathfinderFRC.getTrajectory("front_cargo.left");
+          left_trajectory = PathfinderFRC.getTrajectory(file_name + ".right");
+          right_trajectory = PathfinderFRC.getTrajectory(file_name + ".left");
           System.out.println("Success!");
       } catch (IOException e) {
           e.printStackTrace();
@@ -46,6 +46,9 @@ public class PathDrive extends Command {
       // Config kP (pos FB) and kV (vel FF)
       m_left_follower.configurePIDVA(1.0, 0, 0, 1 / 14.2, 0); // 0.003, 0, 0, 0.0875, 0
       m_right_follower.configurePIDVA(1.0, 0, 0, 1 / 14.2, 0); // Set the kV to 1 / MAX_VEL
+
+      Neptune.elevator.resetYaw(Pathfinder.r2d(left_trajectory.get(0).heading));
+      Neptune.driveTrain.resetEncoders();
 
       // Start notifier to make sure that the path is run at 20ms
       m_follower_notifier = new Notifier(this::followPath);

@@ -18,7 +18,7 @@ public class DriverOI {
     public JoystickButton aim;
 
     public JoystickButton startPath;
-    public Command pathDrive = new PathDrive();
+    public Command pathDrive = new PathDrive("far_rocket");
 
     public JoystickButton climb;
     public JoystickButton climb2;
