@@ -134,6 +134,14 @@ public class DriveTrain extends Subsystem {
     return leftDrive.getSelectedSensorPosition(RobotMap.PIDLoopIdx);
   }
 
+  public int getLeftVelocity() {
+    return leftDrive.getSelectedSensorVelocity();
+  }
+
+  public int getRightVelocity() {
+    return rightDrive.getSelectedSensorVelocity();
+  }
+
   public void resetEncoders() {
     leftDrive.setSelectedSensorPosition(0);
     rightDrive.setSelectedSensorPosition(0);

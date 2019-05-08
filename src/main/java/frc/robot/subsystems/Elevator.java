@@ -109,8 +109,8 @@ public class Elevator extends Subsystem {
     return yaw[0];
   }
 
-  public void resetYaw() {
-    pigeon.setYaw(0);
+  public void resetYaw(double angle) {
+    pigeon.setYaw(angle);
   }
 
   public void setClimbCruiseVelocity() {

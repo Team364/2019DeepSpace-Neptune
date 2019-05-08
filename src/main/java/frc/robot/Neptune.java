@@ -83,7 +83,8 @@ public class Neptune extends TimedRobot {
   @Override
   public void teleopPeriodic() { 
     Scheduler.getInstance().run();
-    //System.out.println(driveTrain.getLeftCounts());
+    // System.out.println(driveTrain.getLeftVelocity());
+    // System.out.println(driveTrain.getRightVelocity());
     //System.out.println(elevator.getYaw());
     oi2.controlLoop();
     if ((elevator.getLiftPosition() < 10000) && (elevator.getLiftPosition() > RobotMap.liftLowerBound)) {

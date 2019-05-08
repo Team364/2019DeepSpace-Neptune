@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.PathfinderFRC;
@@ -25,11 +26,11 @@ public class PathDrive extends Command {
 
     @Override
     protected void initialize() {
-      Neptune.elevator.resetYaw();
+      Neptune.elevator.resetYaw(0);
       Neptune.driveTrain.resetEncoders();
       try {
-          left_trajectory = PathfinderFRC.getTrajectory("far_rocket.right");
-          right_trajectory = PathfinderFRC.getTrajectory("far_rocket.left");
+          left_trajectory = PathfinderFRC.getTrajectory("front_cargo.right");
+          right_trajectory = PathfinderFRC.getTrajectory("front_cargo.left");
           System.out.println("Success!");
       } catch (IOException e) {
           e.printStackTrace();
@@ -43,8 +44,8 @@ public class PathDrive extends Command {
       m_right_follower.configureEncoder(Neptune.driveTrain.getRightCounts(), 1365, 0.5);
 
       // Config kP (pos FB) and kV (vel FF)
-      m_left_follower.configurePIDVA(0.8, 0, 0, 1 / 14.2, 0); // 0.003, 0, 0, 0.0875, 0
-      m_right_follower.configurePIDVA(0.8, 0, 0, 1 / 14.2, 0); // Set the kV to 1 / MAX_VEL
+      m_left_follower.configurePIDVA(1.0, 0, 0, 1 / 14.2, 0); // 0.003, 0, 0, 0.0875, 0
+      m_right_follower.configurePIDVA(1.0, 0, 0, 1 / 14.2, 0); // Set the kV to 1 / MAX_VEL
 
       // Start notifier to make sure that the path is run at 20ms
       m_follower_notifier = new Notifier(this::followPath);
@@ -58,7 +59,7 @@ public class PathDrive extends Command {
     } else {
         // Get Left and Right (current) velocities
         double left_speed = m_left_follower.calculate(Neptune.driveTrain.getLeftCounts());
-        double right_speed = m_right_follower.calculate(Neptune.driveTrain.getRightCounts());
+        double right_speed = m_right_follower.calculate(-Neptune.driveTrain.getRightCounts());
 
         // Get heading and determine heading correction
         double heading = Neptune.elevator.getYaw();
@@ -70,8 +71,10 @@ public class PathDrive extends Command {
         Neptune.driveTrain.openLoop(left_speed + turn, right_speed - turn);
 
         // Print "velocity" from calculation
-        System.out.println("Left Speed: " + left_speed);
-        System.out.println("Right Speed: " + right_speed);
+        SmartDashboard.putNumber("Left Power", left_speed);
+        SmartDashboard.putNumber("Right Power", right_speed);
+        SmartDashboard.putNumber("Left Speed", Neptune.driveTrain.getLeftCounts());
+        SmartDashboard.putNumber("Right Speed", -Neptune.driveTrain.getRightCounts());
     }
   }
 
