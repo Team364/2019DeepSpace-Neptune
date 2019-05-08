@@ -11,20 +11,20 @@ public class DriverOI {
     //Xbox One Wired Controller
     public Joystick controller;
 
-
     //Driver Buttons
     public JoystickButton shiftLow;
     public JoystickButton shiftHigh;
     public JoystickButton aim;
-
+    
     public JoystickButton startPath;
-    public Command pathDrive = new PathDrive("far_rocket");
 
     public JoystickButton climb;
     public JoystickButton climb2;
     public JoystickButton cancelClimb;
     public Command lvl3ClimbSequence = new Climb(3);
     public Command lvl2ClimbSequence = new Climb(2);
+
+    private int path = 0;
 
     /**
      * OI()
@@ -54,7 +54,13 @@ public class DriverOI {
         cancelClimb.cancelWhenPressed(lvl2ClimbSequence);
 
         startPath = new JoystickButton(controller, 2);
-        startPath.whenPressed(pathDrive);
+        if(path == 0) {
+            path++;
+            startPath.whenPressed(new PathDrive("far_rocket"));
+        } else if(path == 1) {
+            path++;
+            startPath.whenPressed(new PathDrive("far_to_hp"));
+        } 
 
         
     }
