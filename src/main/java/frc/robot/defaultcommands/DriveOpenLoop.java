@@ -1,6 +1,7 @@
 package frc.robot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 
 public class DriveOpenLoop extends Command {
@@ -59,6 +60,10 @@ public class DriveOpenLoop extends Command {
         Neptune.driveTrain.openLoop(rightPower, leftPower);
     
 
+        SmartDashboard.putNumber("Left Power", leftPower);
+        SmartDashboard.putNumber("Right Power", rightPower);
+        SmartDashboard.putNumber("Left Speed", Neptune.driveTrain.getLeftCounts());
+        SmartDashboard.putNumber("Right Speed", -Neptune.driveTrain.getRightCounts());
     }
 
     @Override

@@ -54,15 +54,8 @@ public class DriverOI {
         cancelClimb.cancelWhenPressed(lvl2ClimbSequence);
 
         startPath = new JoystickButton(controller, 2);
-        if(path == 0) {
-            path++;
-            startPath.whenPressed(new PathDrive("far_rocket"));
-        } else if(path == 1) {
-            path++;
-            startPath.whenPressed(new PathDrive("far_to_hp"));
-        } 
+        startPath.whenPressed(new PathDrive());
 
-        
     }
 
 }

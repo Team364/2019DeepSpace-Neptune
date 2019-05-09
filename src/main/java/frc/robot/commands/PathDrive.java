@@ -13,27 +13,35 @@ import jaci.pathfinder.followers.EncoderFollower;
 
 public class PathDrive extends Command {
 
-    private Notifier m_follower_notifier;
-    private Trajectory left_trajectory;
-    private Trajectory right_trajectory;
-    private EncoderFollower m_left_follower;
-    private EncoderFollower m_right_follower;
-    private boolean finished = false;
-    private String file_name;
+    private static Notifier m_follower_notifier;
+    private static Trajectory left_trajectory;
+    private static Trajectory right_trajectory;
+    private static EncoderFollower m_left_follower;
+    private static EncoderFollower m_right_follower;
+    private static boolean finished = false;
+    private static int path = 0;
 
-    public PathDrive(String f) {
+    public PathDrive() {
         requires(Neptune.driveTrain);
-        this.file_name = f;
     }
 
     @Override
     protected void initialize() {
+
+      Neptune.elevator.resetYaw(0);
+      Neptune.driveTrain.resetEncoders();
+
       try {
-          left_trajectory = PathfinderFRC.getTrajectory(file_name + ".right");
-          right_trajectory = PathfinderFRC.getTrajectory(file_name + ".left");
-          System.out.println("Success!");
+        if(path == 0) {
+          left_trajectory = PathfinderFRC.getTrajectory("far_rocket.right");
+          right_trajectory = PathfinderFRC.getTrajectory("far_rocket.left");
+        } else if(path == 1) {
+          left_trajectory = PathfinderFRC.getTrajectory("far_to_hp.right");
+          right_trajectory = PathfinderFRC.getTrajectory("far_to_hp.left");
+        }
+        System.out.println("Success!");
       } catch (IOException e) {
-          e.printStackTrace();
+        e.printStackTrace();
       }
       // Create new EncoderFollower objects with correct trajectories
       m_left_follower = new EncoderFollower(left_trajectory);
@@ -46,9 +54,6 @@ public class PathDrive extends Command {
       // Config kP (pos FB) and kV (vel FF)
       m_left_follower.configurePIDVA(1.0, 0, 0, 1 / 14.2, 0); // 0.003, 0, 0, 0.0875, 0
       m_right_follower.configurePIDVA(1.0, 0, 0, 1 / 14.2, 0); // Set the kV to 1 / MAX_VEL
-
-      Neptune.elevator.resetYaw(Pathfinder.r2d(left_trajectory.get(0).heading));
-      Neptune.driveTrain.resetEncoders();
 
       // Start notifier to make sure that the path is run at 20ms
       m_follower_notifier = new Notifier(this::followPath);
@@ -74,10 +79,11 @@ public class PathDrive extends Command {
         Neptune.driveTrain.openLoop(left_speed + turn, right_speed - turn);
 
         // Print "velocity" from calculation
-        SmartDashboard.putNumber("Left Power", left_speed);
-        SmartDashboard.putNumber("Right Power", right_speed);
-        SmartDashboard.putNumber("Left Speed", Neptune.driveTrain.getLeftCounts());
-        SmartDashboard.putNumber("Right Speed", -Neptune.driveTrain.getRightCounts());
+        // SmartDashboard.putNumber("Left Power", left_speed);
+        // SmartDashboard.putNumber("Right Power", right_speed);
+        // SmartDashboard.putNumber("Left Speed", Neptune.driveTrain.getLeftCounts());
+        // SmartDashboard.putNumber("Right Speed", -Neptune.driveTrain.getRightCounts());
+        SmartDashboard.putNumber("PATH", path);
     }
   }
 
@@ -93,6 +99,10 @@ public class PathDrive extends Command {
   @Override
   protected void end() {
       Neptune.driveTrain.stop();
+      m_follower_notifier.close();
+      finished = false;
+      path++;
+      System.out.println("Stopped!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   }
 
   @Override
