@@ -5,9 +5,11 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
 import frc.robot.oi.*;
 import frc.robot.subroutines.ActivateTrident;
+import frc.robot.subroutines.BottomRocket;
 import frc.robot.States;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -24,8 +26,8 @@ public class Neptune extends TimedRobot {
   public static OperatorOI oi2;
 
   public UsbCamera camera;
-  public static boolean manualControl;
   public static Command sandstorm = new ActivateTrident(5);
+  public static Command driveForward = new BottomRocket();
   public static double teleopStart;
   public static double teleopElapsedTime;
   public static boolean endGame;
@@ -61,12 +63,15 @@ public class Neptune extends TimedRobot {
         }else if(States.led == States.LEDstates.PASSIVE){
           LEDs.setVoltage(2);
         }
+        SmartDashboard.putNumber("rightCounts", driveTrain.getRightCounts());
+        SmartDashboard.putNumber("leftCounts", driveTrain.getLeftCounts());
   }
 
   @Override
   public void autonomousInit() {
     Scheduler.getInstance().removeAll();
-    sandstorm.start();
+   // sandstorm.start();
+    driveForward.start();
   }
 
   @Override

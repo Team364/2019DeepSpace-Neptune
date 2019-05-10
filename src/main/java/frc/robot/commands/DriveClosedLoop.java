@@ -14,18 +14,21 @@ public class DriveClosedLoop extends Command {
         requires(Neptune.driveTrain);
         target = Target;
         //was in elevatetoposition.java, thought i might include it
-        setInterruptible(true);
+        setInterruptible(false);
         setTimeout(0.05);
-
+        Neptune.driveTrain.resetEncoders();
     }
 
     @Override
     protected void initialize() {
-        Neptune.manualControl = false;
+        target *= 2609;
     }
 
     @Override
     protected void execute() {
+
+        //2609 ticks = 1 foot
+
         Neptune.driveTrain.closedLoop(target);
     }
 

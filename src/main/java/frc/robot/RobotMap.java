@@ -46,13 +46,13 @@ public class RobotMap {
     public static final double driveNominalOutputReverse = 0;
     public static final double drivePeakOutputForward = 1;
     public static final double drivePeakOutputReverse = -1;
-    public static final int driveCruiseVelocity = 20000;
-    public static final int driveAcceleration = 8000;
+    public static final int driveCruiseVelocity = 10000;
+    public static final int driveAcceleration = 4000;
     // Drive PID
-    public static final double drivePgain = 0.2;
+    public static final double drivePgain = 0.05;
     public static final double driveIgain = 0.0;
     public static final double driveDgain = 0.0;
-    public static final double driveFgain = 0.2;
+    public static final double driveFgain = 0.0;
     // Lift
     // TalonBase Config
     public static final boolean liftReverse = false;//was false

@@ -45,7 +45,6 @@ public class ElevateToPosition extends Command {
 
     @Override
     protected void initialize() {
-        Neptune.manualControl = false;
         States.actionState = States.ActionStates.SCORE_ACT;
     }
 

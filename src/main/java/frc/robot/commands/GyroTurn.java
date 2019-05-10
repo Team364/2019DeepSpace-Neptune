@@ -8,7 +8,7 @@ public class GyroTurn extends Command {
 
     //coefficient that yaw is multiplied by to get correct number for motion magic
     //TODO: figure out coefficient for yaw to encoder
-    private double coefficient;
+    private double scalar;
     
     private double heading;
     private double target;
@@ -22,12 +22,11 @@ public class GyroTurn extends Command {
 
     @Override
     protected void initialize(){
-        Neptune.manualControl = false;
     }
 
     @Override
     protected void execute(){
-        target = coefficient * (Neptune.driveTrain.getYaw() - heading);
+        target = scalar * (Neptune.driveTrain.getYaw() - heading);
         Neptune.driveTrain.turnClosedLoop(target);
     }
 

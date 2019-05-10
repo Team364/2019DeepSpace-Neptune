@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.defaultcommands.DriveOpenLoop;
 import frc.robot.misc.Piston;
 import frc.robot.misc.Piston.PistonStates;
@@ -71,6 +72,7 @@ public class DriveTrain extends Subsystem {
     rightDrive.setInverted(RobotMap.rightDriveReverseEncoder);
     leftDrive.setSensorPhase(RobotMap.leftDriveReverse);
     leftDrive.setInverted(RobotMap.leftDriveReverseEncoder);
+    
 
     rightDrive.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.TimeoutMs);
     rightDrive.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.TimeoutMs);
@@ -120,13 +122,15 @@ public class DriveTrain extends Subsystem {
 
   public void closedLoop(double target){
     leftDrive.set(ControlMode.MotionMagic, target);
-    rightDrive.set(ControlMode.MotionMagic, target);
+    rightDrive.set(ControlMode.MotionMagic, -target);
+    SmartDashboard.putNumber("idk man", leftDrive.getErrorDerivative(RobotMap.PIDLoopIdx));
   }
 
   public void turnClosedLoop(double target){
     //TODO: figure which one is negative (Neptune.driveTrain.turnClosedLoop)
     leftDrive.set(ControlMode.MotionMagic, -target);
     rightDrive.set(ControlMode.MotionMagic, target);
+
   }
 
 

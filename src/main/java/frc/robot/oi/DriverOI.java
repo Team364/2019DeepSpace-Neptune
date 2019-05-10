@@ -6,6 +6,7 @@ import frc.robot.Neptune;
 import frc.robot.commands.*;
 import frc.robot.subroutines.*;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.defaultcommands.DriveOpenLoop;
 public class DriverOI {
     //Driver Controller
     //Xbox One Wired Controller
@@ -57,5 +58,14 @@ public class DriverOI {
         startPath.whenPressed(new PathDrive());
 
     }
-
+    /*public void driverLoop(){
+        double frontThrottle = Neptune.oi.controller.getRawAxis(2);//Right Trigger
+        double backThrottle = Neptune.oi.controller.getRawAxis(3);//Left Trigger
+        double steer = -0.7*Neptune.oi.controller.getRawAxis(0);//X-axis of left Joystick
+        double Deadband1 = 0.25;
+        Command OpenLoop = new DriveOpenLoop();
+            if ((Math.abs(frontThrottle) >= Deadband1) || (Math.abs(backThrottle) >= Deadband1) || (Math.abs(steer) >= Deadband1) && !OpenLoop.isRunning()) {
+                OpenLoop.start();
+            }
+        }*/
 }
