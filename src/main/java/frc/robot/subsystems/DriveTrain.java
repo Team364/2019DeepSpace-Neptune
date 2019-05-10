@@ -9,6 +9,7 @@ import frc.robot.defaultcommands.DriveOpenLoop;
 import frc.robot.misc.Piston;
 import frc.robot.misc.Piston.PistonStates;
 import frc.robot.RobotMap;
+import com.ctre.phoenix.sensors.PigeonIMU;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -28,7 +29,12 @@ public class DriveTrain extends Subsystem {
   private DoubleSolenoid sh;
   public Piston shifter;
 
+  public PigeonIMU pigeonTesting;
+
   public DriveTrain() {
+
+    //dont know number at moment
+    pigeonTesting = new PigeonIMU(100);
 
     rightDrive = new TalonSRX(RobotMap.rightFrontDrive);
     leftDrive = new TalonSRX(RobotMap.leftFrontDrive);
@@ -112,6 +118,19 @@ public class DriveTrain extends Subsystem {
     rightDrive.set(ControlMode.PercentOutput, -right);
   }
 
+  public void closedLoop(double target){
+    leftDrive.set(ControlMode.MotionMagic, target);
+    rightDrive.set(ControlMode.MotionMagic, target);
+  }
+
+  public void turnClosedLoop(double target){
+    //TODO: figure which one is negative (Neptune.driveTrain.turnClosedLoop)
+    leftDrive.set(ControlMode.MotionMagic, -target);
+    rightDrive.set(ControlMode.MotionMagic, target);
+  }
+
+
+
   public void stop() {
     leftDrive.set(ControlMode.PercentOutput, 0);
     rightDrive.set(ControlMode.PercentOutput, 0);
@@ -124,6 +143,27 @@ public class DriveTrain extends Subsystem {
 
   public boolean isShifterHigh() {
     return this.shifter.getPistonState() == PistonStates.OPEN;
+  }
+
+  public double getYaw(){
+    double [] ypr = new double[3];
+    pigeonTesting.getYawPitchRoll(ypr);
+    //gets first element which is yaw
+    return ypr[0];
+  }
+
+  public double getPitch(){
+    double [] ypr = new double[3];
+    pigeonTesting.getYawPitchRoll(ypr);
+    //gets second element which is pitch
+    return ypr[2];
+  }
+
+  public double getRoll(){
+    double [] ypr = new double[3];
+    pigeonTesting.getYawPitchRoll(ypr);
+    //gets third element which is roll
+    return ypr[3];
   }
 
   public int getRightCounts(){
