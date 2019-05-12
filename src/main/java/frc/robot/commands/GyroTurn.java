@@ -26,7 +26,7 @@ public class GyroTurn extends Command {
 
     @Override
     protected void execute(){
-        target = scalar * (Neptune.driveTrain.getYaw() - heading);
+        target = scalar * (Neptune.elevator.getYaw() - heading);
         Neptune.driveTrain.turnClosedLoop(target);
     }
 

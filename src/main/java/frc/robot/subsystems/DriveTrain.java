@@ -30,12 +30,8 @@ public class DriveTrain extends Subsystem {
   private DoubleSolenoid sh;
   public Piston shifter;
 
-  public PigeonIMU pigeonTesting;
 
   public DriveTrain() {
-
-    //dont know number at moment
-    pigeonTesting = new PigeonIMU(100);
 
     rightDrive = new TalonSRX(RobotMap.rightFrontDrive);
     leftDrive = new TalonSRX(RobotMap.leftFrontDrive);
@@ -148,28 +144,7 @@ public class DriveTrain extends Subsystem {
   public boolean isShifterHigh() {
     return this.shifter.getPistonState() == PistonStates.OPEN;
   }
-
-  public double getYaw(){
-    double [] ypr = new double[3];
-    pigeonTesting.getYawPitchRoll(ypr);
-    //gets first element which is yaw
-    return ypr[0];
-  }
-
-  public double getPitch(){
-    double [] ypr = new double[3];
-    pigeonTesting.getYawPitchRoll(ypr);
-    //gets second element which is pitch
-    return ypr[2];
-  }
-
-  public double getRoll(){
-    double [] ypr = new double[3];
-    pigeonTesting.getYawPitchRoll(ypr);
-    //gets third element which is roll
-    return ypr[3];
-  }
-
+  
   public int getRightCounts(){
     return rightDrive.getSelectedSensorPosition(RobotMap.PIDLoopIdx);
   }
