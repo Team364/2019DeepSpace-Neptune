@@ -13,9 +13,10 @@ public class BottomRocket extends CommandGroup{
 
         //like seriously its no bueno right now
 
-        //addSequential(new PathDrive());
-        addSequential(new ElevateToPosition(11));
-        addSequential(new DriveClosedLoop(6));
+        //addSequential(new PathDrive(0));
+        //addSequential(new PathDrive(1));
+        //addSequential(new ElevateToPosition(11));
+    addSequential(new DriveClosedLoop(18));
         //addSequential(new GyroTurn(90));
         //addSequential(new PathDrive());
 

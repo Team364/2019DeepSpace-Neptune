@@ -114,12 +114,18 @@ public class DriveTrain extends Subsystem {
   public void openLoop(double left, double right) {
     leftDrive.set(ControlMode.PercentOutput, left);
     rightDrive.set(ControlMode.PercentOutput, -right);
+    SmartDashboard.putNumber("wastd pot", rightDrive.getMotorOutputPercent());
   }
 
   public void closedLoop(double target){
-    leftDrive.set(ControlMode.MotionMagic, target);
-    rightDrive.set(ControlMode.MotionMagic, -target);
+    leftDrive.set(ControlMode.MotionMagic, -target);
+    rightDrive.set(ControlMode.MotionMagic, target);
     SmartDashboard.putNumber("idk man", leftDrive.getErrorDerivative(RobotMap.PIDLoopIdx));
+    SmartDashboard.putNumber("Right Loop Target", rightDrive.getClosedLoopTarget(RobotMap.PIDLoopIdx));
+    SmartDashboard.putNumber("Left Loop Target", leftDrive.getClosedLoopTarget(RobotMap.PIDLoopIdx));
+    SmartDashboard.putNumber("Right Loop Error", rightDrive.getClosedLoopError(RobotMap.PIDLoopIdx));
+    SmartDashboard.putNumber("Left Loop Error", leftDrive.getClosedLoopError(RobotMap.PIDLoopIdx));
+
   }
 
   public void turnClosedLoop(double target){
@@ -160,10 +166,22 @@ public class DriveTrain extends Subsystem {
   public int getRightVelocity() {
     return rightDrive.getSelectedSensorVelocity();
   }
-
+  public double getRightError(){
+    return rightDrive.getClosedLoopError(RobotMap.PIDLoopIdx);
+  }
+  public double getLeftError(){
+    return leftDrive.getClosedLoopError(RobotMap.PIDLoopIdx);
+  }
+  public void setPconfig(double pValue){
+    rightDrive.config_kP(RobotMap.SlotIdx, pValue, RobotMap.TimeoutMs);
+    leftDrive.config_kP(RobotMap.SlotIdx, pValue, RobotMap.TimeoutMs);
+  }
   public void resetEncoders() {
     leftDrive.setSelectedSensorPosition(0);
     rightDrive.setSelectedSensorPosition(0);
+  }
+  public TalonSRX getRightDrive(){
+    return rightDrive;
   }
 
   public void setTrackingMode() {

@@ -49,7 +49,7 @@ public class RobotMap {
     public static final int driveCruiseVelocity = 10000;
     public static final int driveAcceleration = 4000;
     // Drive PID
-    public static final double drivePgain = 0.05;
+    public static final double drivePgain = 0.1;
     public static final double driveIgain = 0.0;
     public static final double driveDgain = 0.0;
     public static final double driveFgain = 0.0;

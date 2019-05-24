@@ -21,7 +21,8 @@ public class PathDrive extends Command {
     private static boolean finished = false;
     private static int path = 0;
 
-    public PathDrive() {
+    public PathDrive(int Path) {
+      path = Path;
         requires(Neptune.driveTrain);
     }
 
@@ -38,6 +39,11 @@ public class PathDrive extends Command {
         } else if(path == 1) {
           left_trajectory = PathfinderFRC.getTrajectory("far_to_hp.right");
           right_trajectory = PathfinderFRC.getTrajectory("far_to_hp.left");
+        }
+        else 
+        {
+          //if the path is not one of the above numbers, the command will just end
+          finished = true;
         }
         System.out.println("Success!");
       } catch (IOException e) {

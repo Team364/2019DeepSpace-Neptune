@@ -6,8 +6,7 @@ import frc.robot.RobotMap;
 
 public class GyroTurn extends Command {
 
-    //coefficient that yaw is multiplied by to get correct number for motion magic
-    //TODO: figure out coefficient for yaw to encoder
+    //TODO: figure out yaw for yaw to encoder
     private double scalar;
     
     private double heading;

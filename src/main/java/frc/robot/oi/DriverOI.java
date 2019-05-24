@@ -55,7 +55,7 @@ public class DriverOI {
         cancelClimb.cancelWhenPressed(lvl2ClimbSequence);
 
         startPath = new JoystickButton(controller, 2);
-        startPath.whenPressed(new PathDrive());
+        //startPath.whenPressed(new PathDrive());
 
     }
     /*public void driverLoop(){
