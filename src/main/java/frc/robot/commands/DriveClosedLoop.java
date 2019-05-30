@@ -22,7 +22,6 @@ public class DriveClosedLoop extends Command {
         }
     
         Neptune.driveTrain.setPconfig(p);
-        //was in elevatetoposition.java, thought i might include it
         setInterruptible(false);
         setTimeout(1);
     }
@@ -37,7 +36,6 @@ public class DriveClosedLoop extends Command {
     protected void execute() {
         Neptune.driveTrain.getRightDrive().getClosedLoopTarget();
         Neptune.driveTrain.closedLoop(target);
-        SmartDashboard.putNumber("birch lasanga", target);
     }
 
     @Override

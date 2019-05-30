@@ -6,15 +6,16 @@ import frc.robot.RobotMap;
 
 public class GyroTurn extends Command {
 
-    //TODO: figure out yaw for yaw to encoder
-    private double scalar;
+    //TODO: figure out scalar for yaw to encoder
+    private double scalar = 1;
     
     private double heading;
     private double target;
 
     public GyroTurn(double Heading){
         requires(Neptune.driveTrain);
-        heading = Heading;
+        heading = Heading + Neptune.elevator.getYaw();
+        target = heading * scalar;
         setInterruptible(true);
         setTimeout(0.05);
     }
@@ -25,7 +26,6 @@ public class GyroTurn extends Command {
 
     @Override
     protected void execute(){
-        target = scalar * (Neptune.elevator.getYaw() - heading);
         Neptune.driveTrain.turnClosedLoop(target);
     }
 

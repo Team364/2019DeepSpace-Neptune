@@ -114,7 +114,6 @@ public class DriveTrain extends Subsystem {
   public void openLoop(double left, double right) {
     leftDrive.set(ControlMode.PercentOutput, left);
     rightDrive.set(ControlMode.PercentOutput, -right);
-    SmartDashboard.putNumber("wastd pot", rightDrive.getMotorOutputPercent());
   }
 
   public void closedLoop(double target){
@@ -129,8 +128,7 @@ public class DriveTrain extends Subsystem {
   }
 
   public void turnClosedLoop(double target){
-    //TODO: figure which one is negative (Neptune.driveTrain.turnClosedLoop)
-    leftDrive.set(ControlMode.MotionMagic, -target);
+    leftDrive.set(ControlMode.MotionMagic, target);
     rightDrive.set(ControlMode.MotionMagic, target);
 
   }
