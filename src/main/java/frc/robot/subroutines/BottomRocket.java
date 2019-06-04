@@ -12,9 +12,9 @@ public class BottomRocket extends CommandGroup{
 
         addSequential(new ElevateToPosition(11));
         addSequential(new ActivateTrident(5));
-        //addSequential(new PathDrive());
-        //addSequential(new LimeDrive());
-        //addSequential(new DriveClosedLoop(2));
+        addSequential(new PathDrive());
+        addSequential(new LimeAuto());
+        addSequential(new DriveClosedLoop(2));
         //addSequential(new ActivateTrident(4));
         //addSequential(new DriveClosedLoop(-3));
         //addSequential(new GyroTurn(90));
