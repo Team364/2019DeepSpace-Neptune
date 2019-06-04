@@ -5,6 +5,7 @@ import frc.robot.Neptune;
 import frc.robot.States;
 import frc.robot.commands.*;
 
+
 public class ActivateTrident extends CommandGroup {
   private int set;
   public ActivateTrident(int set) {

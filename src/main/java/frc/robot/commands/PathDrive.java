@@ -21,8 +21,7 @@ public class PathDrive extends Command {
     private static boolean finished = false;
     private static int path = 0;
 
-    public PathDrive(int Path) {
-      path = Path;
+    public PathDrive() {
         requires(Neptune.driveTrain);
     }
 
