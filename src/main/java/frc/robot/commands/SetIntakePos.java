@@ -13,9 +13,9 @@ public class SetIntakePos extends Command {
 
     public SetIntakePos() {
         if (States.objState == States.ObjectStates.CARGO_OBJ) {
-            requires(Neptune.trident.claw);
+            // requires(Neptune.trident.claw);
         } else if (States.objState == States.ObjectStates.HATCH_OBJ) {
-            requires(Neptune.trident.lever);
+            // requires(Neptune.trident.lever);
         }
         setTimeout(1);
     }

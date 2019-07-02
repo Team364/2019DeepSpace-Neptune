@@ -25,6 +25,11 @@ public class ActivateTrident extends CommandGroup {
     }else if( set == 5){// Start of Sandstorm
       addSequential(new SetPiston(Neptune.trident.lever, 1)); // Open lever
       addSequential(new ElevateToPosition(1)); //Move arm and lifts
+    }else if(set == 6){ // Defense Mode
+    
+      addParallel(new SetPiston(Neptune.trident.lever, 0));
+      addParallel(new SetPiston(Neptune.trident.claw, 0));
+      addSequential(new ElevateToPosition(11));
     }
   }
   

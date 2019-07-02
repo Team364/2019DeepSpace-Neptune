@@ -3,6 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
+import frc.robot.RobotMap;
 import frc.robot.States;
 
 
@@ -48,6 +49,7 @@ public class DriveClosedLoop extends Command {
     }
     @Override
     protected void end() {
+        Neptune.driveTrain.setPconfig(RobotMap.drivePgain);
     }
 
     @Override

@@ -21,7 +21,8 @@ public class PathDrive extends Command {
     private static boolean finished = false;
     private static int path = 0;
 
-    public PathDrive() {
+    public PathDrive(int Path) {
+      path = Path;
         requires(Neptune.driveTrain);
     }
 
@@ -38,6 +39,9 @@ public class PathDrive extends Command {
         } else if(path == 1) {
           left_trajectory = PathfinderFRC.getTrajectory("far_to_hp.right");
           right_trajectory = PathfinderFRC.getTrajectory("far_to_hp.left");
+        } else if(path == 2){
+          left_trajectory = PathfinderFRC.getTrajectory("colton_practice.right");
+          right_trajectory = PathfinderFRC.getTrajectory("colton_practice.left");
         }
         else 
         {
@@ -79,6 +83,7 @@ public class PathDrive extends Command {
         double desired_heading = -Pathfinder.r2d(m_left_follower.getHeading());
         double heading_difference = Pathfinder.boundHalfDegrees(desired_heading - heading);
         double turn =  0.8 * (-1.0/80.0) * heading_difference;
+        //m_left_follower.
 
         // Apply motor power
         Neptune.driveTrain.openLoop(left_speed + turn, right_speed - turn);

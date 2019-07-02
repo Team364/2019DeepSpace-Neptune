@@ -121,12 +121,14 @@ public class OperatorOI{
       }
       //Defense Button
       if(buttoBoxo.getRawButton(11)){
-        elevate = new ElevateToPosition(11);
-        elevate.start();
-        setLever = new SetPiston(Neptune.trident.lever, 0);
-        setClaw = new SetPiston(Neptune.trident.claw, 0);
-        setLever.start();
-        setClaw.start();
+        // elevate = new ElevateToPosition(11);
+        // elevate.start();
+        // setLever = new SetPiston(Neptune.trident.lever, 0);
+        // setClaw = new SetPiston(Neptune.trident.claw, 0);
+        // setLever.start();
+        // setClaw.start();
+       Command defense = new ActivateTrident(6);
+       defense.start();
 
       }
     }

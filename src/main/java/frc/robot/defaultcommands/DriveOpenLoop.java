@@ -64,6 +64,7 @@ public class DriveOpenLoop extends Command {
         SmartDashboard.putNumber("Right Power", rightPower);
         SmartDashboard.putNumber("Left Speed", Neptune.driveTrain.getLeftCounts());
         SmartDashboard.putNumber("Right Speed", -Neptune.driveTrain.getRightCounts());
+        SmartDashboard.putNumber("Gyro", Neptune.elevator.getYaw());
     }
 
     @Override

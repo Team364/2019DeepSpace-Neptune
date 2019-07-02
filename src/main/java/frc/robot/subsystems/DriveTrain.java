@@ -53,7 +53,7 @@ public class DriveTrain extends Subsystem {
     rightRearDriveSlave.setNeutralMode(NeutralMode.Brake);
     rightTopDriveSlave.setNeutralMode(NeutralMode.Brake);
 
-    sh = new DoubleSolenoid(RobotMap.primaryPCM, RobotMap.shifterPort1, RobotMap.shifterPort2);
+    sh = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
     shifter = new Piston(sh, "Shifter");
 
     rightDrive.configFactoryDefault();
@@ -114,22 +114,22 @@ public class DriveTrain extends Subsystem {
   public void openLoop(double left, double right) {
     leftDrive.set(ControlMode.PercentOutput, left);
     rightDrive.set(ControlMode.PercentOutput, -right);
+    SmartDashboard.putNumber("right value", rightDrive.getMotorOutputPercent());
+    SmartDashboard.putNumber("left value", leftDrive.getMotorOutputPercent());
+    SmartDashboard.putNumber("right input", right);
+
+
   }
 
   public void closedLoop(double target){
     leftDrive.set(ControlMode.MotionMagic, -target);
     rightDrive.set(ControlMode.MotionMagic, target);
-    SmartDashboard.putNumber("idk man", leftDrive.getErrorDerivative(RobotMap.PIDLoopIdx));
-    SmartDashboard.putNumber("Right Loop Target", rightDrive.getClosedLoopTarget(RobotMap.PIDLoopIdx));
-    SmartDashboard.putNumber("Left Loop Target", leftDrive.getClosedLoopTarget(RobotMap.PIDLoopIdx));
-    SmartDashboard.putNumber("Right Loop Error", rightDrive.getClosedLoopError(RobotMap.PIDLoopIdx));
-    SmartDashboard.putNumber("Left Loop Error", leftDrive.getClosedLoopError(RobotMap.PIDLoopIdx));
-
   }
 
   public void turnClosedLoop(double target){
     leftDrive.set(ControlMode.MotionMagic, target);
     rightDrive.set(ControlMode.MotionMagic, target);
+    SmartDashboard.putNumber("error", leftDrive.getClosedLoopError(RobotMap.PIDLoopIdx));
 
   }
 
