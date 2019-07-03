@@ -70,8 +70,8 @@ public class Neptune extends TimedRobot {
   @Override
   public void autonomousInit() {
     Scheduler.getInstance().removeAll();
-   // sandstorm.start();
-    driveForward.start();
+    sandstorm.start();
+    //driveForward.start();
   }
 
   @Override

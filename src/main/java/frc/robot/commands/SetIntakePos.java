@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 import frc.robot.States;
 import frc.robot.commands.SetPiston;
@@ -10,6 +11,8 @@ public class SetIntakePos extends Command {
     private Command setClaw;
     private Command setLever;
     private Command elevate;
+    private int loops;
+    private boolean finish = false;
 
     public SetIntakePos() {
         if (States.objState == States.ObjectStates.CARGO_OBJ) {
@@ -17,32 +20,37 @@ public class SetIntakePos extends Command {
         } else if (States.objState == States.ObjectStates.HATCH_OBJ) {
             // requires(Neptune.trident.lever);
         }
-        setTimeout(1);
     }
 
     @Override
     protected void initialize() {
+        finish = false;
+        loops = 0;
         States.actionState = States.ActionStates.SEEK;
     }
 
     @Override
     protected void execute() {
         if (States.objState == States.ObjectStates.CARGO_OBJ) {
+            loops++;
             setClaw = new SetPiston(Neptune.trident.claw, 1);
             setLever = new SetPiston(Neptune.trident.lever, 1);
+            SmartDashboard.putNumber("Loops", loops);
             setClaw.start();
             setLever.start();
+            end();
         } else if (States.objState == States.ObjectStates.HATCH_OBJ) {
             setLever = new SetPiston(Neptune.trident.lever, 0);
             setClaw = new SetPiston(Neptune.trident.claw, 0);
             setLever.start();
             setClaw.start();
+            end();
         }
     }
 
     @Override
     protected boolean isFinished() {
-        return isTimedOut();
+        return finish;
     }
 
     @Override
@@ -54,6 +62,7 @@ public class SetIntakePos extends Command {
         }
         elevate = new ElevateToPosition(0);
         elevate.start();
+        finish = true;
     }
 
     @Override
