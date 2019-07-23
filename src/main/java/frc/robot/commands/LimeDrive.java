@@ -21,12 +21,13 @@ public class LimeDrive extends Command {
   double ty;
   double tv;
   double txShift = 1;
-
+  boolean inverted = false;
   DriveOpenLoop variables;
 
 
-  public LimeDrive() {
+  public LimeDrive(boolean inverted) {
     requires(Neptune.driveTrain);
+    this.inverted = inverted;
   }
 
   @Override
@@ -35,8 +36,12 @@ public class LimeDrive extends Command {
     variables = new DriveOpenLoop();
     loops = 0;
     Neptune.driveTrain.setTrackingMode();
-    KpAim = 0.05;//0.05
-    KpDistance = -0.118;//0.118
+    KpAim = 0.06;//0.05
+    if(inverted == true){
+      KpDistance = -0.5;//0.118
+    }else{
+      KpDistance = 0.5;//0.118
+    }
     steerAdjustMax = 0.364;//0.364 
     distanceAdjustMax = 0.364;//0.364
   }

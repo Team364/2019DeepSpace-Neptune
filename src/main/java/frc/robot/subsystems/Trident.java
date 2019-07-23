@@ -57,6 +57,10 @@ public class Trident extends Subsystem {
     runIntake(0);
   }
 
+  public void inSpinIntake() {
+    runIntake(-0.2);
+  }
+
   public double getRawOutput() {
     return intake.getMotorOutputPercent();
   }

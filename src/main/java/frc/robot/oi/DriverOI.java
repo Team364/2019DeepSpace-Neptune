@@ -16,7 +16,7 @@ public class DriverOI {
     public JoystickButton shiftLow;
     public JoystickButton shiftHigh;
     public JoystickButton aim;
-    
+    public JoystickButton aimInverted;
     public JoystickButton startPath;
 
     public JoystickButton climb;
@@ -42,7 +42,10 @@ public class DriverOI {
         shiftHigh.whenPressed(new SetPiston(Neptune.driveTrain.shifter, 0));
 
         aim = new JoystickButton(controller, 1);
-        aim.whileActive(new LimeDrive());
+        aim.whileActive(new LimeDrive(false));
+
+        aimInverted = new JoystickButton(controller, 2);
+        aimInverted.whileActive(new LimeDrive(true));
 
         climb = new JoystickButton(controller, 8);
         climb.whenPressed(lvl3ClimbSequence);
