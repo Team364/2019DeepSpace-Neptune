@@ -100,7 +100,7 @@ public class Neptune extends TimedRobot {
       States.liftZone = States.LiftZones.SAFE;
     }
 
-    if ((Neptune.elevator.getLiftPosition() >= RobotMap.liftUpperBound)) {
+    if ((elevator.getLiftPosition() >= RobotMap.liftUpperBound)) {
       if(stopLoops == 0){
         elevator.stopLift();
         stopLoops++;

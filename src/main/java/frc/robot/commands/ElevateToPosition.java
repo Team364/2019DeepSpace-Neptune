@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
 import frc.robot.RobotMap;
 import frc.robot.States;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 public class ElevateToPosition extends Command {
 
@@ -15,6 +17,8 @@ public class ElevateToPosition extends Command {
     private double intake;
     private double liftStartConfig;
     private double desiredHeight;
+    private boolean finish;
+    private int x = 0;
 
     private double wantedAngle;
     private double intakeCargo;
@@ -40,12 +44,13 @@ public class ElevateToPosition extends Command {
         desiredHeight = Height;
         requires(Neptune.elevator);
         setInterruptible(true);
-        setTimeout(0.05);
+        //setTimeout(0.05);
     }
 
     @Override
     protected void initialize() {
         States.actionState = States.ActionStates.SCORE_ACT;
+        finish = false;
     }
 
     @Override
@@ -162,13 +167,17 @@ public class ElevateToPosition extends Command {
         if (wantedPosition > 132000) {
             wantedPosition = 132000;
         }
+        x++;
+        SmartDashboard.putNumber("num", x);
+        SmartDashboard.putNumber("CameraServo", Neptune.elevator.getCam());
         Neptune.elevator.elevateTo(wantedPosition, wantedAngle);
         Neptune.elevator.setCamera(camera);
+        finish = true;
     }
 
     @Override
     protected boolean isFinished() {
-        return isTimedOut();
+        return finish;
     }
 
     @Override

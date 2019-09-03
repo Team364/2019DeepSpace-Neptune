@@ -103,7 +103,9 @@ public class Elevator extends Subsystem {
     return Instance;
 }
 
-
+  public double getCam(){
+    return servoCamera.getRaw();
+  }
   public double getYaw() {
     pigeon.getYawPitchRoll(yaw);
     return yaw[0];
@@ -128,6 +130,7 @@ public class Elevator extends Subsystem {
   }
   public void setCamera(int position){
     servoCamera.setRaw(position);
+    
   }
 
   public void setLiftPosition(double liftHeight) {

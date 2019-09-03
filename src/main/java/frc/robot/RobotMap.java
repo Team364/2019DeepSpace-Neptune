@@ -70,13 +70,13 @@ public class RobotMap {
     public static final double liftLowerBound = -100;
     public static final double liftUpperBound = 135000;
     
-    public static final int l1Hcam = 300;
-    public static final int l1Ccam = 300;
-    public static final int l2Hcam = 650;
-    public static final int l2Ccam = 850;
-    public static final int l3Hcam = 1000;
-    public static final int l3Ccam = 1000;
-    public static final int fCam = 500;
+    public static final int l1Hcam = 1900;//300 *with old servo*
+    public static final int l1Ccam = 1900;//300
+    public static final int l2Hcam = 1600;//650
+    public static final int l2Ccam = 1500;//850
+    public static final int l3Hcam = 1400;//1000
+    public static final int l3Ccam = 1400;//1000
+    public static final int fCam = 1800;
 
     // Lift PID
     public static final double liftPgain = 0.3;
