@@ -41,7 +41,7 @@ public class SwerveMod{
         angleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, SLOTIDX, SWERVETIMEOUT);
         //angleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 1, SWERVETIMEOUT);
         angleMotor.setSelectedSensorPosition(0, SLOTIDX, SWERVETIMEOUT);
-        angleMotor.setSensorPhase(phase);
+        angleMotor.setSensorPhase(false);
         angleMotor.selectProfileSlot(SLOTIDX, SWERVETIMEOUT);
         angleMotor.config_kP(SLOTIDX, ANGLEP);
         angleMotor.config_kI(SLOTIDX, ANGLEI);
@@ -51,11 +51,13 @@ public class SwerveMod{
         angleMotor.configMotionCruiseVelocity(ANGLEVELOCITY, SWERVETIMEOUT);
         angleMotor.configMotionAcceleration(ANGLEACCELERATION, SWERVETIMEOUT);
 
+        angleMotor.setInverted(phase);
+
         angleMotor.configNominalOutputForward(ANGLENOMINALFORWARD, SWERVETIMEOUT);
         angleMotor.configNominalOutputReverse(ANGLENOMINALREVERSE, SWERVETIMEOUT);
         angleMotor.configPeakOutputForward(ANGLEPEAKFORWARD, SWERVETIMEOUT);
         angleMotor.configPeakOutputReverse(ANGLEPEAKREVERSE, SWERVETIMEOUT);
-
+    
         driveMotor.setNeutralMode(NeutralMode.Brake);
 
         // Set amperage limits
@@ -123,12 +125,7 @@ public class SwerveMod{
         SmartDashboard.putNumber("mod " + moduleNumber + " ACTUAL targetAngle ", mZeroOffset);
         cycles_T++;
         SmartDashboard.putNumber("CYCLE TWOS", cycles_T);
-        if(moduleNumber == 1){
-            mAngleMotor.set(ControlMode.Position, 121.4);
-        }
-        else{
         mAngleMotor.set(ControlMode.Position, mZeroOffset);
-        }
     }
     public void setTargetAngle(double targetAngle) {
         targetAngle = modulate360(targetAngle);

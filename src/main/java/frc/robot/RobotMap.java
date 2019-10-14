@@ -10,7 +10,7 @@ public class RobotMap {
     public static final int WHEELBASE = 26;
     public static final int WHEELDIAMETER = 3;
     
-    public static final int FLANGLE = 16;//FL 2-> BR 8
+    public static final int FLANGLE = 32;//FL 2-> BR 8
     public static final int FLDRIVE = 36;//FL 1-> BR 7
     public static final int FRANGLE = 32;//FR 6-> BL 12
     public static final int FRDRIVE = 12;//FR 5-> BL 3
@@ -57,8 +57,8 @@ public class RobotMap {
     public static final int SLOTIDX = 0;
     public static final int SWERVETIMEOUT = 0;
 
-    public static final double ANGLEP = 3;//20
-    public static final double ANGLEI = 0.01;//0.001
+    public static final double ANGLEP = 1;//20
+    public static final double ANGLEI = 0;//0.001
     public static final double ANGLED = 0;//130 //200
 
     public static final int ANGLEVELOCITY = 10000;

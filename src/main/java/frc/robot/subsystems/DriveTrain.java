@@ -43,7 +43,7 @@ public class Drivetrain extends Subsystem {
                             new TalonSRX(FLANGLE),
                             new TalonSRX(FLDRIVE),
                             MOD1OFFSET,
-                            false),
+                            true),
                     new SwerveMod(2,
                             new Vector2(-TRACKWIDTH / 2.0, -WHEELBASE / 2.0),
                             new TalonSRX(BLANGLE),
@@ -84,6 +84,7 @@ public class Drivetrain extends Subsystem {
             Vector2 velocity = mod.getModulePosition().normal().scale(rotation).add(translation);
             mod.setTargetVelocity(velocity);
         }
+        setKinematics();
     }
     public void setKinematics(){
         for (SwerveMod mod : getSwerveModules()){

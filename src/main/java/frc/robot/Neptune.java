@@ -65,7 +65,8 @@ public class Neptune extends TimedRobot {
           SmartDashboard.putNumber("Swerve Module " + mod.moduleNumber + " Closed loop error Deg", mod.getAdjustedError());
           SmartDashboard.putNumber("Swerve Module " + mod.moduleNumber + " Target Angle: ",  mod.getTargetAngle());
           SmartDashboard.putNumber("Swerve Module " + mod.moduleNumber + " Abosolute Position: ", mod.getDegrees());
-
+          SmartDashboard.putNumber("MOD " + mod.moduleNumber + " OUTPUT", mod.getAngleMotor().getMotorOutputPercent());
+          
         }
   }
 
