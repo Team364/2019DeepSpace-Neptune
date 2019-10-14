@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
 import frc.robot.oi.*;
 import frc.robot.subroutines.ActivateTrident;
+import frc.robot.subroutines.BottomRocket;
 import frc.robot.States;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -17,7 +18,7 @@ public class Neptune extends TimedRobot {
 
   public static AnalogOutput LEDs = new AnalogOutput(0);
   public static Elevator elevator = Elevator.getInstance();
-  public static Drivetrain driveTrain = Drivetrain.getInstance();
+  public static DriveTrain driveTrain = DriveTrain.getInstance();
   public static Trident trident = Trident.getInstance();
   public static Climber climber = Climber.getInstance();
 
@@ -26,6 +27,7 @@ public class Neptune extends TimedRobot {
 
   public UsbCamera camera;
   public static Command sandstorm = new ActivateTrident(5);
+  public static Command driveForward = new BottomRocket();
   public static double teleopStart;
   public static double teleopElapsedTime;
   public static boolean endGame;
@@ -61,6 +63,7 @@ public class Neptune extends TimedRobot {
         }else if(States.led == States.LEDstates.PASSIVE){
           LEDs.setVoltage(2);
         }
+<<<<<<< HEAD
         for(SwerveMod mod : driveTrain.getSwerveModules()){
           SmartDashboard.putNumber("Swerve Module " + mod.moduleNumber + " Closed loop error Deg", mod.getAdjustedError());
           SmartDashboard.putNumber("Swerve Module " + mod.moduleNumber + " Target Angle: ",  mod.getTargetAngle());
@@ -68,6 +71,10 @@ public class Neptune extends TimedRobot {
           SmartDashboard.putNumber("MOD " + mod.moduleNumber + " OUTPUT", mod.getAngleMotor().getMotorOutputPercent());
           
         }
+=======
+        SmartDashboard.putNumber("rightCounts", driveTrain.getRightCounts());
+        SmartDashboard.putNumber("leftCounts", driveTrain.getLeftCounts());
+>>>>>>> parent of 38d4ef2... First Commit
   }
 
   @Override

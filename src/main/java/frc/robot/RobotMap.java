@@ -4,6 +4,7 @@ public class RobotMap {
 
     // Hardware
     public static final int primaryPCM = 0;
+<<<<<<< HEAD
  
     //hardware
     public static final int TRACKWIDTH = 21;
@@ -79,6 +80,17 @@ public class RobotMap {
     public static final int DRIVEPEAKCURRENTDURATION = 100;
     public static final boolean DRIVEENABLECURRENTLIMIT = true;
 
+=======
+    // DriveTrain
+    public static final int leftFrontDrive = 15;// Talon SRX//
+    public static final int leftTopDrive = 4;// Victor SPX
+    public static final int leftRearDrive = 5;// Victor SPX
+    public static final int rightFrontDrive = 12; //CURRENTLY A VICTOR; On Comp: Talon SPX//--figgly--12--was 3
+    public static final int rightTopDrive = 6;// 10 //Victor SPX//
+    public static final int rightRearDrive = 3;// Victor SPX
+    public static final int shifterPort1 = 3;// Primary PCM
+    public static final int shifterPort2 = 4;// Primary PCM
+>>>>>>> parent of 38d4ef2... First Commit
     // Lift
     public static final int topLift = 7;// Talon SRX -- Master
     public static final int bottomLift = 13;// Talon SRX -- Gyro
