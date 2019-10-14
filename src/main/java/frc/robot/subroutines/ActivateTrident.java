@@ -11,8 +11,6 @@ public class ActivateTrident extends CommandGroup {
   public ActivateTrident(int set) {
     this.set = set;
     if (set == 1) { // Intake Cargo
-      addSequential(new DelayedStop(-0.8, true)); // Intake
-      addSequential(new DelayedStop(-0.4, true)); // Intake
       addSequential(new WaitCommand(.25));      
       addSequential(new SetPiston(Neptune.trident.claw, 0)); // Close Claw
       addSequential(new ElevateToPosition(1));      

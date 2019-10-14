@@ -9,6 +9,7 @@ import frc.robot.misc.math.Vector2;
 import frc.robot.subsystems.SwerveMod;
 
 import static frc.robot.RobotMap.*;
+import static frc.robot.subsystems.Drivetrain.*;
 
 public class DrivetrainCommand extends Command {
 
@@ -30,8 +31,8 @@ public class DrivetrainCommand extends Command {
 	@Override
 	protected void execute() {
         forward = -Neptune.oi.controller.getRawAxis(1);
-		strafe = Neptune.oi.controller.getRawAxis(1);
-		rotation = Neptune.oi.controller.getRawAxis(1);
+		strafe = Neptune.oi.controller.getRawAxis(0);
+		rotation = Neptune.oi.controller.getRawAxis(4);
 
 		forward *= Math.abs(forward);
 		strafe *= Math.abs(strafe);
@@ -47,18 +48,26 @@ public class DrivetrainCommand extends Command {
 		SmartDashboard.putNumber("Rotation", rotation);
 
 		//TODO: add field oriented boolean
-		for (SwerveMod mod : Neptune.driveTrain.getSwerveModules()) {
-			if (Math.abs(forward) > 0.05 ||
-			    Math.abs(strafe) > 0.05 ||
-			    Math.abs(rotation) > 0.05) {
+		for (SwerveMod mod : mDrivetrain.getSwerveModules()) {
+			if (forward > 0 || strafe > 0 || rotation > 0) {
 				mDrivetrain.holonomicDrive(translation, rotation, true);
 				lastTranslation = translation;
 				lastRotation = rotation;
+				cycles++;
 			} else {
-				mDrivetrain.holonomicDrive(lastTranslation, lastRotation, true);
+				if(cycles != 0){
+					mDrivetrain.holonomicDrive(lastTranslation, lastRotation, true);
+				}
 			}
-		}		
-		mDrivetrain.updateKinematics();
+		}	
+		if(cycles != 0){	
+			mDrivetrain.updateKinematics();
+		}
+		else{
+			for(SwerveMod mod : Neptune.driveTrain.getSwerveModules()){
+                mod.setZero();
+            }
+		}
 	}
 
 	private double deadband(double input) {

@@ -61,6 +61,12 @@ public class Neptune extends TimedRobot {
         }else if(States.led == States.LEDstates.PASSIVE){
           LEDs.setVoltage(2);
         }
+        for(SwerveMod mod : driveTrain.getSwerveModules()){
+          SmartDashboard.putNumber("Swerve Module " + mod.moduleNumber + " Closed loop error Deg", mod.getAdjustedError());
+          SmartDashboard.putNumber("Swerve Module " + mod.moduleNumber + " Target Angle: ",  mod.getTargetAngle());
+          SmartDashboard.putNumber("Swerve Module " + mod.moduleNumber + " Abosolute Position: ", mod.getDegrees());
+
+        }
   }
 
   @Override

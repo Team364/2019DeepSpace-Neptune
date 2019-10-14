@@ -6,30 +6,30 @@ public class RobotMap {
     public static final int primaryPCM = 0;
  
     //hardware
-    public static final int TRACKWIDTH = 19;
-    public static final int WHEELBASE = 19;
-    public static final int WHEELDIAMETER = 2;
+    public static final int TRACKWIDTH = 21;
+    public static final int WHEELBASE = 26;
+    public static final int WHEELDIAMETER = 3;
     
-    public static final int FLANGLE = 2;//FL 2-> BR 8
-    public static final int FLDRIVE = 1;//FL 1-> BR 7
-    public static final int FRANGLE = 6;//FR 6-> BL 12
-    public static final int FRDRIVE = 5;//FR 5-> BL 3
-    public static final int BRANGLE = 8;//BR 8-> FL 2
-    public static final int BRDRIVE = 7;//BR 7-> FL 1
-    public static final int BLANGLE = 12;//was 4 //BL 12-> FR
-    public static final int BLDRIVE = 3;//BL 3-> FR
+    public static final int FLANGLE = 16;//FL 2-> BR 8
+    public static final int FLDRIVE = 36;//FL 1-> BR 7
+    public static final int FRANGLE = 32;//FR 6-> BL 12
+    public static final int FRDRIVE = 12;//FR 5-> BL 3
+    public static final int BRANGLE = 33;//BR 8-> FL 2
+    public static final int BRDRIVE = 15;//BR 7-> FL 1
+    public static final int BLANGLE = 39;//was 4 //BL 12-> FR
+    public static final int BLDRIVE = 37;//BL 3-> FR
 
-    public static final int PIGEON = 3;
+    public static final int PIGEON = 13;
 
     //Offsets 
     /**Front Right */
-    public static final double MOD0OFFSET = 101.1;
+    public static final double MOD0OFFSET = 121.4;
     /**Front Left */
-    public static final double MOD1OFFSET = 322.1;
+    public static final double MOD1OFFSET = 99.5;
     /**Back Left */
-    public static final double MOD2OFFSET = 188.6;
+    public static final double MOD2OFFSET = 273.8;
     /**Back Right */
-    public static final double MOD3OFFSET = 132.45;
+    public static final double MOD3OFFSET = 34.5;
 
     //Holds
     public static final int ABUTTONANGLE = 92;
@@ -57,7 +57,7 @@ public class RobotMap {
     public static final int SLOTIDX = 0;
     public static final int SWERVETIMEOUT = 0;
 
-    public static final double ANGLEP = 1.5;//20
+    public static final double ANGLEP = 3;//20
     public static final double ANGLEI = 0.01;//0.001
     public static final double ANGLED = 0;//130 //200
 
@@ -71,7 +71,7 @@ public class RobotMap {
 
     public static final int ANGLECONTINUOUSCURRENTLIMIT = 30;
     public static final int ANGLEPEAKCURRENT = 30;
-    public static final int ANGLEPEAKCURRENTDURATION = 100;
+    public static final int ANGLEPEAKCURRENTDURATION = 50;
     public static final boolean ANGLEENABLECURRENTLIMIT = true;
 
     public static final int DRIVECONTINUOUSCURRENTLIMIT = 25;

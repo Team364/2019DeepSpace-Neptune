@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 import frc.robot.commands.DrivetrainCommand;
 import frc.robot.misc.math.Rotation2;
@@ -26,37 +27,38 @@ public class Drivetrain extends Subsystem {
     private int w = WHEELBASE;
     private int t = TRACKWIDTH;
     private Command zero;
+    public static int cycles ;
 
     public Drivetrain() {
+        cycles = 0;
             mSwerveModules = new SwerveMod[] {
                     new SwerveMod(0,
                             new Vector2(TRACKWIDTH / 2.0, WHEELBASE / 2.0),
                             new TalonSRX(FRANGLE),
                             new TalonSRX(FRDRIVE),
-                            MOD0OFFSET),
+                            MOD0OFFSET,
+                            false),
                     new SwerveMod(1,
                             new Vector2(-TRACKWIDTH / 2.0, WHEELBASE / 2.0),
                             new TalonSRX(FLANGLE),
                             new TalonSRX(FLDRIVE),
-                            MOD1OFFSET),
+                            MOD1OFFSET,
+                            false),
                     new SwerveMod(2,
                             new Vector2(-TRACKWIDTH / 2.0, -WHEELBASE / 2.0),
                             new TalonSRX(BLANGLE),
                             new TalonSRX(BLDRIVE),
-                            MOD2OFFSET),
+                            MOD2OFFSET,
+                            false),
                     new SwerveMod(3,
                             new Vector2(TRACKWIDTH / 2.0, -WHEELBASE / 2.0),
                             new TalonSRX(BRANGLE),
                             new TalonSRX(BRDRIVE),
-                            MOD3OFFSET)
+                            MOD3OFFSET,
+                            false)
             };
-
-            mSwerveModules[0].setDriveInverted(true);
-            mSwerveModules[2].setDriveInverted(true);
-            mSwerveModules[3].setDriveInverted(true);
             //mSwerveModules[2].setSensorPhase(true);
-
-            updateKinematics();
+            
     } 
 
     public synchronized static Drivetrain getInstance() {
@@ -75,6 +77,7 @@ public class Drivetrain extends Subsystem {
         if (fieldOriented) {
             // need to get pigeon vector
             translation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getYaw()).inverse());
+
         }
 
         for (SwerveMod mod : getSwerveModules()) {
@@ -121,6 +124,8 @@ public class Drivetrain extends Subsystem {
     }
     public void updateKinematics(){
         for (SwerveMod mod : getSwerveModules()){
+            SmartDashboard.putNumber("cycles", cycles);
+            SmartDashboard.putNumber("targetAngle initial" + mod.moduleNumber, mod.targetAngle);
             mod.setTargetAngle(mod.targetAngle);
             mod.setTargetSpeed(mod.targetSpeed);
         }
