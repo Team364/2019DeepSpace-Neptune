@@ -111,6 +111,10 @@ public class Elevator extends Subsystem {
     return yaw[0];
   }
 
+  public PigeonIMU getPigeon(){
+    return pigeon;
+  }
+
   public void resetYaw(double angle) {
     pigeon.setYaw(angle);
   }
