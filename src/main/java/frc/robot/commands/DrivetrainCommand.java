@@ -44,11 +44,7 @@ public class DrivetrainCommand extends Command {
 		rotation = deadband(rotation);
 		translation = new Vector2(forward, strafe);
 
-		SmartDashboard.putNumber("Forward", forward);
-		SmartDashboard.putNumber("Strafe", strafe);
-		SmartDashboard.putNumber("Rotation", rotation);
-		SmartDashboard.putNumber("TRANSLATION", translation.getAngle().toDegrees());
-		//TODO: add field oriented boolean
+			//TODO: add field oriented boolean
 			if (Math.abs(forward) > 0 || Math.abs(strafe) > 0 || Math.abs(rotation) > 0) {
 				mDrivetrain.holonomicDrive(translation, rotation, false);
 				lastTranslation = translation;
@@ -59,7 +55,9 @@ public class DrivetrainCommand extends Command {
 				mDrivetrain.holonomicDrive(lastTranslation, lastRotation, true);
 				}
 			}		
+		if(cycles != 0){
 		mDrivetrain.updateKinematics();
+		}
 	}
 
 	private double deadband(double input) {

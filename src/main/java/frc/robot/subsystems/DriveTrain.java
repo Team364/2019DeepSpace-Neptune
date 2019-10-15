@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -54,10 +55,13 @@ public class Drivetrain extends Subsystem {
 
             mSwerveModules[0].setDriveInverted(true);
             mSwerveModules[2].setDriveInverted(true);
-            mSwerveModules[3].setDriveInverted(true);
-            //mSwerveModules[2].setSensorPhase(true);
+            mSwerveModules[3].setDriveInverted(true);            
+            //mSwerveModules[1].setDriveInverted(true);
 
-            updateKinematics();
+            mSwerveModules[1].setSensorPhase(true);
+            //mSwerveModules[1].getAngleMotor().setInverted(false);
+
+            setZero();
     } 
 
     public synchronized static Drivetrain getInstance() {
@@ -75,13 +79,11 @@ public class Drivetrain extends Subsystem {
     public void holonomicDrive(Vector2 translation, double rotation, boolean speedOff) {
 
             // need to get pigeon vector
-         //   translation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getYaw()).inverse());
+            translation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getYaw()).inverse());
 
         for (SwerveMod mod : getSwerveModules()) {
             Vector2 velocity = mod.getModulePosition().normal().scale(rotation).add(translation);
             mod.setTargetVelocity(velocity, speedOff);
-            //SmartDashboard.putNumber("angleT" + mod.moduleNumber + "  ", translation.getAngle().toDegrees());
-            SmartDashboard.putNumber("speedT" + mod.moduleNumber + "  ", velocity.length);
         }
 
     }
@@ -89,6 +91,11 @@ public class Drivetrain extends Subsystem {
         for (SwerveMod mod : getSwerveModules()){
             mod.setTargetAngle(mod.targetAngle);
             mod.setTargetSpeed(mod.targetSpeed);
+        }
+    }
+    public void setZero(){
+        for(SwerveMod mod : getSwerveModules()){
+            mod.getAngleMotor().set(ControlMode.Position, mod.mZeroOffset);
         }
     }
 

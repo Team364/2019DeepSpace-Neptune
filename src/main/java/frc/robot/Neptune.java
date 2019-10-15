@@ -51,6 +51,8 @@ public class Neptune extends TimedRobot {
         SmartDashboard.putNumber("gyro", Neptune.elevator.getYaw());
         for(SwerveMod mod : driveTrain.getSwerveModules()){
           SmartDashboard.putNumber("target Angle " + mod.moduleNumber + "  ", mod.targetAngle);
+          SmartDashboard.putNumber("actual Angle " + mod.moduleNumber + "  ", mod.getDegrees());
+          SmartDashboard.putNumber("error " + mod.moduleNumber + "  ", mod.getAngleMotor().getErrorDerivative());
         }
         
   }

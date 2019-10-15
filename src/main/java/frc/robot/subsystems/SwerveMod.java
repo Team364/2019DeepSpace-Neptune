@@ -16,7 +16,7 @@ public class SwerveMod{
     private double lastTargetAngle = 0;
     public final int moduleNumber;
 
-    private final double mZeroOffset;
+    public final double mZeroOffset;
 
     private final TalonSRX mAngleMotor;
     private final TalonSRX mDriveMotor;
@@ -39,7 +39,6 @@ public class SwerveMod{
         angleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, SLOTIDX, SWERVETIMEOUT);
         angleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 1, SWERVETIMEOUT);
         angleMotor.setSelectedSensorPosition(0, SLOTIDX, SWERVETIMEOUT);
-        angleMotor.setSensorPhase(false);
         angleMotor.selectProfileSlot(SLOTIDX, SWERVETIMEOUT);
         angleMotor.config_kP(SLOTIDX, ANGLEP);
         angleMotor.config_kI(SLOTIDX, ANGLEI);
@@ -69,17 +68,10 @@ public class SwerveMod{
 
         driveMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, SLOTIDX, SWERVETIMEOUT);
         driveMotor.setSelectedSensorPosition(0, SLOTIDX, SWERVETIMEOUT);
-        driveMotor.setSensorPhase(false);
         driveMotor.selectProfileSlot(SLOTIDX, SWERVETIMEOUT);
         driveMotor.config_kP(SLOTIDX, ANGLEP);
         driveMotor.config_kI(SLOTIDX, ANGLEI);
         driveMotor.config_kD(SLOTIDX, ANGLED);
-    }
-
-    public void setZero(){
-        for(SwerveMod mod : Neptune.driveTrain.getSwerveModules()){
-            mAngleMotor.set(ControlMode.Position, mZeroOffset);
-        }
     }
 
     public TalonSRX getAngleMotor(){
@@ -120,6 +112,7 @@ public class SwerveMod{
         return lastTargetAngle;
     }
 
+
     public void setDriveInverted(boolean inverted) {
         driveInverted = inverted;
     }
@@ -130,7 +123,6 @@ public class SwerveMod{
         this.targetSpeed = targetSpeed;
     }
     public void setTargetAngle(double targetAngle) {
-        SmartDashboard.putNumber("INITIAL target" + moduleNumber + "  ", targetAngle);
         targetAngle = modulate360(targetAngle);
         double currentAngle = toDegrees(getPos());
         double currentAngleMod = modulate360(currentAngle);
@@ -156,7 +148,7 @@ public class SwerveMod{
         double currentError = getRawError();
         lastTargetAngle = targetAngle;
         targetAngle = toCounts(targetAngle);
-        SmartDashboard.putNumber("ACTUAL target" + moduleNumber + "  ", targetAngle);
+        SmartDashboard.putNumber("ACTUAL " + moduleNumber + "  ", targetAngle);
         mAngleMotor.set(ControlMode.Position, targetAngle);
     }
 
