@@ -47,9 +47,8 @@ public class DrivetrainCommand extends Command {
 		SmartDashboard.putNumber("Forward", forward);
 		SmartDashboard.putNumber("Strafe", strafe);
 		SmartDashboard.putNumber("Rotation", rotation);
-
+		SmartDashboard.putNumber("TRANSLATION", translation.getAngle().toDegrees());
 		//TODO: add field oriented boolean
-		for (SwerveMod mod : Neptune.driveTrain.getSwerveModules()) {
 			if (Math.abs(forward) > 0 || Math.abs(strafe) > 0 || Math.abs(rotation) > 0) {
 				mDrivetrain.holonomicDrive(translation, rotation, true);
 				lastTranslation = translation;
@@ -59,8 +58,7 @@ public class DrivetrainCommand extends Command {
 				if(cycles != 0){
 				mDrivetrain.holonomicDrive(lastTranslation, lastRotation, true);
 				}
-			}
-		}		
+			}		
 		mDrivetrain.updateKinematics();
 	}
 

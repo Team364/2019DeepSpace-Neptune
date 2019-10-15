@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 import frc.robot.commands.DrivetrainCommand;
 import frc.robot.misc.math.Rotation2;
@@ -74,50 +75,16 @@ public class Drivetrain extends Subsystem {
     public void holonomicDrive(Vector2 translation, double rotation, boolean fieldOriented) {
         if (fieldOriented) {
             // need to get pigeon vector
-            translation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getYaw()).inverse());
+         //   translation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getYaw()).inverse());
         }
 
         for (SwerveMod mod : getSwerveModules()) {
             Vector2 velocity = mod.getModulePosition().normal().scale(rotation).add(translation);
             mod.setTargetVelocity(velocity);
+            //SmartDashboard.putNumber("angleT" + mod.moduleNumber + "  ", translation.getAngle().toDegrees());
+            SmartDashboard.putNumber("speedT" + mod.moduleNumber + "  ", velocity.length);
         }
-    }
-    public void setKinematics(){
-        for (SwerveMod mod : getSwerveModules()){
-            double targetAngle;
-            double targetSpeed;
 
-                targetAngle = mod.targetAngle;
-                targetSpeed = mod.targetSpeed;
-
-            final double currentAngle = mod.getCurrentAngle();
-
-            // Change the target angle so the delta is in the range [-pi, pi) instead of [0, 2pi)
-            double delta = targetAngle - currentAngle;
-            if (delta >= Math.PI) {
-                targetAngle -= 2.0 * Math.PI;
-            } else if (delta < -Math.PI) {
-                targetAngle += 2.0 * Math.PI;
-            }
-
-            // Deltas that are greater than 90 deg or less than -90 deg can be inverted so the total movement of the module
-            // is less than 90 deg by inverting the wheel direction
-            delta = targetAngle - currentAngle;
-            if (delta > Math.PI / 2.0 || delta < -Math.PI / 2.0) {
-                // Only need to add pi here because the target angle will be put back into the range [0, 2pi)
-                targetAngle += Math.PI;
-
-                targetSpeed *= -1.0;
-            }
-
-            // Put target angle back into the range [0, 2pi)
-            targetAngle %= 2.0 * Math.PI;
-            if (targetAngle < 0.0) {
-                targetAngle += 2.0 * Math.PI;
-            }
-            mod.setTargetAngleVal(targetAngle);
-            mod.setTargetSpeedVal(targetSpeed);
-        }
     }
     public void updateKinematics(){
         for (SwerveMod mod : getSwerveModules()){

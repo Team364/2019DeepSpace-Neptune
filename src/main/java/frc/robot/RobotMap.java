@@ -49,7 +49,7 @@ public class RobotMap {
         RIGHTBUMPERANGLE};
 
     //constants
-    public static final double STICKDEADBAND = 0.05;
+    public static final double STICKDEADBAND = 0.2;
     public static final double ENCODERTICKS = 4096.0;
     public static final double OFFSETTOSTRAIGHT = 180;
 

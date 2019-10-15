@@ -14,7 +14,7 @@ import static frc.robot.RobotMap.*;
 
 public class SwerveMod{
     private double lastTargetAngle = 0;
-    private final int moduleNumber;
+    public final int moduleNumber;
 
     private final double mZeroOffset;
 
@@ -95,7 +95,7 @@ public class SwerveMod{
 
 
     public void setTargetVelocity(Vector2 velocity){
-            targetAngle = velocity.getAngle().toRadians();
+            targetAngle = velocity.getAngle().toDegrees();
             targetSpeed = velocity.length;
     }
 
@@ -125,6 +125,7 @@ public class SwerveMod{
         this.targetSpeed = targetSpeed;
     }
     public void setTargetAngle(double targetAngle) {
+        SmartDashboard.putNumber("INITIAL target" + moduleNumber + "  ", targetAngle);
         targetAngle = modulate360(targetAngle);
         double currentAngle = toDegrees(getPos());
         double currentAngleMod = modulate360(currentAngle);
@@ -150,6 +151,7 @@ public class SwerveMod{
         double currentError = getRawError();
         lastTargetAngle = targetAngle;
         targetAngle = toCounts(targetAngle);
+        SmartDashboard.putNumber("ACTUAL target" + moduleNumber + "  ", targetAngle);
         mAngleMotor.set(ControlMode.Position, targetAngle);
     }
 

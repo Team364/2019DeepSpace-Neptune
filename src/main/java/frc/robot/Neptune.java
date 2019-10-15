@@ -47,20 +47,12 @@ public class Neptune extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-        //LED set
-        if(!dStation.isDSAttached()){
-          LEDs.setVoltage(1);
-        }else if(dStation.isDSAttached()&&(dStation.isDisabled())){
-          LEDs.setVoltage(2);
-        }else if(States.led == States.LEDstates.INTAKE_MODE){
-          LEDs.setVoltage(3);
-        }else if(States.led == States.LEDstates.HAS_OBJ){
-          LEDs.setVoltage(4);
-        }else if(States.led == States.LEDstates.CLIMBING){
-          LEDs.setVoltage(5);
-        }else if(States.led == States.LEDstates.PASSIVE){
-          LEDs.setVoltage(2);
+
+        SmartDashboard.putNumber("gyro", Neptune.elevator.getYaw());
+        for(SwerveMod mod : driveTrain.getSwerveModules()){
+          SmartDashboard.putNumber("target Angle " + mod.moduleNumber + "  ", mod.targetAngle);
         }
+        
   }
 
   @Override
