@@ -32,8 +32,8 @@ public class DrivetrainCommand extends Command {
 	@Override
 	protected void execute() {
         forward = -Neptune.oi.controller.getRawAxis(1);
-		strafe = Neptune.oi.controller.getRawAxis(1);
-		rotation = Neptune.oi.controller.getRawAxis(1);
+		strafe = Neptune.oi.controller.getRawAxis(0);
+		rotation = Neptune.oi.controller.getRawAxis(4);
 
 		forward *= Math.abs(forward);
 		strafe *= Math.abs(strafe);
@@ -50,7 +50,7 @@ public class DrivetrainCommand extends Command {
 		SmartDashboard.putNumber("TRANSLATION", translation.getAngle().toDegrees());
 		//TODO: add field oriented boolean
 			if (Math.abs(forward) > 0 || Math.abs(strafe) > 0 || Math.abs(rotation) > 0) {
-				mDrivetrain.holonomicDrive(translation, rotation, true);
+				mDrivetrain.holonomicDrive(translation, rotation, false);
 				lastTranslation = translation;
 				lastRotation = rotation;
 				cycles++;

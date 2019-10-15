@@ -72,15 +72,14 @@ public class Drivetrain extends Subsystem {
         return mSwerveModules[i];
     }
 
-    public void holonomicDrive(Vector2 translation, double rotation, boolean fieldOriented) {
-        if (fieldOriented) {
+    public void holonomicDrive(Vector2 translation, double rotation, boolean speedOff) {
+
             // need to get pigeon vector
          //   translation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getYaw()).inverse());
-        }
 
         for (SwerveMod mod : getSwerveModules()) {
             Vector2 velocity = mod.getModulePosition().normal().scale(rotation).add(translation);
-            mod.setTargetVelocity(velocity);
+            mod.setTargetVelocity(velocity, speedOff);
             //SmartDashboard.putNumber("angleT" + mod.moduleNumber + "  ", translation.getAngle().toDegrees());
             SmartDashboard.putNumber("speedT" + mod.moduleNumber + "  ", velocity.length);
         }

@@ -94,9 +94,14 @@ public class SwerveMod{
     }
 
 
-    public void setTargetVelocity(Vector2 velocity){
+    public void setTargetVelocity(Vector2 velocity, boolean speedOff){
             targetAngle = velocity.getAngle().toDegrees();
+            if(!speedOff){
             targetSpeed = velocity.length;
+            }
+            else{
+            targetSpeed = 0;
+            }
     }
 
     public Vector2 getModulePosition(){
