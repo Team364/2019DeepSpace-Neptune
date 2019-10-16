@@ -40,7 +40,7 @@ public class Elevator extends Subsystem {
     pigeon = new PigeonIMU(liftSlave);
     gen_status = new PigeonIMU.GeneralStatus();
     pigeon.getGeneralStatus(gen_status);
-
+    pigeon.setYaw(0);
     arm = new TalonSRX(RobotMap.arm);
     fr = new DoubleSolenoid(1, 0, 7);
     front = new Piston(fr, "Front");

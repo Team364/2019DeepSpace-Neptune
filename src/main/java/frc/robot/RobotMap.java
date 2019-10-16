@@ -13,52 +13,47 @@ public class RobotMap {
     public static final int FLANGLE = 16;//FL 2-> BR 8/////////////16
     public static final int FLDRIVE = 36;//FL 1-> BR 7/////////////36
     public static final int FRANGLE = 32;//FR 6-> BL 12////////////32
+
     public static final int FRDRIVE = 12;//FR 5-> BL 3/////////////12
     public static final int BRANGLE = 33;//BR 8-> FL 2
     public static final int BRDRIVE = 15;//BR 7-> FL 1
     public static final int BLANGLE = 39;//was 4 //BL 12-> FR
     public static final int BLDRIVE = 37;//BL 3-> FR
 
-    public static final int PIGEON = 3;
+    public static final int PIGEON = 13;
 
     //Offsets 
     /**Front Right */
-    public static final double MOD0OFFSET = 121.4;
+    public static final double MOD0OFFSET = 121.4;//121.4
     /**Front Left */
-    public static final double MOD1OFFSET = 275.3;
+    public static final double MOD1OFFSET = 95.7;//95.7
     /**Back Left */
-    public static final double MOD2OFFSET = 273.8;
+    public static final double MOD2OFFSET = 273.8;//273.8
     /**Back Right */
-    public static final double MOD3OFFSET = 34.5;
+    public static final double MOD3OFFSET = 34.5;//34.5
 
-    //Holds
-    public static final int ABUTTONANGLE = 92;
-    public static final int BBUTTONANGLE = -120;
-    public static final int XBUTTONANGLE = 45;
-    public static final int YBUTTONANGLE = 60;
-    public static final int LEFTBUMPERANGLE = -180;
-    public static final int RIGHTBUMPERANGLE = 0;
-    
-    public static double[] angles = {
-        0,
-        ABUTTONANGLE,
-        BBUTTONANGLE,
-        XBUTTONANGLE,
-        YBUTTONANGLE,
-        LEFTBUMPERANGLE,
-        RIGHTBUMPERANGLE};
+    //Vector Offsets
+    /**Front Right Vector Offset */
+    public static final double MOD0VECTOR = 113.84;
+    /**Front Left Vector Offset */
+    public static final double MOD1VECTOR = 101;
+    /**Back Left Vector Offset */
+    public static final double MOD2VECTOR = 90;
+    /**Back Right Vector Offset */
+    public static final double MOD3VECTOR = 36;
 
     //constants
     public static final double STICKDEADBAND = 0.2;
     public static final double ENCODERTICKS = 4096.0;
     public static final double OFFSETTOSTRAIGHT = 180;
+    public static final double ANGLE_TICKS_PER_RADIAN = ENCODERTICKS / (2.0 * Math.PI);
 
 
     public static final int SLOTIDX = 0;
     public static final int SWERVETIMEOUT = 0;
 
-    public static final double ANGLEP = .5;//20
-    public static final double ANGLEI = 0.01;//0.001
+    public static final double ANGLEP = 1;//20
+    public static final double ANGLEI = 0.001;//0.001
     public static final double ANGLED = 0;//130 //200
 
     public static final int ANGLEVELOCITY = 10000;

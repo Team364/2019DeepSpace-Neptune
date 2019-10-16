@@ -13,6 +13,8 @@ import frc.robot.States;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
+import static frc.robot.Conversions.*;
+
 public class Neptune extends TimedRobot {
 
   public static AnalogOutput LEDs = new AnalogOutput(0);
@@ -50,9 +52,13 @@ public class Neptune extends TimedRobot {
 
         SmartDashboard.putNumber("gyro", Neptune.elevator.getYaw());
         for(SwerveMod mod : driveTrain.getSwerveModules()){
-          SmartDashboard.putNumber("target Angle " + mod.moduleNumber + "  ", mod.targetAngle);
-          SmartDashboard.putNumber("actual Angle " + mod.moduleNumber + "  ", mod.getDegrees());
+          SmartDashboard.putNumber("target Angle " + mod.moduleNumber + "  ", mod.smartAngle);
+          SmartDashboard.putNumber("actual Angle " + mod.moduleNumber + "  ", toDegrees(mod.getPos()));
           SmartDashboard.putNumber("error " + mod.moduleNumber + "  ", mod.getAngleMotor().getErrorDerivative());
+          SmartDashboard.putNumber("given power " + mod.moduleNumber + "  ", mod.getAngleMotor().getMotorOutputPercent());
+          //SmartDashboard.putNumber("x vector" + mod.moduleNumber + "  ", mod.getVelocityX());
+          //SmartDashboard.putNumber("y vector" + mod.moduleNumber + "  ", mod.getVelocityY());
+
         }
         
   }

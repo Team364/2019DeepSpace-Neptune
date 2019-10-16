@@ -24,4 +24,18 @@ public class Conversions{
         return units / 360 * WHEELBASE * ENCODERTICKS / WHEELDIAMETER;
     }
     
+    
+	public static double deadband(double input) {
+		if (Math.abs(input) < STICKDEADBAND) return 0;
+		return input;
+    }
+    public static double rotationDeadband(double input){
+        if (Math.abs(input) < STICKDEADBAND) return 0;
+        if(input > 0){
+            return 1;
+        }
+        else{
+            return -1;
+        }
+    }
 }

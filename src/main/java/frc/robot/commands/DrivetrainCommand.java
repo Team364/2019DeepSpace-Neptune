@@ -10,6 +10,8 @@ import frc.robot.subsystems.SwerveMod;
 
 import static frc.robot.RobotMap.*;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 public class DrivetrainCommand extends Command {
 
 	private final Drivetrain mDrivetrain;
@@ -18,7 +20,7 @@ public class DrivetrainCommand extends Command {
 	double forward;
 	double strafe;
 	double rotation;
-	Vector2 translation;
+	private Vector2 translation;
 
 	Vector2 lastTranslation;
 	double lastRotation;
@@ -35,17 +37,12 @@ public class DrivetrainCommand extends Command {
 		strafe = Neptune.oi.controller.getRawAxis(0);
 		rotation = Neptune.oi.controller.getRawAxis(4);
 
-		forward *= Math.abs(forward);
-		strafe *= Math.abs(strafe);
-		rotation *= Math.abs(rotation);
+		//forward *= Math.abs(forward);
+		//strafe *= Math.abs(strafe);
+		//rotation *= Math.abs(rotation);
 
-		forward = deadband(forward);
-		strafe = deadband(strafe);
-		rotation = deadband(rotation);
 		translation = new Vector2(forward, strafe);
-
-			//TODO: add field oriented boolean
-			if (Math.abs(forward) > 0 || Math.abs(strafe) > 0 || Math.abs(rotation) > 0) {
+			if (Math.abs(forward) > STICKDEADBAND || Math.abs(strafe) > STICKDEADBAND || Math.abs(rotation) > STICKDEADBAND) {
 				mDrivetrain.holonomicDrive(translation, rotation, false);
 				lastTranslation = translation;
 				lastRotation = rotation;
@@ -54,16 +51,12 @@ public class DrivetrainCommand extends Command {
 				if(cycles != 0){
 				mDrivetrain.holonomicDrive(lastTranslation, lastRotation, true);
 				}
-			}		
-		if(cycles != 0){
-		mDrivetrain.updateKinematics();
+			}	
+		if(cycles != 0){	
+			mDrivetrain.updateKinematics();
 		}
 	}
 
-	private double deadband(double input) {
-		if (Math.abs(input) < STICKDEADBAND) return 0;
-		return input;
-	}
 
 	@Override
 	protected void end() {

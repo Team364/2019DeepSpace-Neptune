@@ -11,6 +11,8 @@ import frc.robot.misc.math.Vector2;
 import static frc.robot.Conversions.*;
 import static frc.robot.RobotMap.*;
 
+import java.util.Vector;
+
 
 public class SwerveMod{
     private double lastTargetAngle = 0;
@@ -25,20 +27,26 @@ public class SwerveMod{
     
     public double targetAngle;
     public double targetSpeed;
+    public double smartAngle;
+    public Vector2 velocity;
+    public double vectorOffset;
+    public double currentAngle;
 
-    public SwerveMod(int moduleNumber, Vector2 moduleVector, TalonSRX angleMotor, TalonSRX driveMotor, double zeroOffset) {
+    public SwerveMod(int moduleNumber, Vector2 modulePosition, TalonSRX angleMotor, TalonSRX driveMotor, double zeroOffset, double vectorOffset) {
         this.moduleNumber = moduleNumber;
-        this.modulePosition = moduleVector;
+        this.modulePosition = modulePosition;
+        this.vectorOffset = vectorOffset;
         mAngleMotor = angleMotor;
         mDriveMotor = driveMotor;
         mZeroOffset = zeroOffset;
         targetAngle = mZeroOffset;
         targetSpeed = 0;
+        currentAngle = 0;
 
         angleMotor.configFactoryDefault();
-        angleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, SLOTIDX, SWERVETIMEOUT);
-        angleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 1, SWERVETIMEOUT);
-        angleMotor.setSelectedSensorPosition(0, SLOTIDX, SWERVETIMEOUT);
+        angleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, SLOTIDX, SWERVETIMEOUT);
+        //angleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 1, SWERVETIMEOUT);
+        //angleMotor.setSelectedSensorPosition(0, SLOTIDX, SWERVETIMEOUT);
         angleMotor.selectProfileSlot(SLOTIDX, SWERVETIMEOUT);
         angleMotor.config_kP(SLOTIDX, ANGLEP);
         angleMotor.config_kI(SLOTIDX, ANGLEI);
@@ -78,22 +86,33 @@ public class SwerveMod{
         return mAngleMotor;
     }
     public double getCurrentAngle(){
-        double angle = toDegrees(getPos());
-        angle = modulate360(angle);
-        if (angle < 0) angle += 360;
-        angle = (angle*Math.PI)/180;
+        double angle = currentAngle;
         return angle;
     }
 
 
-    public void setTargetVelocity(Vector2 velocity, boolean speedOff){
-            targetAngle = velocity.getAngle().toDegrees();
+    public void setTargetVelocity(Vector2 velocity, boolean speedOff, double rotation){
+            this.velocity = velocity;
+            if(moduleNumber == 1){
+                targetAngle = -(velocity.getAngle().toDegrees()) + (Math.abs(rotationDeadband(rotation)) * (vectorOffset - 90)) ;
+            }
+            else{
+                targetAngle = velocity.getAngle().toDegrees() + (Math.abs(rotationDeadband(rotation)) * (vectorOffset - 90)) - (Math.abs(rotationDeadband(rotation)) * 90 * (vectorOffset-90)) + (rotationDeadband(rotation) * 180);
+
+            }
+            smartAngle = targetAngle;
             if(!speedOff){
             targetSpeed = velocity.length;
             }
             else{
             targetSpeed = 0;
             }
+    }
+    public double getVelocityX(){
+        return velocity.x;
+    }
+    public double getVelocityY(){
+        return velocity.y;
     }
 
     public Vector2 getModulePosition(){
@@ -112,7 +131,6 @@ public class SwerveMod{
         return lastTargetAngle;
     }
 
-
     public void setDriveInverted(boolean inverted) {
         driveInverted = inverted;
     }
@@ -125,6 +143,7 @@ public class SwerveMod{
     public void setTargetAngle(double targetAngle) {
         targetAngle = modulate360(targetAngle);
         double currentAngle = toDegrees(getPos());
+        //double currentAngleMod = currentAngle;
         double currentAngleMod = modulate360(currentAngle);
         if (currentAngleMod < 0) currentAngleMod += 360;
         double delta = currentAngleMod - targetAngle;
@@ -148,8 +167,9 @@ public class SwerveMod{
         double currentError = getRawError();
         lastTargetAngle = targetAngle;
         targetAngle = toCounts(targetAngle);
-        SmartDashboard.putNumber("ACTUAL " + moduleNumber + "  ", targetAngle);
-        mAngleMotor.set(ControlMode.Position, targetAngle);
+        //smartAngle = targetAngle;
+            mAngleMotor.set(ControlMode.Position, targetAngle);
+            mAngleMotor.set(ControlMode.Position, targetAngle);
     }
 
     public void setTargetSpeed(double speed) {
@@ -169,12 +189,6 @@ public class SwerveMod{
         return mAngleMotor.getSelectedSensorPosition(SLOTIDX);
     }
 
-    /**
-     * @return Degrees of Position
-     */
-    public double getDegrees(){
-        return toDegrees(mAngleMotor.getSensorCollection().getPulseWidthPosition() & 0xFFF);
-    }
     /**
      * @return Ticks of Position
      */
