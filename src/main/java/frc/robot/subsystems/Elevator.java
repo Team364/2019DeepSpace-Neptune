@@ -12,6 +12,7 @@ import frc.robot.States;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.robot.misc.Piston;
 import edu.wpi.first.wpilibj.PWM;
+import static frc.robot.Conversions.*;
 
 public class Elevator extends Subsystem {
 
@@ -113,6 +114,9 @@ public class Elevator extends Subsystem {
 
   public PigeonIMU getPigeon(){
     return pigeon;
+  }
+  public double getGyro(){
+    return modulate360(getYaw() * -1);
   }
 
   public void resetYaw(double angle) {

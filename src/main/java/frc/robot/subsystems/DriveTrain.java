@@ -89,11 +89,12 @@ public class Drivetrain extends Subsystem {
             for(SwerveMod mod : getSwerveModules()){
                 Vector2 translateOffset = null;
                 Vector2 newTranslation = null;
-                translateOffset = translation.rotateBy(Rotation2.fromDegrees(mod.vectorOffset));
+                newTranslation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getGyro()).inverse());
 
-                newTranslation = translateOffset.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getYaw()).inverse());
+                translateOffset = newTranslation.rotateBy(Rotation2.fromDegrees(mod.vectorOffset));
 
-                velocity = mod.getModulePosition().normal().scale(deadband(rotation)).add(newTranslation);
+
+                velocity = mod.getModulePosition().normal().scale(deadband(rotation)).add(translateOffset);
                 mod.setTargetVelocity(velocity, speedOff, rotation);
             }        
     }
