@@ -1,17 +1,30 @@
 package frc.robot.subsystems;
 
+import static frc.robot.Conversions.modulate360;
+import static frc.robot.Conversions.modulate4096;
+import static frc.robot.Conversions.toCounts;
+import static frc.robot.Conversions.toDegrees;
+import static frc.robot.RobotMap.ANGLECONTINUOUSCURRENTLIMIT;
+import static frc.robot.RobotMap.ANGLED;
+import static frc.robot.RobotMap.ANGLEENABLECURRENTLIMIT;
+import static frc.robot.RobotMap.ANGLEI;
+import static frc.robot.RobotMap.ANGLEP;
+import static frc.robot.RobotMap.ANGLEPEAKCURRENT;
+import static frc.robot.RobotMap.ANGLEPEAKCURRENTDURATION;
+import static frc.robot.RobotMap.DRIVECONTINUOUSCURRENTLIMIT;
+import static frc.robot.RobotMap.DRIVEENABLECURRENTLIMIT;
+import static frc.robot.RobotMap.DRIVEPEAKCURRENT;
+import static frc.robot.RobotMap.DRIVEPEAKCURRENTDURATION;
+import static frc.robot.RobotMap.SLOTIDX;
+import static frc.robot.RobotMap.SWERVETIMEOUT;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Neptune;
 import frc.robot.misc.math.Vector2;
-
-import static frc.robot.Conversions.*;
-import static frc.robot.RobotMap.*;
-
-import java.util.Vector;
 
 
 public class SwerveMod{
@@ -44,25 +57,30 @@ public class SwerveMod{
         currentAngle = 0;
         this.invertDrive = invertDrive;
 
+
+        // Configure Angle Motor
         angleMotor.configFactoryDefault();
-        angleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, SLOTIDX, SWERVETIMEOUT);
+        angleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, SLOTIDX, SWERVETIMEOUT);
+        angleMotor.configFeedbackNotContinuous(false, SWERVETIMEOUT); //make false if using relative, make true if using absolute
         angleMotor.selectProfileSlot(SLOTIDX, SWERVETIMEOUT);
         angleMotor.setSensorPhase(invertSensorPhase);
         angleMotor.config_kP(SLOTIDX, ANGLEP, SWERVETIMEOUT);
         angleMotor.config_kI(SLOTIDX, ANGLEI, SWERVETIMEOUT);
         angleMotor.config_kD(SLOTIDX, ANGLED, SWERVETIMEOUT);
         angleMotor.setNeutralMode(NeutralMode.Brake);
-        angleMotor.configMotionCruiseVelocity(ANGLEVELOCITY, SWERVETIMEOUT);
-        angleMotor.configMotionAcceleration(ANGLEACCELERATION, SWERVETIMEOUT);
 
-        angleMotor.configNominalOutputForward(ANGLENOMINALFORWARD, SWERVETIMEOUT);
-        angleMotor.configNominalOutputReverse(ANGLENOMINALREVERSE, SWERVETIMEOUT);
-        angleMotor.configPeakOutputForward(ANGLEPEAKFORWARD, SWERVETIMEOUT);
-        angleMotor.configPeakOutputReverse(ANGLEPEAKREVERSE, SWERVETIMEOUT);
-
+        
+        //Configre Drive Motor
+        /*driveMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, SLOTIDX, SWERVETIMEOUT);
+        driveMotor.setSelectedSensorPosition(0, SLOTIDX, SWERVETIMEOUT);
+        driveMotor.selectProfileSlot(SLOTIDX, SWERVETIMEOUT);
+        driveMotor.config_kP(SLOTIDX, ANGLEP, SWERVETIMEOUT);
+        driveMotor.config_kI(SLOTIDX, ANGLEI, SWERVETIMEOUT);
+        driveMotor.config_kD(SLOTIDX, ANGLED, SWERVETIMEOUT);*/
         driveMotor.setNeutralMode(NeutralMode.Brake);
 
-        // Set amperage limits
+        
+        // Setup Current Limiting
         angleMotor.configContinuousCurrentLimit(ANGLECONTINUOUSCURRENTLIMIT, SWERVETIMEOUT);
         angleMotor.configPeakCurrentLimit(ANGLEPEAKCURRENT, SWERVETIMEOUT);
         angleMotor.configPeakCurrentDuration(ANGLEPEAKCURRENTDURATION, SWERVETIMEOUT);
@@ -73,12 +91,7 @@ public class SwerveMod{
         driveMotor.configPeakCurrentDuration(DRIVEPEAKCURRENTDURATION, SWERVETIMEOUT);
         driveMotor.enableCurrentLimit(DRIVEENABLECURRENTLIMIT);
 
-        driveMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, SLOTIDX, SWERVETIMEOUT);
-        driveMotor.setSelectedSensorPosition(0, SLOTIDX, SWERVETIMEOUT);
-        driveMotor.selectProfileSlot(SLOTIDX, SWERVETIMEOUT);
-        driveMotor.config_kP(SLOTIDX, ANGLEP);
-        driveMotor.config_kI(SLOTIDX, ANGLEI);
-        driveMotor.config_kD(SLOTIDX, ANGLED);
+        
 
         
         setDriveInverted(invertDrive);
@@ -86,7 +99,6 @@ public class SwerveMod{
 
         absolutePosition = getTicks();
         if(invertSensorPhase){absolutePosition *= -1;}
-        angleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, SLOTIDX, SWERVETIMEOUT);
 
         zero();
     }
@@ -174,7 +186,7 @@ public class SwerveMod{
         }
 
         targetAngle += currentAngle - currentAngleMod;
-        double currentError = getRawError();
+        //double currentError = getRawError();
         lastTargetAngle = targetAngle;
         
         targetAngle = toCounts(targetAngle);
