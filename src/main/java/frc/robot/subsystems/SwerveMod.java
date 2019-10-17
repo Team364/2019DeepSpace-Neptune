@@ -1,9 +1,7 @@
 package frc.robot.subsystems;
 
-import static frc.robot.Conversions.modulate360;
-import static frc.robot.Conversions.modulate4096;
-import static frc.robot.Conversions.toCounts;
-import static frc.robot.Conversions.toDegrees;
+import static frc.robot.Conversions.*;
+
 import static frc.robot.RobotMap.ANGLECONTINUOUSCURRENTLIMIT;
 import static frc.robot.RobotMap.ANGLED;
 import static frc.robot.RobotMap.ANGLEENABLECURRENTLIMIT;
@@ -120,12 +118,9 @@ public class SwerveMod{
             else{
                 targetAngle = velocity.getAngle().toDegrees();
             }
-            //targetAngle += (rotationDeadband(rotation) * 90);
-
             smartAngle = targetAngle;
             if(speed){
             targetSpeed = velocity.length;
-
             }
             else{
             targetSpeed = 0;

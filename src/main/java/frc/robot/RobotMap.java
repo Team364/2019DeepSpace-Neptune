@@ -26,7 +26,7 @@ public class RobotMap {
     /**Front Right */
     public static final int MOD0OFFSET = 549;
     /**Front Left */
-    public static final int MOD1OFFSET = -1113;
+    public static final int MOD1OFFSET = -1113+100;
     /**Back Left */
     public static final int MOD2OFFSET = -1099;
     /**Back Right */

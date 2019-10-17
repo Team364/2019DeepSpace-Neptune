@@ -34,7 +34,7 @@ public class Drivetrain extends Subsystem {
     public Drivetrain() {
             mSwerveModules = new SwerveMod[] {
                     new SwerveMod(0,
-                            new Vector2(TRACKWIDTH / 2.0, -WHEELBASE / 2.0),
+                            new Vector2(-TRACKWIDTH / 2.0, WHEELBASE / 2.0),
                             new TalonSRX(FRANGLE),
                             new TalonSRX(FRDRIVE),
                             false, 
