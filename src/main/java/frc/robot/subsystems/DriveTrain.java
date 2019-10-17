@@ -34,39 +34,35 @@ public class Drivetrain extends Subsystem {
     public Drivetrain() {
             mSwerveModules = new SwerveMod[] {
                     new SwerveMod(0,
-                            new Vector2(TRACKWIDTH / 2.0, WHEELBASE / 2.0),
+                            new Vector2(TRACKWIDTH / 2.0, -WHEELBASE / 2.0),
                             new TalonSRX(FRANGLE),
                             new TalonSRX(FRDRIVE),
-                            MOD0OFFSET,
-                            MOD0VECTOR),
+                            false, 
+                            false,
+                            MOD0OFFSET),
                     new SwerveMod(1,
-                            new Vector2(-TRACKWIDTH / 2.0, WHEELBASE / 2.0),
+                            new Vector2(TRACKWIDTH / 2.0, WHEELBASE / 2.0),
                             new TalonSRX(FLANGLE),
                             new TalonSRX(FLDRIVE),
-                            MOD1OFFSET,
-                            MOD1VECTOR),
+                            true,
+                            true,
+                            MOD1OFFSET),
                     new SwerveMod(2,
-                            new Vector2(-TRACKWIDTH / 2.0, -WHEELBASE / 2.0),
+                            new Vector2(TRACKWIDTH / 2.0, -WHEELBASE / 2.0),
                             new TalonSRX(BLANGLE),
                             new TalonSRX(BLDRIVE),
-                            MOD2OFFSET,
-                            MOD2VECTOR),
+                            true,
+                            false,
+                            MOD2OFFSET),
                     new SwerveMod(3,
-                            new Vector2(TRACKWIDTH / 2.0, -WHEELBASE / 2.0),
+                            new Vector2(-TRACKWIDTH / 2.0, -WHEELBASE / 2.0),
                             new TalonSRX(BRANGLE),
                             new TalonSRX(BRDRIVE),
-                            MOD3OFFSET,
-                            MOD3VECTOR)
+                            true,
+                            false,
+                            MOD3OFFSET)
             };
-
-            mSwerveModules[0].setDriveInverted(true);
-            mSwerveModules[2].setDriveInverted(true);
-            mSwerveModules[3].setDriveInverted(true);            
-            //mSwerveModules[1].setDriveInverted(true);
-
-            mSwerveModules[1].setSensorPhase(true);
-            mSwerveModules[1].getAngleMotor().setInverted(false);
-
+         
             
     } 
 
@@ -81,21 +77,16 @@ public class Drivetrain extends Subsystem {
     public SwerveMod getSwerveModule(int i) {
         return mSwerveModules[i];
     }
-    //SmartDashboard.putNumber("vector Offset " + mod.moduleNumber + "  ", mod.vectorOffset);
 
-    public void holonomicDrive(Vector2 translation, double rotation, boolean speedOff) {
+    public void holonomicDrive(Vector2 translation, double rotation, boolean speed) {
             // need to get pigeon vector
 
             for(SwerveMod mod : getSwerveModules()){
-                Vector2 translateOffset = null;
                 Vector2 newTranslation = null;
-                newTranslation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getGyro()).inverse());
+                newTranslation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getGyro()));
 
-                translateOffset = newTranslation.rotateBy(Rotation2.fromDegrees(mod.vectorOffset));
-
-
-                velocity = mod.getModulePosition().normal().scale(deadband(rotation)).add(translateOffset);
-                mod.setTargetVelocity(velocity, speedOff, rotation);
+                velocity = mod.getModulePosition().normal().scale(deadband(rotation)).add(newTranslation);
+                mod.setTargetVelocity(velocity, speed, rotation);
             }        
     }
     public void updateKinematics(){

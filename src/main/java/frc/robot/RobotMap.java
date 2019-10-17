@@ -24,35 +24,25 @@ public class RobotMap {
 
     //Offsets 
     /**Front Right */
-    public static final double MOD0OFFSET = 121.4;//121.4
+    public static final int MOD0OFFSET = 549;
     /**Front Left */
-    public static final double MOD1OFFSET = 95.7;//95.7
+    public static final int MOD1OFFSET = -1113;
     /**Back Left */
-    public static final double MOD2OFFSET = 273.8;//273.8
+    public static final int MOD2OFFSET = -1099;
     /**Back Right */
-    public static final double MOD3OFFSET = 34.5;//34.5
-
-    //Vector Offsets
-    /**Front Right Vector Offset */
-    public static final double MOD0VECTOR = 113.84;
-    /**Front Left Vector Offset */
-    public static final double MOD1VECTOR = 101;
-    /**Back Left Vector Offset */
-    public static final double MOD2VECTOR = 90;
-    /**Back Right Vector Offset */
-    public static final double MOD3VECTOR = 36;
+    public static final int MOD3OFFSET = -405;
 
     //constants
     public static final double STICKDEADBAND = 0.2;
     public static final double ENCODERTICKS = 4096.0;
     public static final double OFFSETTOSTRAIGHT = 180;
-    public static final double ANGLE_TICKS_PER_RADIAN = ENCODERTICKS / (2.0 * Math.PI);
+    //public static final double ANGLE_TICKS_PER_RADIAN = ENCODERTICKS / (2.0 * Math.PI);
 
 
     public static final int SLOTIDX = 0;
-    public static final int SWERVETIMEOUT = 0;
+    public static final int SWERVETIMEOUT = 30;
 
-    public static final double ANGLEP = 1;//20
+    public static final double ANGLEP = .5;//20
     public static final double ANGLEI = 0.001;//0.001
     public static final double ANGLED = 0;//130 //200
 
@@ -69,8 +59,8 @@ public class RobotMap {
     public static final int ANGLEPEAKCURRENTDURATION = 100;
     public static final boolean ANGLEENABLECURRENTLIMIT = true;
 
-    public static final int DRIVECONTINUOUSCURRENTLIMIT = 25;
-    public static final int DRIVEPEAKCURRENT = 25;
+    public static final int DRIVECONTINUOUSCURRENTLIMIT = 30;
+    public static final int DRIVEPEAKCURRENT = 30;
     public static final int DRIVEPEAKCURRENTDURATION = 100;
     public static final boolean DRIVEENABLECURRENTLIMIT = true;
 

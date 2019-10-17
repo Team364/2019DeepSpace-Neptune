@@ -15,6 +15,9 @@ public class Conversions{
     public static double modulate360(double units){
         return units %= 360;
     }
+    public static int modulate4096(int units){
+        return units %= 4096;
+    }
 
     /**
      * @return encoder counts for the drive wheel to reach so that angle desired is acheived whilst

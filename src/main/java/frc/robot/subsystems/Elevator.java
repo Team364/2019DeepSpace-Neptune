@@ -116,7 +116,7 @@ public class Elevator extends Subsystem {
     return pigeon;
   }
   public double getGyro(){
-    return modulate360(getYaw() * -1);
+    return modulate360(getYaw());
   }
 
   public void resetYaw(double angle) {

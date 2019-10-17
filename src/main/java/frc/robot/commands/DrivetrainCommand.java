@@ -24,11 +24,16 @@ public class DrivetrainCommand extends Command {
 
 	Vector2 lastTranslation;
 	double lastRotation;
+	double plzStop = 0;
 
 	public DrivetrainCommand(Drivetrain drivetrain) {
 		mDrivetrain = drivetrain;
 		cycles = 0;
 		requires(drivetrain);
+	}
+	@Override
+	protected void initialize(){
+
 	}
 
 	@Override
@@ -36,25 +41,29 @@ public class DrivetrainCommand extends Command {
         forward = -Neptune.oi.controller.getRawAxis(1);
 		strafe = Neptune.oi.controller.getRawAxis(0);
 		rotation = Neptune.oi.controller.getRawAxis(4);
-
-		//forward *= Math.abs(forward);
-		//strafe *= Math.abs(strafe);
-		//rotation *= Math.abs(rotation);
-
-		translation = new Vector2(forward, strafe);
+		boolean zeroPoint = false;
+		if(zeroPoint){
+			translation = new Vector2(-1, 0);
+		}
+		else{
+			translation = new Vector2(forward, strafe);
+		}
+		
 			if (Math.abs(forward) > STICKDEADBAND || Math.abs(strafe) > STICKDEADBAND || Math.abs(rotation) > STICKDEADBAND) {
-				mDrivetrain.holonomicDrive(translation, rotation, false);
+				mDrivetrain.holonomicDrive(translation, rotation, true);
 				lastTranslation = translation;
 				lastRotation = rotation;
 				cycles++;
+
 			} else {
 				if(cycles != 0){
-				mDrivetrain.holonomicDrive(lastTranslation, lastRotation, true);
+
+					mDrivetrain.holonomicDrive(lastTranslation, lastRotation, false);
 				}
 			}	
-		if(cycles != 0){	
+			if(cycles != 0){
 			mDrivetrain.updateKinematics();
-		}
+			}
 	}
 
 

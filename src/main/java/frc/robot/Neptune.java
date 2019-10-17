@@ -45,6 +45,9 @@ public class Neptune extends TimedRobot {
     camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
     camera.setResolution(320, 240);
     camera.setFPS(18);
+    /*for(SwerveMod mod : Neptune.driveTrain.getSwerveModules()){
+			mod.zero();
+		}*/
   } 
 
   @Override
@@ -52,10 +55,10 @@ public class Neptune extends TimedRobot {
 
         SmartDashboard.putNumber("gyro", Neptune.elevator.getYaw());
         for(SwerveMod mod : driveTrain.getSwerveModules()){
-          SmartDashboard.putNumber("target Angle " + mod.moduleNumber + "  ", mod.smartAngle);
-          SmartDashboard.putNumber("actual Angle " + mod.moduleNumber + "  ", toDegrees(mod.getPos()));
-          SmartDashboard.putNumber("error " + mod.moduleNumber + "  ", mod.getAngleMotor().getErrorDerivative());
-          SmartDashboard.putNumber("given power " + mod.moduleNumber + "  ", mod.getAngleMotor().getMotorOutputPercent());
+          SmartDashboard.putNumber("target Angle " + mod.moduleNumber + "  ", toCounts(mod.smartAngle));
+          SmartDashboard.putNumber("relative Angle " + mod.moduleNumber + "  ", mod.getPos());
+          SmartDashboard.putNumber("absolute Angle " + mod.moduleNumber + "  ", mod.getTicks());
+          //SmartDashboard.putNumber("given power " + mod.moduleNumber + "  ", mod.getAngleMotor().getMotorOutputPercent());
           //SmartDashboard.putNumber("x vector" + mod.moduleNumber + "  ", mod.getVelocityX());
           //SmartDashboard.putNumber("y vector" + mod.moduleNumber + "  ", mod.getVelocityY());
 
