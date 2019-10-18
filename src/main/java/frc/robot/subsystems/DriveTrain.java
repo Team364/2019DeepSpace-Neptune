@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,10 +27,7 @@ public class Drivetrain extends Subsystem {
 	 * 3 is Back Right
 	 */
     private SwerveMod[] mSwerveModules;
-    private int w = WHEELBASE;
-    private int t = TRACKWIDTH;
-    private Command zero;
-    private Vector2 velocity;
+
 
     public Drivetrain() {
             mSwerveModules = new SwerveMod[] {
@@ -79,8 +77,7 @@ public class Drivetrain extends Subsystem {
     }
 
     public void holonomicDrive(Vector2 translation, double rotation, boolean speed) {
-            // need to get pigeon vector
-
+            Vector2 velocity;
             for(SwerveMod mod : getSwerveModules()){
                 Vector2 newTranslation = null;
                 newTranslation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getGyro()));
@@ -109,6 +106,16 @@ public class Drivetrain extends Subsystem {
 
     public SwerveMod[] getSwerveModules() {
         return mSwerveModules;
+    }
+
+    public void setTrackingMode(){
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3); //Turns LED off
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0); //Begin Processing Vision
+    }
+
+    public void setDriverCamMode(){
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); //Turns LED off
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1); //Disable Vision Processing
     }
 
     @Override

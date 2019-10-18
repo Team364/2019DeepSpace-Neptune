@@ -4,7 +4,13 @@ public class RobotMap {
 
     // Hardware
     public static final int primaryPCM = 0;
- 
+
+    //LimeAim button
+    public static final int LIMEBUTTON = 1;
+
+    //Gyro reset button
+    public static final int RESETGYRO = 4;
+
     //hardware
     public static final int TRACKWIDTH = 21;
     public static final int WHEELBASE = 26;

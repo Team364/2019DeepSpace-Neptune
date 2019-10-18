@@ -38,6 +38,7 @@ public class DrivetrainCommand extends Command {
 
 	@Override
 	protected void execute() {
+		Neptune.driveTrain.setTrackingMode();
         forward = -Neptune.oi.controller.getRawAxis(1);
 		strafe = Neptune.oi.controller.getRawAxis(0);
 		rotation = Neptune.oi.controller.getRawAxis(4);

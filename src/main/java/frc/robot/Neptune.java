@@ -45,32 +45,22 @@ public class Neptune extends TimedRobot {
     camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
     camera.setResolution(320, 240);
     camera.setFPS(18);
-    /*for(SwerveMod mod : Neptune.driveTrain.getSwerveModules()){
-			mod.zero();
-		}*/
   } 
 
   @Override
   public void robotPeriodic() {
-
-        SmartDashboard.putNumber("gyro", Neptune.elevator.getYaw());
-        for(SwerveMod mod : driveTrain.getSwerveModules()){
-          SmartDashboard.putNumber("target Angle " + mod.moduleNumber + "  ", toCounts(mod.smartAngle));
-          SmartDashboard.putNumber("relative Angle " + mod.moduleNumber + "  ", mod.getPos());
-          SmartDashboard.putNumber("absolute Angle " + mod.moduleNumber + "  ", mod.getTicks());
-          //SmartDashboard.putNumber("given power " + mod.moduleNumber + "  ", mod.getAngleMotor().getMotorOutputPercent());
-          //SmartDashboard.putNumber("x vector" + mod.moduleNumber + "  ", mod.getVelocityX());
-          //SmartDashboard.putNumber("y vector" + mod.moduleNumber + "  ", mod.getVelocityY());
-
-        }
-        
+    SmartDashboard.putNumber("gyro", Neptune.elevator.getYaw());
+    for(SwerveMod mod : driveTrain.getSwerveModules()){
+      SmartDashboard.putNumber("target Angle " + mod.moduleNumber + "  ", toCounts(mod.smartAngle));
+      SmartDashboard.putNumber("relative Angle " + mod.moduleNumber + "  ", mod.getPos());
+      SmartDashboard.putNumber("absolute Angle " + mod.moduleNumber + "  ", mod.getTicks());
+    }
   }
 
   @Override
   public void autonomousInit() {
     Scheduler.getInstance().removeAll();
     sandstorm.start();
-    //driveForward.start();
   }
 
   @Override
@@ -81,15 +71,13 @@ public class Neptune extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    Neptune.driveTrain.setDriverCamMode();
     Scheduler.getInstance().removeAll();
   }
 
   @Override
   public void teleopPeriodic() { 
     Scheduler.getInstance().run();
-    // System.out.println(driveTrain.getLeftVelocity());
-    // System.out.println(driveTrain.getRightVelocity());
-    //System.out.println(elevator.getYaw());
     oi2.controlLoop();
     if ((elevator.getLiftPosition() < 10000) && (elevator.getLiftPosition() > RobotMap.liftLowerBound)) {
       States.liftZone = States.LiftZones.LOWER_DANGER;

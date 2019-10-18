@@ -32,6 +32,22 @@ public class Conversions{
 		if (Math.abs(input) < STICKDEADBAND) return 0;
 		return input;
     }
+        
+	public static double Cdeadband(double input, double deadband) {
+		if (Math.abs(input) < deadband) return 0;
+		return input;
+    }
+
+    public static double constraint(double input) {
+		if (Math.abs(input) > 1){
+            if(input > 0){
+                return 1;
+            }
+            return -1;
+        }
+        return input;
+    }
+
     public static double rotationDeadband(double input){
         if (Math.abs(input) < STICKDEADBAND) return 0;
         if(input > 0){
