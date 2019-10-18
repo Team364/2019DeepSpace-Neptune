@@ -11,6 +11,17 @@ public class RobotMap {
     //Gyro reset button
     public static final int RESETGYRO = 4;
 
+    //Gyro Set Points
+    public static final double[] gyroSet = 
+    {
+        90,
+        -90,
+        0,
+        45,
+        -45,
+        180
+    };
+
     //hardware
     public static final int TRACKWIDTH = 21;
     public static final int WHEELBASE = 26;

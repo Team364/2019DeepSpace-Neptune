@@ -37,14 +37,14 @@ public class LimeAim extends Command {
     protected void execute() {
         xValue = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
         areaValue = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
-
-
+        //figure out if 10 is right
+        rotation = Neptune.driveTrain.closestGyroSetPoint()/10;
         translation = new Vector2(constraint(areaValue - 11.5) * -0.25, xValue/29.8);
         translation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getGyro()).inverse());
 
         Boolean calibrationMode = true;
         if(!calibrationMode){
-        Neptune.driveTrain.holonomicDrive(translation, 0, true);
+        Neptune.driveTrain.holonomicDrive(translation, rotation, true);
         Neptune.driveTrain.updateKinematics();
         }
     }

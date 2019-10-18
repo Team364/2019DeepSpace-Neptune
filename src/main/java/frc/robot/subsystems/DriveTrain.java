@@ -108,6 +108,16 @@ public class Drivetrain extends Subsystem {
         return mSwerveModules;
     }
 
+    public double closestGyroSetPoint(){
+        double checkPoint = 0;
+        for(Double setPoint : gyroSet){
+            double initial = setPoint - Neptune.elevator.getYaw();
+            if(checkPoint == 0) checkPoint = initial;
+            if(Math.abs(initial) < Math.abs(checkPoint)) checkPoint = initial;
+        }
+        return checkPoint;
+    }
+
     public void setTrackingMode(){
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3); //Turns LED off
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0); //Begin Processing Vision
