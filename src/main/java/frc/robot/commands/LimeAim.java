@@ -37,8 +37,8 @@ public class LimeAim extends Command {
         areaValue = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
 
         double closest = Neptune.driveTrain.closestGyroSetPoint();
-        rotation = xValue/29.8;//constraint(closest/40, 0.5)
-        translation = new Vector2(forward, xValue/29.8*1.2);
+        rotation = xValue/29.8*0.8;//constraint(closest/40, 0.5)
+        translation = new Vector2(forward, xValue/29.8);
 
         translation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getGyro()).inverse());
         SmartDashboard.putNumber("gyro SetPoint ", xValue/29.8);
