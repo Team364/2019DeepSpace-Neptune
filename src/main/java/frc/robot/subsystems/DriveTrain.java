@@ -1,21 +1,35 @@
 package frc.robot.subsystems;
 
+import static frc.robot.Conversions.deadband;
+import static frc.robot.RobotMap.BLANGLE;
+import static frc.robot.RobotMap.BLDRIVE;
+import static frc.robot.RobotMap.BRANGLE;
+import static frc.robot.RobotMap.BRDRIVE;
+import static frc.robot.RobotMap.FLANGLE;
+import static frc.robot.RobotMap.FLDRIVE;
+import static frc.robot.RobotMap.FRANGLE;
+import static frc.robot.RobotMap.FRDRIVE;
+import static frc.robot.RobotMap.MOD0OFFSET;
+import static frc.robot.RobotMap.MOD1OFFSET;
+import static frc.robot.RobotMap.MOD2OFFSET;
+import static frc.robot.RobotMap.MOD3OFFSET;
+import static frc.robot.RobotMap.TRACKWIDTH;
+import static frc.robot.RobotMap.WHEELBASE;
+import static frc.robot.RobotMap.gyroSet;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 import frc.robot.commands.DrivetrainCommand;
 import frc.robot.misc.math.Rotation2;
 import frc.robot.misc.math.Vector2;
-
-import static frc.robot.RobotMap.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import static frc.robot.Conversions.*;
-import static frc.robot.Neptune.*;
-import frc.robot.subsystems.SwerveMod.*;
+ 
 
 public class Drivetrain extends Subsystem {
 
@@ -111,10 +125,12 @@ public class Drivetrain extends Subsystem {
     public double closestGyroSetPoint(){
         double checkPoint = 0;
         for(Double setPoint : gyroSet){
-            double initial = setPoint - Neptune.elevator.getYaw();
+            double initial = setPoint - modulate360(Neptune.elevator.getYaw());
             if(checkPoint == 0) checkPoint = initial;
             if(Math.abs(initial) < Math.abs(checkPoint)) checkPoint = initial;
         }
+                SmartDashboard.putNumber("acutal point ", checkPoint + Neptune.elevator.getYaw());
+
         return checkPoint;
     }
 

@@ -38,12 +38,12 @@ public class Conversions{
 		return input;
     }
 
-    public static double constraint(double input) {
+    public static double constraint(double input, double constraint) {
 		if (Math.abs(input) > 1){
             if(input > 0){
-                return 1;
+                return constraint;
             }
-            return -1;
+            return -constraint;
         }
         return input;
     }

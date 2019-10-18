@@ -1,16 +1,12 @@
 package frc.robot.commands;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Neptune;
-import frc.robot.States;
-import frc.robot.misc.math.Vector2;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import frc.robot.misc.math.Rotation2;
-import static frc.robot.Conversions.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Neptune;
+import frc.robot.misc.math.Rotation2;
+import frc.robot.misc.math.Vector2;
 
 
 public class LimeAim extends Command {
@@ -20,6 +16,7 @@ public class LimeAim extends Command {
     Vector2 translation;
     double rotation;
 
+    double forward;
     double xValue;
     double areaValue;
     double skewValue;
@@ -35,14 +32,18 @@ public class LimeAim extends Command {
 
     @Override
     protected void execute() {
+        forward = -Neptune.oi.controller.getRawAxis(1);
         xValue = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
         areaValue = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
-        //figure out if 10 is right
-        rotation = Neptune.driveTrain.closestGyroSetPoint()/10;
-        translation = new Vector2(constraint(areaValue - 11.5) * -0.25, xValue/29.8);
-        translation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getGyro()).inverse());
 
-        Boolean calibrationMode = true;
+        double closest = Neptune.driveTrain.closestGyroSetPoint();
+        rotation = xValue/29.8;//constraint(closest/40, 0.5)
+        translation = new Vector2(forward, xValue/29.8*1.2);
+
+        translation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getGyro()).inverse());
+        SmartDashboard.putNumber("gyro SetPoint ", xValue/29.8);
+
+        Boolean calibrationMode = false;
         if(!calibrationMode){
         Neptune.driveTrain.holonomicDrive(translation, rotation, true);
         Neptune.driveTrain.updateKinematics();
