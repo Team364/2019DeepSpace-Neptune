@@ -168,8 +168,6 @@ public class ElevateToPosition extends Command {
             wantedPosition = 132000;
         }
         x++;
-        SmartDashboard.putNumber("num", x);
-        SmartDashboard.putNumber("CameraServo", Neptune.elevator.getCam());
         Neptune.elevator.elevateTo(wantedPosition, wantedAngle);
         Neptune.elevator.setCamera(camera);
         finish = true;

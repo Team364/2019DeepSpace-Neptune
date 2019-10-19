@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
 import frc.robot.oi.*;
+import frc.robot.commands.*;
 import frc.robot.subroutines.ActivateTrident;
 import frc.robot.States;
 import edu.wpi.cscore.UsbCamera;
@@ -28,6 +29,7 @@ public class Neptune extends TimedRobot {
 
   public UsbCamera camera;
   public static Command sandstorm = new ActivateTrident(5);
+  public static Command modStart = new ResetMods();
   public static double teleopStart;
   public static double teleopElapsedTime;
   public static boolean endGame;
@@ -45,16 +47,13 @@ public class Neptune extends TimedRobot {
     camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
     camera.setResolution(320, 240);
     camera.setFPS(18);
+    modStart.start();
   } 
 
   @Override
   public void robotPeriodic() {
     SmartDashboard.putNumber("gyro", Neptune.elevator.getYaw());
-    for(SwerveMod mod : driveTrain.getSwerveModules()){
-      SmartDashboard.putNumber("target Angle " + mod.moduleNumber + "  ", toCounts(mod.smartAngle));
-      SmartDashboard.putNumber("relative Angle " + mod.moduleNumber + "  ", mod.getPos());
-      SmartDashboard.putNumber("absolute Angle " + mod.moduleNumber + "  ", mod.getTicks());
-    }
+
   }
 
   @Override

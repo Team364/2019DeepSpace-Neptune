@@ -34,7 +34,7 @@ public class LimeAim extends Command {
     public LimeAim(double[] GyroSet) {
         this.GyroSet = GyroSet;
         requires(Neptune.driveTrain);
-        snapController = new PIDController(0.03, 0.0, 0.0, new PIDSource() {
+        snapController = new PIDController(0.03, 0.0, 0, new PIDSource() {
         
         public void setPIDSourceType(PIDSourceType pidSource){
         }
@@ -52,7 +52,7 @@ public class LimeAim extends Command {
     });
     snapController.enable();
     snapController.setInputRange(0, 360);
-    snapController.setOutputRange(-0.3, 0.3);
+    snapController.setOutputRange(-0.5, 0.5);
     snapController.setContinuous(true);
 
 
@@ -75,7 +75,7 @@ public class LimeAim extends Command {
     });
     strafeController.enable();
     strafeController.setInputRange(-29.8, 29.8);
-    strafeController.setOutputRange(-0.3, 0.3);
+    strafeController.setOutputRange(-0.4, 0.4);
     strafeController.setContinuous(true);
     }
 
@@ -87,11 +87,10 @@ public class LimeAim extends Command {
 
     @Override
     protected void execute() {
-        forward = -Neptune.oi.controller.getRawAxis(1);
+        forward = -Neptune.oi.controller.getRawAxis(1) *0.30;
 
         snapController.setSetpoint(closestSetPoint);
         strafeController.setSetpoint(0);
-        SmartDashboard.putNumber("strafePID", strafePid);
         translation = new Vector2(forward, -strafePid);
         translation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getGyro()).inverse());
         rotation = -gyroPid;

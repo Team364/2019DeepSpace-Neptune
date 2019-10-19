@@ -128,7 +128,6 @@ public class Elevator extends Subsystem {
     if(raw < 0){
         raw += 360;
     }
-    SmartDashboard.putNumber("output for pid ", raw);
     return raw;
   }
 

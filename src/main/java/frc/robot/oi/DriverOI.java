@@ -4,8 +4,8 @@ import static frc.robot.RobotMap.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.LimeAim;
-import frc.robot.commands.ResetGyro;
+import frc.robot.commands.*;
+
 public class DriverOI {
     //Driver Controller
     //Xbox One Wired Controller
@@ -17,6 +17,7 @@ public class DriverOI {
 
 
     public JoystickButton resetGyro;
+    public JoystickButton resetMods;
     /**
      * OI()
      * <p>Initializes Joysticks and buttons thereof
@@ -36,6 +37,9 @@ public class DriverOI {
 
         resetGyro = new JoystickButton(controller, RESETGYRO);
         resetGyro.whileHeld(new ResetGyro());
+
+        resetMods = new JoystickButton(controller, RESETMODS);
+        resetMods.whileHeld(new ResetMods());
 
     }
 

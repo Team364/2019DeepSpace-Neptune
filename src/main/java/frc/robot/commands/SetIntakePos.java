@@ -35,7 +35,6 @@ public class SetIntakePos extends Command {
             loops++;
             setClaw = new SetPiston(Neptune.trident.claw, 1);
             setLever = new SetPiston(Neptune.trident.lever, 1);
-            SmartDashboard.putNumber("Loops", loops);
             setClaw.start();
             setLever.start();
             end();

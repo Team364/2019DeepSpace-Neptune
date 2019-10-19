@@ -9,6 +9,10 @@ public class RobotMap {
     //Gyro reset button
     public static final int RESETGYRO = 4;
 
+    //Mods reset button
+    public static final int RESETMODS = 3;
+
+
     //Gyro Set Points
     public static final double[] CARGOGYROSET = 
     {
@@ -75,11 +79,11 @@ public class RobotMap {
 
 
     public static final int SLOTIDX = 0;
-    public static final int SWERVETIMEOUT = 30;
+    public static final int SWERVETIMEOUT = 20;
 
-    public static final double ANGLEP = .5;//20
-    public static final double ANGLEI = 0.001;//0.001
-    public static final double ANGLED = 0;//130 //200
+    public static final double ANGLEP = 7.5;//20
+    public static final double ANGLEI = 0.0;//0.001
+    public static final double ANGLED = 100;//130 //200
 
     public static final int ANGLEVELOCITY = 10000;
     public static final int ANGLEACCELERATION = 10000;
