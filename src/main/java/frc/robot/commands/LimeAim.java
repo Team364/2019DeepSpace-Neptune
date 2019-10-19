@@ -52,11 +52,11 @@ public class LimeAim extends Command {
     });
     snapController.enable();
     snapController.setInputRange(0, 360);
-    snapController.setOutputRange(-0.5, 0.5);
+    snapController.setOutputRange(-0.3, 0.3);
     snapController.setContinuous(true);
 
 
-    strafeController = new PIDController(0.01, 0.0, .0, new PIDSource() {
+    strafeController = new PIDController(0.04, 0.00, 0, new PIDSource() {
         
         public void setPIDSourceType(PIDSourceType pidSource){
         }
@@ -75,7 +75,7 @@ public class LimeAim extends Command {
     });
     strafeController.enable();
     strafeController.setInputRange(-29.8, 29.8);
-    strafeController.setOutputRange(-0.8, 0.8);
+    strafeController.setOutputRange(-0.3, 0.3);
     strafeController.setContinuous(true);
     }
 
@@ -91,10 +91,10 @@ public class LimeAim extends Command {
 
         snapController.setSetpoint(closestSetPoint);
         strafeController.setSetpoint(0);
-        SmartDashboard.putNumber("set snap", closestSetPoint);
+        SmartDashboard.putNumber("strafePID", strafePid);
         translation = new Vector2(forward, -strafePid);
         translation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getGyro()).inverse());
-        rotation = gyroPid;
+        rotation = -gyroPid;
         Boolean calibrationMode = false;
         if(!calibrationMode){
         Neptune.driveTrain.holonomicDrive(translation, rotation, true);
