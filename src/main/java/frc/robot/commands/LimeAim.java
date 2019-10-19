@@ -52,7 +52,7 @@ public class LimeAim extends Command {
     });
     snapController.enable();
     snapController.setInputRange(0, 360);
-    snapController.setOutputRange(-0.5, 0.5);
+    snapController.setOutputRange(-0.4, 0.4);
     snapController.setContinuous(true);
 
 
@@ -75,7 +75,7 @@ public class LimeAim extends Command {
     });
     strafeController.enable();
     strafeController.setInputRange(-29.8, 29.8);
-    strafeController.setOutputRange(-0.4, 0.4);
+    strafeController.setOutputRange(-0.3, 0.3);
     strafeController.setContinuous(true);
     }
 
