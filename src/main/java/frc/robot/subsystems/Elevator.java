@@ -1,18 +1,22 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.sensors.PigeonIMU;
+import static frc.robot.Conversions.modulate360;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
-import frc.robot.States;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.sensors.PigeonIMU;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import frc.robot.misc.Piston;
 import edu.wpi.first.wpilibj.PWM;
-import static frc.robot.Conversions.*;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Neptune;
+import frc.robot.RobotMap;
+import frc.robot.States;
+import frc.robot.misc.Piston;
 
 public class Elevator extends Subsystem {
 
@@ -109,7 +113,7 @@ public class Elevator extends Subsystem {
   }
   public double getYaw() {
     pigeon.getYawPitchRoll(yaw);
-    return yaw[0];
+    return -yaw[0];
   }
 
   public PigeonIMU getPigeon(){
@@ -117,6 +121,15 @@ public class Elevator extends Subsystem {
   }
   public double getGyro(){
     return modulate360(getYaw());
+  }
+
+  public double getFittedYaw(){
+    double raw = modulate360(Neptune.elevator.getYaw());
+    if(raw < 0){
+        raw += 360;
+    }
+    SmartDashboard.putNumber("output for pid ", raw);
+    return raw;
   }
 
   public void resetYaw(double angle) {

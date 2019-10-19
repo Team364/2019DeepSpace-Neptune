@@ -2,6 +2,9 @@ package frc.robot.commands;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
@@ -20,29 +23,78 @@ public class LimeAim extends Command {
     double xValue;
     double areaValue;
     double skewValue;
+    double gyroPid;
+    double strafePid;
+    PIDController snapController;
+    PIDController strafeController;
+    double[] GyroSet;
+    double closestSetPoint;
 
-    public LimeAim() {
+
+    public LimeAim(double[] GyroSet) {
+        this.GyroSet = GyroSet;
         requires(Neptune.driveTrain);
+        snapController = new PIDController(0.03, 0.0, 0.0, new PIDSource() {
+        
+        public void setPIDSourceType(PIDSourceType pidSource){
+        }
+     
+        public PIDSourceType getPIDSourceType(){
+            return PIDSourceType.kDisplacement;
+        }
+
+        public double pidGet() {
+            return Neptune.elevator.getFittedYaw();
+        }
+
+    }, output -> {
+        gyroPid = output;
+    });
+    snapController.enable();
+    snapController.setInputRange(0, 360);
+    snapController.setOutputRange(-0.5, 0.5);
+    snapController.setContinuous(true);
+
+
+    strafeController = new PIDController(0.01, 0.0, .0, new PIDSource() {
+        
+        public void setPIDSourceType(PIDSourceType pidSource){
+        }
+
+        public PIDSourceType getPIDSourceType(){
+            return PIDSourceType.kDisplacement;
+        }
+
+        public double pidGet() {
+            xValue = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+            return xValue;
+        }
+
+    }, output -> {
+        strafePid = output;
+    });
+    strafeController.enable();
+    strafeController.setInputRange(-29.8, 29.8);
+    strafeController.setOutputRange(-0.8, 0.8);
+    strafeController.setContinuous(true);
     }
 
     @Override
     protected void initialize() {
+        closestSetPoint = Neptune.driveTrain.closestGyroSetPoint(GyroSet);
         Neptune.driveTrain.setTrackingMode();
     }
 
     @Override
     protected void execute() {
         forward = -Neptune.oi.controller.getRawAxis(1);
-        xValue = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
-        areaValue = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
 
-        double closest = Neptune.driveTrain.closestGyroSetPoint();
-        rotation = xValue/29.8*0.8;//constraint(closest/40, 0.5)
-        translation = new Vector2(forward, xValue/29.8);
-
+        snapController.setSetpoint(closestSetPoint);
+        strafeController.setSetpoint(0);
+        SmartDashboard.putNumber("set snap", closestSetPoint);
+        translation = new Vector2(forward, -strafePid);
         translation = translation.rotateBy(Rotation2.fromDegrees(Neptune.elevator.getGyro()).inverse());
-        SmartDashboard.putNumber("gyro SetPoint ", xValue/29.8);
-
+        rotation = gyroPid;
         Boolean calibrationMode = false;
         if(!calibrationMode){
         Neptune.driveTrain.holonomicDrive(translation, rotation, true);

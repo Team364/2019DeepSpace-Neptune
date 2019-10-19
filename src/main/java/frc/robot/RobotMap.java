@@ -5,22 +5,40 @@ public class RobotMap {
     // Hardware
     public static final int primaryPCM = 0;
 
-    //LimeAim button
-    public static final int LIMEBUTTON = 1;
 
     //Gyro reset button
     public static final int RESETGYRO = 4;
 
     //Gyro Set Points
-    public static final double[] gyroSet = 
+    public static final double[] CARGOGYROSET = 
     {
         90,
-        -90,
-        0,
+        270,
+        0
+    };
+    //Gyro Set Points
+    public static final double[] ROCKETGYROSET = 
+    {
         32,
-        -32,
+        328,
+        90,
+        270,
+        148,
+        212
+
+    };
+    //Gyro Set Points
+    public static final double[] INTAKEGYROSET = 
+    {
         180
     };
+
+    //Lime Aim Buttons
+    public static final int LIMEBUTTONCARGO = 5;
+    public static final int LIMEBUTTONROCKET = 6;
+    public static final int LIMEBUTTONINTAKE = 1;
+
+
 
     //hardware
     public static final int TRACKWIDTH = 21;

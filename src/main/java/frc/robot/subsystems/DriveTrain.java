@@ -15,7 +15,6 @@ import static frc.robot.RobotMap.MOD2OFFSET;
 import static frc.robot.RobotMap.MOD3OFFSET;
 import static frc.robot.RobotMap.TRACKWIDTH;
 import static frc.robot.RobotMap.WHEELBASE;
-import static frc.robot.RobotMap.gyroSet;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -122,16 +121,17 @@ public class Drivetrain extends Subsystem {
         return mSwerveModules;
     }
 
-    public double closestGyroSetPoint(){
+    public double closestGyroSetPoint(double[] gyroSet){
         double checkPoint = 0;
+        double returnSetPoint = 0;
         for(Double setPoint : gyroSet){
-            double initial = setPoint - modulate360(Neptune.elevator.getYaw());
-            if(checkPoint == 0) checkPoint = initial;
-            if(Math.abs(initial) < Math.abs(checkPoint)) checkPoint = initial;
+            double initial = setPoint - Neptune.elevator.getFittedYaw();
+            if(Math.abs(initial) < Math.abs(checkPoint) || checkPoint == 0) {
+                checkPoint = initial;
+                returnSetPoint = setPoint;
+            }
         }
-                SmartDashboard.putNumber("acutal point ", checkPoint + Neptune.elevator.getYaw());
-
-        return checkPoint;
+        return returnSetPoint;
     }
 
     public void setTrackingMode(){

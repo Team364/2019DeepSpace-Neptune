@@ -1,18 +1,21 @@
 package frc.robot.oi;
 
+import static frc.robot.RobotMap.*;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.Neptune;
-import frc.robot.commands.*;
-import frc.robot.subroutines.*;
-import edu.wpi.first.wpilibj.command.Command;
-import static frc.robot.RobotMap.*;
+import frc.robot.commands.LimeAim;
+import frc.robot.commands.ResetGyro;
 public class DriverOI {
     //Driver Controller
     //Xbox One Wired Controller
     public Joystick controller;
 
-    public JoystickButton limeAim;
+    public JoystickButton limeAimCargo;
+    public JoystickButton limeAimRocket;
+    public JoystickButton limeAimIntake;
+
+
     public JoystickButton resetGyro;
     /**
      * OI()
@@ -22,8 +25,14 @@ public class DriverOI {
     public DriverOI() {
         controller = new Joystick(0);
 
-        limeAim = new JoystickButton(controller, LIMEBUTTON);
-        limeAim.whileHeld(new LimeAim());
+        limeAimCargo = new JoystickButton(controller, LIMEBUTTONCARGO);
+        limeAimCargo.whileHeld(new LimeAim(CARGOGYROSET));
+
+        limeAimRocket = new JoystickButton(controller, LIMEBUTTONROCKET);
+        limeAimRocket.whileHeld(new LimeAim(ROCKETGYROSET));
+        
+        limeAimIntake = new JoystickButton(controller, LIMEBUTTONINTAKE);
+        limeAimIntake.whileHeld(new LimeAim(INTAKEGYROSET));
 
         resetGyro = new JoystickButton(controller, RESETGYRO);
         resetGyro.whileHeld(new ResetGyro());
