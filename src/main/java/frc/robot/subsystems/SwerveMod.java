@@ -20,7 +20,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.misc.math.Vector2;
 
 
@@ -187,8 +187,7 @@ public class SwerveMod{
     }
 
     public  double getPos(){
-        double relativePos = mAngleMotor.getSelectedSensorPosition(SLOTIDX);                
-        SmartDashboard.putNumber("Current Encoder Value" + moduleNumber + "   ", relativePos);
+        double relativePos = mAngleMotor.getSelectedSensorPosition(SLOTIDX);
         return relativePos;
     }    
 

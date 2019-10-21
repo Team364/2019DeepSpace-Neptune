@@ -68,7 +68,7 @@ public class RobotMap {
     /**Back Left */
     public static final int MOD2OFFSET = -1099;
     /**Back Right */
-    public static final int MOD3OFFSET = -405;
+    public static final int MOD3OFFSET = -405 - 768;
 
     //constants
     public static final double STICKDEADBAND = 0.2;

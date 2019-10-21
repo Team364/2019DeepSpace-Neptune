@@ -34,7 +34,7 @@ public class LimeAim extends Command {
         this.GyroSet = GyroSet;
         requires(Neptune.driveTrain);
 
-        snapController = new PIDController(0.03, 0, 0.125, new PIDSource() {
+        snapController = new PIDController(0.03, 0, 0, new PIDSource() {
         
             public void setPIDSourceType(PIDSourceType pidSource){
             }
@@ -56,7 +56,7 @@ public class LimeAim extends Command {
         snapController.setContinuous(true);
 
 
-        strafeController = new PIDController(0.03, 0.00017, 0.1, new PIDSource() {
+        strafeController = new PIDController(0.05, 0, 0, new PIDSource() {
         
             public void setPIDSourceType(PIDSourceType pidSource){
             }
@@ -75,7 +75,7 @@ public class LimeAim extends Command {
         });
         strafeController.enable();
         strafeController.setInputRange(-29.8, 29.8);
-        strafeController.setOutputRange(-0.2, 0.2);
+        strafeController.setOutputRange(-0.25, 0.25);
         strafeController.setContinuous(true);
     }
 

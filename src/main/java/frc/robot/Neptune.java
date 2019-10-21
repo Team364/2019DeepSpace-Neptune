@@ -1,17 +1,22 @@
 package frc.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.robot.subsystems.*;
-import frc.robot.oi.*;
-import frc.robot.commands.*;
-import frc.robot.subroutines.ActivateTrident;
-import frc.robot.States;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.*;
+import frc.robot.oi.DriverOI;
+import frc.robot.oi.OperatorOI;
+import frc.robot.subroutines.ActivateTrident;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Elevator;
+//import frc.robot.subsystems.SwerveMod;
+import frc.robot.subsystems.Trident;
 
 public class Neptune extends TimedRobot {
 
@@ -27,6 +32,7 @@ public class Neptune extends TimedRobot {
   public UsbCamera camera;
   public static Command sandstorm = new ActivateTrident(5);
   public static Command modStart = new ResetMods();
+  public static Command gyroStart = new ResetGyro();
   public static double teleopStart;
   public static double teleopElapsedTime;
   public static boolean endGame;
@@ -45,12 +51,13 @@ public class Neptune extends TimedRobot {
     camera.setResolution(320, 240);
     camera.setFPS(18);
     modStart.start();
+    gyroStart.start();
   } 
 
   @Override
   public void robotPeriodic() {
     //SmartDashboard.putNumber("gyro", Neptune.elevator.getYaw());
-
+    
   }
 
   @Override
