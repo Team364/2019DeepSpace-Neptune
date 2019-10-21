@@ -1,9 +1,6 @@
 package frc.robot.subsystems;
 
-import static frc.robot.Conversions.modulate360;
-import static frc.robot.Conversions.modulate4096;
-import static frc.robot.Conversions.toCounts;
-import static frc.robot.Conversions.toDegrees;
+import static frc.robot.Conversions.*;
 import static frc.robot.RobotMap.ANGLECONTINUOUSCURRENTLIMIT;
 import static frc.robot.RobotMap.ANGLED;
 import static frc.robot.RobotMap.ANGLEENABLECURRENTLIMIT;
@@ -43,8 +40,7 @@ public class SwerveMod{
     public double smartAngle;
     public Vector2 velocity;
     public double currentAngle;
-    private int absolutePosition;
-    private boolean invertDrive;
+    //private int absolutePosition;
     private boolean invertSensorPhase;
 
     public SwerveMod(int moduleNumber, Vector2 modulePosition, TalonSRX angleMotor, TalonSRX driveMotor, boolean invertDrive, boolean invertSensorPhase, int zeroOffset) {
@@ -56,7 +52,6 @@ public class SwerveMod{
         targetAngle = 0;
         targetSpeed = 0;
         currentAngle = 0;
-        this.invertDrive = invertDrive;
         this.invertSensorPhase = invertSensorPhase;
 
 
@@ -91,12 +86,6 @@ public class SwerveMod{
 
     public TalonSRX getAngleMotor(){
         return mAngleMotor;
-    }
-
-    public void resetMod(){
-        absolutePosition = getTicks();
-        if(invertSensorPhase){absolutePosition *= -1;}
-        zero();
     }
 
     public void setTargetVelocity(Vector2 velocity, boolean speed, double rotation){
@@ -168,14 +157,9 @@ public class SwerveMod{
     public void setTargetSpeed(double speed) {
         if (driveInverted) {speed = -speed;}
         mDriveMotor.set(ControlMode.PercentOutput, speed);
-    }
+    } 
 
-    
 
-    public  double getPos(){
-        double relativePos = mAngleMotor.getSelectedSensorPosition(SLOTIDX);
-        return relativePos;
-    }
 
     /**
      * @return Ticks of Position
@@ -184,14 +168,29 @@ public class SwerveMod{
         return mAngleMotor.getSensorCollection().getPulseWidthPosition() & 0xFFF;
     }
 
-    public double getOffset(){
-        return mZeroOffset;
+    public void resetMod(){
+        //absolutePosition = getTicks();
+        //if(invertSensorPhase){absolutePosition *= -1;}
+        zero();
     }
 
     public void zero(){
-        mAngleMotor.setSelectedSensorPosition(modulate4096(absolutePosition + mZeroOffset), SLOTIDX, SWERVETIMEOUT);
+        int pulseWidth = mAngleMotor.getSensorCollection().getPulseWidthPosition();
+        if(invertSensorPhase){pulseWidth *= -1;}
+        int moduleOffset;
+        moduleOffset = mZeroOffset;
+		moduleOffset &= 0xFFF;
+		pulseWidth += moduleOffset;
+        pulseWidth = pulseWidth & 0xFFF;
+        mAngleMotor.setSelectedSensorPosition(pulseWidth, SLOTIDX, SWERVETIMEOUT);
+        //mAngleMotor.setSelectedSensorPosition(modulate4096(absolutePosition + mZeroOffset), SLOTIDX, SWERVETIMEOUT);
     }
-    //(int)( toCounts(modulate360( toDegrees(getPos()) ) ))
+
+    public  double getPos(){
+        double relativePos = mAngleMotor.getSelectedSensorPosition(SLOTIDX);                
+        SmartDashboard.putNumber("Current Encoder Value" + moduleNumber + "   ", relativePos);
+        return relativePos;
+    }    
 
     public void setSensorPhase(boolean invert){
         mAngleMotor.setSensorPhase(invert);

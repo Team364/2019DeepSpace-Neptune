@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
 import frc.robot.RobotMap;
 import frc.robot.States;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class ElevateToPosition extends Command {
@@ -18,7 +17,6 @@ public class ElevateToPosition extends Command {
     private double liftStartConfig;
     private double desiredHeight;
     private boolean finish;
-    private int x = 0;
 
     private double wantedAngle;
     private double intakeCargo;
@@ -167,7 +165,6 @@ public class ElevateToPosition extends Command {
         if (wantedPosition > 132000) {
             wantedPosition = 132000;
         }
-        x++;
         Neptune.elevator.elevateTo(wantedPosition, wantedAngle);
         Neptune.elevator.setCamera(camera);
         finish = true;

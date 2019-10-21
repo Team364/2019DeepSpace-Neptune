@@ -1,16 +1,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.SwerveMod;
 import frc.robot.misc.math.Vector2;
-import frc.robot.subsystems.SwerveMod;
 
 import static frc.robot.RobotMap.*;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class DrivetrainCommand extends Command {
 

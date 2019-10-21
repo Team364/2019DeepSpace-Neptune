@@ -18,7 +18,6 @@ public class OperatorOI{
     public JoystickButton setLiftPositionHigh;
     public JoystickButton setLiftPositionCargo;
     public JoystickButton setIntakePosition;
-    public JoystickButton defense;
     
     private boolean cargo;
     private boolean intake;
@@ -29,6 +28,7 @@ public class OperatorOI{
     private Command elevate;
     private Command setLever;
     private Command setClaw;
+    private Command defense;
     
     //Operator Buttons
     public OperatorOI() {
@@ -127,7 +127,7 @@ public class OperatorOI{
         // setClaw = new SetPiston(Neptune.trident.claw, 0);
         // setLever.start();
         // setClaw.start();
-       Command defense = new ActivateTrident(6);
+       defense = new ActivateTrident(6);
        defense.start();
 
       }

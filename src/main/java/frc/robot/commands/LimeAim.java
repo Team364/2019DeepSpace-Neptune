@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 import frc.robot.misc.math.Rotation2;
 import frc.robot.misc.math.Vector2;
@@ -34,49 +33,50 @@ public class LimeAim extends Command {
     public LimeAim(double[] GyroSet) {
         this.GyroSet = GyroSet;
         requires(Neptune.driveTrain);
-        snapController = new PIDController(0.03, 0.0, 0, new PIDSource() {
+
+        snapController = new PIDController(0.03, 0, 0.125, new PIDSource() {
         
-        public void setPIDSourceType(PIDSourceType pidSource){
-        }
+            public void setPIDSourceType(PIDSourceType pidSource){
+            }
      
-        public PIDSourceType getPIDSourceType(){
-            return PIDSourceType.kDisplacement;
-        }
+            public PIDSourceType getPIDSourceType(){
+                return PIDSourceType.kDisplacement;
+            }
 
-        public double pidGet() {
-            return Neptune.elevator.getFittedYaw();
-        }
+            public double pidGet() {
+                return Neptune.elevator.getFittedYaw();
+            }
 
-    }, output -> {
-        gyroPid = output;
-    });
-    snapController.enable();
-    snapController.setInputRange(0, 360);
-    snapController.setOutputRange(-0.4, 0.4);
-    snapController.setContinuous(true);
+        }, output -> {
+            gyroPid = output;
+        });
+        snapController.enable();
+        snapController.setInputRange(0, 360);
+        snapController.setOutputRange(-1, 1);
+        snapController.setContinuous(true);
 
 
-    strafeController = new PIDController(0.04, 0.00, 0, new PIDSource() {
+        strafeController = new PIDController(0.03, 0.00017, 0.1, new PIDSource() {
         
-        public void setPIDSourceType(PIDSourceType pidSource){
-        }
+            public void setPIDSourceType(PIDSourceType pidSource){
+            }
 
-        public PIDSourceType getPIDSourceType(){
-            return PIDSourceType.kDisplacement;
-        }
+            public PIDSourceType getPIDSourceType(){
+                return PIDSourceType.kDisplacement;
+            }
 
-        public double pidGet() {
-            xValue = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
-            return xValue;
-        }
+            public double pidGet() {
+                xValue = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+                return xValue;
+           }
 
-    }, output -> {
-        strafePid = output;
-    });
-    strafeController.enable();
-    strafeController.setInputRange(-29.8, 29.8);
-    strafeController.setOutputRange(-0.3, 0.3);
-    strafeController.setContinuous(true);
+        }, output -> {
+            strafePid = output;
+        });
+        strafeController.enable();
+        strafeController.setInputRange(-29.8, 29.8);
+        strafeController.setOutputRange(-0.2, 0.2);
+        strafeController.setContinuous(true);
     }
 
     @Override
@@ -87,7 +87,7 @@ public class LimeAim extends Command {
 
     @Override
     protected void execute() {
-        forward = -Neptune.oi.controller.getRawAxis(1) *0.30;
+        forward = -Neptune.oi.controller.getRawAxis(1) *0.50;
 
         snapController.setSetpoint(closestSetPoint);
         strafeController.setSetpoint(0);

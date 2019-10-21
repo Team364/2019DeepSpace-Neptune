@@ -1,33 +1,15 @@
 package frc.robot.subsystems;
 
-import static frc.robot.Conversions.deadband;
-import static frc.robot.RobotMap.BLANGLE;
-import static frc.robot.RobotMap.BLDRIVE;
-import static frc.robot.RobotMap.BRANGLE;
-import static frc.robot.RobotMap.BRDRIVE;
-import static frc.robot.RobotMap.FLANGLE;
-import static frc.robot.RobotMap.FLDRIVE;
-import static frc.robot.RobotMap.FRANGLE;
-import static frc.robot.RobotMap.FRDRIVE;
-import static frc.robot.RobotMap.MOD0OFFSET;
-import static frc.robot.RobotMap.MOD1OFFSET;
-import static frc.robot.RobotMap.MOD2OFFSET;
-import static frc.robot.RobotMap.MOD3OFFSET;
-import static frc.robot.RobotMap.TRACKWIDTH;
-import static frc.robot.RobotMap.WHEELBASE;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
+import static frc.robot.Conversions.*;
+import static frc.robot.RobotMap.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 import frc.robot.commands.DrivetrainCommand;
 import frc.robot.misc.math.Rotation2;
 import frc.robot.misc.math.Vector2;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import static frc.robot.Conversions.*;
  
 
 public class Drivetrain extends Subsystem {
@@ -103,11 +85,6 @@ public class Drivetrain extends Subsystem {
         for (SwerveMod mod : getSwerveModules()){
             mod.setTargetAngle(mod.targetAngle);
             mod.setTargetSpeed(mod.targetSpeed);
-        }
-    }
-    public void setZero(){
-        for(SwerveMod mod : getSwerveModules()){
-            mod.getAngleMotor().set(ControlMode.Position, mod.mZeroOffset);
         }
     }
 

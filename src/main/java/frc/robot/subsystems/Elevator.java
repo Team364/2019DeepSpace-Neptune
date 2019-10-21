@@ -9,14 +9,11 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Neptune;
 import frc.robot.RobotMap;
 import frc.robot.States;
-import frc.robot.misc.Piston;
 
 public class Elevator extends Subsystem {
 
@@ -26,8 +23,6 @@ public class Elevator extends Subsystem {
   private TalonSRX liftSlave;
   public double TargetHeight;
   public double TargetAngle;
-  private DoubleSolenoid fr;
-  public Piston front;
   private PWM servoCamera; 
   private PigeonIMU pigeon;
   private PigeonIMU.GeneralStatus gen_status;
@@ -47,8 +42,6 @@ public class Elevator extends Subsystem {
     pigeon.getGeneralStatus(gen_status);
     pigeon.setYaw(0);
     arm = new TalonSRX(RobotMap.arm);
-    fr = new DoubleSolenoid(1, 0, 7);
-    front = new Piston(fr, "Front");
     lift.configFactoryDefault();
     arm.configFactoryDefault();
     lift.configPeakCurrentLimit(RobotMap.liftCurrentCeiling);

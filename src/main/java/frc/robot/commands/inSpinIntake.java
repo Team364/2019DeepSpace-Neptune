@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
 import frc.robot.States;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 public class inSpinIntake extends Command {
   public inSpinIntake() {
     // Use requires() here to declare subsystem dependencies

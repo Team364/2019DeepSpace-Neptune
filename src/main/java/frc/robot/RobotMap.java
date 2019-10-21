@@ -52,7 +52,6 @@ public class RobotMap {
     public static final int FLANGLE = 16;//FL 2-> BR 8/////////////16
     public static final int FLDRIVE = 36;//FL 1-> BR 7/////////////36
     public static final int FRANGLE = 32;//FR 6-> BL 12////////////32
-
     public static final int FRDRIVE = 12;//FR 5-> BL 3/////////////12
     public static final int BRANGLE = 33;//BR 8-> FL 2
     public static final int BRDRIVE = 15;//BR 7-> FL 1
@@ -85,14 +84,6 @@ public class RobotMap {
     public static final double ANGLEI = 0.0;//0.001
     public static final double ANGLED = 100;//130 //200
 
-    public static final int ANGLEVELOCITY = 10000;
-    public static final int ANGLEACCELERATION = 10000;
-
-    public static final double ANGLENOMINALFORWARD = 0;
-    public static final double ANGLENOMINALREVERSE = 0;
-    public static final double ANGLEPEAKFORWARD = 1;
-    public static final double ANGLEPEAKREVERSE = -1;
-
     public static final int ANGLECONTINUOUSCURRENTLIMIT = 30;
     public static final int ANGLEPEAKCURRENT = 30;
     public static final int ANGLEPEAKCURRENTDURATION = 100;
@@ -106,8 +97,6 @@ public class RobotMap {
     // Lift
     public static final int topLift = 7;// Talon SRX -- Master
     public static final int bottomLift = 13;// Talon SRX -- Gyro
-    public static final int lowerLiftLimitSwitch = 3;// Digital Input
-    public static final int upperLiftLimitSwitch = 2;// Digital Input
     public static final int servoCamera = 0;//PWM
     // Grip
     public static final int rightClaw = 1;// Victor SPX
@@ -119,7 +108,6 @@ public class RobotMap {
     public static final int intakeLimitSwitch = 0;// Digital Input
     // Arm
     public static final int arm = 6; // Talon SRX
-    public static final int armLimitSwitch = 1;// Digital Input
     // Climb
     public static final int levitator = 2;// TalonSRX
     public static final int climbDriveMotor = 21;//VictorSPX
@@ -127,22 +115,7 @@ public class RobotMap {
 
 
     // Software
-    // Drive
-    public static final boolean rightDriveReverse = false;
-    public static final boolean rightDriveReverseEncoder = false;
-    public static final boolean leftDriveReverse = false;
-    public static final boolean leftDriveReverseEncoder = false;
-    public static final double driveNominalOutputForward = 0;
-    public static final double driveNominalOutputReverse = 0;
-    public static final double drivePeakOutputForward = 1;
-    public static final double drivePeakOutputReverse = -1;
-    public static final int driveCruiseVelocity = 10000;
-    public static final int driveAcceleration = 4000;
-    // Drive PID
-    public static final double drivePgain = 2.0;
-    public static final double driveIgain = 0.0;
-    public static final double driveDgain = 0.0;
-    public static final double driveFgain = 0.0;
+
     // Lift
     // TalonBase Config
     public static final boolean liftReverse = false;//was false
@@ -231,6 +204,6 @@ public class RobotMap {
     // PID constants
     public static final int SlotIdx = 0;
     public static final int PIDLoopIdx = 0;
-    public static final int TimeoutMs = 0;
+    public static final int TimeoutMs = 20;
 
 }
