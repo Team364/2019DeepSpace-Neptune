@@ -28,12 +28,11 @@ public class DriverOI {
     public JoystickButton resetGyro;
     public JoystickButton resetMods;
     public JoystickButton climb;
-    public JoystickButton climb2;
     public JoystickButton cancelClimb;
 
     
     public Command lvl3ClimbSequence = new Climb(3);
-    public Command lvl2ClimbSequence = new Climb(2);
+
 
     /**
      * OI()
@@ -61,12 +60,10 @@ public class DriverOI {
         climb = new JoystickButton(controller, 8);
         climb.whenPressed(lvl3ClimbSequence);
         
-        climb2 = new JoystickButton(controller, 7);
-        climb2.whenPressed(lvl2ClimbSequence);
-        
+
         cancelClimb = new JoystickButton(controller, 4);
         cancelClimb.cancelWhenPressed(lvl3ClimbSequence);
-        cancelClimb.cancelWhenPressed(lvl2ClimbSequence);
+
 
 
     }
