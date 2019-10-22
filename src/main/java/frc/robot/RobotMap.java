@@ -110,8 +110,8 @@ public class RobotMap {
     public static final int arm = 6; // Talon SRX
     // Climb
     public static final int levitator = 2;// TalonSRX
-    public static final int climbDriveMotor = 21;//VictorSPX
-    public static final int forearms = 20;//VictorSPX
+    public static final int climbDriveMotor = 20;//VictorSPX
+    public static final int forearms = 4;//VictorSPX
 
 
     // Software

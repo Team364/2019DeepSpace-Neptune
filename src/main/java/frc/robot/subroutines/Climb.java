@@ -7,18 +7,16 @@ import frc.robot.commands.*;
 
 public class Climb extends CommandGroup {
 
-	private int climbSet;
 	public Climb(int climbSet) {
-		this.climbSet = climbSet;
 		if(climbSet == 3){//Level 3 climb from platform
 			addSequential(new ElevateToPosition(6));
 			addSequential(new WaitCommand(1.6));
-			addSequential(new EngageForeams(0.35));
+			addSequential(new EngageForeams(0.5));
 			addSequential(new WaitCommand(0.5));
 			addParallel(new ElevateToPosition(7));
 			addSequential(new LevitateToPosition(RobotMap.lvl3Climb));
 			addSequential(new WaitCommand(3.2));
-			//addSequential(new FinalSequence(3));
+			addSequential(new FinalSequence());
 		}else if(climbSet == 2){//Level 2 climb from platform
 			addSequential(new ElevateToPosition(9));
 			addSequential(new WaitCommand(1.2));
@@ -27,7 +25,7 @@ public class Climb extends CommandGroup {
 			addParallel(new ElevateToPosition(7));
 			addSequential(new LevitateToPosition(RobotMap.lvl2Climb));
 			addSequential(new WaitCommand(1));
-			//addSequential(new FinalSequence(2));
+			//addSequential(new FinalSequence());
 		}		
 	}
 

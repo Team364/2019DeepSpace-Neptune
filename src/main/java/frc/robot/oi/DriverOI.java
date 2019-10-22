@@ -1,9 +1,18 @@
 package frc.robot.oi;
 
-import static frc.robot.RobotMap.*;
+import static frc.robot.RobotMap.CARGOGYROSET;
+import static frc.robot.RobotMap.INTAKEGYROSET;
+import static frc.robot.RobotMap.LIMEBUTTONCARGO;
+import static frc.robot.RobotMap.LIMEBUTTONINTAKE;
+import static frc.robot.RobotMap.LIMEBUTTONROCKET;
+import static frc.robot.RobotMap.RESETGYRO;
+import static frc.robot.RobotMap.RESETMODS;
+import static frc.robot.RobotMap.ROCKETGYROSET;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.subroutines.Climb;
 import frc.robot.commands.*;
 
 public class DriverOI {
@@ -18,6 +27,14 @@ public class DriverOI {
 
     public JoystickButton resetGyro;
     public JoystickButton resetMods;
+    public JoystickButton climb;
+    public JoystickButton climb2;
+    public JoystickButton cancelClimb;
+
+    
+    public Command lvl3ClimbSequence = new Climb(3);
+    public Command lvl2ClimbSequence = new Climb(2);
+
     /**
      * OI()
      * <p>Initializes Joysticks and buttons thereof
@@ -40,6 +57,17 @@ public class DriverOI {
 
         resetMods = new JoystickButton(controller, RESETMODS);
         resetMods.whileHeld(new ResetMods());
+
+        climb = new JoystickButton(controller, 8);
+        climb.whenPressed(lvl3ClimbSequence);
+        
+        climb2 = new JoystickButton(controller, 7);
+        climb2.whenPressed(lvl2ClimbSequence);
+        
+        cancelClimb = new JoystickButton(controller, 4);
+        cancelClimb.cancelWhenPressed(lvl3ClimbSequence);
+        cancelClimb.cancelWhenPressed(lvl2ClimbSequence);
+
 
     }
 
