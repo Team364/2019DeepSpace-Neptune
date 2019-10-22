@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.oi.DriverOI;
 import frc.robot.oi.OperatorOI;
@@ -56,7 +56,7 @@ public class Neptune extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    //SmartDashboard.putNumber("gyro", Neptune.elevator.getYaw());
+    SmartDashboard.putNumber("gyro", Neptune.elevator.getYaw());
     
   }
 

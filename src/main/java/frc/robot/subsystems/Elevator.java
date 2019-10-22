@@ -106,7 +106,7 @@ public class Elevator extends Subsystem {
   }
   public double getYaw() {
     pigeon.getYawPitchRoll(yaw);
-    return -yaw[0];
+    return yaw[0];
   }
 
   public PigeonIMU getPigeon(){
