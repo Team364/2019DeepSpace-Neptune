@@ -8,13 +8,15 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.*;
+import frc.robot.commands.ResetGyro;
+import frc.robot.commands.ResetMods;
 import frc.robot.oi.DriverOI;
 import frc.robot.oi.OperatorOI;
 import frc.robot.subroutines.ActivateTrident;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.SwerveMod;
 //import frc.robot.subsystems.SwerveMod;
 import frc.robot.subsystems.Trident;
 
@@ -50,13 +52,18 @@ public class Neptune extends TimedRobot {
     camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
     camera.setResolution(320, 240);
     camera.setFPS(18);
-    modStart.start();
+    //modStart.start();
     gyroStart.start();
   } 
 
   @Override
   public void robotPeriodic() {
     SmartDashboard.putNumber("gyro", Neptune.elevator.getYaw());
+    for(SwerveMod mod : driveTrain.getSwerveModules()){
+    SmartDashboard.putNumber("encoder" + mod.moduleNumber + "  ", mod.getPos());
+    SmartDashboard.putNumber("target" + mod.moduleNumber + "  ", mod.getTargetAngle());
+
+    }
     
   }
 
