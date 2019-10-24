@@ -32,7 +32,6 @@ public class Neptune extends TimedRobot {
 
   public UsbCamera camera;
   public static Command sandstorm = new ActivateTrident(5);
-  public static Command modStart = new ResetMods();
   public static Command gyroStart = new ResetGyro();
   public static double teleopStart;
   public static double teleopElapsedTime;

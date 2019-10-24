@@ -9,9 +9,6 @@ public class RobotMap {
     //Gyro reset button
     public static final int RESETGYRO = 4;
 
-    //Mods reset button
-    public static final int RESETMODS = 3;
-
 
     //Gyro Set Points
     public static final double[] CARGOGYROSET = 

@@ -1,19 +1,7 @@
 package frc.robot.subsystems;
 
 import static frc.robot.Conversions.*;
-import static frc.robot.RobotMap.ANGLECONTINUOUSCURRENTLIMIT;
-import static frc.robot.RobotMap.ANGLED;
-import static frc.robot.RobotMap.ANGLEENABLECURRENTLIMIT;
-import static frc.robot.RobotMap.ANGLEI;
-import static frc.robot.RobotMap.ANGLEP;
-import static frc.robot.RobotMap.ANGLEPEAKCURRENT;
-import static frc.robot.RobotMap.ANGLEPEAKCURRENTDURATION;
-import static frc.robot.RobotMap.DRIVECONTINUOUSCURRENTLIMIT;
-import static frc.robot.RobotMap.DRIVEENABLECURRENTLIMIT;
-import static frc.robot.RobotMap.DRIVEPEAKCURRENT;
-import static frc.robot.RobotMap.DRIVEPEAKCURRENTDURATION;
-import static frc.robot.RobotMap.SLOTIDX;
-import static frc.robot.RobotMap.SWERVETIMEOUT;
+import static frc.robot.RobotMap.*;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -84,7 +72,7 @@ public class SwerveMod{
         driveMotor.enableCurrentLimit(DRIVEENABLECURRENTLIMIT);        
         setDriveInverted(invertDrive);
 
-        angleController = new PIDController(0.01, 0, 0.5, new PIDSource() {
+        angleController = new PIDController(0.001, 0, 0, new PIDSource() {
         
             public void setPIDSourceType(PIDSourceType pidSource){
             }
@@ -99,6 +87,7 @@ public class SwerveMod{
 
         }, output -> {
             anglePercent = output;
+            mAngleMotor.set(ControlMode.PercentOutput, output);
         }, 0.005);
         angleController.enable();
         angleController.setInputRange(0, 360);
@@ -176,7 +165,7 @@ public class SwerveMod{
 
         targetAngle = 150;
         angleController.setSetpoint(targetAngle);
-            mAngleMotor.set(ControlMode.PercentOutput, anglePercent);
+            
         
     }
 
@@ -185,32 +174,6 @@ public class SwerveMod{
         mDriveMotor.set(ControlMode.PercentOutput, speed);
     } 
 
-
-
-    /**
-     * @return Ticks of Position
-    **/
-    public int getTicks(){
-        return mAngleMotor.getSensorCollection().getPulseWidthPosition() & 0xFFF;
-    }
-
-    public void resetMod(){
-        //absolutePosition = getTicks();
-        //if(invertSensorPhase){absolutePosition *= -1;}
-        zero();
-    }
-
-    public void zero(){
-        int pulseWidth = mAngleMotor.getSensorCollection().getPulseWidthPosition();
-        if(invertSensorPhase){pulseWidth *= -1;}
-        int moduleOffset;
-        moduleOffset = mZeroOffset;
-		moduleOffset &= 0xFFF;
-		pulseWidth += moduleOffset;
-        pulseWidth = pulseWidth & 0xFFF;
-        mAngleMotor.setSelectedSensorPosition(pulseWidth, SLOTIDX, SWERVETIMEOUT);
-        //mAngleMotor.setSelectedSensorPosition(modulate4096(absolutePosition + mZeroOffset), SLOTIDX, SWERVETIMEOUT);
-    }
 
     public  double getPos(){
         double angle = (1.0 - angleEncoder.getVoltage() / RobotController.getVoltage5V()) * 360;
