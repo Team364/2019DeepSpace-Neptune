@@ -1,8 +1,7 @@
 package frc.robot.subsystems;
 
-import static frc.robot.Conversions.deadband;
+import static frc.robot.Conversions.*;
 import static frc.robot.RobotMap.*;
-
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.networktables.NetworkTableInstance;

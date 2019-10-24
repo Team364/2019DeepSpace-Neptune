@@ -66,17 +66,17 @@ public class RobotMap {
 
     //Offsets 
     /**Front Right */
-    public static final int MOD0OFFSET = 0;
+    public static final int MOD0OFFSET = 549;
     /**Front Left */
-    public static final int MOD1OFFSET = 0;
+    public static final int MOD1OFFSET = -1113+100;
     /**Back Left */
-    public static final int MOD2OFFSET = 0;
+    public static final int MOD2OFFSET = -1099;
     /**Back Right */
-    public static final int MOD3OFFSET = 0;
+    public static final int MOD3OFFSET = -405 - 768;
 
     //constants
     public static final double STICKDEADBAND = 0.2;
-    public static final double ENCODERTICKS = 4096.0;
+    public static final double ENCODERTICKS = 1024.0;
     public static final double OFFSETTOSTRAIGHT = 180;
     //public static final double ANGLE_TICKS_PER_RADIAN = ENCODERTICKS / (2.0 * Math.PI);
 
@@ -84,9 +84,9 @@ public class RobotMap {
     public static final int SLOTIDX = 0;
     public static final int SWERVETIMEOUT = 20;
 
-    public static final double ANGLEP = 2.5;//20
+    public static final double ANGLEP = 7.5;//20
     public static final double ANGLEI = 0.0;//0.001
-    public static final double ANGLED = 0;//130 //200
+    public static final double ANGLED = 100;//130 //200
 
     public static final int ANGLECONTINUOUSCURRENTLIMIT = 30;
     public static final int ANGLEPEAKCURRENT = 30;
