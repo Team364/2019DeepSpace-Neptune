@@ -4,12 +4,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
 import frc.robot.misc.math.Rotation2;
 import frc.robot.misc.math.Vector2;
-import frc.robot.subroutines.*;
 
 public class FinalSequence extends Command {
 
     public FinalSequence() {
-        setTimeout(1.3);
+        setTimeout(0.5);
     }
 
     @Override
@@ -31,7 +30,6 @@ public class FinalSequence extends Command {
 
     @Override
     protected void end() {
-        Neptune.driveTrain.holonomicDrive(Vector2.ZERO, 0, true);
-        Neptune.climber.stopDriveWheels();
+        Neptune.climber.stopForarms();
     }
 }

@@ -1,12 +1,11 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 public class Climber extends Subsystem {
 
@@ -53,10 +52,7 @@ public class Climber extends Subsystem {
   }
 
   public void driveWheelsToWin(){
-    driver.set(ControlMode.PercentOutput, 1);
-  }
-  public void stopDriveWheels(){
-    driver.set(ControlMode.PercentOutput, 0);
+    driver.set(ControlMode.PercentOutput, -1);
   }
   public void driveWheelsSlow(){
     driver.set(ControlMode.Velocity, 1);
