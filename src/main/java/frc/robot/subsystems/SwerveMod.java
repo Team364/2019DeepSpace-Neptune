@@ -9,10 +9,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSourceType;
-import edu.wpi.first.wpilibj.RobotController;
+
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.misc.math.Vector2;
 
@@ -36,10 +33,6 @@ public class SwerveMod{
     //private int absolutePosition;
     private boolean invertSensorPhase;
 
-    public PIDController angleController;
-    public double anglePercent;
-    public AnalogInput angleEncoder;
-
     public SwerveMod(int moduleNumber, Vector2 modulePosition, TalonSRX angleMotor, AnalogInput angleEncoder, TalonSRX driveMotor, boolean invertDrive, boolean invertSensorPhase, int zeroOffset) {
         this.moduleNumber = moduleNumber;
         this.modulePosition = modulePosition;
@@ -49,16 +42,22 @@ public class SwerveMod{
         targetAngle = 0;
         targetSpeed = 0;
         currentAngle = 0;
-        this.angleEncoder = angleEncoder;
         this.invertSensorPhase = invertSensorPhase;
 
 
 
+        angleMotor.configFactoryDefault();
+        angleMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog, SLOTIDX, SWERVETIMEOUT);
+        angleMotor.configFeedbackNotContinuous(false, SWERVETIMEOUT); //make false if using relative, make true if using absolute
+        angleMotor.config_kP(SLOTIDX, ANGLEP);
+        angleMotor.config_kI(SLOTIDX, ANGLEI);
+        angleMotor.config_kD(SLOTIDX, ANGLED);
+        angleMotor.setSensorPhase(invertSensorPhase);
+
+
         angleMotor.setNeutralMode(NeutralMode.Brake);
 
-        
         driveMotor.setNeutralMode(NeutralMode.Brake);
-
         
         // Setup Current Limiting
         angleMotor.configContinuousCurrentLimit(ANGLECONTINUOUSCURRENTLIMIT, SWERVETIMEOUT);
@@ -72,27 +71,7 @@ public class SwerveMod{
         driveMotor.enableCurrentLimit(DRIVEENABLECURRENTLIMIT);        
         setDriveInverted(invertDrive);
 
-        angleController = new PIDController(0.001, 0, 0, new PIDSource() {
-        
-            public void setPIDSourceType(PIDSourceType pidSource){
-            }
-     
-            public PIDSourceType getPIDSourceType(){
-                return PIDSourceType.kDisplacement;
-            }
 
-            public double pidGet() {
-                return getPos();
-            }
-
-        }, output -> {
-            anglePercent = output;
-            mAngleMotor.set(ControlMode.PercentOutput, output);
-        }, 0.005);
-        angleController.enable();
-        angleController.setInputRange(0, 360);
-        angleController.setOutputRange(-0.5, 0.5);
-        angleController.setContinuous(true);
     }
 
     public TalonSRX getAngleMotor(){
@@ -163,9 +142,7 @@ public class SwerveMod{
         }
         lastTargetAngle = targetAngle;
 
-        targetAngle = 150;
-        angleController.setSetpoint(targetAngle);
-            
+        mAngleMotor.set(ControlMode.Position, targetAngle);            
         
     }
 
@@ -176,11 +153,7 @@ public class SwerveMod{
 
 
     public  double getPos(){
-        double angle = (1.0 - angleEncoder.getVoltage() / RobotController.getVoltage5V()) * 360;
-        angle %= 360;
-        if(angle < 0){
-            angle += 360;
-        }
+        double angle = mAngleMotor.getSelectedSensorPosition();
         return angle;
     }    
 
