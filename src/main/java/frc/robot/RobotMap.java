@@ -81,9 +81,9 @@ public class RobotMap {
     public static final int SLOTIDX = 0;
     public static final int SWERVETIMEOUT = 20;
 
-    public static final double ANGLEP = 7.5;//20
+    public static final double ANGLEP = 2;//20
     public static final double ANGLEI = 0.0;//0.001
-    public static final double ANGLED = 100;//130 //200
+    public static final double ANGLED = 0;//130 //200
 
     public static final int ANGLECONTINUOUSCURRENTLIMIT = 30;
     public static final int ANGLEPEAKCURRENT = 30;

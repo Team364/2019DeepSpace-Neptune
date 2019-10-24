@@ -60,6 +60,7 @@ public class Neptune extends TimedRobot {
     for(SwerveMod mod : driveTrain.getSwerveModules()){
       SmartDashboard.putNumber("encoder " + mod.moduleNumber + "  ", mod.getPos());
       SmartDashboard.putNumber("target " + mod.moduleNumber + "  ", mod.getTargetAngle());
+      SmartDashboard.putNumber("percent " + mod.moduleNumber + "  ", mod.getAngleMotor().getMotorOutputPercent());
 
     }
   }

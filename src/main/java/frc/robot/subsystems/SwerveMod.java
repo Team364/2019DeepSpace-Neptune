@@ -52,7 +52,7 @@ public class SwerveMod{
         angleMotor.config_kP(SLOTIDX, ANGLEP);
         angleMotor.config_kI(SLOTIDX, ANGLEI);
         angleMotor.config_kD(SLOTIDX, ANGLED);
-        angleMotor.setSensorPhase(invertSensorPhase);
+        //angleMotor.setSensorPhase(true);
 
 
         angleMotor.setNeutralMode(NeutralMode.Brake);
@@ -116,32 +116,33 @@ public class SwerveMod{
     }
 
     public void setTargetAngle(double targetAngle) {
+
+        final double currentAngle = getPos();
         targetAngle = modulate360(targetAngle);
-        double currentAngleMod = getPos();
-        if (currentAngleMod < 0) currentAngleMod += 360;
-        double delta = currentAngleMod - targetAngle;
+        // Change the target angle so the delta is in the range [-180, 180) instead of [0, 360)
+        double delta = targetAngle - currentAngle;
         if (delta > 180) {
-            targetAngle += 360;
-        } else if (delta < -180) {
             targetAngle -= 360;
-        }
-        delta = currentAngleMod - targetAngle;
-        if (delta > 90 || delta < -90) {
-            if (delta > 90)
-                targetAngle += 180;
-            else if (delta < -90)
-                targetAngle -= 180;
-            mDriveMotor.setInverted(false);
-        } else {
-            mDriveMotor.setInverted(true);
-        }
-
-        lastTargetAngle = targetAngle;
-        if(targetAngle < 0){
+        } else if (delta < -180) {
             targetAngle += 360;
         }
-        lastTargetAngle = targetAngle;
 
+        // Deltas that are greater than 90 deg or less than -90 deg can be inverted so the total movement of the module
+        // is less than 90 deg by inverting the wheel direction
+        delta = targetAngle - currentAngle;
+        if (delta > 360 || delta < -360) {
+            // Only need to add pi here because the target angle will be put back into the range [0, 360)
+            targetAngle += 180;
+
+            targetSpeed *= -1.0;
+        }
+
+        // Put target angle back into the range [0, 360)
+        targetAngle %= 360;
+        if (targetAngle < 0.0) {
+            targetAngle += 360;
+        }
+        targetAngle += toCounts(targetAngle);
         mAngleMotor.set(ControlMode.Position, targetAngle);            
         
     }
@@ -153,7 +154,11 @@ public class SwerveMod{
 
 
     public  double getPos(){
-        double angle = mAngleMotor.getSelectedSensorPosition();
+        double angle = toDegrees(mAngleMotor.getSelectedSensorPosition());
+        angle %= 360;
+        if(angle < 0){
+            angle += 360;
+        }
         return angle;
     }    
 
