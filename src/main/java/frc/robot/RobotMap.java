@@ -62,13 +62,24 @@ public class RobotMap {
 
     //Offsets 
     /**Front Right */
-    public static final int MOD0OFFSET = 0;
+    public static final int MOD0OFFSET = 67;
     /**Front Left */
-    public static final int MOD1OFFSET = 0;
+    public static final int MOD1OFFSET = 82;
     /**Back Left */
-    public static final int MOD2OFFSET = 0;
+    public static final int MOD2OFFSET = 302 + 5;
     /**Back Right */
-    public static final int MOD3OFFSET = 140;
+    public static final int MOD3OFFSET = 124;
+
+    //DRIVE INVERT
+    /**Front Right */
+    public static final boolean MOD0DRIVEINVERT = true;
+    /**Front Left */
+    public static final boolean MOD1DRIVEINVERT = false;
+    /**Back Left */
+    public static final boolean MOD2DRIVEINVERT = false;
+    /**Back Right */
+    public static final boolean MOD3DRIVEINVERT = true;
+
 
     //constants
     public static final double STICKDEADBAND = 0.2;

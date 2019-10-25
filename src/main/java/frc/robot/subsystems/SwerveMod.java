@@ -47,7 +47,7 @@ public class SwerveMod{
         // Configure Angle Motor
         angleMotor.configFactoryDefault();
         angleMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog, SLOTIDX, SWERVETIMEOUT);
-        angleMotor.configFeedbackNotContinuous(false, SWERVETIMEOUT); //make false if using relative, make true if using absolute
+        //angleMotor.configFeedbackNotContinuous(false, SWERVETIMEOUT); //make false if using relative, make true if using absolute
         angleMotor.selectProfileSlot(SLOTIDX, SWERVETIMEOUT);
         angleMotor.setSensorPhase(invertSensorPhase);
         angleMotor.config_kP(SLOTIDX, ANGLEP, SWERVETIMEOUT);
@@ -111,15 +111,18 @@ public class SwerveMod{
 
     public void setTargetAngle(double targetAngle) {
         targetAngle = modulate360(targetAngle);
-        double currentAngle = toDegrees(getPos());
+        targetAngle += mZeroOffset;
+        double currentAngle = mAngleMotor.getSelectedSensorPosition(0) * (360.0/1024.0);
         double currentAngleMod = modulate360(currentAngle);
         if (currentAngleMod < 0) currentAngleMod += 360;
+
         double delta = currentAngleMod - targetAngle;
-        if (delta >= 180) {
+        if (delta > 180) {
             targetAngle += 360;
         } else if (delta < -180) {
             targetAngle -= 360;
         }
+        
         delta = currentAngleMod - targetAngle;
         if (delta > 90 || delta < -90) {
             if (delta > 90)
@@ -133,8 +136,7 @@ public class SwerveMod{
 
         targetAngle += currentAngle - currentAngleMod;
         lastTargetAngle = targetAngle;
-        targetAngle %= 360;
-    
+        
         targetAngle = toCounts(targetAngle);
         mAngleMotor.set(ControlMode.Position, targetAngle);
     }
@@ -172,8 +174,9 @@ public class SwerveMod{
     }
 
     public  double getPos(){
-        double relativePos = mAngleMotor.getSelectedSensorPosition(SLOTIDX) + mZeroOffset;
-        return relativePos;
+        double relativePosition = modulate360(toDegrees(mAngleMotor.getSelectedSensorPosition()));
+        if ( relativePosition < 0){ relativePosition += 360;}
+        return relativePosition;
     }    
 
     public void setSensorPhase(boolean invert){
