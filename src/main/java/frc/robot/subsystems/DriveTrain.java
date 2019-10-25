@@ -5,7 +5,6 @@ import static frc.robot.RobotMap.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Neptune;
 import frc.robot.commands.DrivetrainCommand;
@@ -30,7 +29,6 @@ public class Drivetrain extends Subsystem {
                     new SwerveMod(0,
                             new Vector2(-TRACKWIDTH / 2.0, WHEELBASE / 2.0),
                             new TalonSRX(FRANGLE),
-                            new AnalogInput(FRENCODER),
                             new TalonSRX(FRDRIVE),
                             false, 
                             false,
@@ -38,15 +36,13 @@ public class Drivetrain extends Subsystem {
                     new SwerveMod(1,
                             new Vector2(TRACKWIDTH / 2.0, WHEELBASE / 2.0),
                             new TalonSRX(FLANGLE),
-                            new AnalogInput(FLENCODER),
                             new TalonSRX(FLDRIVE),
                             true,
-                            true,
+                            false,
                             MOD1OFFSET),
                     new SwerveMod(2,
                             new Vector2(TRACKWIDTH / 2.0, -WHEELBASE / 2.0),
                             new TalonSRX(BLANGLE),
-                            new AnalogInput(BLENCODER),
                             new TalonSRX(BLDRIVE),
                             true,
                             false,
@@ -54,7 +50,6 @@ public class Drivetrain extends Subsystem {
                     new SwerveMod(3,
                             new Vector2(-TRACKWIDTH / 2.0, -WHEELBASE / 2.0),
                             new TalonSRX(BRANGLE),
-                            new AnalogInput(BRENCODER),
                             new TalonSRX(BRDRIVE),
                             true,
                             false,

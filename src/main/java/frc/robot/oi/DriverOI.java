@@ -6,6 +6,7 @@ import static frc.robot.RobotMap.LIMEBUTTONCARGO;
 import static frc.robot.RobotMap.LIMEBUTTONINTAKE;
 import static frc.robot.RobotMap.LIMEBUTTONROCKET;
 import static frc.robot.RobotMap.RESETGYRO;
+import static frc.robot.RobotMap.RESETMODS;
 import static frc.robot.RobotMap.ROCKETGYROSET;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -52,6 +53,9 @@ public class DriverOI {
 
         resetGyro = new JoystickButton(controller, RESETGYRO);
         resetGyro.whileHeld(new ResetGyro());
+
+        resetMods = new JoystickButton(controller, RESETMODS);
+        resetMods.whileHeld(new ResetMods());
 
         climb = new JoystickButton(controller, 8);
         climb.whenPressed(lvl3ClimbSequence);

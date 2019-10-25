@@ -15,8 +15,8 @@ public class Conversions{
     public static double modulate360(double units){
         return units %= 360;
     }
-    public static int modulate1024(int units){
-        return units %= 1024;
+    public static int modulateEncoder(int units){
+        return units %= ENCODERTICKS;
     }
 
     /**

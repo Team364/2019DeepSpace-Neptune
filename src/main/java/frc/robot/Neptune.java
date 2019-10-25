@@ -32,6 +32,7 @@ public class Neptune extends TimedRobot {
 
   public UsbCamera camera;
   public static Command sandstorm = new ActivateTrident(5);
+  //public static Command modStart = new ResetMods();
   public static Command gyroStart = new ResetGyro();
   public static double teleopStart;
   public static double teleopElapsedTime;
@@ -58,11 +59,11 @@ public class Neptune extends TimedRobot {
   public void robotPeriodic() {
     SmartDashboard.putNumber("gyro", Neptune.elevator.getYaw());
     for(SwerveMod mod : driveTrain.getSwerveModules()){
-      SmartDashboard.putNumber("encoder " + mod.moduleNumber + "  ", mod.getPos());
-      SmartDashboard.putNumber("target " + mod.moduleNumber + "  ", mod.getTargetAngle());
-      SmartDashboard.putNumber("percent " + mod.moduleNumber + "  ", mod.getAngleMotor().getMotorOutputPercent());
+      SmartDashboard.putNumber("analog " + mod.moduleNumber + "  ", mod.getPos());
+      SmartDashboard.putNumber("joystick " + mod.moduleNumber + "  ", mod.getTargetAngle());
 
     }
+    
   }
 
   @Override

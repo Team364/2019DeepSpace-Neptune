@@ -8,7 +8,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.misc.math.Vector2;
@@ -33,7 +32,7 @@ public class SwerveMod{
     //private int absolutePosition;
     private boolean invertSensorPhase;
 
-    public SwerveMod(int moduleNumber, Vector2 modulePosition, TalonSRX angleMotor, AnalogInput angleEncoder, TalonSRX driveMotor, boolean invertDrive, boolean invertSensorPhase, int zeroOffset) {
+    public SwerveMod(int moduleNumber, Vector2 modulePosition, TalonSRX angleMotor, TalonSRX driveMotor, boolean invertDrive, boolean invertSensorPhase, int zeroOffset) {
         this.moduleNumber = moduleNumber;
         this.modulePosition = modulePosition;
         mAngleMotor = angleMotor;
@@ -45,19 +44,20 @@ public class SwerveMod{
         this.invertSensorPhase = invertSensorPhase;
 
 
-
+        // Configure Angle Motor
         angleMotor.configFactoryDefault();
         angleMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog, SLOTIDX, SWERVETIMEOUT);
         angleMotor.configFeedbackNotContinuous(false, SWERVETIMEOUT); //make false if using relative, make true if using absolute
-        angleMotor.config_kP(SLOTIDX, ANGLEP);
-        angleMotor.config_kI(SLOTIDX, ANGLEI);
-        angleMotor.config_kD(SLOTIDX, ANGLED);
-        //angleMotor.setSensorPhase(true);
-
-
+        angleMotor.selectProfileSlot(SLOTIDX, SWERVETIMEOUT);
+        angleMotor.setSensorPhase(invertSensorPhase);
+        angleMotor.config_kP(SLOTIDX, ANGLEP, SWERVETIMEOUT);
+        angleMotor.config_kI(SLOTIDX, ANGLEI, SWERVETIMEOUT);
+        angleMotor.config_kD(SLOTIDX, ANGLED, SWERVETIMEOUT);
         angleMotor.setNeutralMode(NeutralMode.Brake);
 
+        
         driveMotor.setNeutralMode(NeutralMode.Brake);
+
         
         // Setup Current Limiting
         angleMotor.configContinuousCurrentLimit(ANGLECONTINUOUSCURRENTLIMIT, SWERVETIMEOUT);
@@ -71,7 +71,6 @@ public class SwerveMod{
         driveMotor.enableCurrentLimit(DRIVEENABLECURRENTLIMIT);        
         setDriveInverted(invertDrive);
 
-
     }
 
     public TalonSRX getAngleMotor(){
@@ -80,12 +79,7 @@ public class SwerveMod{
 
     public void setTargetVelocity(Vector2 velocity, boolean speed, double rotation){
             this.velocity = velocity;
-            if(moduleNumber == 1){
-                targetAngle = (velocity.getAngle().toDegrees());
-            }
-            else{
-                targetAngle = velocity.getAngle().toDegrees();
-            }
+            targetAngle = velocity.getAngle().toDegrees();
             smartAngle = targetAngle;
             if(speed){
             targetSpeed = velocity.length;
@@ -116,35 +110,33 @@ public class SwerveMod{
     }
 
     public void setTargetAngle(double targetAngle) {
-
-        final double currentAngle = getPos();
         targetAngle = modulate360(targetAngle);
-        // Change the target angle so the delta is in the range [-180, 180) instead of [0, 360)
-        double delta = targetAngle - currentAngle;
-        if (delta > 180) {
-            targetAngle -= 360;
+        double currentAngle = toDegrees(getPos());
+        double currentAngleMod = modulate360(currentAngle);
+        if (currentAngleMod < 0) currentAngleMod += 360;
+        double delta = currentAngleMod - targetAngle;
+        if (delta >= 180) {
+            targetAngle += 360;
         } else if (delta < -180) {
-            targetAngle += 360;
+            targetAngle -= 360;
+        }
+        delta = currentAngleMod - targetAngle;
+        if (delta > 90 || delta < -90) {
+            if (delta > 90)
+                targetAngle += 180;
+            else if (delta < -90)
+                targetAngle -= 180;
+            mDriveMotor.setInverted(false);
+        } else {
+            mDriveMotor.setInverted(true);
         }
 
-        // Deltas that are greater than 90 deg or less than -90 deg can be inverted so the total movement of the module
-        // is less than 90 deg by inverting the wheel direction
-        delta = targetAngle - currentAngle;
-        if (delta > 360 || delta < -360) {
-            // Only need to add pi here because the target angle will be put back into the range [0, 360)
-            targetAngle += 180;
-
-            targetSpeed *= -1.0;
-        }
-
-        // Put target angle back into the range [0, 360)
+        targetAngle += currentAngle - currentAngleMod;
+        lastTargetAngle = targetAngle;
         targetAngle %= 360;
-        if (targetAngle < 0.0) {
-            targetAngle += 360;
-        }
-        targetAngle += toCounts(targetAngle);
-        mAngleMotor.set(ControlMode.Position, targetAngle);            
-        
+    
+        targetAngle = toCounts(targetAngle);
+        mAngleMotor.set(ControlMode.Position, targetAngle);
     }
 
     public void setTargetSpeed(double speed) {
@@ -153,13 +145,35 @@ public class SwerveMod{
     } 
 
 
+
+    /**
+     * @return Ticks of Position
+     */
+    public int getTicks(){
+        return mAngleMotor.getSensorCollection().getPulseWidthPosition() & 0xFFF;
+    }
+
+    public void resetMod(){
+        //absolutePosition = getTicks();
+        //if(invertSensorPhase){absolutePosition *= -1;}
+        zero();
+    }
+
+    public void zero(){
+        int pulseWidth = mAngleMotor.getSensorCollection().getPulseWidthPosition();
+        if(invertSensorPhase){pulseWidth *= -1;}
+        int moduleOffset;
+        moduleOffset = mZeroOffset;
+		moduleOffset &= 0xFFF;
+		pulseWidth += moduleOffset;
+        pulseWidth = pulseWidth & 0xFFF;
+        mAngleMotor.setSelectedSensorPosition(pulseWidth, SLOTIDX, SWERVETIMEOUT);
+        //mAngleMotor.setSelectedSensorPosition(modulate4096(absolutePosition + mZeroOffset), SLOTIDX, SWERVETIMEOUT);
+    }
+
     public  double getPos(){
-        double angle = toDegrees(mAngleMotor.getSelectedSensorPosition());
-        angle %= 360;
-        if(angle < 0){
-            angle += 360;
-        }
-        return angle;
+        double relativePos = mAngleMotor.getSelectedSensorPosition(SLOTIDX) + mZeroOffset;
+        return relativePos;
     }    
 
     public void setSensorPhase(boolean invert){
