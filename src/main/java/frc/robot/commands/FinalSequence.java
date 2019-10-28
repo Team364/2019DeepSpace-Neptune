@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
 import frc.robot.misc.math.Rotation2;
 import frc.robot.misc.math.Vector2;
-import frc.robot.subroutines.*;
 
 public class FinalSequence extends Command {
 

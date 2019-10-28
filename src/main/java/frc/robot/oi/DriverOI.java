@@ -20,7 +20,6 @@ public class DriverOI {
 
 
     public JoystickButton resetGyro;
-    public JoystickButton resetMods;
     public JoystickButton climb;
     public JoystickButton cancelClimb;
 
@@ -48,9 +47,6 @@ public class DriverOI {
 
         resetGyro = new JoystickButton(controller, RESETGYRO);
         resetGyro.whileHeld(new ResetGyro());
-
-        resetMods = new JoystickButton(controller, RESETMODS);
-        resetMods.whileHeld(new ResetMods());
 
         climb = new JoystickButton(controller, 8);
         climb.whenPressed(lvl3ClimbSequence);

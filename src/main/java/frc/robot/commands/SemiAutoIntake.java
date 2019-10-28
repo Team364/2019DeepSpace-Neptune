@@ -1,13 +1,10 @@
 package frc.robot.commands;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
-import frc.robot.misc.math.Rotation2;
 import frc.robot.misc.math.Vector2;
 import static frc.robot.RobotMap.*;
 

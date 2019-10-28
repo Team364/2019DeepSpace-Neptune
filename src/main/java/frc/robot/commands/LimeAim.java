@@ -20,8 +20,6 @@ public class LimeAim extends Command {
 
     private double forward;
     private double xValue;
-    private double areaValue;
-    private double skewValue;
     private double gyroPid;
     private double strafePid;
     private PIDController snapController;
