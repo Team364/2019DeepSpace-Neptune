@@ -8,7 +8,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.misc.math.Vector2;
 
@@ -122,17 +122,21 @@ public class SwerveMod{
         } else if (delta < -180) {
             targetAngle -= 360;
         }
-        
+        /*
         delta = currentAngleMod - targetAngle;
         if (delta > 90 || delta < -90) {
-            if (delta > 90)
+            if(delta > 90){
                 targetAngle += 180;
-            else if (delta < -90)
+            }
+            else if(delta < -90){
                 targetAngle -= 180;
-            mDriveMotor.setInverted(false);
-        } else {
-            mDriveMotor.setInverted(true);
-        }
+            }
+            setDriveInverted(false);
+
+        } else { 
+            setDriveInverted(true);
+
+        }*/
 
         targetAngle += currentAngle - currentAngleMod;
         lastTargetAngle = targetAngle;
@@ -170,7 +174,6 @@ public class SwerveMod{
 		pulseWidth += moduleOffset;
         pulseWidth = pulseWidth & 0xFFF;
         mAngleMotor.setSelectedSensorPosition(pulseWidth, SLOTIDX, SWERVETIMEOUT);
-        //mAngleMotor.setSelectedSensorPosition(modulate4096(absolutePosition + mZeroOffset), SLOTIDX, SWERVETIMEOUT);
     }
 
     public  double getPos(){

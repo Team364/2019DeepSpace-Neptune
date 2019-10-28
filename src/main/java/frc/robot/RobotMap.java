@@ -55,8 +55,8 @@ public class RobotMap {
     public static final int FRDRIVE = 12;//FR 5-> BL 3/////////////12
     public static final int BRANGLE = 33;//BR 8-> FL 2
     public static final int BRDRIVE = 15;//BR 7-> FL 1
-    public static final int BLANGLE = 39;//was 4 //BL 12-> FR
-    public static final int BLDRIVE = 37;//BL 3-> FR
+    public static final int BLANGLE = 37;//was 4 //BL 12-> FR
+    public static final int BLDRIVE = 39;//BL 3-> FR
 
     public static final int PIGEON = 13;
 
@@ -66,19 +66,19 @@ public class RobotMap {
     /**Front Left */
     public static final int MOD1OFFSET = 82;
     /**Back Left */
-    public static final int MOD2OFFSET = 302 + 5;
+    public static final int MOD2OFFSET = 215;
     /**Back Right */
     public static final int MOD3OFFSET = 124;
 
     //DRIVE INVERT
     /**Front Right */
-    public static final boolean MOD0DRIVEINVERT = true;
+    public static final boolean MOD0DRIVEINVERT = false;
     /**Front Left */
-    public static final boolean MOD1DRIVEINVERT = false;
+    public static final boolean MOD1DRIVEINVERT = true;
     /**Back Left */
-    public static final boolean MOD2DRIVEINVERT = false;
+    public static final boolean MOD2DRIVEINVERT = true;
     /**Back Right */
-    public static final boolean MOD3DRIVEINVERT = true;
+    public static final boolean MOD3DRIVEINVERT = false;
 
 
     //constants

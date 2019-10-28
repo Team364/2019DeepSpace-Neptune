@@ -1,13 +1,7 @@
 package frc.robot.oi;
 
-import static frc.robot.RobotMap.CARGOGYROSET;
-import static frc.robot.RobotMap.INTAKEGYROSET;
-import static frc.robot.RobotMap.LIMEBUTTONCARGO;
-import static frc.robot.RobotMap.LIMEBUTTONINTAKE;
-import static frc.robot.RobotMap.LIMEBUTTONROCKET;
-import static frc.robot.RobotMap.RESETGYRO;
-import static frc.robot.RobotMap.RESETMODS;
-import static frc.robot.RobotMap.ROCKETGYROSET;
+import static frc.robot.RobotMap.*;
+
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -32,6 +26,7 @@ public class DriverOI {
 
     
     public Command lvl3ClimbSequence = new Climb(3);
+    public Command lvl2ClimbSequence = new Climb(2);
 
 
     /**
@@ -49,7 +44,7 @@ public class DriverOI {
         limeAimRocket.whileHeld(new LimeAim(ROCKETGYROSET));
         
         limeAimIntake = new JoystickButton(controller, LIMEBUTTONINTAKE);
-        limeAimIntake.whileHeld(new LimeAim(INTAKEGYROSET));
+        limeAimIntake.whileHeld(new SemiAutoIntake());
 
         resetGyro = new JoystickButton(controller, RESETGYRO);
         resetGyro.whileHeld(new ResetGyro());
