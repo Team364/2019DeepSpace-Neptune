@@ -112,20 +112,26 @@ public class SwerveMod{
         } else if (delta < -180) {
             targetAngle -= 360;
         }
-        
+        /*
         delta = currentAngleMod - targetAngle;
-        if (delta > 90 || delta < -90) {
-            if(delta > 90){
-                targetAngle += 180;
-            }
-            else if(delta < -90){
-                targetAngle -= 180;
-            }            
-            mDriveMotor.setInverted(false);
+        if(delta < 90 && delta > -90){
 
-        } else { 
-            mDriveMotor.setInverted(true);
-        }
+        } else {
+            delta = currentAngleMod - targetAngle;
+            if (delta >= 90 || delta <= -90) {
+                if(delta >= 90){
+                    targetAngle += 180;
+                }
+                else if(delta <= -90){
+                    targetAngle -= 180;
+                }            
+                mDriveMotor.setInverted(false);
+
+            } else { 
+                mDriveMotor.setInverted(true);
+            }
+        }*/
+        
 
         targetAngle += currentAngle - currentAngleMod;
         lastTargetAngle = targetAngle;
