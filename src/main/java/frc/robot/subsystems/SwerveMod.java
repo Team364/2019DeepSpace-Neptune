@@ -99,6 +99,10 @@ public class SwerveMod{
         return lastTargetAngle;
     }
 
+    public void setDriveInverted(boolean inverted) {
+        driveInverted = inverted;
+    }
+
     public void setTargetAngle(double targetAngle) {
         targetAngle = modulate360(targetAngle);
         targetAngle += mZeroOffset;
@@ -112,26 +116,21 @@ public class SwerveMod{
         } else if (delta < -180) {
             targetAngle -= 360;
         }
-        /*
-        delta = currentAngleMod - targetAngle;
-        if(delta < 90 && delta > -90){
-
-        } else {
-            delta = currentAngleMod - targetAngle;
-            if (delta >= 90 || delta <= -90) {
-                if(delta >= 90){
-                    targetAngle += 180;
-                }
-                else if(delta <= -90){
-                    targetAngle -= 180;
-                }            
-                mDriveMotor.setInverted(false);
-
-            } else { 
-                mDriveMotor.setInverted(true);
+    
+        /*delta = currentAngleMod - targetAngle;
+        if (delta > 90 || delta < -90) {
+            if(delta > 90){
+                targetAngle += 180;
             }
+            else if(delta < -90){
+                targetAngle -= 180;
+            }            
+            setDriveInverted(false);;
+
+        } else { 
+            setDriveInverted(true);
         }*/
-        
+
 
         targetAngle += currentAngle - currentAngleMod;
         lastTargetAngle = targetAngle;
