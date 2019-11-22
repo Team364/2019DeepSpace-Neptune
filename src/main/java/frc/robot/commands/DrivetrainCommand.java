@@ -45,7 +45,7 @@ public class DrivetrainCommand extends Command {
 		}
 		
 			if (Math.abs(forward) > STICKDEADBAND || Math.abs(strafe) > STICKDEADBAND || Math.abs(rotation) > STICKDEADBAND) {
-				mDrivetrain.holonomicDrive(translation, rotation, true);
+				mDrivetrain.holonomicDrive(translation, rotation, !zeroPoint);
 				lastTranslation = translation;
 				lastRotation = rotation;
 				cycles++;
