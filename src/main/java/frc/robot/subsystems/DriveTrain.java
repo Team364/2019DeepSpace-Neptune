@@ -12,9 +12,9 @@ import frc.robot.misc.math.Rotation2;
 import frc.robot.misc.math.Vector2;
  
 
-public class Drivetrain extends Subsystem {
+public class DriveTrain extends Subsystem {
 
-    private static Drivetrain Instance = null;
+    private static DriveTrain Instance = null;
 	/*
 	 * 0 is Front Right
 	 * 1 is Front Left
@@ -24,7 +24,7 @@ public class Drivetrain extends Subsystem {
     private SwerveMod[] mSwerveModules;
 
 
-    public Drivetrain() {
+    public DriveTrain() {
             mSwerveModules = new SwerveMod[] {
                     new SwerveMod(0,
                             new Vector2(-TRACKWIDTH / 2.0, WHEELBASE / 2.0),
@@ -59,9 +59,9 @@ public class Drivetrain extends Subsystem {
             
     } 
 
-    public synchronized static Drivetrain getInstance() {
+    public synchronized static DriveTrain getInstance() {
         if (Instance == null) {
-          Instance = new Drivetrain();
+          Instance = new DriveTrain();
         }
         return Instance;
       }

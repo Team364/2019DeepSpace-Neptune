@@ -2,14 +2,14 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Neptune;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.misc.math.Vector2;
 
 import static frc.robot.RobotMap.*;
 
 public class DrivetrainCommand extends Command {
 
-	private final Drivetrain mDrivetrain;
+	private final DriveTrain mDrivetrain;
 	public int cycles;
 
 	double forward;
@@ -21,7 +21,7 @@ public class DrivetrainCommand extends Command {
 	double lastRotation;
 	double plzStop = 0;
 
-	public DrivetrainCommand(Drivetrain drivetrain) {
+	public DrivetrainCommand(DriveTrain drivetrain) {
 		mDrivetrain = drivetrain;
 		cycles = 0;
 		requires(drivetrain);

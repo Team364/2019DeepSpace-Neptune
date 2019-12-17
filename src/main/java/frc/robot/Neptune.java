@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.AnalogOutput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -13,7 +14,7 @@ import frc.robot.oi.DriverOI;
 import frc.robot.oi.OperatorOI;
 import frc.robot.subroutines.ActivateTrident;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.SwerveMod;
 //import frc.robot.subsystems.SwerveMod;
@@ -23,7 +24,7 @@ public class Neptune extends TimedRobot {
 
   public static AnalogOutput LEDs = new AnalogOutput(0);
   public static Elevator elevator = Elevator.getInstance();
-  public static Drivetrain driveTrain = Drivetrain.getInstance();
+  public static DriveTrain driveTrain = DriveTrain.getInstance();
   public static Trident trident = Trident.getInstance();
   public static Climber climber = Climber.getInstance();
 
@@ -39,7 +40,7 @@ public class Neptune extends TimedRobot {
   public static boolean climbDrive;
   public int stopLoops;
 
-  //private DriverStation dStation = DriverStation.getInstance(); //leds
+  private DriverStation dStation = DriverStation.getInstance(); //leds
   public static RobotController diagnostics;
  
 
