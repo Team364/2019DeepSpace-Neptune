@@ -58,7 +58,7 @@ public class Neptune extends TimedRobot {
   public void robotPeriodic() {
     //LED set
     if(!dStation.isDSAttached()){
-      LEDs.setVoltage(1);
+      LEDs.setVoltage(5);
     }/*else if(dStation.isDSAttached()&&(dStation.isDisabled())){
       LEDs.setVoltage(2);
     }else if(States.led == States.LEDstates.INTAKE_MODE){
