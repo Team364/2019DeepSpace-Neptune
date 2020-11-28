@@ -7,21 +7,30 @@
 #define FRAMES_PER_SECOND 60
 bool gReverseDirection = false;
 CRGB leds[NUM_LEDS];
-int analogPin = 0;
+String serialString;
 
-void setup() {
- Serial.begin(57600);
+void setup() {  
+  Serial.begin(9600);
   Serial.println("resetting");
   LEDS.addLeds < WS2811, DATA_PIN, GRB > (leds, NUM_LEDS);
   LEDS.setBrightness(84);
-  Serial.begin(9600);
 }
 
 void loop() {
-  int analogValue = analogRead(analogPin);  
-  Serial.println(analogValue);
+
+  while (Serial.available()) {
+    //delay(3);  
+    char c = Serial.read();
+    serialString += c; 
+  }
+  serialString.trim();
+  if (serialString.length() >0) {
+  }
+  else{    
+    serialString=""; 
+  }
   
-  if (analogValue < 100) {     // Startup (Voltage is at 0)
+  if (serialString == "") {     // Startup (Voltage is at 0) Not zeroed, not connected, Blinking red and black
     for (int i = 0; i < NUM_LEDS; i++) {
     leds[i] = CRGB::Black;    
     }
@@ -36,7 +45,7 @@ void loop() {
 
 
 
-  if (analogValue > 100 && analogValue < 300) {     // Zeroed but not connected (Voltage is at 1)
+  if (serialString == "zeroed") {     // Zeroed but not connected (Voltage is at 1) Blinking blue and black
     for (int i = 0; i < NUM_LEDS; i++) {
     leds[i] = CRGB::Black;    
     }
@@ -52,61 +61,73 @@ void loop() {
   
   
   
-  if (analogValue > 300 && analogValue < 500) {             // Connected/Passive State (Voltage is at 2 volts)
+  if (serialString == "connected") {             // Connected/Passive State (Voltage is at 2 volts) Blue and Orange CHasing
     static uint8_t hue = 0;
     //Serial.print("x");
     // First slide the led in one direction
     for (int i = 0; i < NUM_LEDS; i++) {
       FastLED.show();
-      leds[i] = CRGB::Orange;
-      delay(10);
+      leds[i] = CRGB(255, 110, 0);
+      delay(10);      
+      if (serialString != "connected"){
+        break;
+      }
     }
     //Serial.print("x");
     // Now go in the other direction.  
     for (int i = (NUM_LEDS) - 1; i >= 0; i--) {
       FastLED.show();
       leds[i] = CRGB::Blue;
-      delay(10);
+      delay(10);      
+      if (serialString != "connected"){
+        break;
+      }
     }
   }
 
-  if (analogValue > 500 && analogValue < 700) {             // Intake Position State (Voltage is at 3 volts)
+  if (serialString == "intakePosition") {             // Intake Position State (Voltage is at 3 volts)  White and Blue CHasing
     static uint8_t hue = 0;
     //Serial.print("x");
     // First slide the led in one direction
     for (int i = 0; i < NUM_LEDS; i++) {
       FastLED.show();
       leds[i] = CRGB::White;
-      delay(10);
+      delay(10);      
+      if (serialString != "intakePosition"){
+        break;
+      }
     }
     //Serial.print("x");
     // Now go in the other direction.  
     for (int i = (NUM_LEDS) - 1; i >= 0; i--) {
       FastLED.show();
       leds[i] = CRGB::Blue;
-      delay(10);
+      delay(10);      
+      if (serialString != "intakePosition"){
+        break;
+      }
     }
   }
   
   
   
-  if (analogValue > 700 && analogValue < 900) {     // When holding a game object (Voltage is at 4 volts)
+  if (serialString == "acquiredGamePiece") {     // When holding a game object (Voltage is at 4 volts) White and Black Blinking
     for (int i = 0; i < NUM_LEDS; i++) {
     leds[i] = CRGB::Black;    
   }
-  FastLED.show();
-  delay(250);
-  for (int i = 0; i < NUM_LEDS; i++) {
-    leds[i] = CRGB::White;
+    FastLED.show();
+    delay(250);
+    for (int i = 0; i < NUM_LEDS; i++) {
+      leds[i] = CRGB::White;
+    }
+    FastLED.show();  
+    delay(250);
   }
-  FastLED.show();  
-  delay(250);
-  }
 
 
 
 
-  if (analogValue > 900) {                 //When climbing (voltage is at 5 volts)
+  if (serialString == "climbing") {                 //When climbing (voltage is at 5 volts) Chasing Fire
     Fire2012(); // run simulation frame
   
   FastLED.show(); // display this frame
@@ -115,12 +136,12 @@ void loop() {
 
 
 
-  
+  serialString="";
 }
 
 
 
-
+//FASTLed Library for Fire LED Object
 
 // COOLING: How much does the air cool as it rises?
 // Less cooling = taller flames.  More cooling = shorter flames.
